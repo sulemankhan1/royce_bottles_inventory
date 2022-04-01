@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/sulemani/public_html/royce/design
+    - /bin/cp -R test $DEPLOYPATH
