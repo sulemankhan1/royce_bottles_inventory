@@ -10,7 +10,7 @@
 	<link rel="shortcut icon" href="<?= base_url('assets/images/favicon.ico') ?>" />
 
 	<!-- Library / Plugin Css Build -->
-	<link rel="stylesheet" href="<?= base_url('assets/css/core/libs.min.css') ?>" />
+
 
 	<!-- Aos Animation Css -->
 	<link rel="stylesheet" href="<?= base_url('assets/vendor/aos/dist/aos.css') ?>" />
@@ -42,8 +42,8 @@
 	<!-- loader END -->
 
 	<?php
-	include('sidebar.php'); 
-	
+	include('sidebar.php');
+
 	include('header.php');
-	
+
 	?>
