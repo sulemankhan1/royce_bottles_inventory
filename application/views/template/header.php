@@ -4,13 +4,22 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<title>Hope UI | Responsive Bootstrap 5 Admin Dashboard Template</title>
+	<title>
+		<?php
+		if(isset($title) && !empty($title))
+		{
+			echo $title;
+		}else
+		{
+			echo 'Royce';
+		}  ?>
+	</title>
 
 	<!-- Favicon -->
 	<link rel="shortcut icon" href="<?= base_url('assets/images/favicon.ico') ?>" />
 
 	<!-- Library / Plugin Css Build -->
-
+	<link rel="stylesheet" href="<?= base_url('assets/css/core/libs.min.css') ?>" />
 
 	<!-- Aos Animation Css -->
 	<link rel="stylesheet" href="<?= base_url('assets/vendor/aos/dist/aos.css') ?>" />
@@ -21,18 +30,30 @@
 	<!-- Custom Css -->
 	<link rel="stylesheet" href="<?= base_url('assets/css/custom.min.css?v=1.2.0') ?>" />
 
-	<!-- Dark Css -->
-	<link rel="stylesheet" href="<?= base_url('assets/css/dark.min.css') ?>" />
+	<!-- Font Awesome Css -->
+	<script src="https://kit.fontawesome.com/b04cb78fd5.js" crossorigin="anonymous"></script>
 
-	<!-- Customizer Css -->
-	<link rel="stylesheet" href="<?= base_url('assets/css/customizer.min.css') ?>" />
+    <?php
 
-	<!-- RTL Css -->
-	<link rel="stylesheet" href="<?= base_url('assets/css/rtl.min.css') ?>" />
+      if(isset($styles) && !empty($styles))
+      {
+
+        foreach ($styles as $key => $v) {
+
+    ?>
+
+        <link rel="stylesheet" href="<?= base_url('assets/css/'.$v) ?>" />
+
+    <?php
+
+        }
+
+      }
+     ?>
 
 </head>
 
-<body class="  ">
+<body class="">
 	<!-- loader Start -->
 	<div id="loading">
 		<div class="loader simple-loader">
@@ -40,10 +61,3 @@
 		</div>
 	</div>
 	<!-- loader END -->
-
-	<?php
-	include('sidebar.php');
-
-	include('header.php');
-
-	?>
