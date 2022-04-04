@@ -51,6 +51,15 @@
       }
      ?>
 
+		 <style type="text/css">
+
+				.form-control
+				{
+					border: 1px solid #c7c7c7!important;
+				}
+
+		 </style>
+
 </head>
 
 <body class="">
