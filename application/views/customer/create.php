@@ -29,18 +29,26 @@
 
                         <?php
 
-                          echo getInputField('Name','text','name');
-                          echo getInputField('Email','email','email');
-                          echo getInputField('Username','text','username');
-                          echo getInputField('Password','password','password');
+                          echo getInputField('Customer Name','text','name');
+                          echo getInputField('Shop Name','text','name');
+                          echo getInputField('Shop Acronym','text','name');
+                          echo getInputField('Shop ID','text','name');
                           echo getInputField('Contact #','number','contact_no');
-                          echo getInputField('Date Of Birth','date','dob');
-                          echo getInputField('Country','text','country');
-                          echo getInputField('City','text','city');
-                          echo getInputField('Zip code','number','zip_code');
-                          echo getTextareaField('Residential Address','address');
+                          echo getInputField('Email Address For E-Receipt','email','email');
+                          echo getInputField('Email Address For SOA','email','email');
+                          echo getSelectField('Category','category');
+                          echo getSelectField('Salesperson','salesperson_id');
+                          echo getSelectField('Driver','driver_id');
+                          echo getSelectField('Days','day');
+                          ?>
+                      </div>
+                      <div class="row">
+                        <?php
+                          echo getTextareaField('Shop Address','address' , true ,'' ,'' ,'',6);
+                          echo getTextareaField('Remarks','remarks' , true ,'' ,'' ,'',6);
 
-                          echo getSubmitBtn('Add Admin');
+
+                          echo getSubmitBtn('Add Driver');
 
                         ?>
 

@@ -11,7 +11,7 @@
                  <h4 class="card-title"><?= $page_head ?></h4>
                </div>
 
-               <a href="<?= site_url('add_admin') ?>" class="btn btn-sm btn-primary">Add Admin</a>
+               <a href="<?= site_url('add_production') ?>" class="btn btn-sm btn-primary">Add Production</a>
 
             </div>
             <div class="card-body">
@@ -24,6 +24,7 @@
                            <th>Username</th>
                            <th>Email</th>
                            <th>Contact #</th>
+                           <th>FIN #</th>
                            <th>Status</th>
                            <th>Action</th>
                         </tr>
@@ -34,6 +35,7 @@
                           <th>Name</th>
                           <th>Username</th>
                           <th>Email</th>
+                          <th>1111</th>
                           <th>1111</th>
                           <th>
                             <a href="javascript:void(0)" class="changeUser_status_">

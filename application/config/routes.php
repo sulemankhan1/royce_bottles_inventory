@@ -13,5 +13,36 @@ $route['forget_password'] = 'Auth/forget_password';
 $route['dashboard'] = 'Dashboard';
 
 //Manage
+//admin
 $route['admins'] = 'Admin';
 $route['add_admin'] = 'Admin/create';
+
+//driver
+$route['drivers'] = 'Driver';
+$route['add_driver'] = 'Driver/create';
+
+//production
+$route['productions'] = 'Production';
+$route['add_production'] = 'Production/create';
+
+//other users
+$route['other_users'] = 'OtherUsers';
+$route['add_other_user'] = 'OtherUsers/create';
+
+//rights
+$route['rights'] = 'Rights';
+$route['edit_rights'] = 'Rights/edit';
+
+
+//categories
+$route['categories'] = 'Category';
+$route['add_category'] = 'Category/create';
+
+//products
+$route['products'] = 'Product';
+$route['add_product'] = 'Product/create';
+
+
+//customers
+$route['customers'] = 'Customer';
+$route['add_customer'] = 'Customer/create';

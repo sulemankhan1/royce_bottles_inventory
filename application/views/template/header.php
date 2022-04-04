@@ -53,9 +53,26 @@
 
 		 <style type="text/css">
 
-				.form-control
+				.form-control,.form-select
 				{
 					border: 1px solid #c7c7c7!important;
+				}
+
+				.user-form-img
+				{
+					max-width: 135px!important;
+					border-radius: 70px!important;
+				}
+
+				.action-icons,.action-icons:hover
+				{
+					color : grey;
+				}
+
+				.view-details-txt
+				{
+					color : black!important;
+					font-size: 15px;
 				}
 
 		 </style>

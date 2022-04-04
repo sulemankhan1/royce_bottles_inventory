@@ -57,7 +57,7 @@
 								</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link <?= $active_submenu == 'driver'?'active':'' ?>" href="../dashboard/auth/sign-in.html">
+								<a class="nav-link <?= $active_submenu == 'drivers'?'active':'' ?>" href="<?= site_url('drivers') ?>">
 									<i class="icon">
 										<i class="fa-solid fa-caret-right"></i>
 									</i>
@@ -66,16 +66,16 @@
 								</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="../dashboard/auth/sign-in.html">
+								<a class="nav-link <?= $active_submenu == 'productions'?'active':'' ?>" href="<?= site_url('productions') ?>">
 									<i class="icon">
 										<i class="fa-solid fa-caret-right"></i>
 									</i>
 									<i class="sidenav-mini-icon"> P </i>
-									<span class="item-name">Production</span>
+									<span class="item-name">Productions</span>
 								</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="../dashboard/auth/sign-in.html">
+								<a class="nav-link <?= $active_submenu == 'others_users'?'active':'' ?>" href="<?= site_url('other_users') ?>">
 									<i class="icon">
 										<i class="fa-solid fa-caret-right"></i>
 									</i>
@@ -84,7 +84,7 @@
 								</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="../dashboard/auth/sign-in.html">
+								<a class="nav-link <?= $active_submenu == 'rights'?'active':'' ?>" href="<?= site_url('rights') ?>">
 									<i class="icon">
 										<i class="fa-solid fa-caret-right"></i>
 									</i>
@@ -96,7 +96,7 @@
 						</ul>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link <?= $active_menu == 'categories'?'active':'' ?>" aria-current="page" href="../dashboard/index.html">
+						<a class="nav-link <?= $active_menu == 'categories'?'active':'' ?>" aria-current="page" href="<?= site_url('categories') ?>">
 							<i class="icon">
 								<i class="fa-solid fa-soap"></i>
 							</i>
@@ -104,7 +104,7 @@
 						</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link <?= $active_menu == 'products'?'active':'' ?>" aria-current="page" href="../dashboard/index.html">
+						<a class="nav-link <?= $active_menu == 'products'?'active':'' ?>" aria-current="page" href="<?= site_url('products') ?>">
 							<i class="icon">
 								<i class="fa-brands fa-product-hunt"></i>
 							</i>
@@ -112,10 +112,9 @@
 						</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link <?= $active_menu == 'customers'?'active':'' ?>" data-bs-toggle="collapse" href="#horizontal-menu" role="button"
-							aria-expanded="false" aria-controls="horizontal-menu">
+						<a class="nav-link <?= $active_menu == 'customers'?'active':'' ?>" aria-current="page" href="<?= site_url('customers') ?>">
 							<i class="icon">
-								<i class="fa fa-users"></i>
+									<i class="fa fa-users"></i>
 							</i>
 							<span class="item-name">Customers</span>
 						</a>

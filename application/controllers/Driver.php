@@ -2,7 +2,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Admin extends My_controller
+class Driver extends My_controller
 {
 
   function __construct()
@@ -17,10 +17,10 @@ class Admin extends My_controller
 
     $data = [
 
-      'title' => 'Admin',
-      'page_head' => 'Admin',
+      'title' => 'Driver',
+      'page_head' => 'Drivers',
       'active_menu' => 'users',
-      'active_submenu' => 'admins',
+      'active_submenu' => 'drivers',
       'scripts' => [
         'DataTable/myDataTable.js',
         'users/main.js'
@@ -28,7 +28,7 @@ class Admin extends My_controller
 
     ];
 
-    $this->template('users/admin/index',$data);
+    $this->template('users/driver/index',$data);
 
 
 	}
@@ -38,14 +38,14 @@ class Admin extends My_controller
 
     $data = [
 
-      'title' => 'Add Admin',
-      'page_head' => 'Add Admin',
+      'title' => 'Add Driver',
+      'page_head' => 'Add Driver',
       'active_menu' => 'users',
-      'active_submenu' => 'admins'
+      'active_submenu' => 'drivers'
 
     ];
 
-    $this->template('users/admin/create',$data);
+    $this->template('users/driver/create',$data);
 
   }
 

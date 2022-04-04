@@ -11,7 +11,7 @@
                  <h4 class="card-title"><?= $page_head ?></h4>
                </div>
 
-               <a href="<?= site_url('add_admin') ?>" class="btn btn-sm btn-primary">Add Admin</a>
+               <a href="<?= site_url('add_other_user') ?>" class="btn btn-sm btn-primary">Add Other User</a>
 
             </div>
             <div class="card-body">

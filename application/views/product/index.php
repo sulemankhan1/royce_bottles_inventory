@@ -11,7 +11,7 @@
                  <h4 class="card-title"><?= $page_head ?></h4>
                </div>
 
-               <a href="<?= site_url('add_admin') ?>" class="btn btn-sm btn-primary">Add Admin</a>
+               <a href="<?= site_url('add_product') ?>" class="btn btn-sm btn-primary">Add Product</a>
 
             </div>
             <div class="card-body">
@@ -20,34 +20,26 @@
                      <thead>
                         <tr>
                            <th>#</th>
-                           <th>Name</th>
-                           <th>Username</th>
-                           <th>Email</th>
-                           <th>Contact #</th>
-                           <th>Status</th>
+                           <th>Product</th>
+                           <th>Product Code</th>
+                           <th>SKU</th>
                            <th>Action</th>
                         </tr>
                      </thead>
                      <tbody>
                        <tr>
                           <th>1</th>
-                          <th>Name</th>
-                          <th>Username</th>
-                          <th>Email</th>
+                          <th>Product</th>
+                          <th>111</th>
                           <th>1111</th>
-                          <th>
-                            <a href="javascript:void(0)" class="changeUser_status_">
-                                  <span class="badge rounded-pill bg-success">Active</span>
-                            </a>
-                          </th>
                           <th>
                             <a href="javascript:void(0)" class="action-icons" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit">
                               <i class="fa fa-pencil"></i>
                             </a>
-                            <a href="javascript:void(0)" class="action-icons delete_user_" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete">
+                            <a href="javascript:void(0)" class="action-icons delete_record_" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete">
                               <i class="fa-solid fa-trash"></i>
                             </a>
-                            <a href="javascript:void(0)" class="action-icons viewUser_details_" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Details">
+                            <a href="javascript:void(0)" class="action-icons view_details_" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Details">
                               <i class="fa fa-eye"></i>
                             </a>
                           </th>
@@ -62,7 +54,6 @@
 </div>
 
 <?php
-include(APPPATH.'views/users/modals/delete-modal.php');
-include(APPPATH.'views/users/modals/status-modal.php');
-include(APPPATH.'views/users/modals/view-details-modal.php');
+include(APPPATH.'views/modals/delete-modal.php');
+include(APPPATH.'views/modals/view-details-modal.php');
  ?>
