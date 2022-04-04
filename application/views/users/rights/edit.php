@@ -15,30 +15,65 @@
 
                     <div class="col-sm-12">
 
-                      <div class="row">
+                          <div class="accordion" id="accordionExample">
+                              <div class="accordion-item">
+                                  <h4 class="accordion-header" id="headingOne">
+                                      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                          Categories
+                                      </button>
+                                  </h4>
+                                  <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                      <div class="accordion-body">
 
-                        <?php
+                                        <div class="row">
 
-                          echo getInputField('Name','text','name');
-                          echo getInputField('Email','email','email');
-                          echo getInputField('Username','text','username');
-                          echo getInputField('Password','password','password');
-                          echo getInputField('Contact #','number','contact_no');
-                          echo getInputField('License #','number','license_no');
-                          echo getInputField('FIN #','number','fin_no');
-                          echo getInputField('Car Plate','text','car_plate');
-                          echo getInputField('Date Of Birth','date','dob');
-                          echo getInputField('Country','text','country');
-                          echo getInputField('City','text','city');
-                          echo getInputField('Zip code','number','zip_code');
-                          echo getTextareaField('Residential Address','address');
+                                          <div class="col-sm-11">
 
-                          echo getSubmitBtn('Add Driver');
+                                            <p><i class="fa-solid fa-star"></i> Can view categories</p>
 
-                        ?>
+                                          </div>
 
+                                          <div class="col-sm-1">
+                                            <div class="form-check form-switch form-check-inline">
+                                                <input class="form-check-input" type="checkbox" id="switch1" />
+                                                <label class="form-check-label pl-2" for="switch1"></label>
+                                            </div>
+                                          </div>
 
-                      </div>
+                                        </div>
+
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="accordion-item">
+                                  <h4 class="accordion-header" id="headingTwo">
+                                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                          Products
+                                      </button>
+                                  </h4>
+                                  <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                      <div class="accordion-body">
+                                        <div class="row">
+
+                                          <div class="col-sm-11">
+
+                                            <p><i class="fa-solid fa-star"></i> Can view products</p>
+
+                                          </div>
+
+                                          <div class="col-sm-1">
+                                            <div class="form-check form-switch form-check-inline">
+                                                <input class="form-check-input" type="checkbox" id="switch1" />
+                                                <label class="form-check-label pl-2" for="switch1"></label>
+                                            </div>
+                                          </div>
+
+                                        </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+
                     </div>
 
                 </div>

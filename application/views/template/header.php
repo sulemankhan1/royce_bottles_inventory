@@ -75,6 +75,13 @@
 					font-size: 15px;
 				}
 
+				.accordion-item {
+				    background-color: white;
+				}
+
+				.form-switch .form-check-input {
+    			background-color: #ff3b3b;
+				}
 		 </style>
 
 </head>
