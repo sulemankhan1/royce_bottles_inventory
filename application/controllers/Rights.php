@@ -19,7 +19,8 @@ class Rights extends My_controller
 
       'title' => 'Rights',
       'page_head' => 'Rights',
-      'active_menu' => 'rights',
+      'active_menu' => 'users',
+      'active_submenu' => 'rights',
       'scripts' => [
         'DataTable/myDataTable.js',
         'main.js'
@@ -39,7 +40,8 @@ class Rights extends My_controller
 
       'title' => 'Edit Rights',
       'page_head' => 'Edit Rights',
-      'active_menu' => 'rights',
+      'active_menu' => 'users',
+      'active_submenu' => 'rights',
 
     ];
 
