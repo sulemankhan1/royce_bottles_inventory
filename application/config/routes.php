@@ -16,6 +16,7 @@ $route['dashboard'] = 'Dashboard';
 //admin
 $route['admins'] = 'Admin';
 $route['add_admin'] = 'Admin/create';
+$route['edit_admin/(:num)'] = 'Admin/edit/$1';
 
 //driver
 $route['drivers'] = 'Driver';

@@ -41,7 +41,7 @@
                             </a>
                           </th>
                           <th>
-                            <a href="javascript:void(0)" class="action-icons" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit">
+                            <a href="<?= site_url('edit_admin/1') ?>" class="action-icons" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit">
                               <i class="fa fa-pencil"></i>
                             </a>
                             <a href="javascript:void(0)" class="action-icons delete_user_" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete">

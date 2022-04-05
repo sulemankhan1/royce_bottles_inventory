@@ -40,7 +40,16 @@
                           echo getInputField('Zip code','number','zip_code');
                           echo getTextareaField('Residential Address','address');
 
-                          echo getSubmitBtn('Add Admin');
+
+                          if (isset($edit_id)) {
+                          
+                            echo getSubmitBtn('Update Admin');
+                          }
+                          else
+                          {
+
+                            echo getSubmitBtn('Add Admin');
+                          }
 
                         ?>
 

@@ -49,4 +49,21 @@ class Admin extends My_controller
 
   }
 
+  public function edit($id)
+  {
+
+    $data = [
+
+      'title' => 'Edit Admin',
+      'page_head' => 'Edit Admin',
+      'edit_id' => $id,
+      'active_menu' => 'users',
+      'active_submenu' => 'admins'
+
+    ];
+
+    $this->template('users/admin/create',$data);
+
+  }
+
 }
