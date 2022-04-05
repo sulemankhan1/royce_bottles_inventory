@@ -52,6 +52,9 @@
                             <a href="javascript:void(0)" class="action-icons view_details_" data-url="<?= site_url('AjaxController/getViewDetailsByType/Customer/1') ?>" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Details">
                               <i class="fa fa-eye"></i>
                             </a>
+                            <a href="javascript:void(0)" class="action-icons adjust_prices_" data-url="<?= site_url('AjaxController/getViewDetailsByType/Customer/1') ?>" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Product Adjustment Prices">
+                              <i class="fa-solid fa-comment-dollar"></i>
+                            </a>
                           </th>
                        </tr>
                      </tbody>
@@ -66,4 +69,5 @@
 <?php
 include(APPPATH.'views/modals/delete-modal.php');
 include(APPPATH.'views/modals/view-details-modal.php');
+include(APPPATH.'views/users/modals/customer-products.php');
  ?>

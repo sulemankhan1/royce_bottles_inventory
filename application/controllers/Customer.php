@@ -22,7 +22,8 @@ class Customer extends MY_Controller
       'active_menu' => 'customers',
       'scripts' => [
         'DataTable/myDataTable.js',
-        'main.js'
+        'users/customers.js',
+        'main.js',
       ]
 
     ];
