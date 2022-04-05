@@ -2,7 +2,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Profile extends My_controller
+class Profile extends MY_Controller
 {
 
   function __construct()

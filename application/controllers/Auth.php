@@ -2,7 +2,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Auth extends My_controller
+class Auth extends MY_Controller
 {
 
   function __construct()
@@ -15,14 +15,22 @@ class Auth extends My_controller
   public function login()
 	{
 
-		$this->load->view('auth/login');
+    $data = [
+        'title' => 'Login'
+    ];
+
+    $this->load_view('auth/login',$data);
 
 	}
 
   public function forget_password()
 	{
 
-		$this->load->view('auth/forget_password');
+    $data = [
+        'title' => 'Forget Password'
+    ];
+
+    $this->load_view('auth/forget_password',$data);
 
 	}
 

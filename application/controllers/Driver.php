@@ -2,7 +2,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Driver extends My_controller
+class Driver extends MY_Controller
 {
 
   function __construct()

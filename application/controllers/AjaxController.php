@@ -2,7 +2,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class AjaxController extends My_controller
+class AjaxController extends MY_Controller
 {
 
   function __construct()

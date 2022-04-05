@@ -2,7 +2,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Customer extends My_controller
+class Customer extends MY_Controller
 {
 
   function __construct()
