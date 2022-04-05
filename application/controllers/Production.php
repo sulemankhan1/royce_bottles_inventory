@@ -23,7 +23,8 @@ class Production extends My_controller
       'active_submenu' => 'productions',
       'scripts' => [
         'DataTable/myDataTable.js',
-        'users/main.js'
+        'users/main.js',
+        'main.js'
       ]
 
     ];
@@ -41,7 +42,30 @@ class Production extends My_controller
       'title' => 'Add Production',
       'page_head' => 'Add Production',
       'active_menu' => 'users',
-      'active_submenu' => 'productions'
+      'active_submenu' => 'productions',
+      'scripts' => [
+        'img_trigger.js'
+      ]
+
+    ];
+
+    $this->template('users/production/create',$data);
+
+  }
+
+  public function edit($id)
+  {
+
+    $data = [
+
+      'title' => 'Edit Production',
+      'page_head' => 'Edit Production',
+      'edit_id' => $id,
+      'active_menu' => 'users',
+      'active_submenu' => 'productions',
+      'scripts' => [
+        'img_trigger.js'
+      ]
 
     ];
 

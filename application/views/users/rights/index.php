@@ -30,7 +30,7 @@
                             <a href="<?= site_url('edit_rights') ?>" class="action-icons" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit">
                               <i class="fa fa-pencil"></i>
                             </a>
-                            <a href="javascript:void(0)" class="action-icons viewUser_details_" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Details">
+                            <a href="javascript:void(0)" class="action-icons view_details_" data-url="<?= site_url('AjaxController/getViewDetailsByType/Rights/1') ?>" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Details">
                               <i class="fa fa-eye"></i>
                             </a>
                           </th>
@@ -45,7 +45,5 @@
 </div>
 
 <?php
-include(APPPATH.'views/users/modals/delete-modal.php');
-include(APPPATH.'views/users/modals/status-modal.php');
-include(APPPATH.'views/users/modals/view-details-modal.php');
+include(APPPATH.'views/modals/view-details-modal.php');
  ?>

@@ -26,4 +26,11 @@ class Auth extends My_controller
 
 	}
 
+  public function logout()
+  {
+
+    redirect('login');
+
+  }
+
 }

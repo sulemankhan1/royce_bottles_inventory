@@ -10,10 +10,10 @@
                </div>
             </div>
             <div class="card-body">
-              <form class="row g-3 needs-validation" novalidate>
+              <form  action="#" class="row g-3 needs-validation" novalidate>
                 <div class="row mt-4">
 
-                    <div class="col-sm-12">
+                    <div class="col-sm-12 mb-3">
 
                           <div class="accordion" id="accordionExample">
                               <div class="accordion-item">
@@ -33,7 +33,7 @@
 
                                           </div>
 
-                                          <div class="col-sm-1">
+                                          <div class="col-sm-1 text-center">
                                             <div class="form-check form-switch form-check-inline">
                                                 <input class="form-check-input" type="checkbox" id="switch1" />
                                                 <label class="form-check-label pl-2" for="switch1"></label>
@@ -61,7 +61,7 @@
 
                                           </div>
 
-                                          <div class="col-sm-1">
+                                          <div class="col-sm-1 text-center">
                                             <div class="form-check form-switch form-check-inline">
                                                 <input class="form-check-input" type="checkbox" id="switch1" />
                                                 <label class="form-check-label pl-2" for="switch1"></label>
@@ -74,8 +74,14 @@
                               </div>
                           </div>
 
+
                     </div>
 
+                    <?=
+
+                    getSubmitBtn('Update Rights');
+
+                    ?>
                 </div>
 
                </form>

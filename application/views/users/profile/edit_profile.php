@@ -34,26 +34,13 @@
                           echo getInputField('Username','text','username');
                           echo getInputField('Password','password','password');
                           echo getInputField('Contact #','number','contact_no');
-                          echo getInputField('License #','number','license_no');
-                          echo getInputField('FIN #','number','fin_no');
-                          echo getInputField('Car Plate','text','car_plate');
                           echo getInputField('Date Of Birth','date','dob');
                           echo getInputField('Country','text','country');
                           echo getInputField('City','text','city');
                           echo getInputField('Zip code','number','zip_code');
                           echo getTextareaField('Residential Address','address');
-                          
-                          if(isset($edit_id))
-                          {
-                            echo getSubmitBtn('Update Other User');
 
-                          }
-                          else
-                          {
-
-                            echo getSubmitBtn('Add Other User');
-
-                          }
+                          echo getSubmitBtn('Update Profile');
 
                         ?>
 

@@ -43,7 +43,17 @@
                           echo getInputField('Zip code','number','zip_code');
                           echo getTextareaField('Residential Address','address');
 
-                          echo getSubmitBtn('Add Driver');
+                          if(isset($edit_id))
+                          {
+                            echo getSubmitBtn('Update Driver');
+
+                          }
+                          else
+                          {
+
+                            echo getSubmitBtn('Add Driver');
+
+                          }
 
                         ?>
 

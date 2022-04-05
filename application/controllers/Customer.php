@@ -40,11 +40,34 @@ class Customer extends My_controller
       'title' => 'Add Customer',
       'page_head' => 'Add Customer',
       'active_menu' => 'customers',
+      'scripts' => [
+        'img_trigger.js'
+      ]
 
     ];
 
     $this->template('customer/create',$data);
 
   }
+
+  public function edit($id)
+  {
+
+    $data = [
+
+      'title' => 'Edit Customer',
+      'page_head' => 'Edit Customer',
+      'edit_id' => $id,
+      'active_menu' => 'customers',
+      'scripts' => [
+        'img_trigger.js'
+      ]
+
+    ];
+
+    $this->template('customer/create',$data);
+
+  }
+
 
 }

@@ -32,9 +32,18 @@
                           echo getInputField('Product Name','text','name' ,true ,'','', '' ,'',12);
                           echo getInputField('Product Code','text','code',true ,'','', '' ,'',12);
                           echo getInputField('sku','text','sku',true ,'','', '' ,'',12);
-                          echo getTextareaField('Residential Address','address' , true ,'' ,'' ,'',12);
+                          echo getTextareaField('Description','description' , true ,'' ,'' ,'',12);
 
-                          echo getSubmitBtn('Add Product');
+                          if (isset($edit_id)) {
+
+                            echo getSubmitBtn('Update Product');
+                          }
+                          else
+                          {
+
+                            echo getSubmitBtn('Add Product');
+                          }
+
 
                         ?>
 

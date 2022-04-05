@@ -333,20 +333,20 @@
 								</a>
 								<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
 									<li>
-										<a class="dropdown-item" href="dashboard/app/user-profile.html">
+										<a class="dropdown-item" href="<?= site_url('edit_profile/1') ?>">
+											<i class="fa-solid fa-user-pen"></i> Edit Profile
+										</a>
+									</li>
+									<li>
+										<a class="dropdown-item" href="<?= site_url('view_profile/1') ?>">
 												<i class="fa-solid fa-id-card-clip"></i> View Profile
 										</a>
 									</li>
 									<li>
-										<a class="dropdown-item" href="../dashboard/app/user-privacy-setting.html">
-											<i class="fa-solid fa-user-pen"></i> Edit Profile
-										</a>
-										</li>
-									<li>
 										<hr class="dropdown-divider">
 									</li>
 									<li>
-										<a class="dropdown-item" href="../dashboard/auth/sign-in.html">
+										<a class="dropdown-item" href="<?= site_url('logout') ?>">
 											<i class="fa-solid fa-right-from-bracket"></i> Logout
 										</a>
 									</li>

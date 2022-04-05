@@ -127,9 +127,10 @@ if ( ! function_exists('getImgField'))
       $form_img = '<div class="row">'.
                     '<div class="col-sm-12">'.
                       '<img src="'. $img_url .'" class="img-thumbnail user-form-img" alt="...">'.
+                      '<input type="file" class="choose_img" style="display:none;">'.
                     '</div>'.
                     '<div class="col-sm-12 mt-4" style="margin-left:10px;">'.
-                      '<button type="button" class="btn btn-sm btn-outline-primary">'.$btn_txt.'</button>'.
+                      '<button type="button" class="btn btn-sm btn-outline-primary select_img_">'.$btn_txt.'</button>'.
                     '</div>'.
                   '</div>';
 

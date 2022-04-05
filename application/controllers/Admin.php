@@ -23,7 +23,8 @@ class Admin extends My_controller
       'active_submenu' => 'admins',
       'scripts' => [
         'DataTable/myDataTable.js',
-        'users/main.js'
+        'users/main.js',
+        'main.js'
       ]
 
     ];
@@ -41,7 +42,10 @@ class Admin extends My_controller
       'title' => 'Add Admin',
       'page_head' => 'Add Admin',
       'active_menu' => 'users',
-      'active_submenu' => 'admins'
+      'active_submenu' => 'admins',
+      'scripts' => [
+        'img_trigger.js'
+      ]
 
     ];
 
@@ -58,7 +62,10 @@ class Admin extends My_controller
       'page_head' => 'Edit Admin',
       'edit_id' => $id,
       'active_menu' => 'users',
-      'active_submenu' => 'admins'
+      'active_submenu' => 'admins',
+      'scripts' => [
+        'img_trigger.js'
+      ]
 
     ];
 

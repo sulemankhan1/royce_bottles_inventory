@@ -20,7 +20,15 @@
 
                           echo getInputField('Category','text','name');
 
-                          echo getSubmitBtn('Add Category');
+                          if (isset($edit_id)) {
+
+                            echo getSubmitBtn('Update Category');
+                          }
+                          else
+                          {
+
+                            echo getSubmitBtn('Add Category');
+                          }
 
                         ?>
 

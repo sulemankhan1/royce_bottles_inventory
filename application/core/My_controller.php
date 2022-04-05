@@ -30,9 +30,17 @@ class My_controller extends CI_Controller
       if(!isset($data['active_submenu']) && $render != true)
       {
           $data['active_submenu'] = '';
+
+          $this->load->view($path,$data);
+
+      }
+      else
+      {
+
+        return $this->load->view($path,$data,true);
+
       }
 
-      $this->load->view($path,$data,$render);
 
   }
 

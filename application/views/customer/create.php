@@ -44,11 +44,20 @@
                       </div>
                       <div class="row">
                         <?php
+
                           echo getTextareaField('Shop Address','address' , true ,'' ,'' ,'',6);
                           echo getTextareaField('Remarks','remarks' , true ,'' ,'' ,'',6);
 
+                          if (isset($edit_id)) {
 
-                          echo getSubmitBtn('Add Driver');
+                            echo getSubmitBtn('Update Customer');
+                          }
+                          else
+                          {
+
+                            echo getSubmitBtn('Add Customer');
+                          }
+
 
                         ?>
 

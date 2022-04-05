@@ -2,10 +2,10 @@
   <div class="modal-dialog">
       <div class="modal-content">
           <div class="modal-body">
-              <p id="user-delete-msg">Are you sure you want to delete this category?</p>
+              <p id="delete-msg">Are you sure you want to delete this record?</p>
           </div>
           <div class="modal-footer">
-              <button type="button" class="btn btn-sm btn-danger" id="user-delete-action-btn-txt">Delete Category</button>
+              <button type="button" class="btn btn-sm btn-danger" id="delete-action-btn-txt">Delete</button>
               <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Cancel</button>
           </div>
       </div>

@@ -47,4 +47,20 @@ class Category extends My_controller
 
   }
 
+  public function edit($id)
+  {
+
+    $data = [
+
+      'title' => 'Edit Category',
+      'page_head' => 'Edit Category',
+      'edit_id' => $id,
+      'active_menu' => 'categories'
+
+    ];
+
+    $this->template('category/create',$data);
+
+  }
+
 }

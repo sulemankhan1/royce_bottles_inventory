@@ -23,7 +23,8 @@ class Driver extends My_controller
       'active_submenu' => 'drivers',
       'scripts' => [
         'DataTable/myDataTable.js',
-        'users/main.js'
+        'users/main.js',
+        'main.js'
       ]
 
     ];
@@ -41,7 +42,30 @@ class Driver extends My_controller
       'title' => 'Add Driver',
       'page_head' => 'Add Driver',
       'active_menu' => 'users',
-      'active_submenu' => 'drivers'
+      'active_submenu' => 'drivers',
+      'scripts' => [
+        'img_trigger.js'
+      ]
+
+    ];
+
+    $this->template('users/driver/create',$data);
+
+  }
+
+  public function edit($id)
+  {
+
+    $data = [
+
+      'title' => 'Edit Driver',
+      'page_head' => 'Edit Driver',
+      'edit_id' => $id,
+      'active_menu' => 'users',
+      'active_submenu' => 'drivers',
+      'scripts' => [
+        'img_trigger.js'
+      ]
 
     ];
 

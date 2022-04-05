@@ -43,7 +43,17 @@
                           echo getInputField('Zip code','number','zip_code');
                           echo getTextareaField('Residential Address','address');
 
-                          echo getSubmitBtn('Add Production');
+                          if(isset($edit_id))
+                          {
+                            echo getSubmitBtn('Update Production');
+
+                          }
+                          else
+                          {
+
+                            echo getSubmitBtn('Add Production');
+
+                          }
 
                         ?>
 

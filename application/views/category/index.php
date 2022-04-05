@@ -29,10 +29,10 @@
                           <th>1</th>
                           <th>Category</th>
                           <th>
-                            <a href="javascript:void(0)" class="action-icons" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit">
+                            <a href="<?= site_url('edit_category/1') ?>" class="action-icons" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit">
                               <i class="fa fa-pencil"></i>
                             </a>
-                            <a href="javascript:void(0)" class="action-icons delete_record_" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete">
+                            <a href="javascript:void(0)" class="action-icons delete_record_" data-type-msg="Category" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete">
                               <i class="fa-solid fa-trash"></i>
                             </a>
                           </th>

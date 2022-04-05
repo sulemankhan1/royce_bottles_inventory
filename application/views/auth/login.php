@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <title>Hope UI | Responsive Bootstrap 5 Admin Dashboard Template</title>
+      <title>Login</title>
 
       <!-- Favicon -->
       <link rel="shortcut icon" href="<?= base_url('assets/images/favicon.ico') ?>" />
@@ -60,7 +60,7 @@
                            </a>
                            <h2 class="mb-2 text-center">Sign In</h2>
                            <p class="text-center">Login to stay connected.</p>
-                           <form>
+                           <form action="<?= site_url('dashboard') ?>" method="post">
                               <div class="row">
                                  <div class="col-lg-12">
                                     <div class="form-group">
