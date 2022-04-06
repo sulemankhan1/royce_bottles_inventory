@@ -3,10 +3,18 @@
 <div class="conatiner-fluid content-inner mt-n5 py-0" style="margin-top:20px!important;">
   <div class="row">
       <div class="col-sm-12 col-lg-12">
+          <?=
+          showBreadCumbs([
+            ['label'=>'Home','url' => 'dashboard'],
+            ['label'=>'Users','url' => 'other_users'],
+            ['label'=>'Other Users','url' => 'other_users'],
+            ['label'=>'Add Other User']
+          ])
+          ?>
          <div class="card">
             <div class="card-header d-flex justify-content-between">
                <div class="header-title">
-                  <h4 class="card-title"><?= $page_head ?></h4>
+                  <h3 class="card-title"><?= $page_head ?></h3>
                </div>
             </div>
             <div class="card-body">
@@ -42,18 +50,8 @@
                           echo getInputField('City','text','city');
                           echo getInputField('Zip code','number','zip_code');
                           echo getTextareaField('Residential Address','address');
-                          
-                          if(isset($edit_id))
-                          {
-                            echo getSubmitBtn('Update Other User');
-
-                          }
-                          else
-                          {
 
                             echo getSubmitBtn('Add Other User');
-
-                          }
 
                         ?>
 

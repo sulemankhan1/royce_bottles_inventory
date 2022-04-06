@@ -17,10 +17,13 @@ class Admin extends MY_Controller
 
     $data = [
 
-      'title' => 'Admin',
-      'page_head' => 'Admin',
+      'title' => 'Admins',
+      'page_head' => 'Admins',
       'active_menu' => 'users',
       'active_submenu' => 'admins',
+      'styles' => [
+        'my-dataTable.css'
+      ],
       'scripts' => [
         'DataTable/myDataTable.js',
         'users/main.js',
@@ -60,7 +63,6 @@ class Admin extends MY_Controller
 
       'title' => 'Edit Admin',
       'page_head' => 'Edit Admin',
-      'edit_id' => $id,
       'active_menu' => 'users',
       'active_submenu' => 'admins',
       'scripts' => [
@@ -69,7 +71,7 @@ class Admin extends MY_Controller
 
     ];
 
-    $this->template('users/admin/create',$data);
+    $this->template('users/admin/edit',$data);
 
   }
 

@@ -1,20 +1,30 @@
 <!--Nav End-->
 </div>
-<div class="conatiner-fluid content-inner mt-n5 py-0" style="margin-top:20px!important;">
+<div class="conatiner-fluid content-inner mt-n5 py-0" style="margin-top:25px!important;margin-bottom:30px!important">
   <div class="row">
       <div class="col-sm-12 col-lg-12">
-        <?=
-        showBreadCumbs([
-          ['label'=>'Home','url' => 'dashboard'],
-          ['label'=>'Edit Profile']
-        ])
-        ?>
+
+        <div class="row">
+
+            <div class="col-sm-12">
+
+              <?=
+              showBreadCumbs([
+                ['label'=>'Home','url' => 'dashboard'],
+                ['label'=>'Users','url' => 'admins'],
+                ['label'=>'Admins','url' => 'admins'],
+                ['label'=>'Edit Admin']
+              ])
+              ?>
+
+            </div>
+
+        </div>
          <div class="card">
             <div class="card-header d-flex justify-content-between">
                <div class="header-title">
-                  <h4 class="card-title"><?= $page_head ?></h4>
+                  <h3 class="card-title"><?= $page_head ?></h3>
                </div>
-               <a href="<?= site_url('view_profile/1') ?>" class="btn btn-sm btn-primary">View Profile</a>
             </div>
             <div class="card-body">
               <form class="row g-3 needs-validation" novalidate>
@@ -47,7 +57,7 @@
                           echo getInputField('Zip code','number','zip_code');
                           echo getTextareaField('Residential Address','address');
 
-                          echo getSubmitBtn('Update Profile');
+                          echo getSubmitBtn('Update Admin');
 
                         ?>
 

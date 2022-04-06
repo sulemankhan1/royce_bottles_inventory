@@ -6,15 +6,15 @@
         <?=
         showBreadCumbs([
           ['label'=>'Home','url' => 'dashboard'],
-          ['label'=>'Edit Profile']
+          ['label'=>'Products','url' => 'products'],
+          ['label'=>'Edit Product']
         ])
         ?>
          <div class="card">
             <div class="card-header d-flex justify-content-between">
                <div class="header-title">
-                  <h4 class="card-title"><?= $page_head ?></h4>
+                  <h3 class="card-title"><?= $page_head ?></h3>
                </div>
-               <a href="<?= site_url('view_profile/1') ?>" class="btn btn-sm btn-primary">View Profile</a>
             </div>
             <div class="card-body">
               <form class="row g-3 needs-validation" novalidate>
@@ -31,23 +31,17 @@
 
 
                     </div>
-                    <div class="col-sm-9">
+                    <div class="col-sm-6">
                       <div class="row">
 
                         <?php
 
-                          echo getInputField('Name','text','name');
-                          echo getInputField('Email','email','email');
-                          echo getInputField('Username','text','username');
-                          echo getInputField('Password','password','password');
-                          echo getInputField('Contact #','number','contact_no');
-                          echo getInputField('Date Of Birth','date','dob');
-                          echo getInputField('Country','text','country');
-                          echo getInputField('City','text','city');
-                          echo getInputField('Zip code','number','zip_code');
-                          echo getTextareaField('Residential Address','address');
+                          echo getInputField('Product Name','text','name' ,true ,'','', '' ,'',12);
+                          echo getInputField('Product Code','text','code',true ,'','', '' ,'',12);
+                          echo getInputField('sku','text','sku',true ,'','', '' ,'',12);
+                          echo getTextareaField('Description','description' , true ,'' ,'' ,'',12);
 
-                          echo getSubmitBtn('Update Profile');
+                            echo getSubmitBtn('Update Product');
 
                         ?>
 

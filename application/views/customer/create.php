@@ -3,10 +3,17 @@
 <div class="conatiner-fluid content-inner mt-n5 py-0" style="margin-top:20px!important;">
   <div class="row">
       <div class="col-sm-12 col-lg-12">
+        <?=
+        showBreadCumbs([
+          ['label'=>'Home','url' => 'dashboard'],
+          ['label'=>'Customers','url' => 'customers'],
+          ['label'=>'Add Customer ']
+        ])
+        ?>
          <div class="card">
             <div class="card-header d-flex justify-content-between">
                <div class="header-title">
-                  <h4 class="card-title"><?= $page_head ?></h4>
+                  <h3 class="card-title"><?= $page_head ?></h3>
                </div>
             </div>
             <div class="card-body">
@@ -48,16 +55,7 @@
                           echo getTextareaField('Shop Address','address' , true ,'' ,'' ,'',6);
                           echo getTextareaField('Remarks','remarks' , true ,'' ,'' ,'',6);
 
-                          if (isset($edit_id)) {
-
-                            echo getSubmitBtn('Update Customer');
-                          }
-                          else
-                          {
-
                             echo getSubmitBtn('Add Customer');
-                          }
-
 
                         ?>
 

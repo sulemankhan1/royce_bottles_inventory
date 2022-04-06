@@ -21,6 +21,9 @@ class Rights extends MY_Controller
       'page_head' => 'Rights',
       'active_menu' => 'users',
       'active_submenu' => 'rights',
+      'styles' => [
+        'my-dataTable.css'
+      ],
       'scripts' => [
         'DataTable/myDataTable.js',
         'main.js'

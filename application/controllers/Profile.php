@@ -19,7 +19,6 @@ class Profile extends MY_Controller
 
       'title' => 'Edit Profile',
       'page_head' => 'Edit Profile',
-      'edit_id' => $id,
       'active_menu' => '',
       'scripts' => [
         'img_trigger.js'
@@ -38,7 +37,6 @@ class Profile extends MY_Controller
 
       'title' => 'View Profile',
       'page_head' => 'View Profile',
-      'edit_id' => $id,
       'active_menu' => ''
 
     ];

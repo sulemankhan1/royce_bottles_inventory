@@ -82,6 +82,11 @@
 				.form-switch .form-check-input {
     			background-color: #ff3b3b;
 				}
+
+				.btn-lign-right
+				{
+					text-align: right!important;
+				}
 		 </style>
 
 </head>

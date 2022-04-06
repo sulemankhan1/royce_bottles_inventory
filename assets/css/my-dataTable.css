@@ -1,0 +1,39 @@
+.table-responsive .dataTables_wrapper .row .dataTables_length {
+    padding-left: 0px!important;
+    margin-bottom: 17px!important;
+}
+.table-responsive .dataTables_wrapper .row .dataTables_filter, .table-responsive .dataTables_wrapper .row .dataTables_paginate {
+    padding-right: 0px!important;
+}
+
+.table-responsive .dataTables_wrapper .row .dataTables_info {
+  padding-left: 0px!important;
+}
+
+#myDataTable thead tr {
+    background-color: #e5e5e5!important;
+}
+
+#myDataTable tbody tr {
+    background-color: white!important;
+}
+
+table.dataTable {
+  margin-bottom: 20px!important;
+}
+
+.actions-icons a
+{
+  padding: 2px!important;
+}
+
+.table-img-design
+{
+    width: 45px!important;
+    border-radius: 23px!important;
+}
+
+.table-img-txt-design
+{
+  margin-left: 3px!important;
+}

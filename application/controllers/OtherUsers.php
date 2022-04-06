@@ -21,6 +21,9 @@ class OtherUsers extends MY_Controller
       'page_head' => 'Other Users',
       'active_menu' => 'users',
       'active_submenu' => 'others_users',
+      'styles' => [
+        'my-dataTable.css'
+      ],
       'scripts' => [
         'DataTable/myDataTable.js',
         'users/main.js',
@@ -60,7 +63,6 @@ class OtherUsers extends MY_Controller
 
       'title' => 'Edit Other User',
       'page_head' => 'Edit Other User',
-      'edit_id' => $id,
       'active_menu' => 'users',
       'active_submenu' => 'others_users',
       'scripts' => [
@@ -69,7 +71,7 @@ class OtherUsers extends MY_Controller
 
     ];
 
-    $this->template('users/other/create',$data);
+    $this->template('users/other/edit',$data);
 
   }
 

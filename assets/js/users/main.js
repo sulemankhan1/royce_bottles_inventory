@@ -2,10 +2,11 @@
 $('.changeUser_status_').click(function () {
 
   let type = $(this).attr('data-type-msg')
+  let status = $(this).attr('data-type-status')
 
-  let msg = 'Are you sure you want to deactive this '+type+'?'
+  let msg = 'Are you sure you want to '+status+' this '+type+'?'
 
-  let btn_txt = 'Deactive '+type
+  let btn_txt = status +' '+type
 
   $('#user-status-msg').text(msg)
 

@@ -58,3 +58,7 @@ $route['edit_customer/(:num)'] = 'Customer/edit/$1';
 //profile
 $route['edit_profile/(:num)'] = 'Profile/edit_profile/$1';
 $route['view_profile/(:num)'] = 'Profile/view_profile/$1';
+
+
+//inventory
+$route['inventory'] = 'Inventory';

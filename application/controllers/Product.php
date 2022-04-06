@@ -20,6 +20,9 @@ class Product extends MY_Controller
       'title' => 'Products',
       'page_head' => 'Products',
       'active_menu' => 'products',
+      'styles' => [
+        'my-dataTable.css'
+      ],
       'scripts' => [
         'DataTable/myDataTable.js',
         'main.js'
@@ -57,7 +60,6 @@ class Product extends MY_Controller
 
       'title' => 'Edit Product',
       'page_head' => 'Edit Product',
-      'edit_id' => $id,
       'active_menu' => 'products',
       'scripts' => [
         'img_trigger.js'
@@ -65,7 +67,7 @@ class Product extends MY_Controller
 
     ];
 
-    $this->template('product/create',$data);
+    $this->template('product/edit',$data);
 
   }
 

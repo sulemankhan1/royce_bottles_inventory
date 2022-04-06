@@ -20,6 +20,9 @@ class Category extends MY_Controller
       'title' => 'Categories',
       'page_head' => 'Categories',
       'active_menu' => 'categories',
+      'styles' => [
+        'my-dataTable.css'
+      ],
       'scripts' => [
         'DataTable/myDataTable.js',
         'main.js'
@@ -54,12 +57,11 @@ class Category extends MY_Controller
 
       'title' => 'Edit Category',
       'page_head' => 'Edit Category',
-      'edit_id' => $id,
       'active_menu' => 'categories'
 
     ];
 
-    $this->template('category/create',$data);
+    $this->template('category/edit',$data);
 
   }
 

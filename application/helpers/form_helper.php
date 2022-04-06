@@ -1,6 +1,5 @@
 <?php
 
-
 if ( ! function_exists('getSelectField'))
 {
 
@@ -236,6 +235,38 @@ if ( ! function_exists('viewDetailsCol'))
       $col = '<div class="col-sm-'.$column.'"><label for="'.ucfirst($label).'">'.ucfirst($label).'</label><p class="view-details-txt">'.$val.'</p></div>';
 
       return $col;
+
+	}
+
+}
+
+
+if ( ! function_exists('showBreadCumbs'))
+{
+
+  function showBreadCumbs($arr)
+	{
+
+      $breadcumb = '<nav aria-label="breadcrumb">
+                      <ol class="breadcrumb">';
+                          foreach ($arr as $key => $v)
+                          {
+
+                            if(isset($v['url']))
+                            {
+                              $breadcumb .='<li class="breadcrumb-item"><a href="'. site_url($v['url']) .'">'.$v['label'].'</a></li>';
+                            }
+                            else
+                            {
+                              $breadcumb .='<li class="breadcrumb-item active" aria-current="page">'. $v['label'].'</li>';
+                            }
+
+
+                          }
+                      $breadcumb .='</ol>'.
+                    '</nav>';
+
+      return $breadcumb;
 
 	}
 

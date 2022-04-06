@@ -4,6 +4,12 @@
 <div class="conatiner-fluid content-inner mt-n5 py-0" style="margin-top:20px!important;">
   <div class="row">
       <div class="col-sm-12">
+        <?=
+        showBreadCumbs([
+          ['label'=>'Home','url' => 'dashboard'],
+          ['label'=>'Categories']
+        ])
+        ?>
          <div class="card">
             <div class="card-header d-flex justify-content-between">
                <div class="header-title">
@@ -26,17 +32,62 @@
                      </thead>
                      <tbody>
                        <tr>
-                          <th>1</th>
-                          <th>Category</th>
-                          <th>
-                            <a href="<?= site_url('edit_category/1') ?>" class="action-icons" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit">
-                              <i class="fa fa-pencil"></i>
-                            </a>
-                            <a href="javascript:void(0)" class="action-icons delete_record_" data-type-msg="Category" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete">
-                              <i class="fa-solid fa-trash"></i>
-                            </a>
-                          </th>
+                          <td>1</td>
+                          <td>Category</td>
+                          <td>
+                            <span class="actions-icons">
+                              <a href="<?= site_url('edit_category/1') ?>" class="action-icons" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit">
+                                <i class="fa fa-pencil"></i>
+                              </a>
+                              <a href="javascript:void(0)" class="action-icons delete_record_" data-type-msg="Category" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete">
+                                <i class="fa-solid fa-trash"></i>
+                              </a>
+                            </span>
+                          </td>
                        </tr>
+                       <tr>
+                          <td>1</td>
+                          <td>Category</td>
+                          <td>
+                            <span class="actions-icons">
+                              <a href="<?= site_url('edit_category/1') ?>" class="action-icons" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit">
+                                <i class="fa fa-pencil"></i>
+                              </a>
+                              <a href="javascript:void(0)" class="action-icons delete_record_" data-type-msg="Category" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete">
+                                <i class="fa-solid fa-trash"></i>
+                              </a>
+                            </span>
+                          </td>
+                       </tr>
+                       <tr>
+                          <td>1</td>
+                          <td>Category</td>
+                          <td>
+                            <span class="actions-icons">
+                              <a href="<?= site_url('edit_category/1') ?>" class="action-icons" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit">
+                                <i class="fa fa-pencil"></i>
+                              </a>
+                              <a href="javascript:void(0)" class="action-icons delete_record_" data-type-msg="Category" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete">
+                                <i class="fa-solid fa-trash"></i>
+                              </a>
+                            </span>
+                          </td>
+                       </tr>
+                       <tr>
+                          <td>1</td>
+                          <td>Category</td>
+                          <td>
+                            <span class="actions-icons">
+                              <a href="<?= site_url('edit_category/1') ?>" class="action-icons" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit">
+                                <i class="fa fa-pencil"></i>
+                              </a>
+                              <a href="javascript:void(0)" class="action-icons delete_record_" data-type-msg="Category" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete">
+                                <i class="fa-solid fa-trash"></i>
+                              </a>
+                            </span>
+                          </td>
+                       </tr>
+
                      </tbody>
                   </table>
                </div>

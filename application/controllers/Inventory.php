@@ -2,7 +2,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Driver extends MY_Controller
+class Inventory extends MY_Controller
 {
 
   function __construct()
@@ -17,10 +17,10 @@ class Driver extends MY_Controller
 
     $data = [
 
-      'title' => 'Driver',
-      'page_head' => 'Drivers',
-      'active_menu' => 'users',
-      'active_submenu' => 'drivers',
+      'title' => 'Inventory',
+      'page_head' => 'Inventory',
+      'active_menu' => 'inventory',
+      'active_submenu' => 'view_inventory',
       'styles' => [
         'my-dataTable.css'
       ],
@@ -32,7 +32,7 @@ class Driver extends MY_Controller
 
     ];
 
-    $this->template('users/driver/index',$data);
+    $this->template('inventory/index',$data);
 
 
 	}
@@ -42,17 +42,17 @@ class Driver extends MY_Controller
 
     $data = [
 
-      'title' => 'Add Driver',
-      'page_head' => 'Add Driver',
+      'title' => 'Add Admin',
+      'page_head' => 'Add Admin',
       'active_menu' => 'users',
-      'active_submenu' => 'drivers',
+      'active_submenu' => 'admins',
       'scripts' => [
         'img_trigger.js'
       ]
 
     ];
 
-    $this->template('users/driver/create',$data);
+    $this->template('users/admin/create',$data);
 
   }
 
@@ -61,17 +61,17 @@ class Driver extends MY_Controller
 
     $data = [
 
-      'title' => 'Edit Driver',
-      'page_head' => 'Edit Driver',
+      'title' => 'Edit Admin',
+      'page_head' => 'Edit Admin',
       'active_menu' => 'users',
-      'active_submenu' => 'drivers',
+      'active_submenu' => 'admins',
       'scripts' => [
         'img_trigger.js'
       ]
 
     ];
 
-    $this->template('users/driver/edit',$data);
+    $this->template('users/admin/edit',$data);
 
   }
 

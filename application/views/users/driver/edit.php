@@ -3,18 +3,27 @@
 <div class="conatiner-fluid content-inner mt-n5 py-0" style="margin-top:20px!important;">
   <div class="row">
       <div class="col-sm-12 col-lg-12">
-        <?=
-        showBreadCumbs([
-          ['label'=>'Home','url' => 'dashboard'],
-          ['label'=>'Edit Profile']
-        ])
-        ?>
+        <div class="row">
+
+            <div class="col-sm-12">
+
+              <?=
+              showBreadCumbs([
+                ['label'=>'Home','url' => 'dashboard'],
+                ['label'=>'Users','url' => 'drivers'],
+                ['label'=>'Drivers','url' => 'drivers'],
+                ['label'=>'Edit Driver']
+              ])
+              ?>
+
+            </div>
+
+        </div>
          <div class="card">
             <div class="card-header d-flex justify-content-between">
                <div class="header-title">
-                  <h4 class="card-title"><?= $page_head ?></h4>
+                  <h3 class="card-title"><?= $page_head ?></h3>
                </div>
-               <a href="<?= site_url('view_profile/1') ?>" class="btn btn-sm btn-primary">View Profile</a>
             </div>
             <div class="card-body">
               <form class="row g-3 needs-validation" novalidate>
@@ -41,13 +50,17 @@
                           echo getInputField('Username','text','username');
                           echo getInputField('Password','password','password');
                           echo getInputField('Contact #','number','contact_no');
+                          echo getInputField('License #','number','license_no');
+                          echo getInputField('FIN #','number','fin_no');
+                          echo getInputField('Car Plate','text','car_plate');
                           echo getInputField('Date Of Birth','date','dob');
                           echo getInputField('Country','text','country');
                           echo getInputField('City','text','city');
                           echo getInputField('Zip code','number','zip_code');
                           echo getTextareaField('Residential Address','address');
 
-                          echo getSubmitBtn('Update Profile');
+
+                            echo getSubmitBtn('Update Driver');
 
                         ?>
 

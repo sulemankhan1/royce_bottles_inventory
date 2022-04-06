@@ -20,6 +20,9 @@ class Customer extends MY_Controller
       'title' => 'Customers',
       'page_head' => 'Customers',
       'active_menu' => 'customers',
+      'styles' => [
+        'my-dataTable.css'
+      ],
       'scripts' => [
         'DataTable/myDataTable.js',
         'users/customers.js',
@@ -58,7 +61,6 @@ class Customer extends MY_Controller
 
       'title' => 'Edit Customer',
       'page_head' => 'Edit Customer',
-      'edit_id' => $id,
       'active_menu' => 'customers',
       'scripts' => [
         'img_trigger.js'
@@ -66,7 +68,7 @@ class Customer extends MY_Controller
 
     ];
 
-    $this->template('customer/create',$data);
+    $this->template('customer/edit',$data);
 
   }
 

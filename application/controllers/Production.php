@@ -17,10 +17,13 @@ class Production extends MY_Controller
 
     $data = [
 
-      'title' => 'Production',
-      'page_head' => 'Productions',
+      'title' => 'Production Users',
+      'page_head' => 'Production Users',
       'active_menu' => 'users',
       'active_submenu' => 'productions',
+      'styles' => [
+        'my-dataTable.css'
+      ],
       'scripts' => [
         'DataTable/myDataTable.js',
         'users/main.js',
@@ -39,8 +42,8 @@ class Production extends MY_Controller
 
     $data = [
 
-      'title' => 'Add Production',
-      'page_head' => 'Add Production',
+      'title' => 'Add Production User',
+      'page_head' => 'Add Production User',
       'active_menu' => 'users',
       'active_submenu' => 'productions',
       'scripts' => [
@@ -58,9 +61,8 @@ class Production extends MY_Controller
 
     $data = [
 
-      'title' => 'Edit Production',
-      'page_head' => 'Edit Production',
-      'edit_id' => $id,
+      'title' => 'Edit Production User',
+      'page_head' => 'Edit Production User',
       'active_menu' => 'users',
       'active_submenu' => 'productions',
       'scripts' => [
@@ -69,7 +71,7 @@ class Production extends MY_Controller
 
     ];
 
-    $this->template('users/production/create',$data);
+    $this->template('users/production/edit',$data);
 
   }
 

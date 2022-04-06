@@ -6,8 +6,8 @@
         <?=
         showBreadCumbs([
           ['label'=>'Home','url' => 'dashboard'],
-          ['label'=>'Products','url' => 'products'],
-          ['label'=>'Add Product']
+          ['label'=>'Categories','url' => 'categories'],
+          ['label'=>'Add Category']
         ])
         ?>
          <div class="card">
@@ -20,28 +20,14 @@
               <form class="row g-3 needs-validation" novalidate>
                 <div class="row mt-4">
 
-                    <div class="col-sm-3">
-
-
-                        <?php
-
-                          echo getImgField('Upload Photo', base_url('assets/images/avatars/01.png'));
-
-                         ?>
-
-
-                    </div>
-                    <div class="col-sm-6">
+                    <div class="col-sm-12">
                       <div class="row">
 
                         <?php
 
-                          echo getInputField('Product Name','text','name' ,true ,'','', '' ,'',12);
-                          echo getInputField('Product Code','text','code',true ,'','', '' ,'',12);
-                          echo getInputField('sku','text','sku',true ,'','', '' ,'',12);
-                          echo getTextareaField('Description','description' , true ,'' ,'' ,'',12);
+                          echo getInputField('Category','text','name');
 
-                            echo getSubmitBtn('Add Product');
+                            echo getSubmitBtn('Update Category');
 
                         ?>
 

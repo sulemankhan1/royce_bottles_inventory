@@ -129,7 +129,7 @@
 						</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" data-bs-toggle="collapse" href="#inventory-auth" role="button"
+						<a class="nav-link <?= $active_menu == 'products'?'active':'' ?>" data-bs-toggle="collapse" href="#inventory-auth" role="button"
 							aria-expanded="false" aria-controls="inventory-user">
 							<i class="icon">
 								<i class="fa-solid fa-warehouse"></i>
@@ -141,7 +141,7 @@
 						</a>
 						<ul class="sub-nav collapse" id="inventory-auth" data-bs-parent="#inventory-menu">
 							<li class="nav-item">
-								<a class="nav-link" href="../dashboard/auth/sign-in.html">
+								<a class="nav-link <?= $active_submenu == 'view_inventory'?'active':'' ?>" href=<?= base_url('inventory') ?>">
 									<i class="icon">
 										<i class="fa-solid fa-caret-right"></i>
 									</i>
@@ -294,7 +294,7 @@
   <!-- sidebar end-->
 
 
-  <main class="main-content">
+  <main class="main-content" style="background-color:#e9ecef!important; ">
 		<div class="position-relative iq-banner">
 			<!--Nav Start-->
 			<nav class="nav navbar navbar-expand-lg navbar-light iq-navbar">
@@ -328,7 +328,7 @@
 										class="theme-color-default-img img-fluid avatar avatar-50 avatar-rounded">
 									<div class="caption ms-3 d-none d-md-block ">
 										<h6 class="mb-0 caption-title">Austin Robertson</h6>
-										<p class="mb-0 caption-sub-title">Marketing Administrator</p>
+										<p class="mb-0 caption-sub-title">Admin</p>
 									</div>
 								</a>
 								<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">

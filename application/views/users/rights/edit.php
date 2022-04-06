@@ -3,10 +3,18 @@
 <div class="conatiner-fluid content-inner mt-n5 py-0" style="margin-top:20px!important;">
   <div class="row">
       <div class="col-sm-12 col-lg-12">
+        <?=
+        showBreadCumbs([
+          ['label'=>'Home','url' => 'dashboard'],
+          ['label'=>'Users','url' => 'rights'],
+          ['label'=>'Rights','url' => 'rights'],
+          ['label'=>'Edit Rights']
+        ])
+        ?>
          <div class="card">
             <div class="card-header d-flex justify-content-between">
                <div class="header-title">
-                  <h4 class="card-title"><?= $page_head ?></h4>
+                  <h3 class="card-title"><?= $page_head ?></h3>
                </div>
             </div>
             <div class="card-body">
