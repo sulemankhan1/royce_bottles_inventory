@@ -25,7 +25,10 @@
 
                         <?php
 
-                          echo getInputField('Category','text','name');
+                        echo getInputField([
+                          'label' => 'Category',
+                          'name' => 'name'
+                        ]);
 
                             echo getSubmitBtn('Update Category');
 

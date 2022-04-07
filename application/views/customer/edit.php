@@ -25,7 +25,7 @@
 
                         <?php
 
-                          echo getImgField('Upload Photo', base_url('assets/images/avatars/01.png'));
+                          echo getImgField();
 
                          ?>
 
@@ -36,26 +36,73 @@
 
                         <?php
 
-                          echo getInputField('Customer Name','text','name');
-                          echo getInputField('Shop Name','text','name');
-                          echo getInputField('Shop Acronym','text','name');
-                          echo getInputField('Shop ID','text','name');
-                          echo getInputField('Contact #','number','contact_no');
-                          echo getInputField('Email Address For E-Receipt','email','email');
-                          echo getInputField('Email Address For SOA','email','email');
-                          echo getSelectField('Category','category');
-                          echo getSelectField('Salesperson','salesperson_id');
-                          echo getSelectField('Driver','driver_id');
-                          echo getSelectField('Days','day');
+                          echo getInputField([
+                              'label' => 'Customer Name',
+                              'name' => 'name'
+                            ]);
+                          echo getInputField([
+                              'label' => 'Shop Name',
+                              'name' => 'shop_name'
+                            ]);
+                          echo getInputField([
+                              'label' => 'Shop Acronym',
+                              'name' => 'shop_acronym'
+                            ]);
+                          echo getInputField([
+                              'label' => 'Shop ID',
+                              'name' => 'shop_id'
+                            ]);
+                          echo getInputField([
+                              'label' => 'Contact #',
+                              'name' => 'contact_no',
+                              'type' => 'number'
+                            ]);
+                          echo getInputField([
+                              'label' => 'Email Address For E-Receipt',
+                              'name' => 'email',
+                              'type' => 'email'
+                            ]);
+                          echo getInputField([
+                              'label' => 'Email Address For SOA',
+                              'name' => 'soa_email',
+                              'type' => 'email'
+                            ]);
+
+                          echo getSelectField([
+                            'label' => 'Category',
+                            'name' => 'cat_id'
+                          ]);
+
+                          echo getSelectField([
+                            'label' => 'Salesperson',
+                            'name' => 'salesperson_id'
+                          ]);
+
+                          echo getSelectField([
+                            'label' => 'Driver',
+                            'name' => 'driver_id'
+                          ]);
+
+                          echo getSelectField([
+                            'label' => 'Days',
+                            'name' => 'day'
+                          ]);
+
                           ?>
                       </div>
                       <div class="row">
                         <?php
 
-                          echo getTextareaField('Shop Address','address' , true ,'' ,'' ,'',6);
-                          echo getTextareaField('Remarks','remarks' , true ,'' ,'' ,'',6);
+                          echo getTextareaField([
+                            'label' => 'Shop Address',
+                            'name' => 'address'
+                          ]);
+                          echo getTextareaField([
+                            'label' => 'Remarks',
+                            'name' => 'remarks'
+                          ]);
 
-                            echo getSubmitBtn('Update Customer');
+                          echo getSubmitBtn('Update Customer');
 
                         ?>
 

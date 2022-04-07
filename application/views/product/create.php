@@ -25,7 +25,7 @@
 
                         <?php
 
-                          echo getImgField('Upload Photo', base_url('assets/images/avatars/01.png'));
+                          echo getImgField();
 
                          ?>
 
@@ -36,10 +36,26 @@
 
                         <?php
 
-                          echo getInputField('Product Name','text','name' ,true ,'','', '' ,'',12);
-                          echo getInputField('Product Code','text','code',true ,'','', '' ,'',12);
-                          echo getInputField('sku','text','sku',true ,'','', '' ,'',12);
-                          echo getTextareaField('Description','description' , true ,'' ,'' ,'',12);
+                        echo getInputField([
+                          'label' => 'Product Name',
+                          'name' => 'name',
+                          'column' => 'sm-12'
+                        ]);
+                        echo getInputField([
+                          'label' => 'Product Code',
+                          'name' => 'product_code',
+                          'column' => 'sm-12'
+                        ]);
+                        echo getInputField([
+                          'label' => 'SKU',
+                          'name' => 'sku',
+                          'column' => 'sm-12'
+                        ]);
+                        echo getTextareaField([
+                          'label' => 'Description',
+                          'name' => 'description',
+                          'column' => 'sm-12'
+                        ]);
 
                             echo getSubmitBtn('Add Product');
 

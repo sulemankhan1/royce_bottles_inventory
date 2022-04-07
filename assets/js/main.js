@@ -26,14 +26,12 @@ $('.view_details_').click(function () {
     dataType : 'json',
     success :function (data) {
 
-      console.log(data)
-
       $('#view_details_').html(data.html)
+      $('#ViewDetailsModal').modal('show')
 
     }
 
   })
 
-  $('#ViewDetailsModal').modal('show')
 
 })

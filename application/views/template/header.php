@@ -87,6 +87,37 @@
 				{
 					text-align: right!important;
 				}
+				.btn-group button
+				{
+					height: 35px;
+				}
+				.return_stock_inp_cols
+				{
+					-webkit-box-flex: 0!important;
+					-webkit-flex: 0 0 auto!important;
+					-ms-flex: 0 0 auto!important;
+					flex: 0 0 auto!important;
+					width: 11%!important;
+
+				}
+				.return_stock_inp_cols label
+				{
+
+					font-size: 11px!important;
+
+				}
+				#log-details-filter tr th,#log-details-filter tr td
+				{
+					padding-bottom: 10px!important;
+				}
+				#log-details-filter tr td
+				{
+					color: black!important
+				}
+				#log-details-filter
+				{
+					margin-left: 18px!important;
+				}
 		 </style>
 
 </head>

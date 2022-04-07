@@ -7,8 +7,8 @@
         <?=
         showBreadCumbs([
           ['label'=>'Home','url' => 'dashboard'],
-          ['label'=>'Users','url' => 'rights'],
-          ['label'=>'Rights']
+          ['label'=>'Inventory','url' => 'live_stock'],
+          ['label'=>'Live Stock']
         ])
         ?>
          <div class="card">
@@ -25,48 +25,51 @@
                      <thead>
                         <tr>
                            <th>#</th>
-                           <th>Name</th>
-                           <th>Actions</th>
+                           <th>Driver</th>
+                           <th>Total Assign Qty</th>
+                           <th>Total Sold Qty</th>
+                           <th>Total Remaining Qty</th>
+                           <th>Action</th>
                         </tr>
                      </thead>
                      <tbody>
                        <tr>
                           <td>1</td>
-                          <td>Driver</td>
+                          <td>Driver1</td>
+                          <td>55</td>
+                          <td>15</td>
+                          <td>40</td>
                           <td>
                             <span class="actions-icons">
-                              <a href="<?= site_url('edit_rights') ?>" class="action-icons" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit">
-                                <i class="fa fa-pencil"></i>
-                              </a>
-                              <a href="javascript:void(0)" class="action-icons view_details_" data-url="<?= site_url('AjaxController/getViewDetailsByType/Rights/1') ?>" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Details">
+                              <a href="javascript:void(0)" class="action-icons view_details_" data-url="<?= site_url('AjaxController/getViewDetailsByDriverAssignQty/1') ?>" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Details">
                                 <i class="fa fa-eye"></i>
                               </a>
                             </span>
                           </td>
                        </tr>
                        <tr>
-                          <td>2</td>
-                          <td>Production Users</td>
+                          <td>1</td>
+                          <td>Driver1</td>
+                          <td>55</td>
+                          <td>15</td>
+                          <td>40</td>
                           <td>
                             <span class="actions-icons">
-                              <a href="<?= site_url('edit_rights') ?>" class="action-icons" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit">
-                                <i class="fa fa-pencil"></i>
-                              </a>
-                              <a href="javascript:void(0)" class="action-icons view_details_" data-url="<?= site_url('AjaxController/getViewDetailsByType/Rights/1') ?>" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Details">
+                              <a href="javascript:void(0)" class="action-icons view_details_" data-url="<?= site_url('AjaxController/getViewDetailsByDriverAssignQty/1') ?>" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Details">
                                 <i class="fa fa-eye"></i>
                               </a>
                             </span>
                           </td>
                        </tr>
                        <tr>
-                          <td>3</td>
-                          <td>Other Users</td>
+                          <td>1</td>
+                          <td>Driver1</td>
+                          <td>55</td>
+                          <td>15</td>
+                          <td>40</td>
                           <td>
                             <span class="actions-icons">
-                              <a href="<?= site_url('edit_rights') ?>" class="action-icons" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit">
-                                <i class="fa fa-pencil"></i>
-                              </a>
-                              <a href="javascript:void(0)" class="action-icons view_details_" data-url="<?= site_url('AjaxController/getViewDetailsByType/Rights/1') ?>" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Details">
+                              <a href="javascript:void(0)" class="action-icons view_details_" data-url="<?= site_url('AjaxController/getViewDetailsByDriverAssignQty/1') ?>" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Details">
                                 <i class="fa fa-eye"></i>
                               </a>
                             </span>

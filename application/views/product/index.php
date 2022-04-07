@@ -29,7 +29,7 @@
                            <th>Product</th>
                            <th>Product Code</th>
                            <th>SKU</th>
-                           <th>Action</th>
+                           <th>Actions</th>
                         </tr>
                      </thead>
                      <tbody>

@@ -33,11 +33,11 @@
                     <div class="col-sm-3">
 
 
-                        <?php
+                      <?php
 
-                          echo getImgField('Upload Photo', base_url('assets/images/avatars/01.png'));
+                        echo getImgField();
 
-                         ?>
+                       ?>
 
 
                     </div>
@@ -46,16 +46,54 @@
 
                         <?php
 
-                          echo getInputField('Name','text','name');
-                          echo getInputField('Email','email','email');
-                          echo getInputField('Username','text','username');
-                          echo getInputField('Password','password','password');
-                          echo getInputField('Contact #','number','contact_no');
-                          echo getInputField('Date Of Birth','date','dob');
-                          echo getInputField('Country','text','country');
-                          echo getInputField('City','text','city');
-                          echo getInputField('Zip code','number','zip_code');
-                          echo getTextareaField('Residential Address','address');
+                        echo getInputField([
+                          'label' => 'Name',
+                          'name' => 'name'
+                        ]);
+                        echo getInputField([
+                          'label' => 'Email',
+                          'name' => 'email',
+                          'type' => 'email'
+                        ]);
+                        echo getInputField([
+                          'label' => 'Username',
+                          'name' => 'username'
+                        ]);
+                        echo getInputField([
+                          'label' => 'Password',
+                          'name' => 'password',
+                          'type' => 'password'
+                        ]);
+                        echo getInputField([
+                          'label' => 'Contact #',
+                          'name' => 'contact_no',
+                          'type' => 'number'
+                        ]);
+                        echo getInputField([
+                          'label' => 'Date Of Birth',
+                          'name' => 'dob',
+                          'type' => 'date'
+                        ]);
+                        echo getInputField([
+                          'label' => 'Country',
+                          'name' => 'country'
+                        ]);
+                        echo getInputField([
+                          'label' => 'City',
+                          'name' => 'city'
+                        ]);
+                        echo getInputField([
+                          'label' => 'Zip Code',
+                          'name' => 'zip_code'
+                        ]);
+                        ?>
+                    </div>
+                    <div class="row">
+                    <?php
+                        echo getTextareaField([
+                          'label' => 'Residential Address',
+                          'name' => 'address'
+                        ]);
 
                           echo getSubmitBtn('Update Admin');
 

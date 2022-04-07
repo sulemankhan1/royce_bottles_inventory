@@ -12,7 +12,7 @@ class AjaxController extends MY_Controller
 
   }
 
-	public function getViewDetailsByType($type,$id)
+  public function getViewDetailsByType($type,$id)
 	{
 
     $data = [
@@ -44,5 +44,42 @@ class AjaxController extends MY_Controller
     echo json_encode($output);
 
 	}
+
+  public function getReturnStockProductsByDriverId($driver_id)
+  {
+      $data = [];
+      $output['html'] = $this->load_view('inventory/modals/return_stock_products',$data,true);
+
+      echo json_encode($output);
+
+  }
+
+  public function getInventoryDetailsByType($type,$id)
+  {
+
+      $data = [
+
+        'type' => $type
+
+      ];
+
+      $output['html'] = $this->load_view('inventory/modals/inv_details',$data,true);
+
+      echo json_encode($output);
+
+  }
+
+
+  public function getViewDetailsByDriverAssignQty($driver_id)
+  {
+
+      $data = [];
+
+      $output['html'] = $this->load_view('inventory/modals/live_stock_details',$data,true);
+
+      echo json_encode($output);
+
+  }
+
 
 }

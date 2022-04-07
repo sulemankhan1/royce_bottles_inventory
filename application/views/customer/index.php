@@ -33,7 +33,7 @@
                            <th>Email For E-receipt </th>
                            <th>Category</th>
                            <th>Salesperson </th>
-                           <th>Action</th>
+                           <th>Actions</th>
                         </tr>
                      </thead>
                      <tbody>

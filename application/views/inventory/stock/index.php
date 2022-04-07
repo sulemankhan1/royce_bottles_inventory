@@ -7,7 +7,8 @@
         <?=
         showBreadCumbs([
           ['label'=>'Home','url' => 'dashboard'],
-          ['label'=>'Categories']
+          ['label'=>'Inventory','url' => 'view_stock'],
+          ['label'=>'View Stock']
         ])
         ?>
          <div class="card">
@@ -17,7 +18,7 @@
                  <h4 class="card-title"><?= $page_head ?></h4>
                </div>
 
-               <a href="<?= site_url('add_category') ?>" class="btn btn-sm btn-primary">Add Category</a>
+                 <a href="javascript:void(0)" class="btn btn-sm btn-primary" id="add_stock_">Add Stock</a>
 
             </div>
             <div class="card-body">
@@ -26,20 +27,23 @@
                      <thead>
                         <tr>
                            <th>#</th>
-                           <th>Name</th>
-                           <th>Actions</th>
+                           <th>Product Name</th>
+                           <th>Qty</th>
+                           <th>Added By</th>
+                           <th>Added At</th>
+                           <th>Action</th>
                         </tr>
                      </thead>
                      <tbody>
                        <tr>
                           <td>1</td>
-                          <td>Category</td>
+                          <td>Product1</td>
+                          <td>10</td>
+                          <td>Demo</td>
+                          <td>03-04-2021,5:10 PM</td>
                           <td>
                             <span class="actions-icons">
-                              <a href="<?= site_url('edit_category/1') ?>" class="action-icons" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit">
-                                <i class="fa fa-pencil"></i>
-                              </a>
-                              <a href="javascript:void(0)" class="action-icons delete_record_" data-type-msg="Category" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete">
+                              <a href="javascript:void(0)" class="action-icons delete_record_" data-type-msg="Stock" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete">
                                 <i class="fa-solid fa-trash"></i>
                               </a>
                             </span>
@@ -47,13 +51,13 @@
                        </tr>
                        <tr>
                           <td>1</td>
-                          <td>Category</td>
+                          <td>Product1</td>
+                          <td>10</td>
+                          <td>Demo</td>
+                          <td>03-04-2021,5:10 PM</td>
                           <td>
                             <span class="actions-icons">
-                              <a href="<?= site_url('edit_category/1') ?>" class="action-icons" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit">
-                                <i class="fa fa-pencil"></i>
-                              </a>
-                              <a href="javascript:void(0)" class="action-icons delete_record_" data-type-msg="Category" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete">
+                              <a href="javascript:void(0)" class="action-icons delete_record_" data-type-msg="Stock" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete">
                                 <i class="fa-solid fa-trash"></i>
                               </a>
                             </span>
@@ -61,13 +65,13 @@
                        </tr>
                        <tr>
                           <td>1</td>
-                          <td>Category</td>
+                          <td>Product1</td>
+                          <td>10</td>
+                          <td>Demo</td>
+                          <td>03-04-2021,5:10 PM</td>
                           <td>
                             <span class="actions-icons">
-                              <a href="<?= site_url('edit_category/1') ?>" class="action-icons" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit">
-                                <i class="fa fa-pencil"></i>
-                              </a>
-                              <a href="javascript:void(0)" class="action-icons delete_record_" data-type-msg="Category" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete">
+                              <a href="javascript:void(0)" class="action-icons delete_record_" data-type-msg="Stock" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete">
                                 <i class="fa-solid fa-trash"></i>
                               </a>
                             </span>
@@ -75,19 +79,18 @@
                        </tr>
                        <tr>
                           <td>1</td>
-                          <td>Category</td>
+                          <td>Product1</td>
+                          <td>10</td>
+                          <td>Demo</td>
+                          <td>03-04-2021,5:10 PM</td>
                           <td>
                             <span class="actions-icons">
-                              <a href="<?= site_url('edit_category/1') ?>" class="action-icons" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit">
-                                <i class="fa fa-pencil"></i>
-                              </a>
-                              <a href="javascript:void(0)" class="action-icons delete_record_" data-type-msg="Category" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete">
+                              <a href="javascript:void(0)" class="action-icons delete_record_" data-type-msg="Stock" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete">
                                 <i class="fa-solid fa-trash"></i>
                               </a>
                             </span>
                           </td>
                        </tr>
-
                      </tbody>
                   </table>
                </div>
@@ -98,5 +101,6 @@
 </div>
 
 <?php
+include(APPPATH.'views/inventory/modals/add_stock.php');
 include(APPPATH.'views/modals/delete-modal.php');
  ?>

@@ -3,54 +3,91 @@
 if ( ! function_exists('getSelectField'))
 {
 
-  function getSelectField($label = '',$name = '' , $required = true ,$classnames = '' , $id = '' , $arr = '',$column = 6)
+  function getSelectField($arr)
 	{
 
-      $is_requied = $required === true ?  'required': "";
+      $label = '';
+      $name = '';
+      $required = 'required';
+      $id = '';
+      $column = 'sm-6';
+      $sel_classes = '';
+      $options = '';
+      $sel_first_option = 'select';
+      //select column width
+      if(isset($arr['column']))
+      {
+        $column = $arr['column'];
+      }
+      // select label
+      if(isset($arr['label']))
+      {
+        $label = $arr['label'];
+      }
+      // select name
+      if(isset($arr['name']))
+      {
+        $name = $arr['name'];
+      }
+      // select required or not
+      if(isset($arr['required']))
+      {
+        $required = $arr['required'] === false ?  '': 'required';
+      }
+      //to add id in select
+      if(isset($arr['id']))
+      {
+        $id = "id=".$arr['id'];
+      }
+      //to add classes in select
+      if(isset($arr['classes']) && !empty($arr['classes']))
+      {
 
+          $s_classes = explode(',',$arr['classes']);
 
-      // for extra attributes
-      $extra_attr = '';
+          foreach ($s_classes as $k => $v)
+          {
 
-     if (!empty($arr)) {
+            $sel_classes .= $v.' ';
 
-       $attr = explode(',',$arr);
-
-       foreach ($attr as $k => $v)
-       {
-
-         $extra_attr .= $v.' ';
-
-       }
-
-
-     }
-
-     // for extra classes
-      $extra_classes = '';
-      if (!empty($classnames)) {
-
-        $attr = explode(',',$classnames);
-
-        foreach ($attr as $k => $v)
-        {
-
-          $extra_classes .= $v.' ';
-
-        }
-
+          }
 
       }
+      //to add id in select
+      if(isset($arr['data']) && !empty($arr['data']))
+      {
 
-      $form_col = '<div class="col-md-'.$column.' mb-3">'.
+          foreach ($arr['data'] as $key => $v) {
+
+              if(isset($arr['selected']) && $arr['selected'] == $v['id'])
+              {
+
+                $options .='<option value="'. $v['id'] .'" selected>'.$v['name'].'</option>';
+
+              }
+              else
+              {
+
+                $options .='<option value="'. $v['id'] .'">'.$v['name'].'</option>';
+
+
+              }
+          }
+      }
+      //select first option
+      if(isset($arr['first_option']))
+      {
+        $sel_first_option = $arr['first_option'];
+      }
+
+      $select_col = '<div class="col-'.$column.' mb-3">'.
                      '<label for="'. ucfirst($label) .'" class="form-label">'. ucfirst($label) .'</label>'.
-                     '<select class="form-select form-select-sm'. $extra_classes .'" name="'.$name.'" id="'.$id.'" '.$is_requied.'>'.
-                              '<option value="">select</option>'.
-                              '<option value="option1">option1</option>'.
-                      '</select>'.
+                     '<select class="form-select form-select-sm '. $sel_classes .'" name="'.$name.'" '.$id.' '.$required.'>'.
+                     '<option value="">'.$sel_first_option.'</option>'.$options;
+                      $select_col .='</select>'.
                   '</div>';
 
-      return $form_col;
+      return $select_col;
 
 	}
 
@@ -59,51 +96,103 @@ if ( ! function_exists('getSelectField'))
 if ( ! function_exists('getInputField'))
 {
 
-  function getInputField($label = '',$type = '',$name = '' , $required = true , $value = '' ,$classnames = '' , $id = '' , $arr = '',$column = 6)
+  function getInputField($arr)
 	{
 
-      $is_requied = $required === true ?  'required': "";
+      $label = '';
+      $type = 'text';
+      $name = '';
+      $required = 'required';
+      $value = '';
+      $id = '';
+      $column = 'sm-6';
+      $inp_classes = '';
+      $col_classes = '';
+      $inp_attributes = '';
+      //input column width
+      if(isset($arr['column']))
+      {
+        $column = $arr['column'];
+      }
+      // input label
+      if(isset($arr['label']))
+      {
+        $label = $arr['label'];
+      }
+      // input type
+      if(isset($arr['type']))
+      {
+        $type = $arr['type'];
+      }
+      // input name
+      if(isset($arr['name']))
+      {
+        $name = $arr['name'];
+      }
+      // input required or not
+      if(isset($arr['required']))
+      {
+        $required = $arr['required'] === false ?  '': 'required';
+      }
+      // input value
+      if(isset($arr['value']))
+      {
+        $value = "value=".$arr['value'];
+      }
+      //to add id in input
+      if(isset($arr['id']))
+      {
+        $id = "id=".$arr['id'];
+      }
+      //to add classes in input
+      if(isset($arr['classes']) && !empty($arr['classes']))
+      {
 
+          $i_classes = explode(',',$arr['classes']);
 
-      // for extra attributes
-      $extra_attr = '';
+          foreach ($i_classes as $k => $v)
+          {
 
-     if (!empty($arr)) {
+            $inp_classes .= $v.' ';
 
-       $attr = explode(',',$arr);
+          }
 
-       foreach ($attr as $k => $v)
-       {
+      }
+      //to add classes in column
+      if(isset($arr['col_classes']) && !empty($arr['col_classes']))
+      {
 
-         $extra_attr .= $v.' ';
+          $cl_classes = explode(',',$arr['col_classes']);
 
-       }
+          foreach ($cl_classes as $k => $v)
+          {
 
+            $col_classes .= $v.' ';
 
-     }
+          }
 
-     // for extra classes
-      $extra_classes = '';
-      if (!empty($classnames)) {
+      }
+      //to add attributes in input
+      if(isset($arr['attr']) && !empty($arr['attr']))
+      {
 
-        $attr = explode(',',$classnames);
+          $i_attributes = explode(',',$arr['attr']);
 
-        foreach ($attr as $k => $v)
-        {
+          foreach ($i_attributes as $k => $v)
+          {
 
-          $extra_classes .= $v.' ';
+            $inp_attributes .= $v.' ';
 
-        }
-
+          }
 
       }
 
-      $form_col = '<div class="col-md-'.$column.' mb-3">'.
+      $input_col = '<div class="col-'.$column.' mb-3 '.$col_classes.'">'.
                      '<label for="'. ucfirst($label) .'" class="form-label">'. ucfirst($label) .'</label>'.
-                     '<input type="'. $type .'" class="form-control form-control-sm '. $extra_classes .'" name="'.$name.'" id="'. $id .'" '.$is_requied.' '.$extra_attr.' value="'.$value.'">'.
+                     '<input type="'. $type .'" class="form-control form-control-sm '. $inp_classes .'" name="'.$name.'" '. $id .' '.$required.' '.$inp_attributes.' '.$value.'>'.
                   '</div>';
 
-      return $form_col;
+      return $input_col;
 
 	}
 
@@ -112,28 +201,47 @@ if ( ! function_exists('getInputField'))
 
 if ( ! function_exists('getImgField'))
 {
-
-  function getImgField($btn_txt = '',$img_url = '')
+  function getImgField($arr = [])
 	{
 
-      if(!empty($img_url))
+      $img_url = base_url('assets/images/avatars/01.png');
+      $name = 'img';
+      $label = 'Upload Photo';
+      if(!empty($arr))
       {
 
-        $img_url = base_url('assets/images/avatars/01.png');
+        if(isset($arr['img_url']))
+        {
+
+          $img_url = $arr['img_url'];
+
+        }
+        if(isset($arr['name']))
+        {
+
+          $name = $arr['name'];
+
+        }
+        if(isset($arr['label']))
+        {
+
+          $label = $arr['label'];
+
+        }
 
       }
 
-      $form_img = '<div class="row">'.
+      $img_row = '<div class="row">'.
                     '<div class="col-sm-12">'.
                       '<img src="'. $img_url .'" class="img-thumbnail user-form-img" alt="...">'.
-                      '<input type="file" class="choose_img" style="display:none;">'.
+                      '<input type="file" class="choose_img" name="'.$name.'" style="display:none;">'.
                     '</div>'.
                     '<div class="col-sm-12 mt-4" style="margin-left:10px;">'.
-                      '<button type="button" class="btn btn-sm btn-outline-primary select_img_">'.$btn_txt.'</button>'.
+                      '<button type="button" class="btn btn-sm btn-outline-primary select_img_">'.$label.'</button>'.
                     '</div>'.
                   '</div>';
 
-      return $form_img;
+      return $img_row;
 
 	}
 
@@ -142,35 +250,67 @@ if ( ! function_exists('getImgField'))
 if ( ! function_exists('getTextareaField'))
 {
 
-  function getTextareaField($label = '',$name = '' , $required = true , $value = '' ,$classnames = '' , $id = '',$column = 6)
+  function getTextareaField($arr)
 	{
 
-      $is_requied = $required === true ?  'required': "";
+      $label = '';
+      $name = '';
+      $required = 'required';
+      $value = '';
+      $id = '';
+      $column = 'sm-6';
+      $textarea_classes = '';
+      //textarea column width
+      if(isset($arr['column']))
+      {
+        $column = $arr['column'];
+      }
+      // textarea label
+      if(isset($arr['label']))
+      {
+        $label = $arr['label'];
+      }
+      // textarea name
+      if(isset($arr['name']))
+      {
+        $name = $arr['name'];
+      }
+      // textarea required or not
+      if(isset($arr['required']))
+      {
+        $required = $arr['required'] === false ?  '': 'required';
+      }
+      // textarea value
+      if(isset($arr['value']))
+      {
+        $value = $arr['value'];
+      }
+      //to add id in textarea
+      if(isset($arr['id']))
+      {
+        $id = "id=".$arr['id'];
+      }
+      //to add classes in textarea
+      if(isset($arr['classes']) && !empty($arr['classes']))
+      {
 
-     // for extra classes
-      $extra_classes = '';
-      if (!empty($classnames)) {
+          $txt_classes = explode(',',$arr['classes']);
 
-        $attr = explode(',',$classnames);
+          foreach ($txt_classes as $k => $v)
+          {
 
-        foreach ($attr as $k => $v)
-        {
+            $textarea_classes .= $v.' ';
 
-          $extra_classes .= $v.' ';
-
-        }
-
+          }
 
       }
 
-      $form_txtArea = '<div class="mb-3 col-sm-'.$column.'">'.
+      $textarea_col = '<div class="col-'.$column.' mb-3">'.
                           '<label for="'. ucfirst($label) .'" class="form-label">'. ucfirst($label) .'</label>'.
-                          '<textarea name="'.$name.'" class="form-control '.$extra_classes.'" aria-label="With textarea" id="'. $id .'" '.$is_requied.'>'.$value.'</textarea>'.
+                          '<textarea name="'.$name.'" class="form-control '.$textarea_classes.'" aria-label="With textarea" '. $id .' '.$required.'>'.$value.'</textarea>'.
                         '</div>';
 
-      return $form_txtArea;
-
-
+      return $textarea_col;
 
 	}
 
@@ -188,9 +328,6 @@ if ( ! function_exists('getSubmitBtn'))
                   </div>';
 
       return $form_btn;
-
-
-
 	}
 
 }
@@ -218,9 +355,9 @@ if ( ! function_exists('getHiddenField'))
 
      }
 
-      $form_hidden = '<input type="hidden" class="'. $extra_classes .'" name="'.$name.'" id="'. $id .'" value="'.$value.'">';
+      $hidden_input = '<input type="hidden" class="'. $extra_classes .'" name="'.$name.'" id="'. $id .'" value="'.$value.'">';
 
-      return $form_hidden;
+      return $hidden_input;
 
 	}
 

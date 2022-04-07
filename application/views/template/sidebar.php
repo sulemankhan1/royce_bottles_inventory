@@ -129,7 +129,7 @@
 						</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link <?= $active_menu == 'products'?'active':'' ?>" data-bs-toggle="collapse" href="#inventory-auth" role="button"
+						<a class="nav-link <?= $active_menu == 'inventory'?'active':'' ?>" data-bs-toggle="collapse" href="#inventory-auth" role="button"
 							aria-expanded="false" aria-controls="inventory-user">
 							<i class="icon">
 								<i class="fa-solid fa-warehouse"></i>
@@ -141,7 +141,7 @@
 						</a>
 						<ul class="sub-nav collapse" id="inventory-auth" data-bs-parent="#inventory-menu">
 							<li class="nav-item">
-								<a class="nav-link <?= $active_submenu == 'view_inventory'?'active':'' ?>" href=<?= base_url('inventory') ?>">
+								<a class="nav-link <?= $active_submenu == 'view_inventory'?'active':'' ?>" href="<?= base_url('inventory') ?>">
 									<i class="icon">
 										<i class="fa-solid fa-caret-right"></i>
 									</i>
@@ -150,7 +150,7 @@
 								</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="../dashboard/auth/sign-in.html">
+								<a class="nav-link <?= $active_submenu == 'add_stock'?'active':'' ?>" href="<?= base_url('add_stock') ?>">
 									<i class="icon">
 										<i class="fa-solid fa-caret-right"></i>
 									</i>
@@ -159,16 +159,16 @@
 								</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="../dashboard/auth/sign-in.html">
+								<a class="nav-link <?= $active_submenu == 'view_stock'?'active':'' ?>" href="<?= base_url('view_stock') ?>">
 									<i class="icon">
 										<i class="fa-solid fa-caret-right"></i>
 									</i>
 									<i class="sidenav-mini-icon"> VS </i>
-									<span class="item-name">Add Stock</span>
+									<span class="item-name">View Stock</span>
 								</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="../dashboard/auth/sign-in.html">
+								<a class="nav-link <?= $active_submenu == 'stock_history'?'active':'' ?>" href="<?= base_url('stock_history') ?>">
 									<i class="icon">
 										<i class="fa-solid fa-caret-right"></i>
 									</i>
@@ -177,7 +177,7 @@
 								</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="../dashboard/auth/sign-in.html">
+								<a class="nav-link <?= $active_submenu == 'assign_to_driver'?'active':'' ?>" href="<?= base_url('assign_to_driver') ?>">
 									<i class="icon">
 										<i class="fa-solid fa-caret-right"></i>
 									</i>
@@ -187,7 +187,7 @@
 							</li>
 
 							<li class="nav-item">
-								<a class="nav-link" href="../dashboard/auth/sign-in.html">
+								<a class="nav-link <?= $active_submenu == 'return_stock'?'active':'' ?>" href="<?= base_url('return_stock') ?>">
 									<i class="icon">
 										<i class="fa-solid fa-caret-right"></i>
 									</i>
@@ -197,7 +197,7 @@
 							</li>
 
 							<li class="nav-item">
-								<a class="nav-link" href="../dashboard/auth/sign-in.html">
+								<a class="nav-link <?= $active_submenu == 'live_stock'?'active':'' ?>" href="<?= base_url('live_stock') ?>">
 									<i class="icon">
 										<i class="fa-solid fa-caret-right"></i>
 									</i>
@@ -207,7 +207,7 @@
 							</li>
 
 							<li class="nav-item">
-								<a class="nav-link" href="../dashboard/auth/sign-in.html">
+								<a class="nav-link <?= $active_submenu == 'logs'?'active':'' ?>" href="<?= base_url('logs') ?>">
 									<i class="icon">
 										<i class="fa-solid fa-caret-right"></i>
 									</i>

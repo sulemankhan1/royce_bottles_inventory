@@ -6,8 +6,8 @@
         <?=
         showBreadCumbs([
           ['label'=>'Home','url' => 'dashboard'],
-          ['label'=>'Categories','url' => 'categories'],
-          ['label'=>'Add Category']
+          ['label'=>'Inventory','url' => 'add_stock'],
+          ['label'=>'Add Stock']
         ])
         ?>
          <div class="card">
@@ -25,12 +25,28 @@
 
                         <?php
 
-                          echo getInputField([
-                            'label' => 'Category',
-                            'name' => 'name'
+                          $pro_arr = [
+
+                            ['id' => 1,'name' => 'Product1'],
+                            ['id' => 2,'name' => 'Product2'],
+                            ['id' => 3,'name' => 'Product3']
+
+                          ];
+
+                          echo getSelectField([
+                            'label' => 'Product',
+                            'name' => 'product_id',
+                            'data' => $pro_arr
                           ]);
 
-                            echo getSubmitBtn('Add Category');
+                          echo getInputField([
+                            'label' => 'Qty',
+                            'type' => 'number',
+                            'name' => 'qty',
+                            'column' => 'sm-3'
+                          ]);
+
+                          echo getSubmitBtn('Add Stock');
 
                         ?>
 
