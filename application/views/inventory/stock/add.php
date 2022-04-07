@@ -33,6 +33,8 @@
 
                           ];
 
+                          echo getHiddenField('redirect_to','add_stock');
+
                           echo getSelectField([
                             'label' => 'Product',
                             'name' => 'product_id',

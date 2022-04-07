@@ -248,5 +248,5 @@
 <?php
 include(APPPATH.'views/modals/delete-modal.php');
 include(APPPATH.'views/modals/view-details-modal.php');
-include(APPPATH.'views/users/modals/customer-products.php');
+include(APPPATH.'views/customer/customer-products.php');
  ?>

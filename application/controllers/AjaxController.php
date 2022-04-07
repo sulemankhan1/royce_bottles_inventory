@@ -81,5 +81,61 @@ class AjaxController extends MY_Controller
 
   }
 
+  public function printLogDetails()
+  {
+
+      $get = $this->inp_get();
+
+      $data = [
+        'page_title' => 'Log Details'
+      ];
+
+      $this->load_view('inventory/print_log_details',$data);
+
+
+  }
+
+  public function getSalesDetails($sale_id)
+  {
+
+      $data = [];
+
+      $output['html'] = $this->load_view('sales/view_details',$data,true);
+
+      echo json_encode($output);
+
+  }
+
+  public function getCustomerSaleInfo($customer_id)
+  {
+
+      $data = [];
+      $total_unpaid_invoices = 10;
+      if($total_unpaid_invoices > 0)
+      {
+          $output['total_unpaid_inv'] = '<span class="badge rounded-pill bg-danger">Total Unpaid Invoices: '.$total_unpaid_invoices.'</span>';
+      }
+      else
+      {
+          $output['total_unpaid_inv'] = '<span class="badge rounded-pill bg-success">Total Unpaid Invoices: '.$total_unpaid_invoices.'</span>';
+      }
+
+      $output['remarks'] = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
+
+      $output['html'] = $this->load_view('sales/customer_sale_products',$data,true);
+
+      echo json_encode($output);
+
+  }
+
+  public function showSalesDetails()
+  {
+
+    $data = [
+      'page_title' => 'Sale Information'
+    ];
+    $output['html'] = $this->load_view('sales/view_sale',$data);
+
+  }
 
 }

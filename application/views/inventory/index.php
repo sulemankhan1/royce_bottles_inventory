@@ -7,7 +7,7 @@
         <?=
         showBreadCumbs([
           ['label'=>'Home','url' => 'dashboard'],
-          ['label'=>'Inventory','url' => 'inventory'],
+          ['label'=>'Inventory','url' => 'view_inventory'],
           ['label'=>'View Inventory']
         ])
         ?>
@@ -21,7 +21,7 @@
                </div>
 
                 <span>
-                  <a href="javascript:void(0)" class="btn btn-sm btn-primary" id="add_stock_">Add Stock</a>
+                  <a href="javascript:void(0)" class="btn btn-sm btn-primary" id="add_stock_" data-redirect="view_inventory">Add Stock</a>
                   <a href="javascript:void(0)" class="btn btn-sm btn-warning" id="return_stock_">Return Stock</a>
                   <a href="javascript:void(0)" class="btn btn-sm btn-success" id="assign_stock_to_driver_">Assign Stock To Driver</a>
                 </span>

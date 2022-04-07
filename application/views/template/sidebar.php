@@ -141,7 +141,7 @@
 						</a>
 						<ul class="sub-nav collapse" id="inventory-auth" data-bs-parent="#inventory-menu">
 							<li class="nav-item">
-								<a class="nav-link <?= $active_submenu == 'view_inventory'?'active':'' ?>" href="<?= base_url('inventory') ?>">
+								<a class="nav-link <?= $active_submenu == 'view_inventory'?'active':'' ?>" href="<?= base_url('view_inventory') ?>">
 									<i class="icon">
 										<i class="fa-solid fa-caret-right"></i>
 									</i>
@@ -219,7 +219,7 @@
 						</ul>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link <?= $active_menu == 'sales'?'active':'' ?>" aria-current="page" href="../dashboard/index.html">
+						<a class="nav-link <?= $active_menu == 'sales'?'active':'' ?>" aria-current="page" href="<?= base_url('sales') ?>">					
 							<i class="icon">
 								<i class="fa-solid fa-circle-dollar-to-slot"></i>
 							</i>

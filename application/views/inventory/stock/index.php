@@ -18,7 +18,7 @@
                  <h4 class="card-title"><?= $page_head ?></h4>
                </div>
 
-                 <a href="javascript:void(0)" class="btn btn-sm btn-primary" id="add_stock_">Add Stock</a>
+                 <a href="javascript:void(0)" class="btn btn-sm btn-primary" id="add_stock_" data-redirect="view_stock">Add Stock</a>
 
             </div>
             <div class="card-body">

@@ -12,6 +12,7 @@ if ( ! function_exists('getSelectField'))
       $id = '';
       $column = 'sm-6';
       $sel_classes = '';
+      $col_classes = '';
       $options = '';
       $sel_first_option = 'select';
       //select column width
@@ -53,6 +54,20 @@ if ( ! function_exists('getSelectField'))
           }
 
       }
+      //to add classes in column
+      if(isset($arr['col_classes']) && !empty($arr['col_classes']))
+      {
+
+          $cl_classes = explode(',',$arr['col_classes']);
+
+          foreach ($cl_classes as $k => $v)
+          {
+
+            $col_classes .= $v.' ';
+
+          }
+
+      }
       //to add id in select
       if(isset($arr['data']) && !empty($arr['data']))
       {
@@ -80,7 +95,7 @@ if ( ! function_exists('getSelectField'))
         $sel_first_option = $arr['first_option'];
       }
 
-      $select_col = '<div class="col-'.$column.' mb-3">'.
+      $select_col = '<div class="col-'.$column.' mb-3 '.$col_classes.'">'.
                      '<label for="'. ucfirst($label) .'" class="form-label">'. ucfirst($label) .'</label>'.
                      '<select class="form-select form-select-sm '. $sel_classes .'" name="'.$name.'" '.$id.' '.$required.'>'.
                      '<option value="">'.$sel_first_option.'</option>'.$options;
@@ -355,7 +370,16 @@ if ( ! function_exists('getHiddenField'))
 
      }
 
-      $hidden_input = '<input type="hidden" class="'. $extra_classes .'" name="'.$name.'" id="'. $id .'" value="'.$value.'">';
+     if($id != '')
+     {
+       $id = "id=".$id;
+     }
+     else
+     {
+        $id = '';
+     }
+
+      $hidden_input = '<input type="hidden" class="'. $extra_classes .'" name="'.$name.'" '. $id .' value="'.$value.'">';
 
       return $hidden_input;
 

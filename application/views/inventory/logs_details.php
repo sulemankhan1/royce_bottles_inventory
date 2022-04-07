@@ -18,8 +18,8 @@
 
                  <h4 class="card-title"><?= $page_head ?></h4>
                </div>
-<!-- print_log_details -->
-                 <a href="javascript:void(0)" class="btn btn-sm btn-primary" id="">Print</a>
+
+              <a href="javascript:void(0)" class="btn btn-sm btn-primary" id="print_log_details" data-url="<?= base_url('AjaxController/printLogDetails')?>">Print</a>
 
             </div>
             <div class="card-body" id="logs_data">

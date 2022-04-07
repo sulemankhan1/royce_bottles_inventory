@@ -65,39 +65,3 @@
       </div>
    </div>
 </div>
-
-
-<div class="getProductRowToAssign" style="display:none!important">
-  <div class="row">
-    <?php
-      $pro_arr = [
-
-        ['id' => 1,'name' => 'Product1'],
-        ['id' => 2,'name' => 'Product2'],
-        ['id' => 3,'name' => 'Product3']
-
-      ];
-
-      echo getSelectField([
-        'label' => 'Product',
-        'name' => 'product_id',
-        'column' => 'sm-5',
-        'data' => $pro_arr
-      ]);
-
-      echo getInputField([
-        'label' => 'Qty',
-        'type' => 'number',
-        'name' => 'qty',
-        'column' => 'sm-2'
-      ]);
-
-    ?>
-
-    <div class="col-sm-1" style="padding:0px!important;">
-      <a href="javascript:void(0)" class="remove_assign_products_to_driver">
-        <i class="fa-solid fa-x" style="font-size: 20px;margin-top: 38px;margin-left:8px;;color:#fd6262!important;"></i>
-      </a>
-    </div>
-  </div>
-</div>

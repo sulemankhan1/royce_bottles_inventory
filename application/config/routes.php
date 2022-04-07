@@ -61,7 +61,7 @@ $route['view_profile/(:num)'] = 'Profile/view_profile/$1';
 
 
 //inventory
-$route['inventory'] = 'Inventory';
+$route['view_inventory'] = 'Inventory';
 $route['add_stock'] = 'Inventory/add_stock';
 $route['view_stock'] = 'Inventory/view_stock';
 $route['stock_history'] = 'Inventory/stock_history';
@@ -70,3 +70,8 @@ $route['return_stock'] = 'Inventory/return_stock';
 $route['live_stock'] = 'Inventory/live_stock';
 $route['logs'] = 'Inventory/logs';
 $route['view_logs'] = 'Inventory/view_logs';
+
+//sales
+$route['sales'] = 'Sales';
+$route['add_sale'] = 'Sales/create';
+$route['view_sale'] = 'Sales/view_sale';

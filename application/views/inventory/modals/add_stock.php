@@ -12,7 +12,7 @@
                 <div class="row mt-3">
 
                   <?php
-
+                    echo getHiddenField('redirect_to','view_inventory','add_stock_redirect_to_');
                     $pro_arr = [
 
                       ['id' => 1,'name' => 'Product1'],
@@ -20,7 +20,7 @@
                       ['id' => 3,'name' => 'Product3']
 
                     ];
-                    
+
                     echo getSelectField([
                       'label' => 'Product',
                       'name' => 'product_id',
