@@ -86,3 +86,8 @@ $route['invoices'] = 'Invoice';
 $route['evidence'] = 'Evidence';
 $route['add_evidence'] = 'Evidence/create';
 $route['edit_evidence/(:num)'] = 'Evidence/edit/$1';
+
+//salesperson
+$route['salesperson'] = 'Salesperson';
+$route['add_salesperson'] = 'Salesperson/create';
+$route['edit_salesperson/(:num)'] = 'Salesperson/edit/$1';

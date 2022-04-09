@@ -243,7 +243,7 @@
 						</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link <?= $active_menu == 'salesperson'?'active':'' ?>" aria-current="page" href="../dashboard/index.html">
+						<a class="nav-link <?= $active_menu == 'salesperson'?'active':'' ?>" aria-current="page" href="<?= site_url('salesperson') ?>">
 							<i class="icon">
 								<i class="fa-solid fa-person-dots-from-line"></i>
 							</i>
