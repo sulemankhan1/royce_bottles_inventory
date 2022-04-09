@@ -219,11 +219,19 @@
 						</ul>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link <?= $active_menu == 'sales'?'active':'' ?>" aria-current="page" href="<?= base_url('sales') ?>">					
+						<a class="nav-link <?= $active_menu == 'sales'?'active':'' ?>" aria-current="page" href="<?= base_url('sales') ?>">
 							<i class="icon">
 								<i class="fa-solid fa-circle-dollar-to-slot"></i>
 							</i>
 							<span class="item-name">Sales</span>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link <?= $active_menu == 'invoices'?'active':'' ?>" aria-current="page" href="<?= base_url('invoices') ?>">
+							<i class="icon">
+								<i class="fa-solid fa-file-invoice-dollar"></i>
+							</i>
+							<span class="item-name">Invoices</span>
 						</a>
 					</li>
 					<li class="nav-item">
@@ -232,14 +240,6 @@
 								<i class="fa-solid fa-file-shield"></i>
 							</i>
 							<span class="item-name">Evidence</span>
-						</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link <?= $active_menu == 'invoices'?'active':'' ?>" aria-current="page" href="../dashboard/index.html">
-							<i class="icon">
-								<i class="fa-solid fa-file-invoice-dollar"></i>
-							</i>
-							<span class="item-name">Invoices</span>
 						</a>
 					</li>
 					<li class="nav-item">

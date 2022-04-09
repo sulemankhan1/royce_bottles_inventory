@@ -25,7 +25,7 @@ class Sales extends MY_Controller
       ],
       'scripts' => [
         'DataTable/myDataTable.js',
-        'main.js'
+        'sales/sales.js'
       ]
 
     ];
@@ -52,6 +52,27 @@ class Sales extends MY_Controller
     ];
 
     $this->template('sales/create',$data);
+
+  }
+
+  public function edit($id)
+  {
+
+    $data = [
+
+      'title' => 'Edit Sale',
+      'page_head' => 'Edit Sale',
+      'active_menu' => 'sales',
+      'styles' => [
+        'add_sale.css'
+      ],
+      'scripts' => [
+        'sales/add_sale.js'
+      ]
+
+    ];
+
+    $this->template('sales/edit',$data);
 
   }
 

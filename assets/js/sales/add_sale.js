@@ -10,6 +10,7 @@ $('#sale_customer_id').change(function () {
       success : function (data) {
 
         $('#total_unpaid_inv').html(data.total_unpaid_inv)
+        $('.customer_remarks_col').css('display','block')
         $('#customer_remarks').html(data.remarks)
         $('#showCustomerSaleProducts_').html(data.html)
 
@@ -78,7 +79,7 @@ $('.payment_type').change(function () {
 $('.add_sale_').click(function () {
 
   let url = $('input[name=show_view_sale]').val()
-
-  window.open(url,'Sale Information','height=800,width=800');
+  let sale_id = 1
+  window.open(url+'/'+sale_id,'Sale Information','height=800,width=800');
 
 })

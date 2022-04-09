@@ -95,17 +95,6 @@ class AjaxController extends MY_Controller
 
   }
 
-  public function getSalesDetails($sale_id)
-  {
-
-      $data = [];
-
-      $output['html'] = $this->load_view('sales/view_details',$data,true);
-
-      echo json_encode($output);
-
-  }
-
   public function getCustomerSaleInfo($customer_id)
   {
 
@@ -128,12 +117,32 @@ class AjaxController extends MY_Controller
 
   }
 
-  public function showSalesDetails()
+  public function showSalesDetails($sale_id,$type = '')
   {
 
     $data = [
-      'page_title' => 'Sale Information'
+      'page_title' => 'Sale Information',
+      'type' => $type
     ];
+    $output['html'] = $this->load_view('sales/view_sale',$data);
+
+  }
+
+  public function updateSale($sale_id)
+  {
+
+      echo json_encode(true);
+
+  }
+
+  public function showInvoiceDetails($invoice_id,$type)
+  {
+
+    $data = [
+      'page_title' => 'Invoice Details',
+      'type' => $type
+    ];
+
     $output['html'] = $this->load_view('sales/view_sale',$data);
 
   }

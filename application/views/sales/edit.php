@@ -6,8 +6,8 @@
         <?=
         showBreadCumbs([
           ['label'=>'Home','url' => 'dashboard'],
-          ['label'=>'Sales','url' => 'sales'],
-          ['label'=>'Add Sale']
+          ['label'=>'Inventory','url' => 'return_stock'],
+          ['label'=>'Return Stock']
         ])
         ?>
          <div class="card">
@@ -47,7 +47,7 @@
                           ?>
 
                         <div class="col-md-8">
-                          <label for="Customer Remarks" class="form-label customer_remarks_col" style="display:none;">Customer Remarks</label>
+                          <label for="Customer Remarks" class="form-label">Customer Remarks</label>
                           <p id="customer_remarks"></p>
                         </div>
 
@@ -126,7 +126,7 @@
 
                         <div class="col-sm-3">
 
-                          <a href="javascript:void(0)" class="btn btn-sm btn-primary add_sale_">Add Sale</a>
+                          <a href="javascript:void(0)" class="btn btn-sm btn-primary add_sale_">Update Sale</a>
 
                         </div>
 

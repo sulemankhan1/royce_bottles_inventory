@@ -74,4 +74,9 @@ $route['view_logs'] = 'Inventory/view_logs';
 //sales
 $route['sales'] = 'Sales';
 $route['add_sale'] = 'Sales/create';
+$route['edit_sale/(:num)'] = 'Sales/edit/$1';
 $route['view_sale'] = 'Sales/view_sale';
+
+
+// invoices
+$route['invoices'] = 'Invoice';
