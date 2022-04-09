@@ -235,6 +235,14 @@
 						</a>
 					</li>
 					<li class="nav-item">
+						<a class="nav-link <?= $active_menu == 'payments'?'active':'' ?>" aria-current="page" href="<?= site_url('payments') ?>">
+							<i class="icon">
+								<i class="fa fa-money"></i>
+							</i>
+							<span class="item-name">Payments</span>
+						</a>
+					</li>
+					<li class="nav-item">
 						<a class="nav-link <?= $active_menu == 'evidence'?'active':'' ?>" aria-current="page" href="<?= site_url('evidence') ?>">
 							<i class="icon">
 								<i class="fa-solid fa-file-shield"></i>
@@ -251,7 +259,8 @@
 						</a>
 					</li>
 
-					<li class="nav-item mb-5">
+
+					<li class="nav-item">
 						<a class="nav-link <?= $active_menu == 'setting'?'active':'' ?>" data-bs-toggle="collapse" href="#setting-auth" role="button"
 							aria-expanded="false" aria-controls="setting-user">
 							<i class="icon">
@@ -284,6 +293,16 @@
 
 						</ul>
 					</li>
+
+					<li class="nav-item mb-5">
+						<a class="nav-link <?= $active_menu == 'db_export'?'active':'' ?>" aria-current="page" href="<?= site_url('db_export') ?>">
+							<i class="icon">
+								<i class="fa fa-download"></i>
+							</i>
+							<span class="item-name">DB Export</span>
+						</a>
+					</li>
+
 				</ul>
 				<!-- Sidebar Menu End -->
 			</div>

@@ -289,7 +289,7 @@
                   <p>Are you sure you want to submit this sale?</p>
               </div>
               <div class="modal-footer">
-                  <button type="button" class="btn btn-sm btn-danger" id="confirm_sale" data-url="<?= site_url('AjaxController/updateSale/1')?>" data-redirect="<?= site_url('sales')?>">Submit</button>
+                  <button type="button" class="btn btn-sm btn-primary" id="confirm_sale" data-url="<?= site_url('AjaxController/updateSale/1')?>" data-redirect="<?= site_url('sales')?>">Submit</button>
                   <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Cancel</button>
               </div>
           </div>

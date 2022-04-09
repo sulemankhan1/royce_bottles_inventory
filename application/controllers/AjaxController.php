@@ -159,4 +159,29 @@ class AjaxController extends MY_Controller
 
   }
 
+  public function getCustomerPayments($customer_id)
+  {
+
+    $data = [
+      'page_title' => 'Customer Payments'
+    ];
+    $output['html'] = $this->load_view('payments/view_payments',$data);
+
+  }
+
+  public function printCustomerPayments()
+  {
+
+      $get = $this->inp_get();
+
+      $data = [
+        'page_title' => 'Customer Payments'
+      ];
+
+      $this->load_view('payments/print_payment_details',$data);
+
+
+  }
+
+
 }

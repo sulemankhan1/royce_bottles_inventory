@@ -91,3 +91,10 @@ $route['edit_evidence/(:num)'] = 'Evidence/edit/$1';
 $route['salesperson'] = 'Salesperson';
 $route['add_salesperson'] = 'Salesperson/create';
 $route['edit_salesperson/(:num)'] = 'Salesperson/edit/$1';
+
+
+//payments
+$route['payments'] = 'Payments';
+
+//db_export
+$route['db_export'] = 'DB_export';
