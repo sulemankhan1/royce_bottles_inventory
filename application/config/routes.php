@@ -98,3 +98,8 @@ $route['payments'] = 'Payments';
 
 //db_export
 $route['db_export'] = 'DB_export';
+
+
+//settings
+$route['company_setting'] = 'Settings/company';
+$route['email_setting'] = 'Settings/email';

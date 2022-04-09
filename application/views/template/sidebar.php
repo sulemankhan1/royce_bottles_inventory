@@ -273,7 +273,7 @@
 						</a>
 						<ul class="sub-nav collapse" id="setting-auth" data-bs-parent="#setting-menu">
 							<li class="nav-item">
-								<a class="nav-link" href="../dashboard/auth/sign-in.html">
+								<a class="nav-link <?= $active_submenu == 'company_setting'?'active':'' ?>" href="<?= base_url('company_setting') ?>">
 									<i class="icon">
 										<i class="fa-solid fa-caret-right"></i>
 									</i>
@@ -282,7 +282,7 @@
 								</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="../dashboard/auth/sign-in.html">
+								<a class="nav-link <?= $active_submenu == 'email_setting'?'active':'' ?>" href="<?= base_url('email_setting') ?>">
 									<i class="icon">
 										<i class="fa-solid fa-caret-right"></i>
 									</i>

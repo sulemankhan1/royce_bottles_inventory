@@ -95,9 +95,16 @@ if ( ! function_exists('getSelectField'))
         $sel_first_option = $arr['first_option'];
       }
 
-      $select_col = '<div class="col-'.$column.' mb-3 '.$col_classes.'">'.
-                     '<label for="'. ucfirst($label) .'" class="form-label">'. ucfirst($label) .'</label>'.
-                     '<select class="form-select form-select-sm '. $sel_classes .'" name="'.$name.'" '.$id.' '.$required.'>'.
+      $select_col = '<div class="col-'.$column.' mb-3 '.$col_classes.'">';
+
+                      if($label != '')
+                      {
+
+                        $select_col .='<label for="'. ucfirst($label) .'" class="form-label">'. ucfirst($label) .'</label>';
+
+                      }
+
+                     $select_col .='<select class="form-select form-select-sm '. $sel_classes .'" name="'.$name.'" '.$id.' '.$required.'>'.
                      '<option value="">'.$sel_first_option.'</option>'.$options;
                       $select_col .='</select>'.
                   '</div>';

@@ -118,6 +118,11 @@
 				{
 					margin-left: 18px!important;
 				}
+				#email_general_setting_save_btn > .col-12
+				{
+					margin: 0px!important;
+					padding: 0px!important;
+				}
 
 		 </style>
 
