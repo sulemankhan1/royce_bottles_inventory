@@ -68,6 +68,7 @@ $route['stock_history'] = 'Inventory/stock_history';
 $route['assign_to_driver'] = 'Inventory/assign_to_driver';
 $route['return_stock'] = 'Inventory/return_stock';
 $route['live_stock'] = 'Inventory/live_stock';
+$route['request_stock'] = 'Inventory/request_stock';
 $route['logs'] = 'Inventory/logs';
 $route['view_logs'] = 'Inventory/view_logs';
 
@@ -76,6 +77,12 @@ $route['sales'] = 'Sales';
 $route['add_sale'] = 'Sales/create';
 $route['edit_sale/(:num)'] = 'Sales/edit/$1';
 $route['view_sale'] = 'Sales/view_sale';
+
+//call order
+$route['call_order'] = 'Order';
+$route['add_call_order'] = 'Order/create';
+// $route['edit_sale/(:num)'] = 'Sales/edit/$1';
+// $route['view_sale'] = 'Sales/view_sale';
 
 
 // invoices

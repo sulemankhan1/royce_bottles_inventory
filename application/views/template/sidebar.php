@@ -205,6 +205,15 @@
 									<span class="item-name">Live Stock</span>
 								</a>
 							</li>
+							<li class="nav-item">
+								<a class="nav-link <?= $active_submenu == 'request_stock'?'active':'' ?>" href="<?= base_url('request_stock') ?>">
+									<i class="icon">
+										<i class="fa-solid fa-caret-right"></i>
+									</i>
+									<i class="sidenav-mini-icon"> Rs </i>
+									<span class="item-name">Request Stock</span>
+								</a>
+							</li>
 
 							<li class="nav-item">
 								<a class="nav-link <?= $active_submenu == 'logs'?'active':'' ?>" href="<?= base_url('logs') ?>">
@@ -224,6 +233,14 @@
 								<i class="fa-solid fa-circle-dollar-to-slot"></i>
 							</i>
 							<span class="item-name">Sales</span>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link <?= $active_menu == 'call_order'?'active':'' ?>" aria-current="page" href="<?= base_url('call_order') ?>">
+							<i class="icon">
+								<i class="fa-solid fa-cart-flatbed"></i>
+							</i>
+							<span class="item-name">Call Order</span>
 						</a>
 					</li>
 					<li class="nav-item">

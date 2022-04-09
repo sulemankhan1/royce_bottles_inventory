@@ -87,6 +87,7 @@
 
                   <?php if ($type == 'invoice' || $type == 'invoice_print'): ?>
 
+                    <a href="javascript:void(0)" class="btn btn-sm btn-success" id="send_invoice_email">Send Email</a>
                     <a href="javascript:void(0)" class="btn btn-sm btn-primary" id="print_details">Print</a>
 
                   <?php endif; ?>

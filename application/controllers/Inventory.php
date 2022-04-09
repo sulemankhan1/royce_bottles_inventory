@@ -161,6 +161,25 @@ class Inventory extends MY_Controller
 
   }
 
+  public function request_stock()
+  {
+
+    $data = [
+
+      'title' => 'Request Stock',
+      'page_head' => 'Request Stock',
+      'active_menu' => 'inventory',
+      'active_submenu' => 'request_stock',
+      'scripts' => [
+        'inventory/assign_to_driver.js'
+      ]
+
+    ];
+
+    $this->template('inventory/stock/request_stock',$data);
+
+  }
+
   public function logs()
   {
 
