@@ -235,7 +235,7 @@
 						</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link <?= $active_menu == 'evidence'?'active':'' ?>" aria-current="page" href="../dashboard/index.html">
+						<a class="nav-link <?= $active_menu == 'evidence'?'active':'' ?>" aria-current="page" href="<?= site_url('evidence') ?>">
 							<i class="icon">
 								<i class="fa-solid fa-file-shield"></i>
 							</i>

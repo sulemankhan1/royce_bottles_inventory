@@ -147,4 +147,16 @@ class AjaxController extends MY_Controller
 
   }
 
+  public function getEvidenceDetails($evidence_id)
+  {
+
+      $data = [];
+
+      $output['html'] = $this->load_view('evidence/view_details',$data,true);
+
+
+    echo json_encode($output);
+
+  }
+
 }

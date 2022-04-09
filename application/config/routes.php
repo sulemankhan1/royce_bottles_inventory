@@ -80,3 +80,9 @@ $route['view_sale'] = 'Sales/view_sale';
 
 // invoices
 $route['invoices'] = 'Invoice';
+
+
+//evidence
+$route['evidence'] = 'Evidence';
+$route['add_evidence'] = 'Evidence/create';
+$route['edit_evidence/(:num)'] = 'Evidence/edit/$1';
