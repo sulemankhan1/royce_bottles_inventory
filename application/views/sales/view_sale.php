@@ -5,10 +5,13 @@
     <title><?= $page_title ?></title>
 
     <!-- Hope Ui Design System Css -->
-    <link rel="stylesheet" href="<?= base_url('assets/css/hope-ui.min.css?v=1.2.0') ?>" />
+    <link rel="stylesheet" href="<?= base_url('assets/css/hope-ui.min.css?v=1.2.0') ?>"  media="all" />
 
     <!-- Custom Css -->
-    <link rel="stylesheet" href="<?= base_url('assets/css/custom.min.css?v=1.2.0') ?>" />
+    <link rel="stylesheet" href="<?= base_url('assets/css/custom.min.css?v=1.2.0') ?>"  media="all" />
+
+    <!-- to set deisgn in print -->
+    <link rel="stylesheet" href="<?= base_url('assets/css/bootstrap-print.min.css') ?>" media="print">
 
     <style type="text/css">
 
@@ -54,7 +57,7 @@
 
         @media print
         {
-            #print_details
+            .hide_content
             {
                 display: none !important;
             }
@@ -87,8 +90,8 @@
 
                   <?php if ($type == 'invoice' || $type == 'invoice_print'): ?>
 
-                    <a href="javascript:void(0)" class="btn btn-sm btn-success" id="send_invoice_email">Send Email</a>
-                    <a href="javascript:void(0)" class="btn btn-sm btn-primary" id="print_details">Print</a>
+                    <a href="javascript:void(0)" class="btn btn-sm btn-success hide_content" id="send_invoice_email">Send Email</a>
+                    <a href="javascript:void(0)" class="btn btn-sm btn-primary hide_content" id="print_details">Print</a>
 
                   <?php endif; ?>
 
