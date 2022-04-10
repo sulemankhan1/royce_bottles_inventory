@@ -27,19 +27,23 @@
 
                         echo getInputField([
                           'label' => 'Customer Name',
-                          'name' => 'customer_name',
-                          'column' => 'sm-4'
+                          'name' => 'customer_name'
                         ]);
 
                         echo getInputField([
                           'label' => 'Contact #',
-                          'name' => 'contact_no',
-                          'column' => 'sm-4'
+                          'name' => 'contact_no'
                         ]);
+
+                        echo getInputField([
+                          'label' => 'Email',
+                          'name' => 'customer_email',
+                          'type' => 'email'
+                        ]);
+
                         echo getInputField([
                           'label' => 'Address',
                           'name' => 'customer_address',
-                          'column' => 'sm-4'
                         ]);
 
                         echo getSelectField([
