@@ -71,7 +71,7 @@
 										<i class="fa-solid fa-caret-right"></i>
 									</i>
 									<i class="sidenav-mini-icon"> P </i>
-									<span class="item-name">Productions</span>
+									<span class="item-name">Production</span>
 								</a>
 							</li>
 							<li class="nav-item">
@@ -330,10 +330,10 @@
   <!-- sidebar end-->
 
 
-  <main class="main-content" style="background-color:#e9ecef!important; ">
+  <main class="main-content">
 		<div class="position-relative iq-banner">
 			<!--Nav Start-->
-			<nav class="nav navbar navbar-expand-lg navbar-light iq-navbar">
+			<nav class="nav navbar navbar-expand-lg navbar-light iq-navbar" >
 				<div class="container-fluid navbar-inner">
 					<a href="../dashboard/index.html" class="navbar-brand">
 						<!--Logo start-->

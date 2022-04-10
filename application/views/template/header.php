@@ -123,6 +123,10 @@
 					margin: 0px!important;
 					padding: 0px!important;
 				}
+				.conatiner-fluid.content-inner.mt-n5.py-0 {
+					 padding-top: 80px !important;
+					 background: #e9ecef !important;
+				}
 
 		 </style>
 

@@ -1,7 +1,7 @@
 
 <!--Nav End-->
 </div>
-<div class="conatiner-fluid content-inner mt-n5 py-0" style="margin-top:20px!important;">
+<div class="conatiner-fluid content-inner mt-n5 py-0" style=" padding-top: 80px !important; background: #e9ecef !important">
   <div class="row">
       <div class="col-sm-12">
         <?=
