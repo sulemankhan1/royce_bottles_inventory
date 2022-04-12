@@ -49,7 +49,7 @@
                 </div>
                 <div class="progress-detail">
                   <p class="mb-2">Total Sales</p>
-                  <h4 class="counter">$560K</h4>
+                  <h4 class="counter">560</h4>
                 </div>
               </div>
             </div>
@@ -68,8 +68,8 @@
                   </svg>
                 </div>
                 <div class="progress-detail">
-                  <p class="mb-2">Total Profit</p>
-                  <h4 class="counter">$185K</h4>
+                  <p class="mb-2">Total Credit</p>
+                  <h4 class="counter">185</h4>
                 </div>
               </div>
             </div>
@@ -87,8 +87,8 @@
                   </svg>
                 </div>
                 <div class="progress-detail">
-                  <p class="mb-2">Total Cost</p>
-                  <h4 class="counter">$375K</h4>
+                  <p class="mb-2">Total Customers</p>
+                  <h4 class="counter">37</h4>
                 </div>
               </div>
             </div>
@@ -107,66 +107,8 @@
                   </svg>
                 </div>
                 <div class="progress-detail">
-                  <p class="mb-2">Revenue</p>
-                  <h4 class="counter">$742K</h4>
-                </div>
-              </div>
-            </div>
-          </li>
-          <li class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="1100">
-            <div class="card-body">
-              <div class="progress-widget">
-                <div id="circle-progress-05"
-                  class="text-center circle-progress-01 circle-progress circle-progress-primary"
-                  data-min-value="0" data-max-value="100" data-value="50"
-                  data-type="percent">
-                  <svg class="card-slie-arrow " width="24px" height="24px"
-                    viewBox="0 0 24 24">
-                    <path fill="currentColor"
-                      d="M5,17.59L15.59,7H9V5H19V15H17V8.41L6.41,19L5,17.59Z" />
-                  </svg>
-                </div>
-                <div class="progress-detail">
-                  <p class="mb-2">Net Income</p>
-                  <h4 class="counter">$150K</h4>
-                </div>
-              </div>
-            </div>
-          </li>
-          <li class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="1200">
-            <div class="card-body">
-              <div class="progress-widget">
-                <div id="circle-progress-06"
-                  class="text-center circle-progress-01 circle-progress circle-progress-info"
-                  data-min-value="0" data-max-value="100" data-value="40"
-                  data-type="percent">
-                  <svg class="card-slie-arrow " width="24" viewBox="0 0 24 24">
-                    <path fill="currentColor"
-                      d="M19,6.41L17.59,5L7,15.59V9H5V19H15V17H8.41L19,6.41Z" />
-                  </svg>
-                </div>
-                <div class="progress-detail">
-                  <p class="mb-2">Today</p>
-                  <h4 class="counter">$4600</h4>
-                </div>
-              </div>
-            </div>
-          </li>
-          <li class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="1300">
-            <div class="card-body">
-              <div class="progress-widget">
-                <div id="circle-progress-07"
-                  class="text-center circle-progress-01 circle-progress circle-progress-primary"
-                  data-min-value="0" data-max-value="100" data-value="30"
-                  data-type="percent">
-                  <svg class="card-slie-arrow " width="24" viewBox="0 0 24 24">
-                    <path fill="currentColor"
-                      d="M19,6.41L17.59,5L7,15.59V9H5V19H15V17H8.41L19,6.41Z" />
-                  </svg>
-                </div>
-                <div class="progress-detail">
-                  <p class="mb-2">Members</p>
-                  <h4 class="counter">11.2M</h4>
+                  <p class="mb-2">Total Drivers</p>
+                  <h4 class="counter">74</h4>
                 </div>
               </div>
             </div>
@@ -183,8 +125,8 @@
         <div class="card" data-aos="fade-up" data-aos-delay="800">
           <div class="flex-wrap card-header d-flex justify-content-between align-items-center">
             <div class="header-title">
-              <h4 class="card-title">$855.8K</h4>
-              <p class="mb-0">Gross Sales</p>
+              <h4 class="card-title">855.8</h4>
+              <p class="mb-0">Total Sales</p>
             </div>
             <div class="d-flex align-items-center align-self-center">
               <div class="d-flex align-items-center text-primary">
@@ -228,7 +170,7 @@
           </div>
         </div>
       </div>
-      <div class="col-md-12 col-xl-6">
+      <!-- <div class="col-md-12 col-xl-6">
         <div class="card" data-aos="fade-up" data-aos-delay="900">
           <div class="flex-wrap card-header d-flex justify-content-between">
             <div class="header-title">
@@ -303,10 +245,10 @@
             <div id="d-activity" class="d-activity"></div>
           </div>
         </div>
-      </div>
+      </div>-->
       <div class="col-md-12 col-lg-12">
         <div class="overflow-hidden card" data-aos="fade-up" data-aos-delay="600">
-          <div class="flex-wrap card-header d-flex justify-content-between">
+          <!-- <div class="flex-wrap card-header d-flex justify-content-between">
             <div class="header-title">
               <h4 class="mb-2 card-title">Enterprise Clients</h4>
               <p class="mb-0">
@@ -328,184 +270,82 @@
                 <a class="dropdown-item " href="javascript:void(0);">Something else here</a>
               </div>
             </div>
-          </div>
+          </div> -->
+          <!-- <div class="p-0 card-body"> -->
           <div class="p-0 card-body">
             <div class="mt-4 table-responsive">
-              <table id="basic-table" class="table mb-0 table-striped" role="grid">
+              <table id="basic-table" class="table mb-0" role="grid">
                 <thead>
                   <tr>
-                    <th>COMPANIES</th>
-                    <th>CONTACTS</th>
-                    <th>ORDER</th>
-                    <th>COMPLETION</th>
+                    <th>#</th>
+                    <th>Customer</th>
+                    <th>Shop Name</th>
+                    <th>Email</th>
+                    <th>Contact #</th>
+                    <th>Shop ID </th>
+                    <th>Total Credit</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
+                    <td>1</td>
                     <td>
                       <div class="d-flex align-items-center">
                         <img class="rounded bg-soft-primary img-fluid avatar-40 me-3"
                           src="<?= base_url('assets/images/shapes/01.png') ?>" alt="profile">
-                        <h6>Addidis Sportwear</h6>
+                        <h6>Customer</h6>
                       </div>
                     </td>
-                    <td>
-                      <div class="iq-media-group iq-media-group-1">
-                        <a href="#" class="iq-media-1">
-                          <div class="icon iq-icon-box-3 rounded-pill">SP</div>
-                        </a>
-                        <a href="#" class="iq-media-1">
-                          <div class="icon iq-icon-box-3 rounded-pill">PP</div>
-                        </a>
-                        <a href="#" class="iq-media-1">
-                          <div class="icon iq-icon-box-3 rounded-pill">MM</div>
-                        </a>
-                      </div>
-                    </td>
-                    <td>$14,000</td>
-                    <td>
-                      <div class="mb-2 d-flex align-items-center">
-                        <h6>60%</h6>
-                      </div>
-                      <div class="shadow-none progress bg-soft-primary w-100"
-                        style="height: 4px">
-                        <div class="progress-bar bg-primary"
-                          data-toggle="progress-bar" role="progressbar"
-                          aria-valuenow="60" aria-valuemin="0"
-                          aria-valuemax="100"></div>
-                      </div>
-                    </td>
+                    <td>Shop</td>
+                    <td>demo@email.com</td>
+                    <td>1111</td>
+                    <td>1131</td>
+                    <td>1400</td>
                   </tr>
                   <tr>
+                    <td>1</td>
                     <td>
                       <div class="d-flex align-items-center">
                         <img class="rounded bg-soft-primary img-fluid avatar-40 me-3"
-                          src="<?= base_url('assets/images/shapes/05.png') ?>" alt="profile">
-                        <h6>Netflixer Platforms</h6>
+                          src="<?= base_url('assets/images/shapes/01.png') ?>" alt="profile">
+                        <h6>Customer</h6>
                       </div>
                     </td>
-                    <td>
-                      <div class="iq-media-group iq-media-group-1">
-                        <a href="#" class="iq-media-1">
-                          <div class="icon iq-icon-box-3 rounded-pill">SP</div>
-                        </a>
-                        <a href="#" class="iq-media-1">
-                          <div class="icon iq-icon-box-3 rounded-pill">PP</div>
-                        </a>
-                      </div>
-                    </td>
-                    <td>$30,000</td>
-                    <td>
-                      <div class="mb-2 d-flex align-items-center">
-                        <h6>25%</h6>
-                      </div>
-                      <div class="shadow-none progress bg-soft-primary w-100"
-                        style="height: 4px">
-                        <div class="progress-bar bg-primary"
-                          data-toggle="progress-bar" role="progressbar"
-                          aria-valuenow="25" aria-valuemin="0"
-                          aria-valuemax="100"></div>
-                      </div>
-                    </td>
+                    <td>Shop</td>
+                    <td>demo@email.com</td>
+                    <td>1111</td>
+                    <td>1131</td>
+                    <td>1400</td>
                   </tr>
                   <tr>
+                    <td>1</td>
                     <td>
                       <div class="d-flex align-items-center">
                         <img class="rounded bg-soft-primary img-fluid avatar-40 me-3"
-                          src="<?= base_url('assets/images/shapes/02.png') ?>" alt="profile">
-                        <h6>Shopifi Stores</h6>
+                          src="<?= base_url('assets/images/shapes/01.png') ?>" alt="profile">
+                        <h6>Customer</h6>
                       </div>
                     </td>
-                    <td>
-                      <div class="iq-media-group iq-media-group-1">
-                        <a href="#" class="iq-media-1">
-                          <div class="icon iq-icon-box-3 rounded-pill">PP</div>
-                        </a>
-                        <a href="#" class="iq-media-1">
-                          <div class="icon iq-icon-box-3 rounded-pill">TP</div>
-                        </a>
-                      </div>
-                    </td>
-                    <td>$8,500</td>
-                    <td>
-                      <div class="mb-2 d-flex align-items-center">
-                        <h6>100%</h6>
-                      </div>
-                      <div class="shadow-none progress bg-soft-success w-100"
-                        style="height: 4px">
-                        <div class="progress-bar bg-success"
-                          data-toggle="progress-bar" role="progressbar"
-                          aria-valuenow="100" aria-valuemin="0"
-                          aria-valuemax="100"></div>
-                      </div>
-                    </td>
+                    <td>Shop</td>
+                    <td>demo@email.com</td>
+                    <td>1111</td>
+                    <td>1131</td>
+                    <td>1400</td>
                   </tr>
                   <tr>
+                    <td>1</td>
                     <td>
                       <div class="d-flex align-items-center">
                         <img class="rounded bg-soft-primary img-fluid avatar-40 me-3"
-                          src="<?= base_url('assets/images/shapes/03.png') ?>" alt="profile">
-                        <h6>Bootstrap Technologies</h6>
+                          src="<?= base_url('assets/images/shapes/01.png') ?>" alt="profile">
+                        <h6>Customer</h6>
                       </div>
                     </td>
-                    <td>
-                      <div class="iq-media-group iq-media-group-1">
-                        <a href="#" class="iq-media-1">
-                          <div class="icon iq-icon-box-3 rounded-pill">SP</div>
-                        </a>
-                        <a href="#" class="iq-media-1">
-                          <div class="icon iq-icon-box-3 rounded-pill">PP</div>
-                        </a>
-                        <a href="#" class="iq-media-1">
-                          <div class="icon iq-icon-box-3 rounded-pill">MM</div>
-                        </a>
-                        <a href="#" class="iq-media-1">
-                          <div class="icon iq-icon-box-3 rounded-pill">TP</div>
-                        </a>
-                      </div>
-                    </td>
-                    <td>$20,500</td>
-                    <td>
-                      <div class="mb-2 d-flex align-items-center">
-                        <h6>100%</h6>
-                      </div>
-                      <div class="shadow-none progress bg-soft-success w-100"
-                        style="height: 4px">
-                        <div class="progress-bar bg-success"
-                          data-toggle="progress-bar" role="progressbar"
-                          aria-valuenow="100" aria-valuemin="0"
-                          aria-valuemax="100"></div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="d-flex align-items-center">
-                        <img class="rounded bg-soft-primary img-fluid avatar-40 me-3"
-                          src="<?= base_url('assets/images/shapes/04.png') ?>" alt="profile">
-                        <h6>Community First</h6>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="iq-media-group iq-media-group-1">
-                        <a href="#" class="iq-media-1">
-                          <div class="icon iq-icon-box-3 rounded-pill">MM</div>
-                        </a>
-                      </div>
-                    </td>
-                    <td>$9,800</td>
-                    <td>
-                      <div class="mb-2 d-flex align-items-center">
-                        <h6>75%</h6>
-                      </div>
-                      <div class="shadow-none progress bg-soft-primary w-100"
-                        style="height: 4px">
-                        <div class="progress-bar bg-primary"
-                          data-toggle="progress-bar" role="progressbar"
-                          aria-valuenow="75" aria-valuemin="0"
-                          aria-valuemax="100"></div>
-                      </div>
-                    </td>
+                    <td>Shop</td>
+                    <td>demo@email.com</td>
+                    <td>1111</td>
+                    <td>1131</td>
+                    <td>1400</td>
                   </tr>
                 </tbody>
               </table>

@@ -2,6 +2,13 @@
     padding-left: 0px!important;
     margin-bottom: 17px!important;
 }
+
+#myDataTable_length
+{
+  float: left!important;
+  padding-right: 10px!important;
+
+}
 .table-responsive .dataTables_wrapper .row .dataTables_filter, .table-responsive .dataTables_wrapper .row .dataTables_paginate {
     padding-right: 0px!important;
 }
@@ -36,4 +43,12 @@ table.dataTable {
 .table-img-txt-design
 {
   margin-left: 3px!important;
+}
+
+#myDataTable thead tr th:first-child{
+    width: 3%!important;
+}
+
+#myDataTable thead tr th:last-child{
+    width: 10%!important;
 }

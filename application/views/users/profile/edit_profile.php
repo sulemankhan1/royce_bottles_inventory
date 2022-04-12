@@ -14,13 +14,12 @@
                <div class="header-title">
                   <h4 class="card-title"><?= $page_head ?></h4>
                </div>
-               <a href="<?= site_url('view_profile/1') ?>" class="btn btn-sm btn-primary">View Profile</a>
             </div>
             <div class="card-body">
               <form class="row g-3 needs-validation" novalidate>
                 <div class="row mt-4">
 
-                    <div class="col-sm-3">
+                    <div class="col-sm-2">
 
 
                         <?php
@@ -31,7 +30,7 @@
 
 
                     </div>
-                    <div class="col-sm-9">
+                    <div class="col-sm-10 form-col-padding">
                       <div class="row">
 
                       <?php

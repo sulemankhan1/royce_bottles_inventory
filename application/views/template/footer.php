@@ -2,7 +2,7 @@
   <footer class="footer">
     <div class="footer-body">
       <ul class="left-panel list-inline mb-0 p-0">
-        
+
       </ul>
       <div class="right-panel">
         ©<script>
@@ -23,6 +23,13 @@
 
   <!-- External Library Bundle Script -->
   <script src="<?= base_url('assets/js/core/external.min.js') ?>"></script>
+
+  <!-- datatable button js -->
+  <script src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+  <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
 
 
   <!-- AOS Animation Plugin-->

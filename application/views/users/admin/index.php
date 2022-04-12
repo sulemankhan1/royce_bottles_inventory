@@ -48,8 +48,8 @@
                          <td>Email</td>
                          <td>1111</td>
                          <td>
-                           <a href="javascript:void(0)" class="changeUser_status_" data-type-msg="Admin" data-type-status="active">
-                                 <span class="badge rounded-pill bg-secondary">Deactive</span>
+                        <a href="javascript:void(0)" class="changeUser_status_ action-icons" data-type-msg="Admin" data-type-status="active" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Active">
+                                 <span class="badge rounded-pill bg-secondary">Deactivated</span>
                            </a>
                          </td>
                          <td>
@@ -78,7 +78,7 @@
                          <td>Email</td>
                          <td>1111</td>
                          <td>
-                           <a href="javascript:void(0)" class="changeUser_status_" data-type-msg="Admin" data-type-status="deactive">
+                           <a href="javascript:void(0)" class="changeUser_status_ action-icons" data-type-msg="Admin" data-type-status="deactivate" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Deactivate">
                                  <span class="badge rounded-pill bg-success">Active</span>
                            </a>
                          </td>
@@ -108,8 +108,38 @@
                          <td>Email</td>
                          <td>1111</td>
                          <td>
-                           <a href="javascript:void(0)" class="changeUser_status_" data-type-msg="Admin" data-type-status="active">
-                                 <span class="badge rounded-pill bg-secondary">Deactive</span>
+                           <a href="javascript:void(0)" class="changeUser_status_ action-icons" data-type-msg="Admin" data-type-status="active" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Active">
+                                 <span class="badge rounded-pill bg-secondary">Deactivated</span>
+                           </a>
+                         </td>
+                         <td>
+                           <span class="actions-icons">
+                             <a href="<?= site_url('edit_admin/1') ?>" class="action-icons" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit">
+                               <i class="fa fa-pencil"></i>
+                             </a>
+                             <a href="javascript:void(0)" class="action-icons delete_record_" data-type-msg="Admin" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete">
+                               <i class="fa-solid fa-trash"></i>
+                             </a>
+                             <a href="javascript:void(0)" class="action-icons view_details_" data-url="<?= site_url('AjaxController/getViewDetailsByType/Admin/1') ?>" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Details">
+                               <i class="fa fa-eye"></i>
+                             </a>
+                           </span>
+                         </td>
+                      </tr>
+                      <tr>
+                         <td>1</td>
+                         <td>
+                           <img src="<?= base_url('assets/images/avatars/01.png') ?>" class="table-img-design" alt="">
+                           <span class="table-img-txt-design">
+                             Name
+                           </span>
+                         </td>
+                         <td>Username</td>
+                         <td>Email</td>
+                         <td>1111</td>
+                         <td>
+                           <a href="javascript:void(0)" class="changeUser_status_ action-icons" data-type-msg="Admin" data-type-status="active" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Active">
+                                 <span class="badge rounded-pill bg-secondary">Deactivated</span>
                            </a>
                          </td>
                          <td>
@@ -139,37 +169,7 @@
                          <td>1111</td>
                          <td>
                            <a href="javascript:void(0)" class="changeUser_status_" data-type-msg="Admin" data-type-status="active">
-                                 <span class="badge rounded-pill bg-secondary">Deactive</span>
-                           </a>
-                         </td>
-                         <td>
-                           <span class="actions-icons">
-                             <a href="<?= site_url('edit_admin/1') ?>" class="action-icons" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit">
-                               <i class="fa fa-pencil"></i>
-                             </a>
-                             <a href="javascript:void(0)" class="action-icons delete_record_" data-type-msg="Admin" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete">
-                               <i class="fa-solid fa-trash"></i>
-                             </a>
-                             <a href="javascript:void(0)" class="action-icons view_details_" data-url="<?= site_url('AjaxController/getViewDetailsByType/Admin/1') ?>" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Details">
-                               <i class="fa fa-eye"></i>
-                             </a>
-                           </span>
-                         </td>
-                      </tr>
-                      <tr>
-                         <td>1</td>
-                         <td>
-                           <img src="<?= base_url('assets/images/avatars/01.png') ?>" class="table-img-design" alt="">
-                           <span class="table-img-txt-design">
-                             Name
-                           </span>
-                         </td>
-                         <td>Username</td>
-                         <td>Email</td>
-                         <td>1111</td>
-                         <td>
-                           <a href="javascript:void(0)" class="changeUser_status_" data-type-msg="Admin" data-type-status="active">
-                                 <span class="badge rounded-pill bg-secondary">Deactive</span>
+                                 <span class="badge rounded-pill bg-secondary">Deactivated</span>
                            </a>
                          </td>
                          <td>

@@ -30,6 +30,15 @@
       <!-- RTL Css -->
       <link rel="stylesheet" href="<?= base_url('assets/css/rtl.min.css') ?>" />
 
+      <style type="text/css">
+      .form-control,.form-select
+      {
+        border: 1px solid #c7c7c7!important;
+      }
+      </style>
+
+
+
   </head>
   <body class=" " data-bs-spy="scroll" data-bs-target="#elements-section" data-bs-offset="0" tabindex="0">
     <!-- loader Start -->

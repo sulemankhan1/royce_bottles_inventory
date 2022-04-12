@@ -20,7 +20,7 @@
               <form class="row g-3 needs-validation" novalidate>
                 <div class="row mt-4">
 
-                    <div class="col-sm-3">
+                    <div class="col-sm-2">
 
 
                         <?php
@@ -31,7 +31,7 @@
 
 
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-sm-6 form-col-padding">
                       <div class="row">
 
                         <?php
@@ -49,6 +49,11 @@
                         echo getInputField([
                           'label' => 'SKU',
                           'name' => 'sku',
+                          'column' => 'sm-12'
+                        ]);
+                        echo getSelectField([
+                          'label' => 'Category',
+                          'name' => 'cat_id',
                           'column' => 'sm-12'
                         ]);
                         echo getTextareaField([

@@ -1,6 +1,6 @@
 <!--Nav End-->
 </div>
-<div class="conatiner-fluid content-inner mt-n5 py-0" style="margin-top:25px!important;margin-bottom:30px!important">
+<div class="conatiner-fluid content-inner mt-n5 py-0">
   <div class="row">
       <div class="col-sm-12 col-lg-12">
 
@@ -30,7 +30,7 @@
               <form class="row g-3 needs-validation" novalidate>
                 <div class="row mt-4">
 
-                    <div class="col-sm-3">
+                    <div class="col-sm-2">
 
 
                       <?php
@@ -41,7 +41,7 @@
 
 
                     </div>
-                    <div class="col-sm-9">
+                    <div class="col-sm-10 form-col-padding">
                       <div class="row">
 
                         <?php

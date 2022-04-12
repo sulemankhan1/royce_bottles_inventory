@@ -183,5 +183,18 @@ class AjaxController extends MY_Controller
 
   }
 
+  public function getPendingPageStockDetails($pending_page_id)
+  {
+
+    $data = [
+      
+    ];
+
+    $output['html'] = $this->load_view('inventory/modals/pending_page_details',$data,true);
+
+    echo json_encode($output);
+
+  }
+
 
 }

@@ -1,11 +1,11 @@
 <!-- sidebar start-->
 <aside class="sidebar sidebar-default navs-rounded-all ">
 		<div class="sidebar-header d-flex align-items-center justify-content-start">
-			<a href="../dashboard/index.html" class="navbar-brand">
+			<a href="<?= site_url('dashboard') ?>" class="navbar-brand">
 				<!--Logo start-->
-				<i class="fa-solid fa-hashtag"></i>
+				<img src="<?= base_url('assets/images/company_logo.jpg')?>" alt="" style="width:100%;height:80px;">
 				<!--logo End-->
-				<h4 class="logo-title">Hope UI</h4>
+				<h4 class="logo-title"></h4>
 			</a>
 			<div class="sidebar-toggle" data-toggle="sidebar" data-active="true">
 				<i class="icon">
@@ -214,6 +214,15 @@
 									<span class="item-name">Request Stock</span>
 								</a>
 							</li>
+							<li class="nav-item">
+								<a class="nav-link <?= $active_submenu == 'pending_page'?'active':'' ?>" href="<?= base_url('pending_page') ?>">
+									<i class="icon">
+										<i class="fa-solid fa-caret-right"></i>
+									</i>
+									<i class="sidenav-mini-icon"> PP </i>
+									<span class="item-name">Pending Page</span>
+								</a>
+							</li>
 
 							<li class="nav-item">
 								<a class="nav-link <?= $active_submenu == 'logs'?'active':'' ?>" href="<?= base_url('logs') ?>">
@@ -335,11 +344,12 @@
 			<!--Nav Start-->
 			<nav class="nav navbar navbar-expand-lg navbar-light iq-navbar" >
 				<div class="container-fluid navbar-inner">
-					<a href="../dashboard/index.html" class="navbar-brand">
+					<a href="<?= site_url('dashboard') ?>" class="navbar-brand">
 						<!--Logo start-->
-						<i class="fa-solid fa-hashtag"></i>
+						<!-- <i class="fa-solid fa-hashtag"></i> -->
+						<img src="<?= base_url('assets/images/company_logo.jpg')?>" alt="" style="width:100%;height:45px;">
 						<!--logo End-->
-						<h4 class="logo-title">Hope UI</h4>
+						<h4 class="logo-title"></h4>
 					</a>
 					<div class="sidebar-toggle" data-toggle="sidebar" data-active="true">
 						<i class="icon">

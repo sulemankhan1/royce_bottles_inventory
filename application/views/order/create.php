@@ -23,6 +23,9 @@
                     <div class="col-sm-12">
                       <div class="row">
 
+                        <div class="col-sm-12 mb-2">
+                            <h5>Customer Details</h5>
+                        </div>
                         <?php
 
                         echo getInputField([
@@ -46,10 +49,16 @@
                           'name' => 'customer_address',
                         ]);
 
+                        ?>
+
+                        <div class="col-sm-12 mb-2">
+                            <h5>Assign to Driver</h5>
+                        </div>
+                        <?php
                         echo getSelectField([
-                          'label' => 'Days',
+                          'label' => 'Day',
                           'name' => 'day',
-                          'column' => 'sm-4'
+                          'column' => 'sm-6'
                         ]);
 
                         $pro_arr = [
@@ -64,7 +73,7 @@
                           'label' => 'Driver',
                           'name' => 'driver_id',
                           'data' => $pro_arr,
-                          'column' => 'sm-4'
+                          'column' => 'sm-6'
                         ]);
 
                           ?>
@@ -73,6 +82,10 @@
                       <div id="assign_products_to_driver">
 
                         <div class="row">
+
+                          <div class="col-sm-12 mb-2">
+                              <h5>Stock Details</h5>
+                          </div>
                           <?php
                             $pro_arr = [
 

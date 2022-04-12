@@ -6,7 +6,8 @@ $('.changeUser_status_').click(function () {
 
   let msg = 'Are you sure you want to '+status+' this '+type+'?'
 
-  let btn_txt = status +' '+type
+  // let btn_txt = status +' '+type
+  let btn_txt = status
 
   $('#user-status-msg').text(msg)
 

@@ -26,7 +26,7 @@
                      <thead>
                         <tr>
                            <th>#</th>
-                           <th>Product</th>
+                           <th style="width:60%!important">Product</th>
                            <th>Product Code</th>
                            <th>SKU</th>
                            <th>Actions</th>

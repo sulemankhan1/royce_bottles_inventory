@@ -30,6 +30,11 @@
 	<!-- Custom Css -->
 	<link rel="stylesheet" href="<?= base_url('assets/css/custom.min.css?v=1.2.0') ?>" />
 
+	<!-- datatable button Css -->
+	<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css" />
+
+
+
 	<!-- Font Awesome Css -->
 	<script src="https://kit.fontawesome.com/b04cb78fd5.js" crossorigin="anonymous"></script>
 
@@ -128,6 +133,36 @@
 					 background: #e9ecef !important;
 				}
 
+				.form-col-padding
+				{
+					padding-left: 44px;
+				}
+
+				@media only screen and (max-width: 767px) {
+				  /* For mobile phones: */
+					.card-header.d-flex.justify-content-between
+					{
+						   flex-flow: wrap;
+					}
+					.card-header.d-flex.justify-content-between > .row > .col-sm-12 > span > a
+					{
+						   margin-top: 10px;
+					}
+					.btn-group
+					{
+						flex-flow: column;
+					}
+					.dt-buttons
+					{
+						display: inline-table;
+						padding-top: 10px;
+						padding-bottom: 10px;
+					}
+					.dt-buttons > .buttons-html5
+					{
+						margin-right: 7px;
+					}
+				}
 		 </style>
 
 </head>

@@ -180,6 +180,30 @@ class Inventory extends MY_Controller
 
   }
 
+  public function pending_page()
+  {
+
+    $data = [
+
+      'title' => 'Pending Page',
+      'page_head' => 'Pending Page',
+      'active_menu' => 'inventory',
+      'active_submenu' => 'pending_page',
+      'styles' => [
+        'my-dataTable.css'
+      ],
+      'scripts' => [
+        'DataTable/myDataTable.js',
+        'main.js',
+        'users/main.js'
+      ]
+
+    ];
+
+    $this->template('inventory/stock/pending_page',$data);
+
+  }
+
   public function logs()
   {
 

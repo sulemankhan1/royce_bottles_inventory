@@ -48,7 +48,7 @@
                           <td>Email</td>
                           <td>1111</td>
                           <td>
-                            <a href="javascript:void(0)" class="changeUser_status_" data-type-msg="Other User" data-type-status="deactive">
+                            <a href="javascript:void(0)" class="changeUser_status_ action-icons" data-type-msg="Other User" data-type-status="deactivate" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Deactivate">
                                   <span class="badge rounded-pill bg-success">Active</span>
                             </a>
                           </td>
@@ -78,7 +78,7 @@
                           <td>Email</td>
                           <td>1111</td>
                           <td>
-                            <a href="javascript:void(0)" class="changeUser_status_" data-type-msg="Other User" data-type-status="deactive">
+                            <a href="javascript:void(0)" class="changeUser_status_ action-icons" data-type-msg="Other User" data-type-status="deactivate" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Deactivate">
                                   <span class="badge rounded-pill bg-success">Active</span>
                             </a>
                           </td>
@@ -108,8 +108,8 @@
                           <td>Email</td>
                           <td>1111</td>
                           <td>
-                            <a href="javascript:void(0)" class="changeUser_status_" data-type-msg="Other User" data-type-status="active">
-                                  <span class="badge rounded-pill bg-secondary">Deactive</span>
+                            <a href="javascript:void(0)" class="changeUser_status_ action-icons" data-type-msg="Other User" data-type-status="active" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Active">
+                                  <span class="badge rounded-pill bg-secondary">Deactivated</span>
                             </a>
                           </td>
                           <td>
@@ -138,7 +138,7 @@
                           <td>Email</td>
                           <td>1111</td>
                           <td>
-                            <a href="javascript:void(0)" class="changeUser_status_" data-type-msg="Other User" data-type-status="deactive">
+                            <a href="javascript:void(0)" class="changeUser_status_ action-icons" data-type-msg="Other User" data-type-status="deactivate" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Deactivate">
                                   <span class="badge rounded-pill bg-success">Active</span>
                             </a>
                           </td>
@@ -168,7 +168,7 @@
                           <td>Email</td>
                           <td>1111</td>
                           <td>
-                            <a href="javascript:void(0)" class="changeUser_status_" data-type-msg="Other User" data-type-status="deactive">
+                            <a href="javascript:void(0)" class="changeUser_status_ action-icons" data-type-msg="Other User" data-type-status="deactivate" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Deactivate">
                                   <span class="badge rounded-pill bg-success">Active</span>
                             </a>
                           </td>

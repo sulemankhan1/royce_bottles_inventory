@@ -14,7 +14,6 @@
                <div class="header-title">
                   <h4 class="card-title"><?= $page_head ?></h4>
                </div>
-               <a href="<?= site_url('edit_profile/1') ?>" class="btn btn-sm btn-primary">Edit Profile</a>
 
             </div>
             <div class="card-body">
@@ -22,7 +21,7 @@
 
                     <div class="col-sm-3">
 
-                        <img src="<?= base_url('assets/images/avatars/01.png') ?>" class="img-thumbnail user-form-img" alt="...">'.
+                        <img src="<?= base_url('assets/images/avatars/01.png') ?>" class="img-thumbnail user-form-img" alt="...">
 
                     </div>
                 </div>
@@ -41,6 +40,7 @@
                           echo viewDetailsCol('Username','Demo123');
                           echo viewDetailsCol('Contact #','11111');
                           echo viewDetailsCol('Status','<span class="badge rounded-pill bg-success">Active</span>');
+                          echo viewDetailsCol('Type','<span class="badge rounded-pill bg-secondary">Admin</span>');
 
                       ?>
 

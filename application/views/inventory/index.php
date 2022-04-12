@@ -20,26 +20,38 @@
 
                </div>
 
-                <span>
-                  <a href="javascript:void(0)" class="btn btn-sm btn-primary" id="add_stock_" data-redirect="view_inventory">Add Stock</a>
-                  <a href="javascript:void(0)" class="btn btn-sm btn-warning" id="return_stock_">Return Stock</a>
-                  <a href="javascript:void(0)" class="btn btn-sm btn-success" id="assign_stock_to_driver_">Assign Stock To Driver</a>
-                </span>
+               <div class="row">
+
+                 <div class="col-sm-12">
+
+                   <span>
+                     <a href="javascript:void(0)" class="btn btn-sm btn-primary" id="add_stock_" data-redirect="view_inventory">Add Stock</a>
+                     <a href="javascript:void(0)" class="btn btn-sm btn-warning" id="return_stock_">Return Stock</a>
+                     <a href="javascript:void(0)" class="btn btn-sm btn-success" id="assign_stock_to_driver_">Assign Stock To Driver</a>
+                   </span>
+
+                 </div>
+               </div>
 
             </div>
             <div class="card-body">
-              <div class="btn-group" role="group" aria-label="Basic example" style="margin-bottom:32px!important">
-                <button type="button" class="btn btn-sm btn-outline-primary active inv_tabs_" data-type="available">Available</button>
-                <button type="button" class="btn btn-sm btn-outline-primary inv_tabs_" data-type="missing">Missing</button>
-                <button type="button" class="btn btn-sm btn-outline-primary inv_tabs_" data-type="return">Return</button>
-                <button type="button" class="btn btn-sm btn-outline-primary inv_tabs_" data-type="exchange">Exchange</button>
+              <div class="row">
+
+                <div class="col-sm-12">
+                  <div class="btn-group" role="group" aria-label="Basic example" style="margin-bottom:32px!important">
+                    <button type="button" class="btn btn-sm btn-outline-primary active inv_tabs_" data-type="available">Available</button>
+                    <button type="button" class="btn btn-sm btn-outline-primary inv_tabs_" data-type="missing">Missing</button>
+                    <button type="button" class="btn btn-sm btn-outline-primary inv_tabs_" data-type="return">Return</button>
+                    <button type="button" class="btn btn-sm btn-outline-primary inv_tabs_" data-type="exchange">Exchange</button>
+                  </div>
+                </div>
               </div>
               <div class="table-responsive tabs_table available_table_">
                  <table id="invAvailableDataTable" class="table">
                     <thead>
                        <tr>
                           <th>#</th>
-                          <th>Product Name</th>
+                          <th style="width:60%">Product Name</th>
                           <th>Available Qty</th>
                           <th>Action</th>
                        </tr>

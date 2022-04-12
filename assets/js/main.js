@@ -5,7 +5,8 @@ $('.delete_record_').click(function () {
 
   let msg = 'Are you sure you want to delete this '+type+'?'
 
-  let btn_txt = 'Delete '+type
+  // let btn_txt = 'Delete '+type
+  let btn_txt = 'Delete'
 
   $('#delete-msg').text(msg)
 

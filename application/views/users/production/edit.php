@@ -21,7 +21,7 @@
               <form class="row g-3 needs-validation" novalidate>
                 <div class="row mt-4">
 
-                    <div class="col-sm-3">
+                    <div class="col-sm-2">
 
 
                       <?php
@@ -32,7 +32,7 @@
 
 
                     </div>
-                    <div class="col-sm-9">
+                    <div class="col-sm-10 form-col-padding">
                       <div class="row">
 
                         <?php
@@ -61,18 +61,9 @@
                               'type' => 'number'
                             ]);
                             echo getInputField([
-                              'label' => 'License #',
-                              'name' => 'license_no',
-                              'type' => 'number'
-                            ]);
-                            echo getInputField([
                               'label' => 'FIN #',
                               'name' => 'fin_no',
                               'type' => 'number'
-                            ]);
-                            echo getInputField([
-                              'label' => 'Car Plate',
-                              'name' => 'car_plate'
                             ]);
                             echo getInputField([
                               'label' => 'Date Of Birth',
