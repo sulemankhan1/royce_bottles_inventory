@@ -3,7 +3,7 @@
     margin-bottom: 17px!important;
 }
 
-#myDataTable_length
+.dataTables_length
 {
   float: left!important;
   padding-right: 10px!important;
@@ -17,11 +17,11 @@
   padding-left: 0px!important;
 }
 
-#myDataTable thead tr {
+table thead tr {
     background-color: #e5e5e5!important;
 }
 
-#myDataTable tbody tr {
+table tbody tr {
     background-color: white!important;
 }
 
@@ -45,10 +45,10 @@ table.dataTable {
   margin-left: 3px!important;
 }
 
-#myDataTable thead tr th:first-child{
+table thead tr th:first-child{
     width: 3%!important;
 }
 
-#myDataTable thead tr th:last-child{
+table thead tr th:last-child{
     width: 10%!important;
 }

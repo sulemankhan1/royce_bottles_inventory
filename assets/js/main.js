@@ -1,6 +1,6 @@
 //delete record
 $('.delete_record_').click(function () {
-
+  
   let type = $(this).attr('data-type-msg')
 
   let msg = 'Are you sure you want to delete this '+type+'?'

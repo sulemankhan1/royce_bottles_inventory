@@ -55,11 +55,6 @@
                             <h5>Assign to Driver</h5>
                         </div>
                         <?php
-                        echo getSelectField([
-                          'label' => 'Day',
-                          'name' => 'day',
-                          'column' => 'sm-6'
-                        ]);
 
                         $pro_arr = [
 
@@ -73,6 +68,11 @@
                           'label' => 'Driver',
                           'name' => 'driver_id',
                           'data' => $pro_arr,
+                          'column' => 'sm-6'
+                        ]);
+                        echo getSelectField([
+                          'label' => 'Day',
+                          'name' => 'day',
                           'column' => 'sm-6'
                         ]);
 
@@ -104,8 +104,7 @@
                             echo getInputField([
                               'label' => 'Qty',
                               'type' => 'number',
-                              'name' => 'qty',
-                              'column' => 'sm-3'
+                              'name' => 'qty'
                             ]);
 
                           ?>
@@ -163,7 +162,7 @@
         'label' => 'Qty',
         'type' => 'number',
         'name' => 'qty',
-        'column' => 'sm-3'
+        'column' => 'sm-5'
       ]);
 
     ?>

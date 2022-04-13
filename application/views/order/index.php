@@ -26,7 +26,6 @@
                      <thead>
                         <tr>
                            <th>#</th>
-                           <th>Invoice #</th>
                            <th>Customer</th>
                            <th>Day</th>
                            <th>Total Product</th>
@@ -39,14 +38,13 @@
                      <tbody>
                        <tr>
                           <td>1</td>
-                          <td>1333</td>
                           <td>Customer</td>
                           <td>Monday</td>
                           <td>10</td>
                           <td>20</td>
                           <td>1000</td>
                           <td>
-                            <a href="javascript:void(0)" class="changeUser_status_" data-type-msg="Call Order" data-type-status="confirm">
+                            <a href="javascript:void(0)" class="changeUser_status_" data-type-msg="Call Order" data-type-status="move to pending request">
                                   <span class="badge rounded-pill bg-secondary">Pending</span>
                             </a>
                           </td>
@@ -55,7 +53,7 @@
                               <a href="javascript:void(0)" class="action-icons delete_record_" data-type-msg="Call Order" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete">
                                 <i class="fa-solid fa-trash"></i>
                               </a>
-                              <a href="javascript:void(0)" class="action-icons view_sale_details_" data-url="<?= site_url('AjaxController/showSalesDetails/1/details') ?>" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Details">
+                              <a href="javascript:void(0)" class="action-icons view_details_" data-url="<?= site_url('AjaxController/showCallOrderDetails/1') ?>" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Details">
                                 <i class="fa fa-eye"></i>
                               </a>
                             </span>
@@ -63,20 +61,45 @@
                        </tr>
                        <tr>
                           <td>1</td>
-                          <td>1333</td>
                           <td>Customer</td>
                           <td>Monday</td>
                           <td>10</td>
                           <td>20</td>
                           <td>1000</td>
                           <td>
-                            <a href="javascript:void(0)" data-type-msg="Call Order" data-type-status="confirm">
-                                  <span class="badge rounded-pill bg-success">Confirm</span>
+                            <a href="javascript:void(0)" class="changeUser_status_" data-type-msg="Call Order" data-type-status="move to pending request">
+                                  <span class="badge rounded-pill bg-secondary">Pending</span>
                             </a>
                           </td>
                           <td>
                             <span class="actions-icons">
-                              <a href="javascript:void(0)" class="action-icons view_sale_details_" data-url="<?= site_url('AjaxController/showSalesDetails/1/details') ?>" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Details">
+                              <a href="javascript:void(0)" class="action-icons delete_record_" data-type-msg="Call Order" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete">
+                                <i class="fa-solid fa-trash"></i>
+                              </a>
+                              <a href="javascript:void(0)" class="action-icons view_details_" data-url="<?= site_url('AjaxController/showCallOrderDetails/1') ?>" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Details">
+                                <i class="fa fa-eye"></i>
+                              </a>
+                            </span>
+                          </td>
+                       </tr>
+                       <tr>
+                          <td>1</td>
+                          <td>Customer</td>
+                          <td>Monday</td>
+                          <td>10</td>
+                          <td>20</td>
+                          <td>1000</td>
+                          <td>
+                            <a href="javascript:void(0)" class="changeUser_status_" data-type-msg="Call Order" data-type-status="move to pending request">
+                                  <span class="badge rounded-pill bg-secondary">Pending</span>
+                            </a>
+                          </td>
+                          <td>
+                            <span class="actions-icons">
+                              <a href="javascript:void(0)" class="action-icons delete_record_" data-type-msg="Call Order" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete">
+                                <i class="fa-solid fa-trash"></i>
+                              </a>
+                              <a href="javascript:void(0)" class="action-icons view_details_" data-url="<?= site_url('AjaxController/showCallOrderDetails/1') ?>" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Details">
                                 <i class="fa fa-eye"></i>
                               </a>
                             </span>
@@ -94,4 +117,5 @@
 <?php
 include(APPPATH.'views/users/modals/status-modal.php');
 include(APPPATH.'views/modals/delete-modal.php');
+include(APPPATH.'views/modals/view-details-modal.php');
 ?>

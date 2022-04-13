@@ -183,14 +183,27 @@ class AjaxController extends MY_Controller
 
   }
 
-  public function getPendingPageStockDetails($pending_page_id)
+  public function getPendingPageStockDetails($pending_request_id,$type)
   {
 
     $data = [
-      
+      'type' => $type
     ];
 
     $output['html'] = $this->load_view('inventory/modals/pending_page_details',$data,true);
+
+    echo json_encode($output);
+
+  }
+
+  public function showCallOrderDetails($call_order_id)
+  {
+
+    $data = [
+
+    ];
+
+    $output['html'] = $this->load_view('order/view_details',$data,true);
 
     echo json_encode($output);
 

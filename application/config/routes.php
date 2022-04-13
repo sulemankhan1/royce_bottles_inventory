@@ -69,7 +69,7 @@ $route['assign_to_driver'] = 'Inventory/assign_to_driver';
 $route['return_stock'] = 'Inventory/return_stock';
 $route['live_stock'] = 'Inventory/live_stock';
 $route['request_stock'] = 'Inventory/request_stock';
-$route['pending_page'] = 'Inventory/pending_page';
+$route['pending_request'] = 'Inventory/pending_request';
 $route['logs'] = 'Inventory/logs';
 $route['view_logs'] = 'Inventory/view_logs';
 

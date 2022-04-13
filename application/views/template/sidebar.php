@@ -215,12 +215,12 @@
 								</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link <?= $active_submenu == 'pending_page'?'active':'' ?>" href="<?= base_url('pending_page') ?>">
+								<a class="nav-link <?= $active_submenu == 'pending_request'?'active':'' ?>" href="<?= base_url('pending_request') ?>">
 									<i class="icon">
 										<i class="fa-solid fa-caret-right"></i>
 									</i>
 									<i class="sidenav-mini-icon"> PP </i>
-									<span class="item-name">Pending Page</span>
+									<span class="item-name">Pending Request <span class="badge rounded-pill bg-success" style="margin-left:6px">4</span></span>
 								</a>
 							</li>
 

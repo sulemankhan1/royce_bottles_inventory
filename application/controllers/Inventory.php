@@ -180,22 +180,23 @@ class Inventory extends MY_Controller
 
   }
 
-  public function pending_page()
+  public function pending_request()
   {
 
     $data = [
 
-      'title' => 'Pending Page',
-      'page_head' => 'Pending Page',
+      'title' => 'Pending Request',
+      'page_head' => 'Pending Request',
       'active_menu' => 'inventory',
-      'active_submenu' => 'pending_page',
+      'active_submenu' => 'pending_request',
       'styles' => [
         'my-dataTable.css'
       ],
       'scripts' => [
-        'DataTable/myDataTable.js',
+        'DataTable/pendingRequest.js',
         'main.js',
-        'users/main.js'
+        'users/main.js',
+        'pending_request/pending_request.js'
       ]
 
     ];

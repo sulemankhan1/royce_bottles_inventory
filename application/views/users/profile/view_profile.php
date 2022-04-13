@@ -17,11 +17,18 @@
 
             </div>
             <div class="card-body">
-               <div class="row mt-4 mb-4">
+               <div class="row mt-4 mb-2">
 
-                    <div class="col-sm-3">
+                    <div class="col-sm-2">
 
-                        <img src="<?= base_url('assets/images/avatars/01.png') ?>" class="img-thumbnail user-form-img" alt="...">
+                        <div class="row">
+                          <div class="col-sm-12">
+                            <img src="<?= base_url('assets/images/avatars/01.png') ?>" class="img-thumbnail user-form-img" alt="...">
+                          </div>
+                          <div class="col-sm-12" style="text-align: center;margin-top: 10px;">
+                            <p class="view-details-txt"><span class="badge rounded-pill bg-secondary">Admin</span></p>
+                          </div>
+                        </div>
 
                     </div>
                 </div>
@@ -40,7 +47,7 @@
                           echo viewDetailsCol('Username','Demo123');
                           echo viewDetailsCol('Contact #','11111');
                           echo viewDetailsCol('Status','<span class="badge rounded-pill bg-success">Active</span>');
-                          echo viewDetailsCol('Type','<span class="badge rounded-pill bg-secondary">Admin</span>');
+
 
                       ?>
 
