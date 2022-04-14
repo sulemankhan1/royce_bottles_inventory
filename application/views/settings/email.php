@@ -40,7 +40,9 @@
                                 <div class="row pb-2 pt-4">
 
                                   <div class="col-sm-11">
-                                    <span class="text-dark">Invoice should be set automatically</span>
+                                    <span class="text-dark">Invoice should be sent Automatically?</span>
+                                    <br /><br />
+                                    <span class="text-muted">When checked the Invoices will be sent Automatically when a new Sale is Completed (marked as done).</span>
                                   </div>
                                   <div class="col-sm-1">
                                       <div class="form-check form-check-inline">
@@ -55,6 +57,9 @@
 
                                   <div class="col-sm-8">
                                     <span class="text-dark">Recurring Email timestamp</span>
+                                    <br />
+                                    <br />
+                                    <span class="text-muted">Recurring Email means the selected Customers will receive an Email according to your setting with their Invoice / Payment details.</span>
                                   </div>
                                   <div class="col-sm-4">
 
@@ -102,6 +107,8 @@
 
                                   <div class="col-sm-10">
                                     <span class="text-dark">Invoice email template</span>
+                                    <br /><br />
+                                    <span class="text-muted">The selected template will be used when an Invoice is Automatically sent to the Customer.</span>
                                   </div>
                                   <div class="col-sm-2">
                                     <div class="row">
