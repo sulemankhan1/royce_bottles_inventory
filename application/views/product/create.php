@@ -56,6 +56,13 @@
                           'name' => 'cat_id',
                           'column' => 'sm-12'
                         ]);
+                        echo getInputField([
+                          'label' => 'Price',
+                          'name' => 'price',
+                          'type' => 'number',
+                          'column' => 'sm-12',
+                          'attr' => 'readonly'
+                        ]);
                         echo getTextareaField([
                           'label' => 'Description',
                           'name' => 'description',

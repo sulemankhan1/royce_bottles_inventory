@@ -17,3 +17,21 @@ $('.edit_template_').click(function () {
   $('#AddTemplateModal').modal('show')
 
 })
+
+
+//check or uncheck all customers
+$('.check_all_customers').change(function () {
+  
+    if($(this).is(':checked'))
+    {
+
+      $('.customer_check').prop('checked',true)
+
+    }
+    else
+    {
+
+      $('.customer_check').prop('checked',false)
+
+    }
+})

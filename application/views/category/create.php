@@ -25,10 +25,21 @@
 
                         <?php
 
-                          echo getInputField([
-                            'label' => 'Category',
-                            'name' => 'name'
-                          ]);
+                        echo getInputField([
+                          'label' => 'Category',
+                          'name' => 'name'
+                        ]);
+
+                        ?>
+                        </div>
+                        <div class="row">
+                          <?php
+
+                        echo getInputField([
+                          'label' => 'Price',
+                          'name' => 'price',
+                          'type' => 'number'
+                        ]);
 
                             echo getSubmitBtn('Add Category');
 

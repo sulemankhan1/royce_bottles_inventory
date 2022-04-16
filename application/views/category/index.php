@@ -27,6 +27,7 @@
                         <tr>
                            <th>#</th>
                            <th>Name</th>
+                           <th>Price</th>
                            <th>Actions</th>
                         </tr>
                      </thead>
@@ -34,6 +35,7 @@
                        <tr>
                           <td>1</td>
                           <td>Category</td>
+                          <td>100</td>
                           <td>
                             <span class="actions-icons">
                               <a href="<?= site_url('edit_category/1') ?>" class="action-icons" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit">
@@ -48,6 +50,7 @@
                        <tr>
                           <td>1</td>
                           <td>Category</td>
+                          <td>100</td>
                           <td>
                             <span class="actions-icons">
                               <a href="<?= site_url('edit_category/1') ?>" class="action-icons" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit">
@@ -62,6 +65,7 @@
                        <tr>
                           <td>1</td>
                           <td>Category</td>
+                          <td>100</td>
                           <td>
                             <span class="actions-icons">
                               <a href="<?= site_url('edit_category/1') ?>" class="action-icons" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit">
@@ -76,6 +80,7 @@
                        <tr>
                           <td>1</td>
                           <td>Category</td>
+                          <td>100</td>
                           <td>
                             <span class="actions-icons">
                               <a href="<?= site_url('edit_category/1') ?>" class="action-icons" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit">

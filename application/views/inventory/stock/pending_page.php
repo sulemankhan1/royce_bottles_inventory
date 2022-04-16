@@ -24,7 +24,7 @@
 
                 <div class="col-sm-12">
                   <div class="btn-group" role="group" aria-label="Basic example" style="margin-bottom:32px!important">
-                    <button type="button" class="btn btn-sm btn-outline-primary active request_tab_" data-type="driver">Driver</button>
+                    <button type="button" class="btn btn-sm btn-outline-primary active request_tab_" data-type="driver">Delivery Order</button>
                     <button type="button" class="btn btn-sm btn-outline-primary request_tab_" data-type="call_order">Call Order</button>
                   </div>
                 </div>

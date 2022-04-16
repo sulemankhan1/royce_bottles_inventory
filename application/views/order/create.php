@@ -28,25 +28,44 @@
                         </div>
                         <?php
 
+                        $cs_arr = [
+
+                          ['id' => 1,'name' => 'Customer1'],
+                          ['id' => 2,'name' => 'Customer2'],
+                          ['id' => 3,'name' => 'Customer3']
+
+                        ];
+
+                        echo getSelectField([
+                          'label' => 'Customer',
+                          'name' => 'customer_id',
+                          'data' => $cs_arr,
+                          'column' => 'sm-6'
+                        ]);
+
                         echo getInputField([
                           'label' => 'Customer Name',
-                          'name' => 'customer_name'
+                          'name' => 'customer_name',
+                          'attr' => 'readonly'
                         ]);
 
                         echo getInputField([
                           'label' => 'Contact #',
-                          'name' => 'contact_no'
+                          'name' => 'contact_no',
+                          'attr' => 'readonly'
                         ]);
 
                         echo getInputField([
                           'label' => 'Email',
                           'name' => 'customer_email',
-                          'type' => 'email'
+                          'type' => 'email',
+                          'attr' => 'readonly'
                         ]);
 
                         echo getInputField([
                           'label' => 'Address',
                           'name' => 'customer_address',
+                          'attr' => 'readonly'
                         ]);
 
                         ?>

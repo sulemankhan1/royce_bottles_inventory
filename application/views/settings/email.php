@@ -55,6 +55,22 @@
 
                                 <div class="row pb-2 pt-4">
 
+                                  <div class="col-sm-11">
+                                    <span class="text-dark">Invoice should be sent Automatically on Whatsapp?</span>
+                                    <br /><br />
+                                    <span class="text-muted">When checked the Invoices will be sent Automatically on Whatsapp when a new Sale is Completed (marked as done).</span>
+                                  </div>
+                                  <div class="col-sm-1">
+                                      <div class="form-check form-check-inline">
+                                         <input type="checkbox" class="form-check-input" id="customCheck5">
+                                      </div>
+                                  </div>
+
+                                </div>
+                                <hr>
+
+                                <div class="row pb-2 pt-4">
+
                                   <div class="col-sm-8">
                                     <span class="text-dark">Recurring Email timestamp</span>
                                     <br />
@@ -137,6 +153,37 @@
                                 <div class="row pb-2 pt-4">
 
                                   <div class="col-sm-10">
+                                    <span class="text-dark">Whatsapp template</span>
+                                    <br /><br />
+                                    <span class="text-muted">The selected template will be used when an Invoice is Automatically sent to the Customer on Whatsapp.</span>
+                                  </div>
+                                  <div class="col-sm-2">
+                                    <div class="row">
+                                      <?php
+
+                                        $pro_arr = [
+
+                                          ['id' => 1,'name' => 'template1'],
+                                          ['id' => 2,'name' => 'template2'],
+                                          ['id' => 3,'name' => 'template3']
+
+                                        ];
+
+                                        echo getSelectField([
+                                          'name' => 'invoice_template',
+                                          'column' => 'sm-12',
+                                          'data' => $pro_arr
+                                        ]);
+
+                                      ?>
+                                    </div>
+                                  </div>
+
+                                </div>
+                                <hr>
+                                <div class="row pb-2 pt-4">
+
+                                  <div class="col-sm-10">
                                     <span class="text-dark">Recurring email template</span>
                                   </div>
                                   <div class="col-sm-2">
@@ -163,54 +210,85 @@
 
                                 </div>
 
-                                <h4 class="mt-4 mb-2">Recurring Email Receipients</h4>
+                                <div class="row mb-2">
+
+                                  <div class="col-sm-10">
+
+                                    <h4 class="mt-4 mb-2">Recurring Email Receipients</h4>
+
+                                  </div>
+                                  <div class="col-sm-2">
+
+                                    <div class="row" style="margin-top:22px;">
+
+                                      <div class="col-sm-7" style="text-align:right;padding:0px;margin:0px;">
+
+                                        <span class="text-dark">All</span>
+
+                                      </div>
+                                      <div class="col-sm-5" style="padding:0px;padding-left:5px;">
+
+                                        <div class="form-check form-check-inline">
+                                          <input type="checkbox" class="form-check-input check_all_customers" id="customCheck5">
+                                        </div>
+
+                                      </div>
+                                    </div>
+
+                                  </div>
+
+                                </div>
 
                                 <div class="row">
-                                  <div class="col-sm-12">
+                                  <div class="col-sm-4" style="padding-right: 37px;">
 
-                                    <div class="row pt-2 pb-1 mb-2" style="background-color:#f1f1f1!important;border-radius:3px!important;padding-left:15px!important">
+                                    <div class="row pt-2 pb-1 mb-2" style="background-color:#f1f1f1!important;border-radius:3px!important;margin-left:-6px;">
 
-                                      <div class="col-sm-11">
+                                      <div class="col-sm-10">
 
                                         <span class="text-dark">Customer1</span>
 
                                       </div>
-                                      <div class="col-sm-1">
+                                      <div class="col-sm-2">
 
                                         <div class="form-check form-check-inline">
-                                           <input type="checkbox" class="form-check-input" id="customCheck5">
+                                           <input type="checkbox" class="form-check-input customer_check" id="customCheck5">
                                         </div>
 
                                       </div>
 
                                     </div>
-                                    <div class="row pt-2 pb-1 mb-2" style="background-color:#f1f1f1!important;border-radius:3px!important;padding-left:15px!important">
+                                  </div>
+                                  <div class="col-sm-4" style="padding-right: 37px;">
+                                    <div class="row pt-2 pb-1 mb-2" style="background-color:#f1f1f1!important;border-radius:3px!important;margin-left:-6px;">
 
-                                      <div class="col-sm-11">
+                                      <div class="col-sm-10">
 
                                         <span class="text-dark">Customer2</span>
 
                                       </div>
-                                      <div class="col-sm-1">
+                                      <div class="col-sm-2">
 
                                         <div class="form-check form-check-inline">
-                                           <input type="checkbox" class="form-check-input" id="customCheck5">
+                                           <input type="checkbox" class="form-check-input customer_check" id="customCheck5">
                                         </div>
 
                                       </div>
 
                                     </div>
-                                    <div class="row pt-2 pb-1 mb-2" style="background-color:#f1f1f1!important;border-radius:3px!important;padding-left:15px!important">
+                                </div>
+                                <div class="col-sm-4" style="padding-right: 37px;">
+                                    <div class="row pt-2 pb-1 mb-2" style="background-color:#f1f1f1!important;border-radius:3px!important;margin-left:-6px;">
 
-                                      <div class="col-sm-11">
+                                      <div class="col-sm-10">
 
                                         <span class="text-dark">Customer3</span>
 
                                       </div>
-                                      <div class="col-sm-1">
+                                      <div class="col-sm-2">
 
                                         <div class="form-check form-check-inline">
-                                           <input type="checkbox" class="form-check-input" id="customCheck5">
+                                           <input type="checkbox" class="form-check-input customer_check" id="customCheck5">
                                         </div>
 
                                       </div>
