@@ -3,27 +3,46 @@
   <head>
     <meta charset="utf-8">
     <title><?= $page_title ?></title>
+
+
+        <!-- Hope Ui Design System Css -->
+        <link rel="stylesheet" href="<?= base_url('assets/css/hope-ui.min.css?v=1.2.0') ?>" />
+
+        <!-- Custom Css -->
+        <link rel="stylesheet" href="<?= base_url('assets/css/custom.min.css?v=1.2.0') ?>" />
+
+        <style style="text/css">
+
+          body
+          {
+              background: none!important;
+          }
+
+        </style>
+
   </head>
   <body onload="window.print()">
 
       <h2 align="center"><?= $page_title ?></h2>
+      <br><br>
 
       <table width="30%">
         <tr>
-          <td>Customer:</td>
-          <th>Customer1</th>
+          <th>Customer:</th>
+          <td>Customer1</td>
         </tr>
         <tr>
-          <td>Date From:</td>
-          <th>03-10-2022</th>
+          <th>Date From:</th>
+          <td>03-10-2022</td>
         </tr>
         <tr>
-          <td>Date To:</td>
-          <th>03-20-2022</th>
+          <th>Date To:</th>
+          <td>03-20-2022</td>
         </tr>
       </table>
+      <br>
 
-      <table width="100%" border="1">
+      <table class="table table-bordered">
         <thead>
            <tr>
               <th>#</th>

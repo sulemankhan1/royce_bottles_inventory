@@ -3,8 +3,20 @@
   <head>
     <meta charset="utf-8">
     <title><?= $page_title ?></title>
+
+    <!-- Hope Ui Design System Css -->
+    <link rel="stylesheet" href="<?= base_url('assets/css/hope-ui.min.css?v=1.2.0') ?>" />
+
+    <!-- Custom Css -->
+    <link rel="stylesheet" href="<?= base_url('assets/css/custom.min.css?v=1.2.0') ?>" />
+
     <style type="text/css">
 
+
+      body
+      {
+        background: none!important;
+      }
       .table-img-design
       {
           width: 45px!important;
@@ -21,35 +33,37 @@
   <body onload="window.print()">
 
       <h2 align="center"><?= $page_title ?></h2>
+      <br><br>
 
       <table width="30%" id="log-details-filter">
         <tr>
-          <td>Product:</td>
-          <th>All</th>
+          <th>Product:</th>
+          <td>All</td>
         </tr>
         <tr>
-          <td>Customer:</td>
-          <th>All</th>
+          <th>Customer:</th>
+          <td>All</td>
         </tr>
         <tr>
-          <td>Driver:</td>
-          <th>All</th>
+          <th>Driver:</th>
+          <td>All</td>
         </tr>
         <tr>
-          <td>Type:</td>
-          <th>All</th>
+          <th>Type:</th>
+          <td>All</td>
         </tr>
         <tr>
-          <td>Date From:</td>
-          <th>03-10-2022</th>
+          <th>Date From:</th>
+          <td>03-10-2022</td>
         </tr>
         <tr>
-          <td>Date To:</td>
-          <th>03-20-2022</th>
+          <th>Date To:</th>
+          <td>03-20-2022</td>
         </tr>
       </table>
+      <br>
 
-      <table width="100%" border="1">
+      <table class="table table-bordered">
          <thead>
             <tr>
                <th>#</th>

@@ -34,8 +34,7 @@
 	<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css" />
 
 
-
-	<!-- Font Awesome Css -->
+	<!-- Font Awesome script -->
 	<script src="https://kit.fontawesome.com/b04cb78fd5.js" crossorigin="anonymous"></script>
 
     <?php

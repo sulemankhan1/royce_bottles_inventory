@@ -10,6 +10,10 @@
     <!-- Custom Css -->
     <link rel="stylesheet" href="<?= base_url('assets/css/custom.min.css?v=1.2.0') ?>" />
 
+
+    <!-- Font Awesome script -->
+    <script src="https://kit.fontawesome.com/b04cb78fd5.js" crossorigin="anonymous"></script>
+
     <style type="text/css">
 
         .row
@@ -73,7 +77,7 @@
                 </div>
                 <span>
 
-                    <a href="javascript:void(0)" class="btn btn-sm btn-success" id="send_sheet_to_whtaspp">Send Pdf To WhatsApp</a>
+                    <a href="javascript:void(0)" class="btn btn-sm btn-success" id="send_sheet_to_whtaspp"><i class="fa-brands fa-whatsapp"></i> Send Pdf To WhatsApp</a>
                     <a href="javascript:void(0)" class="btn btn-sm btn-success" id="send_mail_to_customer">Send Mail To Customer</a>
 
                     <a href="javascript:void(0)" class="btn btn-sm btn-primary" id="print_customer_payments" data-url="<?= base_url('AjaxController/printCustomerPayments')?>">Print</a>

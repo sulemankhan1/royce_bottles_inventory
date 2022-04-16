@@ -13,6 +13,9 @@
     <!-- to set deisgn in print -->
     <link rel="stylesheet" href="<?= base_url('assets/css/bootstrap-print.min.css') ?>" media="print">
 
+    <!-- Font Awesome script -->
+    <script src="https://kit.fontawesome.com/b04cb78fd5.js" crossorigin="anonymous"></script>
+
     <style type="text/css">
 
         .row
@@ -90,6 +93,7 @@
 
                   <?php if ($type == 'invoice' || $type == 'invoice_print'): ?>
 
+                    <a href="javascript:void(0)" class="btn btn-sm btn-success" id="send_pdf_to_whtaspp"><i class="fa-brands fa-whatsapp"></i> Send Pdf To WhatsApp</a>
                     <a href="javascript:void(0)" class="btn btn-sm btn-success hide_content" id="send_invoice_email">Send Email</a>
                     <a href="javascript:void(0)" class="btn btn-sm btn-primary hide_content" id="print_details">Print</a>
 
