@@ -141,6 +141,11 @@
 					padding-left: 44px;
 				}
 
+				aside.sidebar.sidebar-default.navs-rounded-all.sidebar-mini > .company_logo_div > a > img
+				{
+					height: 30px!important;
+				}
+
 				@media only screen and (max-width: 767px) {
 				  /* For mobile phones: */
 					.card-header.d-flex.justify-content-between

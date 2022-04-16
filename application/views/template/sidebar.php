@@ -1,6 +1,6 @@
 <!-- sidebar start-->
 <aside class="sidebar sidebar-default navs-rounded-all ">
-		<div class="sidebar-header d-flex align-items-center justify-content-start">
+		<div class="sidebar-header d-flex align-items-center justify-content-start company_logo_div">
 			<a href="<?= site_url('dashboard') ?>" class="navbar-brand">
 				<!--Logo start-->
 				<img src="<?= base_url('assets/images/company_logo.jpg')?>" alt="" style="width:100%;height:80px;">
