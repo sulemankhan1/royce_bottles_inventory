@@ -11,6 +11,43 @@
 
                 <div class="row mt-3">
 
+                  <div class="col-sm-12 mb-3">
+
+                        <div class="accordion" id="accordionExample">
+                            <div class="accordion-item">
+                                <h4 class="accordion-header" id="headingOne">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        Template Commands
+                                    </button>
+                                </h4>
+                                <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+
+                                      <div class="row">
+
+                                        <div class="col-sm-12 p-2">
+
+                                          <a href="javascript:void(0)">
+                                            <span class="badge rounded-pill bg-primary">Username</span>
+                                          </a>
+                                          <a href="javascript:void(0)">
+                                            <span class="badge rounded-pill bg-primary">Email</span>
+                                          </a>
+                                          <a href="javascript:void(0)">
+                                            <span class="badge rounded-pill bg-primary">Curr: Date</span>
+                                          </a>
+
+                                        </div>
+
+                                      </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                  </div>
                   <?php
 
                     echo getInputField([
