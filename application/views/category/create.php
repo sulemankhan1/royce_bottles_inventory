@@ -6,7 +6,7 @@
         <?=
         showBreadCumbs([
           ['label'=>'Home','url' => 'dashboard'],
-          ['label'=>'Categories','url' => 'categories'],
+          ['label'=>'Product Categories','url' => 'categories'],
           ['label'=>'Add Category']
         ])
         ?>

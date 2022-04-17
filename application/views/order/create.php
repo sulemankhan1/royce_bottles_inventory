@@ -6,7 +6,7 @@
         <?=
         showBreadCumbs([
           ['label'=>'Home','url' => 'dashboard'],
-          ['label'=>'Call Order','url' => 'call_order'],
+          ['label'=>'Call Orders','url' => 'call_order'],
           ['label'=>'Add Call Order']
         ])
         ?>

@@ -27,6 +27,7 @@
                         <tr>
                            <th>#</th>
                            <th style="width:60%!important">Product</th>
+                           <th style="width:60%!important">Product Category</th>
                            <th>Product Code</th>
                            <th>SKU</th>
                            <th>Actions</th>
@@ -41,6 +42,7 @@
                               Name
                             </span>
                           </td>
+                          <td>choclate</td>
                           <td>111</td>
                           <td>1111</td>
                           <td>
@@ -65,6 +67,8 @@
                               Name
                             </span>
                           </td>
+                          <td>choclate</td>
+
                           <td>111</td>
                           <td>1111</td>
                           <td>
@@ -89,6 +93,8 @@
                               Name
                             </span>
                           </td>
+                          <td>choclate</td>
+
                           <td>111</td>
                           <td>1111</td>
                           <td>
@@ -113,6 +119,8 @@
                               Name
                             </span>
                           </td>
+                          <td>choclate</td>
+
                           <td>111</td>
                           <td>1111</td>
                           <td>
@@ -137,6 +145,8 @@
                               Name
                             </span>
                           </td>
+                          <td>choclate</td>
+
                           <td>111</td>
                           <td>1111</td>
                           <td>

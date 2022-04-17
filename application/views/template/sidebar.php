@@ -100,7 +100,7 @@
 							<i class="icon">
 								<i class="fa-solid fa-soap"></i>
 							</i>
-							<span class="item-name">Categories</span>
+							<span class="item-name">Product Categories</span>
 						</a>
 					</li>
 					<li class="nav-item">
@@ -219,8 +219,8 @@
 									<i class="icon">
 										<i class="fa-solid fa-caret-right"></i>
 									</i>
-									<i class="sidenav-mini-icon"> PP </i>
-									<span class="item-name">Pending Request <span class="badge rounded-pill bg-success" style="margin-left:6px">4</span></span>
+									<i class="sidenav-mini-icon"> PR </i>
+									<span class="item-name">Pending Requests <span class="badge rounded-pill bg-success" style="margin-left:6px">4</span></span>
 								</a>
 							</li>
 
@@ -249,7 +249,7 @@
 							<i class="icon">
 								<i class="fa-solid fa-cart-flatbed"></i>
 							</i>
-							<span class="item-name">Call Order</span>
+							<span class="item-name">Call Orders</span>
 						</a>
 					</li>
 					<li class="nav-item">

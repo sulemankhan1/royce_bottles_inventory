@@ -185,8 +185,8 @@ class Inventory extends MY_Controller
 
     $data = [
 
-      'title' => 'Pending Request',
-      'page_head' => 'Pending Request',
+      'title' => 'Pending Requests',
+      'page_head' => 'Pending Requests',
       'active_menu' => 'inventory',
       'active_submenu' => 'pending_request',
       'styles' => [

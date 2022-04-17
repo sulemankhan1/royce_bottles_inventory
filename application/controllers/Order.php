@@ -17,8 +17,8 @@ class Order extends MY_Controller
 
     $data = [
 
-      'title' => 'Call Order',
-      'page_head' => 'Call Order',
+      'title' => 'Call Orders',
+      'page_head' => 'Call Orders',
       'active_menu' => 'call_order',
       'styles' => [
         'my-dataTable.css'

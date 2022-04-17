@@ -17,8 +17,8 @@ class Category extends MY_Controller
 
     $data = [
 
-      'title' => 'Categories',
-      'page_head' => 'Categories',
+      'title' => 'Product Categories',
+      'page_head' => 'Product Categories',
       'active_menu' => 'categories',
       'styles' => [
         'my-dataTable.css'

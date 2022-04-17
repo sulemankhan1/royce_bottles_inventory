@@ -52,7 +52,7 @@
                           'column' => 'sm-12'
                         ]);
                         echo getSelectField([
-                          'label' => 'Category',
+                          'label' => 'Product Category',
                           'name' => 'cat_id',
                           'column' => 'sm-12'
                         ]);

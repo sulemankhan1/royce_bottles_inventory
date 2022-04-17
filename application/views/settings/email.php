@@ -72,10 +72,10 @@
                                 <div class="row pb-2 pt-4">
 
                                   <div class="col-sm-8">
-                                    <span class="text-dark">Recurring Email timestamp</span>
+                                    <span class="text-dark">Recurring Email Timespan </span>
                                     <br />
                                     <br />
-                                    <span class="text-muted">Recurring Email means the selected Customers will receive an Email according to your setting with their Invoice / Payment details.</span>
+                                    <span class="text-muted">Recurring Email means the selected Customers will receive Email / Whatsapp Message according to your setting with their Invoice / Payment details.</span>
                                   </div>
                                   <div class="col-sm-4">
 

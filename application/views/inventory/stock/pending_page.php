@@ -8,7 +8,7 @@
         showBreadCumbs([
           ['label'=>'Home','url' => 'dashboard'],
           ['label'=>'Inventory','url' => 'pending_request'],
-          ['label'=>'Pending Request']
+          ['label'=>'Pending Requests']
         ])
         ?>
          <div class="card">
