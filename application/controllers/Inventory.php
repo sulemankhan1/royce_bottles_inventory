@@ -180,6 +180,37 @@ class Inventory extends MY_Controller
 
   }
 
+  public function save_driver_stock_request()
+  {
+
+      $this->form_validation->set_rules('product_id[]', 'Product', 'required');
+      $this->form_validation->set_rules('qty[]', 'Quantity', 'required');
+
+      if ($this->form_validation->run() == FALSE)
+      {
+
+        $error = validation_errors();
+
+        $this->session->set_flashdata('_error',$error);
+
+        redirect('request_stock');
+
+      }
+      else
+      {
+
+          $p = $this->inp_post();
+
+          echo "<pre>";
+           print_r($p);
+           echo "</pre>";
+           die();
+
+
+      }
+
+  }
+
   public function pending_request()
   {
 

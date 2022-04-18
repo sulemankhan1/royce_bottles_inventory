@@ -66,7 +66,7 @@
 
      <script type="text/javascript">
 
-      var _succes_msg = '<?= $this->session->flashdata('_success') ?>'
+      var _succes_msg = `<?= $this->session->flashdata('_success') ?>`
 
       toastr.success(_succes_msg, "", {
         positionClass: "toast-top-right",
@@ -94,7 +94,7 @@
 
       <script type="text/javascript">
 
-       var _error_msg = '<?= $this->session->flashdata('_error') ?>'
+       var _error_msg = `<?= $this->session->flashdata('_error') ?>`;
 
        toastr.error(_error_msg, "", {
      		positionClass: "toast-top-right",

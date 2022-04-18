@@ -68,7 +68,13 @@ $route['stock_history'] = 'Inventory/stock_history';
 $route['assign_to_driver'] = 'Inventory/assign_to_driver';
 $route['return_stock'] = 'Inventory/return_stock';
 $route['live_stock'] = 'Inventory/live_stock';
+
+// inventory //request_stock
+
 $route['request_stock'] = 'Inventory/request_stock';
+$route['save_driver_request'] = 'Inventory/save_driver_stock_request';
+
+
 $route['pending_request'] = 'Inventory/pending_request';
 $route['logs'] = 'Inventory/logs';
 $route['view_logs'] = 'Inventory/view_logs';

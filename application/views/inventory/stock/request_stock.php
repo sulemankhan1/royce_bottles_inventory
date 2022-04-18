@@ -17,13 +17,15 @@
                </div>
             </div>
             <div class="card-body">
-              <form class="row g-3 needs-validation" novalidate>
+              <form class="row g-3 needs-validation" novalidate method="post" action="<?= site_url('save_driver_request') ?>">
                 <div class="row mt-4">
 
                     <div class="col-sm-12">
                       <div class="row">
 
                         <?php
+
+                          echo getHiddenField('driver_id',1);
 
                           echo getInputField([
                             'label' => 'Driver',
@@ -49,14 +51,14 @@
 
                             echo getSelectField([
                               'label' => 'Product',
-                              'name' => 'product_id',
+                              'name' => 'product_id[]',
                               'data' => $pro_arr
                             ]);
 
                             echo getInputField([
                               'label' => 'Qty',
                               'type' => 'number',
-                              'name' => 'qty',
+                              'name' => 'qty[]',
                               'column' => 'sm-3'
                             ]);
 
@@ -107,14 +109,14 @@
 
       echo getSelectField([
         'label' => 'Product',
-        'name' => 'product_id',
+        'name' => 'product_id[]',
         'data' => $pro_arr
       ]);
 
       echo getInputField([
         'label' => 'Qty',
         'type' => 'number',
-        'name' => 'qty',
+        'name' => 'qty[]',
         'column' => 'sm-3'
       ]);
 
