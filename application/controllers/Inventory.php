@@ -5,6 +5,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Inventory extends MY_Controller
 {
 
+  private $user_id_ = 1;
+
   function __construct()
   {
 
@@ -120,6 +122,91 @@ class Inventory extends MY_Controller
 
   }
 
+  public function save_assign_to_driver($value='')
+  {
+
+      $this->form_validation->set_rules('driver_id', 'Driver', 'required');
+      $this->form_validation->set_rules('product_id[]', 'Product', 'required');
+      $this->form_validation->set_rules('qty[]', 'Quantity', 'required');
+
+      if ($this->form_validation->run() == FALSE)
+      {
+
+        $error = validation_errors();
+
+        $this->session->set_flashdata('_error',$error);
+
+        redirect('assign_to_driver');
+
+      }
+      else
+      {
+
+           $p = $this->inp_post();
+
+           $is_driver = $this->bm->getRow('driver_request','driver_id',$p['driver_id']);
+
+           $arr = [
+
+              'driver_id' => $p['driver_id'],
+              'added_by' => $this->user_id_
+
+           ];
+
+           $this->trans_('start');
+
+            if(!empty($is_driver))
+            {
+
+              $last_id = $is_driver->id;
+              $this->bm->update('driver_request',$arr,'id',$last_id);
+
+              $this->bm->delete('driver_request_details','driver_request_id',$last_id);
+
+            }
+            else
+            {
+
+                $last_id = $this->bm->insert_row('driver_request',$arr);
+
+            }
+
+              $request_products = [];
+
+              foreach ($p['product_id'] as $key => $v) {
+
+                  $request_products[] = [
+
+                    'driver_request_id' => $last_id,
+                    'product_id' => $v,
+                    'qty' => $p['qty'][$key]
+
+                  ];
+
+              }
+
+              $this->bm->insert_rows('driver_request_details',$request_products);
+
+           $this->trans_('complete');
+
+           if ($this->trans_('status') === FALSE)
+           {
+
+               $this->session->set_flashdata('_error','Connection error Try Again');
+
+           }
+           else
+           {
+
+               $this->session->set_flashdata('_success','Request has sent');
+
+           }
+
+           redirect('assign_to_driver');
+      }
+
+  }
+
   public function return_stock()
   {
 
@@ -199,13 +286,67 @@ class Inventory extends MY_Controller
       else
       {
 
-          $p = $this->inp_post();
+           $p = $this->inp_post();
 
-          echo "<pre>";
-           print_r($p);
-           echo "</pre>";
-           die();
+           $is_driver = $this->bm->getRow('driver_request','driver_id',$p['driver_id']);
 
+           $arr = [
+
+              'driver_id' => $p['driver_id'],
+              'added_by' => $this->user_id_
+
+           ];
+
+           $this->trans_('start');
+
+            if(!empty($is_driver))
+            {
+
+              $last_id = $is_driver->id;
+              $this->bm->update('driver_request',$arr,'id',$last_id);
+
+              $this->bm->delete('driver_request_details','driver_request_id',$last_id);
+
+            }
+            else
+            {
+
+                $last_id = $this->bm->insert_row('driver_request',$arr);
+
+            }
+
+              $request_products = [];
+
+              foreach ($p['product_id'] as $key => $v) {
+
+                  $request_products[] = [
+
+                    'driver_request_id' => $last_id,
+                    'product_id' => $v,
+                    'qty' => $p['qty'][$key]
+
+                  ];
+
+              }
+
+              $this->bm->insert_rows('driver_request_details',$request_products);
+
+           $this->trans_('complete');
+
+           if ($this->trans_('status') === FALSE)
+           {
+
+               $this->session->set_flashdata('_error','Connection error Try Again');
+
+           }
+           else
+           {
+
+               $this->session->set_flashdata('_success','Request has sent');
+
+           }
+
+           redirect('request_stock');
 
       }
 

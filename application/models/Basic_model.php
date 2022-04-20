@@ -9,7 +9,7 @@ class Basic_model extends CI_Model
 
       $this->db->insert($table , $data);
 
-      return $this->insert_id();
+      return $this->db->insert_id();
 
   }
 
@@ -56,34 +56,20 @@ class Basic_model extends CI_Model
   }
 
   // get single row with single condition
-  public function getRow($table,$column,$id,$order_column = '',$order = '')
+  public function getRow($table,$column,$id)
   {
 
       $this->db->where($column,$id);
-
-      if (!empty($order_column))
-      {
-
-        $this->db->order_by($order_column,$order);
-
-      }
 
       return $this->db->get($table)->row();
 
   }
 
   // get single row with single condition
-  public function getRowWithConditions($table,$condition_arr,$order_column = '',$order = '')
+  public function getRowWithConditions($table,$condition_arr)
   {
 
       $this->db->where($condition_arr);
-
-      if (!empty($order_column))
-      {
-
-        $this->db->order_by($order_column,$order);
-
-      }
 
       return $this->db->get($table)->row();
 

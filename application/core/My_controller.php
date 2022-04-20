@@ -80,6 +80,43 @@ class MY_Controller extends CI_Controller
 
   }
 
+  public function trans_($type = 'start')
+  {
+
+      switch ($type) {
+        case 'start':
+
+            return $this->db->trans_start();
+
+          break;
+
+        case 'complete':
+
+            return $this->db->trans_complete();
+
+          break;
+
+        case 'status':
+
+            return $this->db->trans_status();
+
+          break;
+
+        default:
+          // code...
+          break;
+      }
+
+      // $this->maincategory_model->first_function($maincategoryData);
+      // $this->market_model->second_function($marketData);
+      // $this->db->trans_complete();
+      // if ($this->db->trans_status() === FALSE) {
+      //   throw error
+      //       `enter code here`
+      // }
+
+  }
+
   public function is_login()
   {
 

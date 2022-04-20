@@ -29,7 +29,6 @@
 
                           echo getInputField([
                             'label' => 'Driver',
-                            'name' => 'driver_id',
                             'attr' => 'readonly',
                             'value' => 'Driver'
 

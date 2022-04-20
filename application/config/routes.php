@@ -65,7 +65,6 @@ $route['view_inventory'] = 'Inventory';
 $route['add_stock'] = 'Inventory/add_stock';
 $route['view_stock'] = 'Inventory/view_stock';
 $route['stock_history'] = 'Inventory/stock_history';
-$route['assign_to_driver'] = 'Inventory/assign_to_driver';
 $route['return_stock'] = 'Inventory/return_stock';
 $route['live_stock'] = 'Inventory/live_stock';
 
@@ -74,6 +73,9 @@ $route['live_stock'] = 'Inventory/live_stock';
 $route['request_stock'] = 'Inventory/request_stock';
 $route['save_driver_request'] = 'Inventory/save_driver_stock_request';
 
+// inventory //assign_stock
+$route['assign_to_driver'] = 'Inventory/assign_to_driver';
+$route['save_assign_to_driver'] = 'Inventory/save_assign_to_driver';
 
 $route['pending_request'] = 'Inventory/pending_request';
 $route['logs'] = 'Inventory/logs';

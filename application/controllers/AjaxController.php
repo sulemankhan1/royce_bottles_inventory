@@ -209,5 +209,33 @@ class AjaxController extends MY_Controller
 
   }
 
+  public function getDriverRequestedProducts($driver_id)
+  {
+
+    $driver = $this->bm->getRow('driver_request','driver_id',$driver_id);
+    $driver_request_products = $this->bm->getRows('driver_request_details','driver_request_id',$driver->id);
+    
+    $pro_arr = [
+
+      ['id' => 1,'name' => 'Driver1'],
+      ['id' => 2,'name' => 'Driver2'],
+      ['id' => 3,'name' => 'Driver3']
+
+    ];
+
+    $data = [
+
+      'driver_request_products' => $driver_request_products,
+      'products' => $pro_arr
+
+    ];
+
+    $output['html'] = $this->load_view('order/view_details',$data,true);
+
+    echo json_encode($output);
+
+
+  }
+
 
 }

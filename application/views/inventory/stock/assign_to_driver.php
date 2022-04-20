@@ -17,6 +17,7 @@
                </div>
             </div>
             <div class="card-body">
+              <?= getHiddenField('url',site_url('AjaxController/getDriverRequestedProducts'))?>
               <form class="row g-3 needs-validation" novalidate>
                 <div class="row mt-4">
 
