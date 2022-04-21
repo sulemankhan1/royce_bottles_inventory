@@ -110,4 +110,35 @@ class Basic_model extends CI_Model
   }
 
 
+  function uploadFile($file, $uploads_dir)
+  {
+      set_time_limit(0);
+
+      if ($file['size'] > 0) {
+
+          $pic_name = "";
+
+          $ext = pathinfo($file['name'], PATHINFO_EXTENSION);
+
+          $pic_name = rand();
+
+          $tmp_name = $file["tmp_name"];
+
+          $pic_name.= $file["name"];
+
+          move_uploaded_file($tmp_name, "$uploads_dir/$pic_name");
+
+
+          return $pic_name;
+
+      } else {
+
+          return "";
+
+      }
+
+  }
+
+
+
 }

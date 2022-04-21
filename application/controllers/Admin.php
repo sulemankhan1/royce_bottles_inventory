@@ -10,6 +10,8 @@ class Admin extends MY_Controller
 
     parent :: __construct();
 
+    $this->load->library('encryption');
+
   }
 
 	public function index()
@@ -21,11 +23,12 @@ class Admin extends MY_Controller
       'page_head' => 'Admins',
       'active_menu' => 'users',
       'active_submenu' => 'admins',
+      'ajax_url' => site_url('Admin/getAdmins'),
       'styles' => [
         'my-dataTable.css'
       ],
       'scripts' => [
-        'DataTable/myDataTable.js',
+        'DataTable/usersDataTable.js',
         'users/main.js',
         'main.js'
       ]
@@ -34,6 +37,106 @@ class Admin extends MY_Controller
 
     $this->template('users/admin/index',$data);
 
+
+	}
+
+	public function getAdmins()
+	{
+    $this->load->model('Admin_model');
+
+		$records = $this->Admin_model->getAdmins($_REQUEST,'records');
+		$totalFilteredRecords = $this->Admin_model->getAdmins($_REQUEST,'filter');
+		$recordsTotal = $this->Admin_model->getAdmins($_REQUEST,'recordsTotal');
+
+		$data = array();
+		$SNo = 0;
+		$Style = "";
+
+		foreach ($records as $key => $v)
+		{
+
+      $ID = $v->id;
+
+			$SNo++;
+
+			$nestedData = array();
+
+			$nestedData[] = $SNo;
+
+      //check image is exist in folder or not
+      if (getimagesize(base_url('uploads/admin/'.$v->img)) && !empty($v->img))
+      {
+          $img_url = base_url('uploads/admin/'.$v->img);
+      }
+      else
+      {
+          $img_url = base_url('assets/images/avatars/01.png');
+      }
+
+      $name = '<img src="'. $img_url .'" class="table-img-design" alt="">'.
+        '<span class="table-img-txt-design">'.$v->name.'</span>';
+
+			$nestedData[] = $name;
+			$nestedData[] = $v->username;
+			$nestedData[] = $v->email;
+			$nestedData[] = $v->contact_no;
+
+        $change_status_url = site_url('update_user_status/'.$ID);
+
+        if($v->status != 0)
+        {
+
+          $status = '<a href="javascript:void(0)" class="changeUser_status_ action-icons" data-type-status="active" data-msg="Admin" data-url="'. $change_status_url .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Active">
+                   <span class="badge rounded-pill bg-secondary">Deactivated</span>
+             </a>';
+
+        }
+        else
+        {
+
+          $status = '<a href="javascript:void(0)" class="changeUser_status_ action-icons" data-type-status="deactivate" data-msg="Admin" data-url="'. $change_status_url .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Deactivate">
+                 <span class="badge rounded-pill bg-success">Active</span>
+           </a>';
+
+        }
+
+        $nestedData[] = $status;
+
+        $delete_url = site_url('delete_admin/'.$ID);
+
+  			$actions = '';
+
+          $actions .= '<span class="actions-icons">';
+
+    				$actions .= '<a href="'.site_url('edit_admin/'.$ID) .'" class="action-icons" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit">
+              <i class="fa fa-pencil"></i>
+            </a>';
+
+  					$actions .= '<a href="javascript:void(0)" class="action-icons delete_record_" data-msg="Admin" data-url="'. $delete_url .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete">
+              <i class="fa-solid fa-trash"></i>
+            </a>';
+
+    				$actions .= '<a href="javascript:void(0)" class="action-icons view_details_" data-url="'. site_url('AjaxController/getUserDetailsByType/Admin/'.$ID) .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Details">
+              <i class="fa fa-eye"></i>
+            </a>';
+
+          $actions .= '</span>';
+
+			     $nestedData[] = $actions;
+
+           $data[] = $nestedData;
+
+		}
+
+		$json_data = array(
+			"draw" => intval($_REQUEST['draw']), // for every request/draw by clientside , they send a number as a parameter, when they recieve a response/data they first check the draw number, so we are sending same number in draw.
+			"recordsTotal" => intval($recordsTotal), // total number of records
+			"recordsFiltered" => intval($totalFilteredRecords), // total number of records after searching, if there is no searching then totalFiltered = totalData
+			"data" => $data // total data array
+		);
+
+
+		echo json_encode($json_data);
 
 	}
 
@@ -53,6 +156,99 @@ class Admin extends MY_Controller
     ];
 
     $this->template('users/admin/create',$data);
+
+  }
+
+  public function save_admin()
+  {
+
+      $this->form_validation->set_rules('name', 'Name', 'required');
+      $this->form_validation->set_rules('email', 'Email', 'required');
+      $this->form_validation->set_rules('username', 'Username', 'required');
+      $this->form_validation->set_rules('password', 'Password', 'required');
+      $this->form_validation->set_rules('contact_no', 'Contact #', 'required');
+
+      if ($this->form_validation->run() == FALSE)
+      {
+
+        $error = validation_errors();
+
+        $this->session->set_flashdata('_error',$error);
+
+        redirect('add_admin');
+
+      }
+      else
+      {
+
+           $p = $this->inp_post();
+
+           $ID = (isset($p['ID'])?$p['ID']:'');
+           unset($p['ID']);
+
+           $admin_img = NULL;
+
+           if(!empty($_FILES['img']))
+           {
+
+             $admin_img = $this->bm->uploadFile($_FILES['img'],'uploads/admin');
+
+           }
+
+           $arr = [
+
+              'img' => $admin_img,
+              'name' => $p['name'],
+              'email' => $p['email'],
+              'username' => $p['username'],
+              'password' => $this->encryption->encrypt($p['password']),
+              'contact_no' => $p['contact_no'],
+              'dob' => $p['dob'],
+              'country' => $p['country'],
+              'city' => $p['city'],
+              'zip_code' => $p['zip_code'],
+              'address' => $p['address'],
+              'type' => 'admin',
+              'added_by' => $this->user_id_
+
+           ];
+
+           $this->trans_('start');
+
+            if(!empty($ID))
+            {
+
+              unset($arr['type']);
+              unset($arr['added_by']);
+
+              $this->bm->update('users',$arr,'id',$ID);
+
+            }
+            else
+            {
+
+                $this->bm->insert_row('users',$arr);
+
+            }
+
+           $this->trans_('complete');
+
+           if ($this->trans_('status') === FALSE)
+           {
+
+               $this->session->set_flashdata('_error','Connection error Try Again');
+
+           }
+           else
+           {
+
+               $this->session->set_flashdata('_success','Admin created successfully');
+
+           }
+
+           redirect('admins');
+
+      }
 
   }
 

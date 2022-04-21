@@ -5,8 +5,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Inventory extends MY_Controller
 {
 
-  private $user_id_ = 1;
-
   function __construct()
   {
 
