@@ -25,12 +25,19 @@ $route['delete_admin/(:num)'] = 'Admin/delete/$1';
 //driver
 $route['drivers'] = 'Driver';
 $route['add_driver'] = 'Driver/create';
+$route['save_driver'] = 'Driver/save_driver';
 $route['edit_driver/(:num)'] = 'Driver/edit/$1';
+$route['update_driver_status/(:any)/(:num)'] = 'Driver/update_status/$1/$2';
+$route['delete_driver/(:num)'] = 'Driver/delete/$1';
+
 
 //production
 $route['productions'] = 'Production';
 $route['add_production'] = 'Production/create';
+$route['save_production'] = 'Production/save_production';
 $route['edit_production/(:num)'] = 'Production/edit/$1';
+$route['update_production_status/(:any)/(:num)'] = 'Production/update_status/$1/$2';
+$route['delete_production/(:num)'] = 'Production/delete/$1';
 
 //other users
 $route['other_users'] = 'OtherUsers';

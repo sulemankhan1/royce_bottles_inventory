@@ -26,7 +26,7 @@
                </div>
             </div>
             <div class="card-body">
-              <form class="row g-3 needs-validation" novalidate>
+              <form class="row g-3 needs-validation" novalidate action="<?= site_url('save_driver') ?>" method="post" enctype="multipart/form-data">
                 <div class="row mt-4">
 
                     <div class="col-sm-2">
@@ -70,7 +70,8 @@
                         echo getInputField([
                           'label' => 'License #',
                           'name' => 'license_no',
-                          'type' => 'number'
+                          'type' => 'number',
+                          'required' => false
                         ]);
                         echo getInputField([
                           'label' => 'FIN #',
@@ -84,24 +85,29 @@
                         echo getInputField([
                           'label' => 'Date Of Birth',
                           'name' => 'dob',
-                          'type' => 'date'
+                          'type' => 'date',
+                          'required' => false
                         ]);
                         echo getInputField([
                           'label' => 'Country',
-                          'name' => 'country'
+                          'name' => 'country',
+                          'required' => false
                         ]);
                         echo getInputField([
                           'label' => 'City',
-                          'name' => 'city'
+                          'name' => 'city',
+                          'required' => false
                         ]);
                         echo getInputField([
                           'label' => 'Zip Code',
-                          'name' => 'zip_code'
+                          'name' => 'zip_code',
+                          'required' => false
                         ]);
 
                         echo getTextareaField([
                           'label' => 'Residential Address',
-                          'name' => 'address'
+                          'name' => 'address',
+                          'required' => false
                         ]);
 
                         echo getSubmitBtn('Add Driver');

@@ -3,10 +3,10 @@
 /**
  *
  */
-class Admin_model extends CI_Model
+class Driver_model extends CI_Model
 {
 
-  public function getAdmins($requestData,$type)
+  public function getDrivers($requestData,$type)
   {
       // storing request (ie, get/post) global array to a variable
       $columns = [
@@ -16,8 +16,10 @@ class Admin_model extends CI_Model
           2 => 'username',
           3 => 'email',
           4 => 'contact_no',
-          5 => 'status',
-          6 => NULL
+          5 => 'fin_no',
+          6 => 'car_plate',
+          7 => 'status',
+          8 => NULL
 
       ];
 
@@ -25,7 +27,7 @@ class Admin_model extends CI_Model
       $this->db->from('users');
 
       $this->db->where('is_deleted',0);
-      $this->db->where('type','admin');
+      $this->db->where('type','driver');
 
       if($type == 'recordsTotal')
       {
@@ -44,6 +46,8 @@ class Admin_model extends CI_Model
             $this->db->or_like('username',$requestData['search']['value']);
             $this->db->or_like('email',$requestData['search']['value']);
             $this->db->or_like('contact_no',$requestData['search']['value']);
+            $this->db->or_like('fin_no',$requestData['search']['value']);
+            $this->db->or_like('car_plate',$requestData['search']['value']);
 
 
            $this->db->group_end();

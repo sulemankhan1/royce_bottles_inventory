@@ -26,7 +26,7 @@
                </div>
             </div>
             <div class="card-body">
-              <form class="row g-3 needs-validation" novalidate>
+              <form class="row g-3 needs-validation" novalidate action="<?= site_url('save_driver') ?>" method="post" enctype="multipart/form-data">
                 <div class="row mt-4">
 
                     <div class="col-sm-2">
@@ -34,7 +34,17 @@
 
                       <?php
 
-                        echo getImgField();
+                      //check image is exist in folder or not
+                      if (getimagesize(base_url('uploads/driver/'.$driver->img)) && !empty($driver->img))
+                      {
+                          echo getImgField([
+                            'img_url' => base_url('uploads/driver/'.$driver->img)
+                          ]);
+                      }
+                      else
+                      {
+                          echo getImgField();
+                      }
 
                        ?>
 
@@ -44,64 +54,86 @@
 
                         <?php
 
+                        echo getHiddenField('ID',$driver->id);
+                        echo getHiddenField('old_img',$driver->img);
+
                         echo getInputField([
                           'label' => 'Name',
-                          'name' => 'name'
+                          'name' => 'name',
+                          'value' => $driver->name
                         ]);
                         echo getInputField([
                           'label' => 'Email',
                           'name' => 'email',
-                          'type' => 'email'
+                          'type' => 'email',
+                          'value' => $driver->email
                         ]);
                         echo getInputField([
                           'label' => 'Username',
-                          'name' => 'username'
+                          'name' => 'username',
+                          'value' => $driver->username
                         ]);
                         echo getInputField([
                           'label' => 'Password',
                           'name' => 'password',
-                          'type' => 'password'
+                          'type' => 'password',
+                          'value' => $this->encryption->decrypt($driver->password)
                         ]);
                         echo getInputField([
                           'label' => 'Contact #',
                           'name' => 'contact_no',
-                          'type' => 'number'
+                          'type' => 'number',
+                          'value' => $driver->contact_no
                         ]);
                         echo getInputField([
                           'label' => 'License #',
                           'name' => 'license_no',
-                          'type' => 'number'
+                          'type' => 'number',
+                          'required' => false,
+                          'value' => $driver->license_no
                         ]);
                         echo getInputField([
                           'label' => 'FIN #',
                           'name' => 'fin_no',
-                          'type' => 'number'
+                          'type' => 'number',
+                          'value' => $driver->fin_no
                         ]);
                         echo getInputField([
                           'label' => 'Car Plate',
-                          'name' => 'car_plate'
+                          'name' => 'car_plate',
+                          'value' => $driver->car_plate
                         ]);
                         echo getInputField([
                           'label' => 'Date Of Birth',
                           'name' => 'dob',
-                          'type' => 'date'
+                          'type' => 'date',
+                          'required' => false,
+                          'value' => $driver->dob
                         ]);
                         echo getInputField([
                           'label' => 'Country',
-                          'name' => 'country'
+                          'name' => 'country',
+                          'required' => false,
+                          'value' => $driver->country
                         ]);
                         echo getInputField([
                           'label' => 'City',
-                          'name' => 'city'
+                          'name' => 'city',
+                          'required' => false,
+                          'value' => $driver->city
                         ]);
                         echo getInputField([
                           'label' => 'Zip Code',
-                          'name' => 'zip_code'
+                          'name' => 'zip_code',
+                          'required' => false,
+                          'value' => $driver->zip_code == 0?'':$driver->zip_code
                         ]);
 
                         echo getTextareaField([
                           'label' => 'Residential Address',
-                          'name' => 'address'
+                          'name' => 'address',
+                          'required' => false,
+                          'value' => $driver->address
                         ]);
 
                         echo getSubmitBtn('Update Driver');

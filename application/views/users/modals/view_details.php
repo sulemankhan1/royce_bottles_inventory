@@ -3,9 +3,11 @@
     <div class="col-sm-12 text-center">
       <?php
         //check image is exist in folder or not
-        if (getimagesize(base_url('uploads/admin/'.$user->img)) && !empty($user->img))
+        $folder = strtolower($type);
+
+        if (getimagesize(base_url('uploads/'.$folder.'/'.$user->img)) && !empty($user->img))
         {
-            echo '<img src="'. base_url('uploads/admin/'.$user->img) .'" class="img-thumbnail user-form-img" alt="...">';
+            echo '<img src="'. base_url('uploads/'.$folder.'/'.$user->img) .'" class="img-thumbnail user-form-img" alt="...">';
         }
         else
         {
@@ -40,14 +42,20 @@
           else if($type == 'Driver' || $type == 'Other_user' || $type == 'Production')
           {
 
-            echo viewDetailsCol('Name','Demo');
-            echo viewDetailsCol('Email','Demo@gmail.com');
-            echo viewDetailsCol('Username','Demo123');
-            echo viewDetailsCol('Contact #','11111');
-            echo viewDetailsCol('License #','11111');
-            echo viewDetailsCol('FIN #','222');
-            echo viewDetailsCol('Car Plate','xyz-122');
-            echo viewDetailsCol('Status','<span class="badge rounded-pill bg-success">Active</span>');
+            echo viewDetailsCol('Name',$user->name);
+            echo viewDetailsCol('Email',$user->email);
+            echo viewDetailsCol('Username',$user->username);
+            echo viewDetailsCol('Contact #',$user->contact_no);
+            echo viewDetailsCol('License #',$user->license_no);
+            echo viewDetailsCol('FIN #',$user->fin_no);
+            echo viewDetailsCol('Car Plate',$user->car_plate);
+            
+            $badge_clr = $user->status == 1?'bg-secondary':'bg-success';
+            $status = $user->status == 1?'Deactivated':'Active';
+
+            $status_row = '<span class="badge rounded-pill '. $badge_clr .'">'. $status .'</span>';
+
+            echo viewDetailsCol('Status',$status_row);
 
           }
 

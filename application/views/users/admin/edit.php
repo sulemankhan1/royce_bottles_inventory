@@ -78,7 +78,7 @@
                           'label' => 'Password',
                           'name' => 'password',
                           'type' => 'password',
-                          'value' => $admin->password
+                          'value' => $this->encryption->decrypt($admin->password)
                         ]);
                         echo getInputField([
                           'label' => 'Contact #',

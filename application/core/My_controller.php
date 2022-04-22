@@ -2,7 +2,7 @@
 class MY_Controller extends CI_Controller
 {
 
-  private $user_id_ = 1;
+  public $user_id_ = 1;
 
   public function __construct()
   {
