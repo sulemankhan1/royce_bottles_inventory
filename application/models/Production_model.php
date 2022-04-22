@@ -17,8 +17,8 @@ class Production_model extends CI_Model
           3 => 'email',
           4 => 'contact_no',
           5 => 'fin_no',
-          7 => 'status',
-          8 => NULL
+          6 => 'status',
+          7 => NULL
 
       ];
 

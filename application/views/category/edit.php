@@ -17,7 +17,7 @@
                </div>
             </div>
             <div class="card-body">
-              <form class="row g-3 needs-validation" novalidate>
+              <form class="row g-3 needs-validation" novalidate action="<?= site_url('save_category') ?>" method="post">
                 <div class="row mt-4">
 
                     <div class="col-sm-12">
@@ -25,9 +25,12 @@
 
                         <?php
 
+                        echo getHiddenField('ID',$category->id);
+
                         echo getInputField([
                           'label' => 'Category',
-                          'name' => 'name'
+                          'name' => 'name',
+                          'value' => $category->name
                         ]);
 
                         ?>
@@ -38,7 +41,9 @@
                         echo getInputField([
                           'label' => 'Price',
                           'name' => 'price',
-                          'type' => 'number'
+                          'type' => 'number',
+                          'attr' => 'step="any"',
+                          'value' => $category->price
                         ]);
 
                             echo getSubmitBtn('Update Category');

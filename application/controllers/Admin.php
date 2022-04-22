@@ -261,7 +261,19 @@ class Admin extends MY_Controller
            else
            {
 
+             if(!empty($ID))
+             {
+
+               $this->session->set_flashdata('_success','Admin updated successfully');
+
+             }
+             else
+             {
+
                $this->session->set_flashdata('_success','Admin created successfully');
+
+             }
+
 
            }
 

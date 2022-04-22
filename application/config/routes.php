@@ -55,7 +55,10 @@ $route['edit_rights'] = 'Rights/edit';
 //categories
 $route['categories'] = 'Category';
 $route['add_category'] = 'Category/create';
+$route['save_category'] = 'Category/save_category';
 $route['edit_category/(:num)'] = 'Category/edit/$1';
+$route['delete_category/(:num)'] = 'Category/delete/$1';
+
 
 //products
 $route['products'] = 'Product';

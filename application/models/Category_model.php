@@ -3,29 +3,25 @@
 /**
  *
  */
-class OtherUser_model extends CI_Model
+class Category_model extends CI_Model
 {
 
-  public function getOtherUsers($requestData,$type)
+  public function getCategories($requestData,$type)
   {
       // storing request (ie, get/post) global array to a variable
       $columns = [
           // datatable column index => database column name
           0 => NULL,
           1 => 'name',
-          2 => 'username',
-          3 => 'email',
-          4 => 'contact_no',
-          5 => 'status',
-          6 => NULL
+          2 => 'price',
+          3 => NULL
 
       ];
 
       $this->db->select('*');
-      $this->db->from('users');
+      $this->db->from('categories');
 
       $this->db->where('is_deleted',0);
-      $this->db->where('type','other');
 
       if($type == 'recordsTotal')
       {
@@ -41,9 +37,8 @@ class OtherUser_model extends CI_Model
            $this->db->group_start();
 
             $this->db->or_like('name',$requestData['search']['value']);
-            $this->db->or_like('username',$requestData['search']['value']);
-            $this->db->or_like('email',$requestData['search']['value']);
-            $this->db->or_like('contact_no',$requestData['search']['value']);
+            $this->db->or_like('price',$requestData['search']['value']);
+
 
            $this->db->group_end();
 

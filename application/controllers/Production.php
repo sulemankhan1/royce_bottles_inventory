@@ -264,7 +264,19 @@ class Production extends MY_Controller
            else
            {
 
+             if(!empty($ID))
+             {
+
+               $this->session->set_flashdata('_success','Production User updated successfully');
+
+             }
+             else
+             {
+
                $this->session->set_flashdata('_success','Production User created successfully');
+
+             }
+
 
            }
 
