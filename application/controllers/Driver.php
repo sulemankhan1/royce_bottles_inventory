@@ -64,7 +64,7 @@ class Driver extends MY_Controller
 			$nestedData[] = $SNo;
 
       //check image is exist in folder or not
-      if (getimagesize(base_url('uploads/driver/'.$v->img)) && !empty($v->img))
+      if (@getimagesize(base_url('uploads/driver/'.$v->img)) && !empty($v->img))
       {
           $img_url = base_url('uploads/driver/'.$v->img);
       }
@@ -163,7 +163,6 @@ class Driver extends MY_Controller
     $this->template('users/driver/create',$data);
 
   }
-
 
   public function save_driver()
   {

@@ -35,7 +35,7 @@
                       <?php
 
                       //check image is exist in folder or not
-                      if (getimagesize(base_url('uploads/driver/'.$driver->img)) && !empty($driver->img))
+                      if (@getimagesize(base_url('uploads/driver/'.$driver->img)) && !empty($driver->img))
                       {
                           echo getImgField([
                             'img_url' => base_url('uploads/driver/'.$driver->img)

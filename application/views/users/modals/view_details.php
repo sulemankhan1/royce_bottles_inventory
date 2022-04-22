@@ -5,7 +5,7 @@
         //check image is exist in folder or not
         $folder = strtolower($type);
 
-        if (getimagesize(base_url('uploads/'.$folder.'/'.$user->img)) && !empty($user->img))
+        if (@getimagesize(base_url('uploads/'.$folder.'/'.$user->img)) && !empty($user->img))
         {
             echo '<img src="'. base_url('uploads/'.$folder.'/'.$user->img) .'" class="img-thumbnail user-form-img" alt="...">';
         }
@@ -23,13 +23,34 @@
 
         <?php
 
-          if($type == 'Admin')
+          if($type == 'Admin' || $type == 'Driver' || $type == 'Other_user' || $type == 'Production')
           {
 
             echo viewDetailsCol('Name',$user->name);
             echo viewDetailsCol('Email',$user->email);
             echo viewDetailsCol('Username',$user->username);
             echo viewDetailsCol('Contact #',$user->contact_no);
+
+            if($type == 'Driver' || $type == 'Other_user')
+            {
+
+              echo viewDetailsCol('License #',$user->license_no);
+
+            }
+
+            if($type != 'Admin')
+            {
+
+              echo viewDetailsCol('FIN #',$user->fin_no);
+
+            }
+
+            if($type == 'Driver' || $type == 'Other_user')
+            {
+
+              echo viewDetailsCol('Car Plate',$user->car_plate);
+
+            }
 
             $badge_clr = $user->status == 1?'bg-secondary':'bg-success';
             $status = $user->status == 1?'Deactivated':'Active';
@@ -46,10 +67,8 @@
             echo viewDetailsCol('Email',$user->email);
             echo viewDetailsCol('Username',$user->username);
             echo viewDetailsCol('Contact #',$user->contact_no);
-            echo viewDetailsCol('License #',$user->license_no);
-            echo viewDetailsCol('FIN #',$user->fin_no);
-            echo viewDetailsCol('Car Plate',$user->car_plate);
-            
+
+
             $badge_clr = $user->status == 1?'bg-secondary':'bg-success';
             $status = $user->status == 1?'Deactivated':'Active';
 

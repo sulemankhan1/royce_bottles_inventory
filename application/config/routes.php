@@ -42,7 +42,10 @@ $route['delete_production/(:num)'] = 'Production/delete/$1';
 //other users
 $route['other_users'] = 'OtherUsers';
 $route['add_other_user'] = 'OtherUsers/create';
+$route['save_other_user'] = 'OtherUsers/save_other_user';
 $route['edit_other_user/(:num)'] = 'OtherUsers/edit/$1';
+$route['update_other_user_status/(:any)/(:num)'] = 'OtherUsers/update_status/$1/$2';
+$route['delete_other_user/(:num)'] = 'OtherUsers/delete/$1';
 
 //rights
 $route['rights'] = 'Rights';

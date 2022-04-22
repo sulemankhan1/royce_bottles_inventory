@@ -18,7 +18,7 @@
                </div>
             </div>
             <div class="card-body">
-              <form class="row g-3 needs-validation" novalidate>
+              <form class="row g-3 needs-validation" novalidate action="<?= site_url('save_other_user') ?>" method="post" enctype="multipart/form-data">
                 <div class="row mt-4">
 
                     <div class="col-sm-2">
@@ -26,7 +26,17 @@
 
                       <?php
 
-                        echo getImgField();
+                        //check image is exist in folder or not
+                        if (@getimagesize(base_url('uploads/other_user/'.$otherUser->img)) && !empty($otherUser->img))
+                        {
+                            echo getImgField([
+                              'img_url' => base_url('uploads/other_user/'.$otherUser->img)
+                            ]);
+                        }
+                        else
+                        {
+                            echo getImgField();
+                        }
 
                        ?>
 
@@ -37,64 +47,88 @@
 
                         <?php
 
+                        echo getHiddenField('ID',$otherUser->id);
+                        echo getHiddenField('old_img',$otherUser->img);
+
                         echo getInputField([
                           'label' => 'Name',
-                          'name' => 'name'
+                          'name' => 'name',
+                          'value' => $otherUser->name
                         ]);
                         echo getInputField([
                           'label' => 'Email',
                           'name' => 'email',
-                          'type' => 'email'
+                          'type' => 'email',
+                          'value' => $otherUser->email
                         ]);
                         echo getInputField([
                           'label' => 'Username',
-                          'name' => 'username'
+                          'name' => 'username',
+                          'value' => $otherUser->username
                         ]);
                         echo getInputField([
                           'label' => 'Password',
                           'name' => 'password',
-                          'type' => 'password'
+                          'type' => 'password',
+                          'value' => $this->encryption->decrypt($otherUser->password)
                         ]);
                         echo getInputField([
                           'label' => 'Contact #',
                           'name' => 'contact_no',
-                          'type' => 'number'
+                          'type' => 'number',
+                          'value' => $otherUser->contact_no
                         ]);
                         echo getInputField([
                           'label' => 'License #',
                           'name' => 'license_no',
-                          'type' => 'number'
+                          'type' => 'number',
+                          'required' => false,
+                          'value' => $otherUser->license_no
                         ]);
                         echo getInputField([
                           'label' => 'FIN #',
                           'name' => 'fin_no',
-                          'type' => 'number'
+                          'type' => 'number',
+                          'required' => false,
+                          'value' => $otherUser->fin_no
                         ]);
                         echo getInputField([
                           'label' => 'Car Plate',
-                          'name' => 'car_plate'
+                          'name' => 'car_plate',
+                          'required' => false,
+                          'value' => $otherUser->car_plate
                         ]);
                         echo getInputField([
                           'label' => 'Date Of Birth',
                           'name' => 'dob',
-                          'type' => 'date'
+                          'type' => 'date',
+                          'required' => false,
+                          'value' => $otherUser->dob
                         ]);
                         echo getInputField([
                           'label' => 'Country',
-                          'name' => 'country'
+                          'name' => 'country',
+                          'required' => false,
+                          'value' => $otherUser->country
                         ]);
                         echo getInputField([
                           'label' => 'City',
-                          'name' => 'city'
+                          'name' => 'city',
+                          'required' => false,
+                          'value' => $otherUser->city
                         ]);
                         echo getInputField([
                           'label' => 'Zip Code',
-                          'name' => 'zip_code'
+                          'name' => 'zip_code',
+                          'required' => false,
+                          'value' => $otherUser->zip_code == 0?'':$otherUser->zip_code
                         ]);
 
                         echo getTextareaField([
                           'label' => 'Residential Address',
-                          'name' => 'address'
+                          'name' => 'address',
+                          'required' => false,
+                          'value' => $otherUser->address
                         ]);
 
                           echo getSubmitBtn('Update Other User');

@@ -10,6 +10,8 @@ class Production extends MY_Controller
 
     parent :: __construct();
 
+    $this->load->library('encryption');
+
   }
 
 	public function index()
@@ -21,11 +23,12 @@ class Production extends MY_Controller
       'page_head' => 'Production Users',
       'active_menu' => 'users',
       'active_submenu' => 'productions',
+      'ajax_url' => site_url('Production/getProductionUsers'),
       'styles' => [
         'my-dataTable.css'
       ],
       'scripts' => [
-        'DataTable/myDataTable.js',
+        'DataTable/usersDataTable.js',
         'users/main.js',
         'main.js'
       ]
@@ -34,6 +37,110 @@ class Production extends MY_Controller
 
     $this->template('users/production/index',$data);
 
+
+	}
+
+  public function getProductionUsers()
+	{
+
+    $this->load->model('Production_model');
+
+		$records = $this->Production_model->getProductionUsers($_REQUEST,'records');
+		$totalFilteredRecords = $this->Production_model->getProductionUsers($_REQUEST,'filter');
+		$recordsTotal = $this->Production_model->getProductionUsers($_REQUEST,'recordsTotal');
+
+		$data = array();
+		$SNo = 0;
+		$Style = "";
+
+		foreach ($records as $key => $v)
+		{
+
+      $ID = $v->id;
+
+			$SNo++;
+
+			$nestedData = array();
+
+			$nestedData[] = $SNo;
+
+      //check image is exist in folder or not
+      if (@getimagesize(base_url('uploads/production/'.$v->img)) && !empty($v->img))
+      {
+          $img_url = base_url('uploads/production/'.$v->img);
+      }
+      else
+      {
+          $img_url = base_url('assets/images/avatars/01.png');
+      }
+
+      $name = '<img src="'. $img_url .'" class="table-img-design" alt="">'.
+        '<span class="table-img-txt-design">'.$v->name.'</span>';
+
+			$nestedData[] = $name;
+			$nestedData[] = $v->username;
+			$nestedData[] = $v->email;
+      $nestedData[] = $v->contact_no;
+      $nestedData[] = $v->fin_no;
+
+        if($v->status != 0)
+        {
+
+          $change_status_url = site_url('update_production_status/active/'.$ID);
+
+          $status = '<a href="javascript:void(0)" class="changeUser_status_ action-icons" data-type-status="active" data-msg="Production User" data-url="'. $change_status_url .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Active">
+                   <span class="badge rounded-pill bg-secondary">Deactivated</span>
+             </a>';
+
+        }
+        else
+        {
+
+          $change_status_url = site_url('update_production_status/deactivated/'.$ID);
+
+          $status = '<a href="javascript:void(0)" class="changeUser_status_ action-icons" data-type-status="deactivate" data-msg="Production User" data-url="'. $change_status_url .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Deactivate">
+                 <span class="badge rounded-pill bg-success">Active</span>
+           </a>';
+
+        }
+
+        $nestedData[] = $status;
+
+        $delete_url = site_url('delete_production/'.$ID);
+
+  			$actions = '';
+
+          $actions .= '<span class="actions-icons">';
+
+    				$actions .= '<a href="'.site_url('edit_production/'.$ID) .'" class="action-icons" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit">
+              <i class="fa fa-pencil"></i>
+            </a>';
+
+  					$actions .= '<a href="javascript:void(0)" class="action-icons delete_record_" data-msg="Are you sure you want to delete this Production User?" data-url="'. $delete_url .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete">
+              <i class="fa-solid fa-trash"></i>
+            </a>';
+
+    				$actions .= '<a href="javascript:void(0)" class="action-icons view_details_" data-url="'. site_url('AjaxController/getUserDetailsByType/Production/'.$ID) .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Details">
+              <i class="fa fa-eye"></i>
+            </a>';
+
+          $actions .= '</span>';
+
+			     $nestedData[] = $actions;
+
+           $data[] = $nestedData;
+
+		}
+
+		$json_data = array(
+			"draw" => intval($_REQUEST['draw']), // for every request/draw by clientside , they send a number as a parameter, when they recieve a response/data they first check the draw number, so we are sending same number in draw.
+			"recordsTotal" => intval($recordsTotal), // total number of records
+			"recordsFiltered" => intval($totalFilteredRecords), // total number of records after searching, if there is no searching then totalFiltered = totalData
+			"data" => $data // total data array
+		);
+
+
+		echo json_encode($json_data);
 
 	}
 
@@ -56,7 +163,118 @@ class Production extends MY_Controller
 
   }
 
-  public function edit($id)
+  public function save_production()
+  {
+
+      $this->form_validation->set_rules('name', 'Name', 'required');
+      $this->form_validation->set_rules('email', 'Email', 'required');
+      $this->form_validation->set_rules('username', 'Username', 'required');
+      $this->form_validation->set_rules('password', 'Password', 'required');
+      $this->form_validation->set_rules('contact_no', 'Contact #', 'required');
+      $this->form_validation->set_rules('fin_no', 'FIN #', 'required');
+
+      if ($this->form_validation->run() == FALSE)
+      {
+
+        $error = validation_errors();
+
+        $this->session->set_flashdata('_error',$error);
+
+        redirect('add_production');
+
+      }
+      else
+      {
+
+           $p = $this->inp_post();
+
+           $ID = (isset($p['ID'])?$p['ID']:'');
+           unset($p['ID']);
+
+           $production_img = NULL;
+
+           if($ID != '')
+           {
+              $production_img = $p['old_img'];
+              unset($p['old_img']);
+           }
+
+           if(!empty($_FILES['img']['name']))
+           {
+
+             if($ID != '')
+             {
+                  if (getimagesize(base_url('uploads/production/'.$production_img)) && !empty($production_img))
+                  {
+                      $dir_path = getcwd().'/uploads/production/'.$production_img;
+
+                      unlink($dir_path);
+                  }
+             }
+
+             $production_img = $this->bm->uploadFile($_FILES['img'],'uploads/production');
+
+           }
+
+           $arr = [
+
+              'img' => $production_img,
+              'name' => $p['name'],
+              'email' => $p['email'],
+              'username' => $p['username'],
+              'password' => $this->encryption->encrypt($p['password']),
+              'contact_no' => $p['contact_no'],
+              'fin_no' => $p['fin_no'],
+              'dob' => $p['dob'],
+              'country' => $p['country'],
+              'city' => $p['city'],
+              'zip_code' => $p['zip_code'],
+              'address' => $p['address'],
+              'type' => 'production',
+              'added_by' => $this->user_id_
+
+           ];
+
+           $this->trans_('start');
+
+            if(!empty($ID))
+            {
+
+              unset($arr['type']);
+              unset($arr['added_by']);
+
+              $this->bm->update('users',$arr,'id',$ID);
+
+            }
+            else
+            {
+
+                $this->bm->insert_row('users',$arr);
+
+            }
+
+           $this->trans_('complete');
+
+           if ($this->trans_('status') === FALSE)
+           {
+
+               $this->session->set_flashdata('_error','Connection error Try Again');
+
+           }
+           else
+           {
+
+               $this->session->set_flashdata('_success','Production User created successfully');
+
+           }
+
+           redirect('productions');
+
+      }
+
+  }
+
+  public function edit($production_id)
   {
 
     $data = [
@@ -65,6 +283,7 @@ class Production extends MY_Controller
       'page_head' => 'Edit Production User',
       'active_menu' => 'users',
       'active_submenu' => 'productions',
+      'production' => $this->bm->getRow('users','id',$production_id),
       'scripts' => [
         'img_trigger.js'
       ]
@@ -74,5 +293,62 @@ class Production extends MY_Controller
     $this->template('users/production/edit',$data);
 
   }
+
+  public function update_status($status,$production_id)
+  {
+
+      $arr = [
+
+        'status' => $status == 'active'?0:1
+
+      ];
+
+      $res = $this->bm->update('users',$arr,'id',$production_id);
+
+      if ($res)
+      {
+
+        $this->session->set_flashdata('_success','Production User '.$status.' successfully');
+
+      }
+      else
+      {
+
+        $this->session->set_flashdata('_error','Connection error Try Again');
+
+      }
+
+      redirect('productions');
+
+  }
+
+  public function delete($production_id)
+  {
+
+      $arr = [
+
+        'is_deleted' => 1
+
+      ];
+
+      $res = $this->bm->update('users',$arr,'id',$production_id);
+
+      if ($res)
+      {
+
+        $this->session->set_flashdata('_success','Production User deleted successfully');
+
+      }
+      else
+      {
+
+        $this->session->set_flashdata('_error','Connection error Try Again');
+
+      }
+
+      redirect('productions');
+
+  }
+
 
 }

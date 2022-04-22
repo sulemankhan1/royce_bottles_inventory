@@ -36,7 +36,7 @@
                           <th>FIN #</th>
                           <th>Car Plate </th>
                           <th>Status</th>
-                          <th>Actions</th>
+                          <th class="dnr">Actions</th>
                        </tr>
                     </thead>
                     <tbody></tbody>

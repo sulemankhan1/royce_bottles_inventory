@@ -64,7 +64,7 @@ class Admin extends MY_Controller
 			$nestedData[] = $SNo;
 
       //check image is exist in folder or not
-      if (getimagesize(base_url('uploads/admin/'.$v->img)) && !empty($v->img))
+      if (@getimagesize(base_url('uploads/admin/'.$v->img)) && !empty($v->img))
       {
           $img_url = base_url('uploads/admin/'.$v->img);
       }

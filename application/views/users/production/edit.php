@@ -18,7 +18,7 @@
                </div>
             </div>
             <div class="card-body">
-              <form class="row g-3 needs-validation" novalidate>
+                <form class="row g-3 needs-validation" novalidate action="<?= site_url('save_production') ?>" method="post" enctype="multipart/form-data">
                 <div class="row mt-4">
 
                     <div class="col-sm-2">
@@ -26,7 +26,17 @@
 
                       <?php
 
-                        echo getImgField();
+                        //check image is exist in folder or not
+                        if (@getimagesize(base_url('uploads/production/'.$production->img)) && !empty($production->img))
+                        {
+                            echo getImgField([
+                              'img_url' => base_url('uploads/production/'.$production->img)
+                            ]);
+                        }
+                        else
+                        {
+                            echo getImgField();
+                        }
 
                        ?>
 
@@ -37,55 +47,74 @@
 
                         <?php
 
+                            echo getHiddenField('ID',$production->id);
+                            echo getHiddenField('old_img',$production->img);
+
                             echo getInputField([
                               'label' => 'Name',
-                              'name' => 'name'
+                              'name' => 'name',
+                              'value' => $production->name
                             ]);
                             echo getInputField([
                               'label' => 'Email',
                               'name' => 'email',
-                              'type' => 'email'
+                              'type' => 'email',
+                              'value' => $production->email
                             ]);
                             echo getInputField([
                               'label' => 'Username',
-                              'name' => 'username'
+                              'name' => 'username',
+                              'value' => $production->username
                             ]);
                             echo getInputField([
                               'label' => 'Password',
                               'name' => 'password',
-                              'type' => 'password'
+                              'type' => 'password',
+                              'value' => $this->encryption->decrypt($production->password)
                             ]);
                             echo getInputField([
                               'label' => 'Contact #',
                               'name' => 'contact_no',
-                              'type' => 'number'
+                              'type' => 'number',
+                              'value' => $production->contact_no
                             ]);
                             echo getInputField([
                               'label' => 'FIN #',
                               'name' => 'fin_no',
-                              'type' => 'number'
+                              'type' => 'number',
+                              'value' => $production->fin_no
                             ]);
                             echo getInputField([
                               'label' => 'Date Of Birth',
                               'name' => 'dob',
-                              'type' => 'date'
+                              'type' => 'date',
+                              'required' => false,
+                              'value' => $production->dob
                             ]);
                             echo getInputField([
                               'label' => 'Country',
-                              'name' => 'country'
+                              'name' => 'country',
+                              'required' => false,
+                              'value' => $production->country
                             ]);
                             echo getInputField([
                               'label' => 'City',
-                              'name' => 'city'
+                              'name' => 'city',
+                              'required' => false,
+                              'value' => $production->city
                             ]);
                             echo getInputField([
                               'label' => 'Zip Code',
-                              'name' => 'zip_code'
+                              'name' => 'zip_code',
+                              'required' => false,
+                              'value' => $production->zip_code == 0?'':$production->zip_code
                             ]);
 
                             echo getTextareaField([
                               'label' => 'Residential Address',
-                              'name' => 'address'
+                              'name' => 'address',
+                              'required' => false,
+                              'value' => $production->address
                             ]);
 
                             echo getSubmitBtn('Update Production User');

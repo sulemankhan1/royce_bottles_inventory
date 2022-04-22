@@ -17,7 +17,9 @@
 
                  <h4 class="card-title"><?= $page_head ?></h4>
                </div>
-
+               <?=
+               getHiddenField('ajax_url',$ajax_url);
+               ?>
                <a href="<?= site_url('add_other_user') ?>" class="btn btn-sm btn-primary">Add Other User</a>
 
             </div>
@@ -32,161 +34,9 @@
                            <th>Email</th>
                            <th>Contact #</th>
                            <th>Status</th>
-                           <th>Actions</th>
+                           <th class="dnr">Actions</th>
                         </tr>
                      </thead>
-                     <tbody>
-                       <tr>
-                          <td>1</td>
-                          <td>
-                            <img src="<?= base_url('assets/images/avatars/01.png') ?>" class="table-img-design" alt="">
-                            <span class="table-img-txt-design">
-                              Name
-                            </span>
-                          </td>
-                          <td>Username</td>
-                          <td>Email</td>
-                          <td>1111</td>
-                          <td>
-                            <a href="javascript:void(0)" class="changeUser_status_ action-icons" data-type-msg="Other User" data-type-status="deactivate" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Deactivate">
-                                  <span class="badge rounded-pill bg-success">Active</span>
-                            </a>
-                          </td>
-                          <td>
-                            <span class="actions-icons">
-                              <a href="<?= site_url('edit_other_user/1')?>" class="action-icons" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit">
-                                <i class="fa fa-pencil"></i>
-                              </a>
-                              <a href="javascript:void(0)" class="action-icons delete_record_" data-type-msg="Other User" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete">
-                                <i class="fa-solid fa-trash"></i>
-                              </a>
-                              <a href="javascript:void(0)" class="action-icons view_details_" data-url="<?= site_url('AjaxController/getViewDetailsByType/Other_user/1') ?>" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Details">
-                                <i class="fa fa-eye"></i>
-                              </a>
-                            </span>
-                          </td>
-                       </tr>
-                       <tr>
-                          <td>1</td>
-                          <td>
-                            <img src="<?= base_url('assets/images/avatars/01.png') ?>" class="table-img-design" alt="">
-                            <span class="table-img-txt-design">
-                              Name
-                            </span>
-                          </td>
-                          <td>Username</td>
-                          <td>Email</td>
-                          <td>1111</td>
-                          <td>
-                            <a href="javascript:void(0)" class="changeUser_status_ action-icons" data-type-msg="Other User" data-type-status="deactivate" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Deactivate">
-                                  <span class="badge rounded-pill bg-success">Active</span>
-                            </a>
-                          </td>
-                          <td>
-                            <span class="actions-icons">
-                              <a href="<?= site_url('edit_other_user/1')?>" class="action-icons" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit">
-                                <i class="fa fa-pencil"></i>
-                              </a>
-                              <a href="javascript:void(0)" class="action-icons delete_record_" data-type-msg="Other User" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete">
-                                <i class="fa-solid fa-trash"></i>
-                              </a>
-                              <a href="javascript:void(0)" class="action-icons view_details_" data-url="<?= site_url('AjaxController/getViewDetailsByType/Other_user/1') ?>" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Details">
-                                <i class="fa fa-eye"></i>
-                              </a>
-                            </span>
-                          </td>
-                       </tr>
-                       <tr>
-                          <td>1</td>
-                          <td>
-                            <img src="<?= base_url('assets/images/avatars/01.png') ?>" class="table-img-design" alt="">
-                            <span class="table-img-txt-design">
-                              Name
-                            </span>
-                          </td>
-                          <td>Username</td>
-                          <td>Email</td>
-                          <td>1111</td>
-                          <td>
-                            <a href="javascript:void(0)" class="changeUser_status_ action-icons" data-type-msg="Other User" data-type-status="active" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Active">
-                                  <span class="badge rounded-pill bg-secondary">Deactivated</span>
-                            </a>
-                          </td>
-                          <td>
-                            <span class="actions-icons">
-                              <a href="<?= site_url('edit_other_user/1')?>" class="action-icons" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit">
-                                <i class="fa fa-pencil"></i>
-                              </a>
-                              <a href="javascript:void(0)" class="action-icons delete_record_" data-type-msg="Other User" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete">
-                                <i class="fa-solid fa-trash"></i>
-                              </a>
-                              <a href="javascript:void(0)" class="action-icons view_details_" data-url="<?= site_url('AjaxController/getViewDetailsByType/Other_user/1') ?>" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Details">
-                                <i class="fa fa-eye"></i>
-                              </a>
-                            </span>
-                          </td>
-                       </tr>
-                       <tr>
-                          <td>1</td>
-                          <td>
-                            <img src="<?= base_url('assets/images/avatars/01.png') ?>" class="table-img-design" alt="">
-                            <span class="table-img-txt-design">
-                              Name
-                            </span>
-                          </td>
-                          <td>Username</td>
-                          <td>Email</td>
-                          <td>1111</td>
-                          <td>
-                            <a href="javascript:void(0)" class="changeUser_status_ action-icons" data-type-msg="Other User" data-type-status="deactivate" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Deactivate">
-                                  <span class="badge rounded-pill bg-success">Active</span>
-                            </a>
-                          </td>
-                          <td>
-                            <span class="actions-icons">
-                              <a href="<?= site_url('edit_other_user/1')?>" class="action-icons" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit">
-                                <i class="fa fa-pencil"></i>
-                              </a>
-                              <a href="javascript:void(0)" class="action-icons delete_record_" data-type-msg="Other User" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete">
-                                <i class="fa-solid fa-trash"></i>
-                              </a>
-                              <a href="javascript:void(0)" class="action-icons view_details_" data-url="<?= site_url('AjaxController/getViewDetailsByType/Other_user/1') ?>" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Details">
-                                <i class="fa fa-eye"></i>
-                              </a>
-                            </span>
-                          </td>
-                       </tr>
-                       <tr>
-                          <td>1</td>
-                          <td>
-                            <img src="<?= base_url('assets/images/avatars/01.png') ?>" class="table-img-design" alt="">
-                            <span class="table-img-txt-design">
-                              Name
-                            </span>
-                          </td>
-                          <td>Username</td>
-                          <td>Email</td>
-                          <td>1111</td>
-                          <td>
-                            <a href="javascript:void(0)" class="changeUser_status_ action-icons" data-type-msg="Other User" data-type-status="deactivate" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Deactivate">
-                                  <span class="badge rounded-pill bg-success">Active</span>
-                            </a>
-                          </td>
-                          <td>
-                            <span class="actions-icons">
-                              <a href="<?= site_url('edit_other_user/1')?>" class="action-icons" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit">
-                                <i class="fa fa-pencil"></i>
-                              </a>
-                              <a href="javascript:void(0)" class="action-icons delete_record_" data-type-msg="Other User" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete">
-                                <i class="fa-solid fa-trash"></i>
-                              </a>
-                              <a href="javascript:void(0)" class="action-icons view_details_" data-url="<?= site_url('AjaxController/getViewDetailsByType/Other_user/1') ?>" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Details">
-                                <i class="fa fa-eye"></i>
-                              </a>
-                            </span>
-                          </td>
-                       </tr>
-                     </tbody>
                   </table>
                </div>
             </div>
