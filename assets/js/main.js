@@ -1,23 +1,20 @@
 //delete record
-$('.delete_record_').click(function () {
-  
-  let type = $(this).attr('data-type-msg')
+$(document).on('click','.delete_record_',function () {
 
-  let msg = 'Are you sure you want to delete this '+type+'?'
-
-  // let btn_txt = 'Delete '+type
-  let btn_txt = 'Delete'
+  let msg = $(this).attr('data-msg')
+  let url = $(this).attr('data-url')
 
   $('#delete-msg').text(msg)
 
-  $('#delete-action-btn-txt').text(btn_txt)
+  $('#delete-action-btn-txt').text('Delete')
+  $('#delete-action-btn-txt').prop('href',url)
 
   $('#deleteRecordModal').modal('show')
 
 })
 
 //view details
-$('.view_details_').click(function () {
+$(document).on('click','.view_details_',function () {
 
   let url = $(this).attr('data-url')
 

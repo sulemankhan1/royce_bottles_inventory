@@ -81,10 +81,11 @@ class Admin extends MY_Controller
 			$nestedData[] = $v->email;
 			$nestedData[] = $v->contact_no;
 
-        $change_status_url = site_url('update_user_status/'.$ID);
 
         if($v->status != 0)
         {
+
+          $change_status_url = site_url('update_admin_status/active/'.$ID);
 
           $status = '<a href="javascript:void(0)" class="changeUser_status_ action-icons" data-type-status="active" data-msg="Admin" data-url="'. $change_status_url .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Active">
                    <span class="badge rounded-pill bg-secondary">Deactivated</span>
@@ -93,6 +94,8 @@ class Admin extends MY_Controller
         }
         else
         {
+
+          $change_status_url = site_url('update_admin_status/deactivated/'.$ID);
 
           $status = '<a href="javascript:void(0)" class="changeUser_status_ action-icons" data-type-status="deactivate" data-msg="Admin" data-url="'. $change_status_url .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Deactivate">
                  <span class="badge rounded-pill bg-success">Active</span>
@@ -112,7 +115,7 @@ class Admin extends MY_Controller
               <i class="fa fa-pencil"></i>
             </a>';
 
-  					$actions .= '<a href="javascript:void(0)" class="action-icons delete_record_" data-msg="Admin" data-url="'. $delete_url .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete">
+  					$actions .= '<a href="javascript:void(0)" class="action-icons delete_record_" data-msg="Are you sure you want to delete this Admin?" data-url="'. $delete_url .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete">
               <i class="fa-solid fa-trash"></i>
             </a>';
 
@@ -188,8 +191,24 @@ class Admin extends MY_Controller
 
            $admin_img = NULL;
 
-           if(!empty($_FILES['img']))
+           if($ID != '')
            {
+              $admin_img = $p['old_img'];
+              unset($p['old_img']);
+           }
+
+           if(!empty($_FILES['img']['name']))
+           {
+
+             if($ID != '')
+             {
+                  if (getimagesize(base_url('uploads/admin/'.$admin_img)) && !empty($admin_img))
+                  {
+                      $dir_path = getcwd().'/uploads/admin/'.$admin_img;
+
+                      unlink($dir_path);
+                  }
+             }
 
              $admin_img = $this->bm->uploadFile($_FILES['img'],'uploads/admin');
 
@@ -252,7 +271,7 @@ class Admin extends MY_Controller
 
   }
 
-  public function edit($id)
+  public function edit($admin_id)
   {
 
     $data = [
@@ -261,6 +280,7 @@ class Admin extends MY_Controller
       'page_head' => 'Edit Admin',
       'active_menu' => 'users',
       'active_submenu' => 'admins',
+      'admin' => $this->bm->getRow('users','id',$admin_id),
       'scripts' => [
         'img_trigger.js'
       ]
@@ -268,6 +288,62 @@ class Admin extends MY_Controller
     ];
 
     $this->template('users/admin/edit',$data);
+
+  }
+
+  public function update_status($status,$admin_id)
+  {
+
+      $arr = [
+
+        'status' => $status == 'active'?0:1
+
+      ];
+
+      $res = $this->bm->update('users',$arr,'id',$admin_id);
+
+      if ($res)
+      {
+
+        $this->session->set_flashdata('_success','Admin '.$status.' successfully');
+
+      }
+      else
+      {
+
+        $this->session->set_flashdata('_error','Connection error Try Again');
+
+      }
+
+      redirect('admins');
+
+  }
+
+  public function delete($admin_id)
+  {
+
+      $arr = [
+
+        'is_deleted' => 1
+
+      ];
+
+      $res = $this->bm->update('users',$arr,'id',$admin_id);
+
+      if ($res)
+      {
+
+        $this->session->set_flashdata('_success','Admin deleted successfully');
+
+      }
+      else
+      {
+
+        $this->session->set_flashdata('_error','Connection error Try Again');
+
+      }
+
+      redirect('admins');
 
   }
 

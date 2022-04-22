@@ -34,7 +34,7 @@
                           <th>Email</th>
                           <th>Contact #</th>
                           <th>Status</th>
-                          <th>Actions</th>
+                          <th class="dnr">Actions</th>
                        </tr>
                     </thead>
                     <tbody></tbody>

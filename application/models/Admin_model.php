@@ -8,15 +8,16 @@ class Admin_model extends CI_Model
 
   public function getAdmins($requestData,$type)
   {
-
       // storing request (ie, get/post) global array to a variable
       $columns = [
           // datatable column index => database column name
-          0 => 'name',
-          1 => 'username',
-          2 => 'email',
-          3 => 'contact_no',
-          4 => 'status'
+          0 => NULL,
+          1 => 'name',
+          2 => 'username',
+          3 => 'email',
+          4 => 'contact_no',
+          5 => 'status',
+          6 => NULL
 
       ];
 

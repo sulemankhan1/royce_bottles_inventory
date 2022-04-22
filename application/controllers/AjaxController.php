@@ -12,33 +12,34 @@ class AjaxController extends MY_Controller
 
   }
 
-  public function getViewDetailsByType($type,$id)
+  public function getUserDetailsByType($type,$user_id)
 	{
 
     $data = [
 
-      'type' => $type
+      'type' => $type,
+      'user' => $this->bm->getRow('users','id',$user_id)
 
     ];
-
-    if($type === 'Product')
-    {
-
-      $output['html'] = $this->load_view('product/view_details',$data,true);
-
-    }
-    else if($type === 'Customer')
-    {
-
-      $output['html'] = $this->load_view('customer/view_details',$data,true);
-
-    }
-    else
-    {
+    //
+    // if($type === 'Product')
+    // {
+    //
+    //   $output['html'] = $this->load_view('product/view_details',$data,true);
+    //
+    // }
+    // else if($type === 'Customer')
+    // {
+    //
+    //   $output['html'] = $this->load_view('customer/view_details',$data,true);
+    //
+    // }
+    // else
+    // {
 
       $output['html'] = $this->load_view('users/modals/view_details',$data,true);
 
-    }
+    // }
 
 
     echo json_encode($output);
@@ -214,7 +215,7 @@ class AjaxController extends MY_Controller
 
     $driver = $this->bm->getRow('driver_request','driver_id',$driver_id);
     $driver_request_products = $this->bm->getRows('driver_request_details','driver_request_id',$driver->id);
-    
+
     $pro_arr = [
 
       ['id' => 1,'name' => 'Driver1'],

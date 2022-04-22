@@ -10,7 +10,10 @@ $('#myDataTable').DataTable({
             className: 'btn btn-sm btn-primary',
             init: function(api, node, config) {
                $(node).removeClass('dt-button')
-            }
+            },
+            exportOptions: {
+                   columns: ":not('.dnr')",
+               }
           },
           {
             text: 'Pdf',
@@ -18,7 +21,10 @@ $('#myDataTable').DataTable({
             className: 'btn btn-sm btn-primary',
             init: function(api, node, config) {
                $(node).removeClass('dt-button')
-            }
+            },
+            exportOptions: {
+                   columns: ":not('.dnr')",
+               }
           }
         ],
       language: {
@@ -27,13 +33,10 @@ $('#myDataTable').DataTable({
           'next': '»'
         }
       },
-      'aoColumnDefs': [{
-        'bSortable': false,
-        'aTargets': [-1]
-      }],
-      'order': [
-        [0, "desc"]
+      "columnDefs": [
+        { "orderable": false, "targets": [0,-1] }
       ],
+      "aaSorting": [],
       "processing": true,
       "serverSide": true,
       "ajax": {

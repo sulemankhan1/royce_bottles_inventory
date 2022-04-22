@@ -1,7 +1,17 @@
 <div class="row mt-5">
   <?php if ($type != 'Rights'): ?>
     <div class="col-sm-12 text-center">
-        <img src="<?= base_url('assets/images/avatars/01.png') ?>" class="img-thumbnail user-form-img" alt="...">
+      <?php
+        //check image is exist in folder or not
+        if (getimagesize(base_url('uploads/admin/'.$user->img)) && !empty($user->img))
+        {
+            echo '<img src="'. base_url('uploads/admin/'.$user->img) .'" class="img-thumbnail user-form-img" alt="...">';
+        }
+        else
+        {
+            echo '<img src="'. base_url('assets/images/avatars/01.png') .'" class="img-thumbnail user-form-img" alt="...">';
+        }
+       ?>
     </div>
     <div class="col-sm-12">
 
@@ -14,11 +24,17 @@
           if($type == 'Admin')
           {
 
-            echo viewDetailsCol('Name','Demo');
-            echo viewDetailsCol('Email','Demo@gmail.com');
-            echo viewDetailsCol('Username','Demo123');
-            echo viewDetailsCol('Contact #','11111');
-            echo viewDetailsCol('Status','<span class="badge rounded-pill bg-success">Active</span>');
+            echo viewDetailsCol('Name',$user->name);
+            echo viewDetailsCol('Email',$user->email);
+            echo viewDetailsCol('Username',$user->username);
+            echo viewDetailsCol('Contact #',$user->contact_no);
+
+            $badge_clr = $user->status == 1?'bg-secondary':'bg-success';
+            $status = $user->status == 1?'Deactivated':'Active';
+
+            $status_row = '<span class="badge rounded-pill '. $badge_clr .'">'. $status .'</span>';
+
+            echo viewDetailsCol('Status',$status_row);
 
           }
           else if($type == 'Driver' || $type == 'Other_user' || $type == 'Production')
@@ -48,11 +64,11 @@
           if($type == 'Admin' || $type == 'Driver' || $type == 'Other_user' || $type == 'Production')
           {
 
-            echo viewDetailsCol('Date Of Birth','15-12-2001');
-            echo viewDetailsCol('Country','country');
-            echo viewDetailsCol('City','city');
-            echo viewDetailsCol('Zip code','111233');
-            echo viewDetailsCol('Residential Address','address',12);
+            echo viewDetailsCol('Date Of Birth',$user->dob == '0000-00-00'?'':$user->dob);
+            echo viewDetailsCol('Country',$user->country);
+            echo viewDetailsCol('City',$user->city);
+            echo viewDetailsCol('Zip code',$user->zip_code == 0?'':$user->zip_code);
+            echo viewDetailsCol('Residential Address',$user->address,12);
 
           }
 

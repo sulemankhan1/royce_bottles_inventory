@@ -19,6 +19,8 @@ $route['admins'] = 'Admin';
 $route['add_admin'] = 'Admin/create';
 $route['save_admin'] = 'Admin/save_admin';
 $route['edit_admin/(:num)'] = 'Admin/edit/$1';
+$route['update_admin_status/(:any)/(:num)'] = 'Admin/update_status/$1/$2';
+$route['delete_admin/(:num)'] = 'Admin/delete/$1';
 
 //driver
 $route['drivers'] = 'Driver';
