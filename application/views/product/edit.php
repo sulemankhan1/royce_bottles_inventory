@@ -17,7 +17,8 @@
                </div>
             </div>
             <div class="card-body">
-              <form class="row g-3 needs-validation" novalidate>
+              <?= getHiddenField('getCategoryPrice',base_url('AjaxController/getCategoryPrice')); ?>
+              <form class="row g-3 needs-validation" novalidate action="<?= site_url('save_product') ?>" method="post" enctype="multipart/form-data">
                 <div class="row mt-4">
 
                     <div class="col-sm-2">
@@ -25,7 +26,17 @@
 
                         <?php
 
-                          echo getImgField();
+                          //check image is exist in folder or not
+                          if (@getimagesize(base_url('uploads/product/'.$product->img)) && !empty($product->img))
+                          {
+                              echo getImgField([
+                                'img_url' => base_url('uploads/product/'.$product->img)
+                              ]);
+                          }
+                          else
+                          {
+                              echo getImgField();
+                          }
 
                          ?>
 
@@ -36,37 +47,48 @@
 
                         <?php
 
+                        echo getHiddenField('ID',$product->id);
+                        echo getHiddenField('old_img',$product->img);
+
                         echo getInputField([
                           'label' => 'Product Name',
                           'name' => 'name',
-                          'column' => 'sm-12'
+                          'column' => 'sm-12',
+                          'value' => $product->name
                         ]);
                         echo getInputField([
                           'label' => 'Product Code',
                           'name' => 'product_code',
-                          'column' => 'sm-12'
+                          'column' => 'sm-12',
+                          'value' => $product->code
                         ]);
                         echo getInputField([
                           'label' => 'SKU',
                           'name' => 'sku',
-                          'column' => 'sm-12'
+                          'column' => 'sm-12',
+                          'value' => $product->sku
                         ]);
                         echo getSelectField([
                           'label' => 'Product Category',
                           'name' => 'cat_id',
-                          'column' => 'sm-12'
+                          'column' => 'sm-12',
+                          'data' => $categories,
+                          'selected' => $product->cat_id
                         ]);
                         echo getInputField([
                           'label' => 'Price',
                           'name' => 'price',
                           'type' => 'number',
                           'column' => 'sm-12',
-                          'attr' => 'readonly'
+                          'attr' => 'readonly',
+                          'value' => $product->price
                         ]);
                         echo getTextareaField([
                           'label' => 'Description',
                           'name' => 'description',
-                          'column' => 'sm-12'
+                          'column' => 'sm-12',
+                          'required' => false,
+                          'value' => $product->description
                         ]);
 
                             echo getSubmitBtn('Update Product');

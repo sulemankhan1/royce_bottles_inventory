@@ -56,10 +56,14 @@ class Basic_model extends CI_Model
   }
 
   // get single row with single condition
-  public function getRow($table,$column,$id)
+  public function getRow($table,$column = '',$id = '')
   {
 
-      $this->db->where($column,$id);
+      if ($column != '' && $id != '') {
+
+        $this->db->where($column,$id);
+
+      }
 
       return $this->db->get($table)->row();
 
@@ -76,10 +80,14 @@ class Basic_model extends CI_Model
   }
 
   // get rows with single condition
-  public function getRows($table,$column,$id,$order_column = '',$order = '')
+  public function getRows($table,$column = '',$id = '',$order_column = '',$order = '')
   {
 
-      $this->db->where($column,$id);
+      if ($column != '' && $id != '') {
+
+        $this->db->where($column,$id);
+
+      }
 
       if (!empty($order_column))
       {

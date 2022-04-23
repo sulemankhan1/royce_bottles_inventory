@@ -21,30 +21,43 @@ class AjaxController extends MY_Controller
       'user' => $this->bm->getRow('users','id',$user_id)
 
     ];
-    //
-    // if($type === 'Product')
-    // {
-    //
-    //   $output['html'] = $this->load_view('product/view_details',$data,true);
-    //
-    // }
-    // else if($type === 'Customer')
-    // {
-    //
+
     //   $output['html'] = $this->load_view('customer/view_details',$data,true);
-    //
-    // }
-    // else
-    // {
 
       $output['html'] = $this->load_view('users/modals/view_details',$data,true);
-
-    // }
 
 
     echo json_encode($output);
 
 	}
+
+  public function getCategoryPrice($cat_id)
+  {
+
+      $output = $this->bm->getRow('categories','id',$cat_id);
+
+      echo json_encode($output);
+
+  }
+
+  public function getProductDetails($product_id)
+  {
+
+      $product_row = $this->bm->getRow('products','id',$product_id);
+
+      $data = [
+
+        'type' => 'Product',
+        'product' => $product_row,
+        'category' => $this->bm->getRow('categories','id',$product_row->cat_id)
+
+      ];
+
+      $output['html'] = $this->load_view('product/view_details',$data,true);
+
+      echo json_encode($output);
+
+  }
 
   public function getReturnStockProductsByDriverId($driver_id)
   {

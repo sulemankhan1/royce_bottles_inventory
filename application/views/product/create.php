@@ -17,7 +17,8 @@
                </div>
             </div>
             <div class="card-body">
-              <form class="row g-3 needs-validation" novalidate>
+              <?= getHiddenField('getCategoryPrice',base_url('AjaxController/getCategoryPrice')); ?>
+              <form class="row g-3 needs-validation" novalidate action="<?= site_url('save_product') ?>" method="post" enctype="multipart/form-data">
                 <div class="row mt-4">
 
                     <div class="col-sm-2">
@@ -35,6 +36,8 @@
                       <div class="row">
 
                         <?php
+
+                        echo getHiddenField('price',base_url('AjaxController/getCategoryPrice'));
 
                         echo getInputField([
                           'label' => 'Product Name',
@@ -54,7 +57,8 @@
                         echo getSelectField([
                           'label' => 'Product Category',
                           'name' => 'cat_id',
-                          'column' => 'sm-12'
+                          'column' => 'sm-12',
+                          'data' => $categories
                         ]);
                         echo getInputField([
                           'label' => 'Price',
@@ -66,7 +70,8 @@
                         echo getTextareaField([
                           'label' => 'Description',
                           'name' => 'description',
-                          'column' => 'sm-12'
+                          'column' => 'sm-12',
+                          'required' => false
                         ]);
 
                             echo getSubmitBtn('Add Product');

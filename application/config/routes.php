@@ -63,7 +63,9 @@ $route['delete_category/(:num)'] = 'Category/delete/$1';
 //products
 $route['products'] = 'Product';
 $route['add_product'] = 'Product/create';
+$route['save_product'] = 'Product/save_product';
 $route['edit_product/(:num)'] = 'Product/edit/$1';
+$route['delete_product/(:num)'] = 'Product/delete/$1';
 
 
 //customers

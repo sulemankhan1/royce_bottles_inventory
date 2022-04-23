@@ -16,7 +16,9 @@
 
                  <h4 class="card-title"><?= $page_head ?></h4>
                </div>
-
+               <?=
+               getHiddenField('ajax_url',$ajax_url);
+               ?>
                <a href="<?= site_url('add_product') ?>" class="btn btn-sm btn-primary">Add Product</a>
 
             </div>
@@ -30,7 +32,8 @@
                            <th style="width:60%!important">Product Category</th>
                            <th>Product Code</th>
                            <th>SKU</th>
-                           <th>Actions</th>
+                           <th>Price</th>
+                           <th class="dnr">Actions</th>
                         </tr>
                      </thead>
                      <tbody>
