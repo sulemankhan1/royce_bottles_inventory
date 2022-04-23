@@ -17,7 +17,7 @@
                </div>
             </div>
             <div class="card-body">
-              <form class="row g-3 needs-validation" novalidate>
+              <form class="row g-3 needs-validation" novalidate action="<?= site_url('save_salesperson') ?>" method="post">
                 <div class="row mt-4">
 
                     <div class="col-sm-12">
@@ -41,8 +41,9 @@
                             ]);
 
                             echo getTextareaField([
-                              'label' => 'Shop Address',
-                              'name' => 'address'
+                              'label' => 'Address',
+                              'name' => 'address',
+                              'required' => false
                             ]);
 
                             echo getSubmitBtn('Add Salesperson');

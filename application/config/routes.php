@@ -108,8 +108,6 @@ $route['view_sale'] = 'Sales/view_sale';
 //call order
 $route['call_order'] = 'Order';
 $route['add_call_order'] = 'Order/create';
-// $route['edit_sale/(:num)'] = 'Sales/edit/$1';
-// $route['view_sale'] = 'Sales/view_sale';
 
 
 // invoices
@@ -124,7 +122,9 @@ $route['edit_evidence/(:num)'] = 'Evidence/edit/$1';
 //salesperson
 $route['salesperson'] = 'Salesperson';
 $route['add_salesperson'] = 'Salesperson/create';
+$route['save_salesperson'] = 'Salesperson/save_salesperson';
 $route['edit_salesperson/(:num)'] = 'Salesperson/edit/$1';
+$route['delete_salesperson/(:num)'] = 'Salesperson/delete/$1';
 
 
 //payments

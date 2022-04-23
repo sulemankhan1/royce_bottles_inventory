@@ -17,7 +17,7 @@
                </div>
             </div>
             <div class="card-body">
-              <form class="row g-3 needs-validation" novalidate>
+            <form class="row g-3 needs-validation" novalidate action="<?= site_url('save_salesperson') ?>" method="post">
                 <div class="row mt-4">
 
                     <div class="col-sm-12">
@@ -25,24 +25,31 @@
 
                         <?php
 
+                          echo getHiddenField('ID',$salesperson->id);
+
                           echo getInputField([
                               'label' => 'Name',
-                              'name' => 'name'
+                              'name' => 'name',
+                              'value' => $salesperson->name
                             ]);
                           echo getInputField([
                               'label' => 'Contact #',
                               'name' => 'contact_no',
-                              'type' => 'number'
+                              'type' => 'number',
+                              'value' => $salesperson->contact_no
                             ]);
                           echo getInputField([
                               'label' => 'Email Address',
                               'name' => 'email',
-                              'type' => 'email'
+                              'type' => 'email',
+                              'value' => $salesperson->email
                             ]);
 
                             echo getTextareaField([
-                              'label' => 'Shop Address',
-                              'name' => 'address'
+                              'label' => 'Address',
+                              'name' => 'address',
+                              'required' => false,
+                              'value' => $salesperson->address
                             ]);
 
                             echo getSubmitBtn('Update Salesperson');
