@@ -15,19 +15,17 @@ class AjaxController extends MY_Controller
   public function getUserDetailsByType($type,$user_id)
 	{
 
-    $data = [
+      $data = [
 
-      'type' => $type,
-      'user' => $this->bm->getRow('users','id',$user_id)
+        'type' => $type,
+        'user' => $this->bm->getRow('users','id',$user_id)
 
-    ];
-
-    //   $output['html'] = $this->load_view('customer/view_details',$data,true);
+      ];
 
       $output['html'] = $this->load_view('users/modals/view_details',$data,true);
 
 
-    echo json_encode($output);
+      echo json_encode($output);
 
 	}
 
@@ -54,6 +52,46 @@ class AjaxController extends MY_Controller
       ];
 
       $output['html'] = $this->load_view('product/view_details',$data,true);
+
+      echo json_encode($output);
+
+  }
+
+  public function getCustomerDetails($customer_id)
+  {
+
+    $customer_row = $this->bm->getRow('customers','id',$customer_id);
+
+    $data = [
+
+      'type' => 'Customer',
+      'customer' => $customer_row,
+      'salesperson' => $this->bm->getRow('salesperson','id',$customer_row->salesperson_id),
+      'driver' => $this->bm->getRow('users','id',$customer_row->driver_id)
+
+    ];
+
+    $output['html'] = $this->load_view('customer/view_details',$data,true);
+
+    echo json_encode($output);
+
+  }
+
+  public function getCustomerProductPrices($customer_id)
+  {
+
+      $this->load->model('Customer_model');
+
+      $customer_products_price = $this->Customer_model->getCustomerProductPrices($customer_id);
+
+      $data = [
+
+        'customers' => $customer_products_price
+
+      ];
+
+      $output['html'] = $this->load_view('customer/customer_products_data',$data,true);
+      $output['customer_id'] = $customer_id;
 
       echo json_encode($output);
 

@@ -37,8 +37,6 @@
 
                         <?php
 
-                        echo getHiddenField('price',base_url('AjaxController/getCategoryPrice'));
-
                         echo getInputField([
                           'label' => 'Product Name',
                           'name' => 'name',

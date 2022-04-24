@@ -17,7 +17,7 @@
                </div>
             </div>
             <div class="card-body">
-              <form class="row g-3 needs-validation" novalidate>
+              <form class="row g-3 needs-validation" novalidate action="<?= site_url('save_customer') ?>" method="post" enctype="multipart/form-data">
                 <div class="row mt-4">
 
                     <div class="col-sm-2">
@@ -53,8 +53,13 @@
                               'name' => 'shop_id'
                             ]);
                           echo getInputField([
-                              'label' => 'Contact #',
-                              'name' => 'contact_no',
+                              'label' => 'Primary Contact',
+                              'name' => 'primary_contact',
+                              'type' => 'number'
+                            ]);
+                          echo getInputField([
+                              'label' => 'Secondary Contact',
+                              'name' => 'secondary_contact',
                               'type' => 'number'
                             ]);
                           echo getInputField([
@@ -70,22 +75,28 @@
 
                           echo getSelectField([
                             'label' => 'Category',
-                            'name' => 'cat_id'
+                            'name' => 'cat_type',
+                            'static' => true,
+                            'data' => $cat_types
                           ]);
 
                           echo getSelectField([
                             'label' => 'Salesperson',
-                            'name' => 'salesperson_id'
+                            'name' => 'salesperson_id',
+                            'data' => $salespersons
                           ]);
 
                           echo getSelectField([
                             'label' => 'Driver',
-                            'name' => 'driver_id'
+                            'name' => 'driver_id',
+                            'data' => $drivers
                           ]);
 
                           echo getSelectField([
                             'label' => 'Days',
-                            'name' => 'day'
+                            'name' => 'day',
+                            'static' => true,
+                            'data' => $days
                           ]);
 
                           ?>

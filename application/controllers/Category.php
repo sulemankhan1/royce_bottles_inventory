@@ -153,6 +153,19 @@ class Category extends MY_Controller
 
               $this->bm->update('categories',$arr,'id',$ID);
 
+              // update products price which are linked with that product
+              $this->bm->update('products',['price' => $p['price']],'cat_id',$ID);
+
+              // update customer products price
+              $products = $this->bm->getRowsWithConditions('products',['is_deleted' => 0,'cat_id' => $ID]);
+
+              foreach ($products as $key => $v)
+              {
+
+                  $this->bm->update('customer_products_price',['price' => $p['price']],'product_id',$v->id);
+
+              }
+
             }
             else
             {

@@ -17,7 +17,7 @@
                </div>
             </div>
             <div class="card-body">
-              <form class="row g-3 needs-validation" novalidate>
+              <form class="row g-3 needs-validation" novalidate action="<?= site_url('save_customer') ?>" method="post" enctype="multipart/form-data">
                 <div class="row mt-4">
 
                     <div class="col-sm-2">
@@ -25,7 +25,17 @@
 
                         <?php
 
-                          echo getImgField();
+                          //check image is exist in folder or not
+                          if (@getimagesize(base_url('uploads/customer/'.$customer->img)) && !empty($customer->img))
+                          {
+                              echo getImgField([
+                                'img_url' => base_url('uploads/customer/'.$customer->img)
+                              ]);
+                          }
+                          else
+                          {
+                              echo getImgField();
+                          }
 
                          ?>
 
@@ -36,56 +46,82 @@
 
                         <?php
 
+                          echo getHiddenField('ID',$customer->id);
+                          echo getHiddenField('old_img',$customer->img);
+
                           echo getInputField([
                               'label' => 'Customer Name',
-                              'name' => 'name'
+                              'name' => 'name',
+                              'value' => $customer->name
                             ]);
                           echo getInputField([
                               'label' => 'Shop Name',
-                              'name' => 'shop_name'
+                              'name' => 'shop_name',
+                              'value' => $customer->shop_name
                             ]);
                           echo getInputField([
                               'label' => 'Shop Acronym',
-                              'name' => 'shop_acronym'
+                              'name' => 'shop_acronym',
+                              'value' => $customer->shop_acronym
                             ]);
                           echo getInputField([
                               'label' => 'Shop ID',
-                              'name' => 'shop_id'
+                              'name' => 'shop_id',
+                              'value' => $customer->shop_id
                             ]);
                           echo getInputField([
-                              'label' => 'Contact #',
-                              'name' => 'contact_no',
-                              'type' => 'number'
+                              'label' => 'Primary Contact',
+                              'name' => 'primary_contact',
+                              'type' => 'number',
+                              'value' => $customer->primary_contact
+                            ]);
+                          echo getInputField([
+                              'label' => 'Secondary Contact',
+                              'name' => 'secondary_contact',
+                              'type' => 'number',
+                              'value' => $customer->secondary_contact
                             ]);
                           echo getInputField([
                               'label' => 'Email Address For E-Receipt',
                               'name' => 'email',
-                              'type' => 'email'
+                              'type' => 'email',
+                              'value' => $customer->e_receipt_email
                             ]);
                           echo getInputField([
                               'label' => 'Email Address For SOA',
                               'name' => 'soa_email',
-                              'type' => 'email'
+                              'type' => 'email',
+                              'value' => $customer->soa_email
                             ]);
 
                           echo getSelectField([
                             'label' => 'Category',
-                            'name' => 'cat_id'
+                            'name' => 'cat_type',
+                            'static' => true,
+                            'data' => $cat_types,
+                            'selected' => $customer->cat_type
                           ]);
 
                           echo getSelectField([
                             'label' => 'Salesperson',
-                            'name' => 'salesperson_id'
+                            'name' => 'salesperson_id',
+                            'data' => $salespersons,
+                            'selected' => $customer->salesperson_id
                           ]);
 
                           echo getSelectField([
                             'label' => 'Driver',
-                            'name' => 'driver_id'
+                            'name' => 'driver_id',
+                            'data' => $drivers,
+                            'selected' => $customer->driver_id
                           ]);
 
                           echo getSelectField([
                             'label' => 'Days',
-                            'name' => 'day'
+                            'name' => 'day',
+                            'static' => true,
+                            'data' => $days,
+                            'selected' => $customer->day
                           ]);
 
                           ?>
@@ -95,11 +131,13 @@
 
                           echo getTextareaField([
                             'label' => 'Shop Address',
-                            'name' => 'address'
+                            'name' => 'address',
+                            'value' => $customer->address
                           ]);
                           echo getTextareaField([
                             'label' => 'Remarks',
-                            'name' => 'remarks'
+                            'name' => 'remarks',
+                            'value' => $customer->remarks
                           ]);
 
                           echo getSubmitBtn('Update Customer');

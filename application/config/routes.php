@@ -71,7 +71,11 @@ $route['delete_product/(:num)'] = 'Product/delete/$1';
 //customers
 $route['customers'] = 'Customer';
 $route['add_customer'] = 'Customer/create';
+$route['save_customer'] = 'Customer/save_customer';
 $route['edit_customer/(:num)'] = 'Customer/edit/$1';
+$route['delete_customer/(:num)'] = 'Customer/delete/$1';
+$route['update_customer_products_price'] = 'Customer/update_products_price';
+
 
 //profile
 $route['edit_profile/(:num)'] = 'Profile/edit_profile/$1';

@@ -74,16 +74,38 @@ if ( ! function_exists('getSelectField'))
 
           foreach ($arr['data'] as $key => $v) {
 
-              if(isset($arr['selected']) && $arr['selected'] == $v->id)
+              if(isset($arr['static']) && $arr['static'] == true)
               {
 
-                $options .='<option value="'. $v->id .'" selected>'.$v->name.'</option>';
+                if(isset($arr['selected']) && $arr['selected'] == $v)
+                {
+
+                  $options .='<option value="'. $v .'" selected>'.$v.'</option>';
+
+                }
+                else
+                {
+
+                  $options .='<option value="'. $v .'">'.$v.'</option>';
+
+                }
 
               }
               else
               {
 
-                $options .='<option value="'. $v->id .'">'.$v->name.'</option>';
+                if(isset($arr['selected']) && $arr['selected'] == $v->id)
+                {
+
+                  $options .='<option value="'. $v->id .'" selected>'.$v->name.'</option>';
+
+                }
+                else
+                {
+
+                  $options .='<option value="'. $v->id .'">'.$v->name.'</option>';
+
+                }
 
               }
           }

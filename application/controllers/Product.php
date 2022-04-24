@@ -124,7 +124,7 @@ class Product extends MY_Controller
       'title' => 'Add Product',
       'page_head' => 'Add Product',
       'active_menu' => 'products',
-      'categories' => $this->bm->getRows('categories'),
+      'categories' => $this->bm->getRows('categories','is_deleted' ,0),
       'scripts' => [
         'img_trigger.js',
         'product/product.js'
@@ -214,7 +214,27 @@ class Product extends MY_Controller
             else
             {
 
-                $this->bm->insert_row('products',$arr);
+                $last_id = $this->bm->insert_row('products',$arr);
+
+                $customers = $this->bm->getRows('customers','is_deleted',0);
+                $product = $this->bm->getRow('products','id',$last_id);
+
+                $customer_products = [];
+
+                foreach ($customers as $key => $v)
+                {
+
+                  $customer_products[] = [
+
+                      'product_id' => $product->id,
+                      'customer_id' => $v->id,
+                      'price' => $product->price
+
+                  ];
+
+                }
+
+                $this->bm->insert_rows('customer_products_price',$customer_products);
 
             }
 
@@ -259,7 +279,7 @@ class Product extends MY_Controller
       'title' => 'Edit Product',
       'page_head' => 'Edit Product',
       'active_menu' => 'products',
-      'categories' => $this->bm->getRows('categories'),
+      'categories' => $this->bm->getRows('categories','is_deleted' ,0),
       'product' => $this->bm->getRow('products','id',$product_id),
       'scripts' => [
         'img_trigger.js',

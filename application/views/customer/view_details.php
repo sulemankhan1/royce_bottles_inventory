@@ -1,6 +1,20 @@
 <div class="row mt-5">
   <div class="col-sm-12 text-center">
-      <img src="<?= base_url('assets/images/avatars/01.png') ?>" class="img-thumbnail user-form-img" alt="...">
+
+      <?php
+
+        $folder = strtolower($type);
+
+        if (@getimagesize(base_url('uploads/'.$folder.'/'.$customer->img)) && !empty($customer->img))
+        {
+            echo '<img src="'. base_url('uploads/'.$folder.'/'.$customer->img) .'" class="img-thumbnail user-form-img" alt="...">';
+        }
+        else
+        {
+            echo '<img src="'. base_url('assets/images/avatars/01.png') .'" class="img-thumbnail user-form-img" alt="...">';
+        }
+
+       ?>
   </div>
   <div class="col-sm-12">
 
@@ -10,20 +24,21 @@
 
       <?php
 
-        echo viewDetailsCol('Customer Name','John');
-        echo viewDetailsCol('Shop Name','Shop1');
-        echo viewDetailsCol('Shop Acronym','text');
-        echo viewDetailsCol('Shop ID','Shop-12324');
-        echo viewDetailsCol('Contact #','1123');
-        echo viewDetailsCol('Email Address For E-Receipt','email@gmaill.com');
-        echo viewDetailsCol('Email Address For SOA','SOA@gmail.com');
-        echo viewDetailsCol('Category','<span class="badge rounded-pill bg-success">Cash</span>');
-        echo viewDetailsCol('Salesperson','salesperson1');
-        echo viewDetailsCol('Driver','driver1');
-        echo viewDetailsCol('Days','Monday');
+        echo viewDetailsCol('Customer Name',$customer->name);
+        echo viewDetailsCol('Shop Name',$customer->shop_name);
+        echo viewDetailsCol('Shop Acronym',$customer->shop_acronym);
+        echo viewDetailsCol('Shop ID',$customer->shop_id);
+        echo viewDetailsCol('Primary Contact',$customer->primary_contact);
+        echo viewDetailsCol('Secondary Contact',$customer->secondary_contact);
+        echo viewDetailsCol('Email Address For E-Receipt',$customer->e_receipt_email);
+        echo viewDetailsCol('Email Address For SOA',$customer->soa_email);
+        echo viewDetailsCol('Category',$customer->cat_type == 'Cash'?'<span class="badge rounded-pill bg-success">Cash</span>':'<span class="badge rounded-pill bg-warning">Credit</span>');
+        echo viewDetailsCol('Salesperson',$salesperson->name);
+        echo viewDetailsCol('Driver',$driver->name);
+        echo viewDetailsCol('Days',$customer->day);
 
-        echo viewDetailsCol('Shop Address','address' ,12);
-        echo viewDetailsCol('Remarks','remarks' , 12);
+        echo viewDetailsCol('Shop Address',$customer->address,12);
+        echo viewDetailsCol('Remarks',$customer->remarks, 12);
 
       ?>
 
