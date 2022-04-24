@@ -144,4 +144,5 @@ $route['db_export'] = 'DB_export';
 
 //settings
 $route['company_setting'] = 'Settings/company';
+$route['save_company_setting'] = 'Settings/save_company_setting';
 $route['email_setting'] = 'Settings/email';

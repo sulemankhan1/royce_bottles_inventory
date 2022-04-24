@@ -36,7 +36,7 @@
                                }
 
                               ?>
-                             <img src="<?= base_url('assets/images/evidence_demo.png') ?>" class="img-thumbnail user-form-img" alt="..." style="border-radius:0px!important;">
+                             <img src="<?= $img_url ?>" class="img-thumbnail user-form-img" alt="..." style="border-radius:0px!important;">
                              <input type="file" class="choose_img" name="img" accept="image/*" capture style="display:none;">
                            </div>
                            <div class="col-sm-12 mt-4" style="margin-left:5px;">
