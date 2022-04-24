@@ -115,6 +115,15 @@ class AjaxController extends MY_Controller
 
   }
 
+  public function getTemplateData($template_id)
+  {
+
+      $output['data'] = $this->bm->getRow('email_templates','id',$template_id);
+
+      echo json_encode($output);
+
+  }
+
   public function getReturnStockProductsByDriverId($driver_id)
   {
       $data = [];

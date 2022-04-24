@@ -8,20 +8,40 @@ $('#add_template_').click(function () {
 
 })
 
-$('.edit_template_').click(function () {
+$(document).on('click','.edit_template_',function () {
 
-  let head = $(this).attr('data-head')
+  let url = $(this).attr('data-url')
 
-  $('#template_action_head').text(head)
+  alert(url)
 
-  $('#AddTemplateModal').modal('show')
+  $('#template_action_head').text('Edit Template')
+
+  $.ajax({
+
+    url : url,
+    dataType : 'json',
+    success : function (response) {
+
+      let template = response.data
+
+      $('input[name=ID]').val(template.id)
+      $('input[name=title]').val(template.title)
+      $('input[name=subject]').val(template.subject)
+      $('textarea[name=template]').val(template.template)
+
+      $('#AddTemplateModal').modal('show')
+
+    }
+
+  })
+
 
 })
 
 
 //check or uncheck all customers
 $('.check_all_customers').change(function () {
-  
+
     if($(this).is(':checked'))
     {
 
@@ -34,4 +54,10 @@ $('.check_all_customers').change(function () {
       $('.customer_check').prop('checked',false)
 
     }
+})
+
+$('.template_commands_').click(function () {
+
+  let command = $(this).attr('data')
+
 })

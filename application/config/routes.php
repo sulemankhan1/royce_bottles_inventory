@@ -146,3 +146,6 @@ $route['db_export'] = 'DB_export';
 $route['company_setting'] = 'Settings/company';
 $route['save_company_setting'] = 'Settings/save_company_setting';
 $route['email_setting'] = 'Settings/email';
+$route['save_general_setting'] = 'Settings/save_general_setting';
+$route['save_email_template'] = 'Settings/save_template';
+$route['delete_template/(:num)'] = 'Settings/delete_template/$1';

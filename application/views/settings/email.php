@@ -40,13 +40,13 @@
                                 <div class="row pb-2 pt-4">
 
                                   <div class="col-sm-11">
-                                    <span class="text-dark">Invoice should be sent Automatically?</span>
+                                    <span class="text-dark">Invoice should be sent Automatically on Email?</span>
                                     <br /><br />
                                     <span class="text-muted">When checked the Invoices will be sent Automatically when a new Sale is Completed (marked as done).</span>
                                   </div>
                                   <div class="col-sm-1">
                                       <div class="form-check form-check-inline">
-                                         <input type="checkbox" class="form-check-input" id="customCheck5">
+                                         <input type="checkbox" name="" class="form-check-input" id="customCheck5">
                                       </div>
                                   </div>
 
@@ -322,9 +322,11 @@
 
                                 </div>
                                 <div class="col-sm-12">
-
+                                  <?=
+                                  getHiddenField('ajax_url',$ajax_url);
+                                  ?>
                                   <div class="table-responsive">
-                                 <table id="myDataTable" class="table">
+                                 <table id="myDataTable" class="table" style="width:100%;">
                                     <thead>
                                        <tr>
                                           <th>#</th>
@@ -334,42 +336,7 @@
                                           <th>Actions</th>
                                        </tr>
                                     </thead>
-                                    <tbody>
-                                      <tr>
-                                         <td>1</td>
-                                         <td>Title</td>
-                                         <td>Subject</td>
-                                         <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore</td>
-                                         <td>
-                                           <span class="actions-icons">
-                                             <a href="javascript:void(0)" class="action-icons edit_template_" data-head="Edit Template" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit">
-                                               <i class="fa fa-pencil"></i>
-                                             </a>
-                                             <a href="javascript:void(0)" class="action-icons delete_record_" data-type-msg="Template" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete">
-                                               <i class="fa-solid fa-trash"></i>
-                                             </a>
-                                           </span>
-                                         </td>
-                                      </tr>
-
-                                      <tr>
-                                         <td>1</td>
-                                         <td>Title</td>
-                                         <td>Subject</td>
-                                         <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore</td>
-                                         <td>
-                                           <span class="actions-icons">
-                                             <a href="javascript:void(0)" class="action-icons edit_template_" data-head="Edit Template" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit">
-                                               <i class="fa fa-pencil"></i>
-                                             </a>
-                                             <a href="javascript:void(0)" class="action-icons delete_record_" data-type-msg="Template" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete">
-                                               <i class="fa-solid fa-trash"></i>
-                                             </a>
-                                           </span>
-                                         </td>
-                                      </tr>
-
-                                    </tbody>
+                                    <tbody></tbody>
                                  </table>
                               </div>
 

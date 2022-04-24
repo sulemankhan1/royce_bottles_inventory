@@ -2,7 +2,7 @@
 <div class="modal fade" id="AddTemplateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
       <div class="modal-content">
-        <form action="<?= site_url('email_setting') ?>" method="post" class="row g-3 needs-validation" novalidate>
+        <form action="<?= site_url('save_email_template') ?>" method="post" class="row g-3 needs-validation" novalidate>
           <div class="modal-body">
 
               <div class="container">
@@ -28,13 +28,13 @@
                                         <div class="col-sm-12 p-2">
 
                                           <a href="javascript:void(0)">
-                                            <span class="badge rounded-pill bg-primary">Username</span>
+                                            <span class="badge rounded-pill bg-primary template_commands_" data="[USERNAME]">Username</span>
                                           </a>
                                           <a href="javascript:void(0)">
-                                            <span class="badge rounded-pill bg-primary">Email</span>
+                                            <span class="badge rounded-pill bg-primary template_commands_" data="[EMAIL]">Email</span>
                                           </a>
                                           <a href="javascript:void(0)">
-                                            <span class="badge rounded-pill bg-primary">Curr: Date</span>
+                                            <span class="badge rounded-pill bg-primary template_commands_" data="[CURR_DATE]">Curr: Date</span>
                                           </a>
 
                                         </div>
@@ -49,6 +49,8 @@
 
                   </div>
                   <?php
+
+                    echo getHiddenField('ID',0);
 
                     echo getInputField([
                       'label' => 'Title',
