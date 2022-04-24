@@ -97,6 +97,24 @@ class AjaxController extends MY_Controller
 
   }
 
+  public function getEvidenceDetails($evidence_id)
+  {
+
+    $this->load->model('Evidence_model');
+
+    $data = [
+
+      'type' => 'Evidence',
+      'evidence' => $this->Evidence_model->getEvidenceDetails($evidence_id)
+
+    ];
+
+    $output['html'] = $this->load_view('evidence/view_details',$data,true);
+
+    echo json_encode($output);
+
+  }
+
   public function getReturnStockProductsByDriverId($driver_id)
   {
       $data = [];
@@ -196,18 +214,6 @@ class AjaxController extends MY_Controller
     ];
 
     $output['html'] = $this->load_view('sales/view_sale',$data);
-
-  }
-
-  public function getEvidenceDetails($evidence_id)
-  {
-
-      $data = [];
-
-      $output['html'] = $this->load_view('evidence/view_details',$data,true);
-
-
-    echo json_encode($output);
 
   }
 

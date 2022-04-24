@@ -17,7 +17,7 @@
                </div>
             </div>
             <div class="card-body">
-              <form class="row g-3 needs-validation" novalidate>
+              <form class="row g-3 needs-validation" novalidate action="<?= site_url('save_evidence') ?>" method="post" enctype="multipart/form-data">
                 <div class="row mt-4">
 
                     <div class="col-sm-3">
@@ -41,7 +41,8 @@
 
                           echo getSelectField([
                             'label' => 'Shop',
-                            'name' => 'shop_id'
+                            'name' => 'shop_id',
+                            'data' => $customers
                           ]);
                           ?>
 
@@ -51,7 +52,8 @@
                           <?php
                             echo getTextareaField([
                               'label' => 'Comment',
-                              'name' => 'comment'
+                              'name' => 'comment',
+                              'required' => false
                             ]);
 
                             echo getSubmitBtn('Add Evidence');

@@ -17,13 +17,25 @@
                </div>
             </div>
             <div class="card-body">
-              <form class="row g-3 needs-validation" novalidate>
+              <form class="row g-3 needs-validation" novalidate action="<?= site_url('save_evidence') ?>" method="post" enctype="multipart/form-data">
                 <div class="row mt-4">
 
                     <div class="col-sm-3">
 
                          <div class="row">
                            <div class="col-sm-12">
+                             <?php
+                               //check image is exist in folder or not
+                               if (@getimagesize(base_url('uploads/evidence/'.$evidence->img)) && !empty($evidence->img))
+                               {
+                                    $img_url = base_url('uploads/evidence/'.$evidence->img);
+                               }
+                               else
+                               {
+                                   $img_url = base_url('assets/images/evidence_demo.png');
+                               }
+
+                              ?>
                              <img src="<?= base_url('assets/images/evidence_demo.png') ?>" class="img-thumbnail user-form-img" alt="..." style="border-radius:0px!important;">
                              <input type="file" class="choose_img" name="img" accept="image/*" capture style="display:none;">
                            </div>
@@ -39,9 +51,14 @@
 
                         <?php
 
+                          echo getHiddenField('ID',$evidence->id);
+                          echo getHiddenField('old_img',$evidence->img);
+
                           echo getSelectField([
                             'label' => 'Shop',
-                            'name' => 'shop_id'
+                            'name' => 'shop_id',
+                            'data' => $customers,
+                            'selected' => $evidence->shop_id
                           ]);
                           ?>
 
@@ -51,7 +68,9 @@
                           <?php
                             echo getTextareaField([
                               'label' => 'Comment',
-                              'name' => 'comment'
+                              'name' => 'comment',
+                              'required' => false,
+                              'value' => $evidence->comment
                             ]);
 
                             echo getSubmitBtn('Update Evidence');

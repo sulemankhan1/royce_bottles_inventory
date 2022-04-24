@@ -109,5 +109,19 @@ class Customer_model extends CI_Model
 
   }
 
+  public function getCustomerShopName()
+  {
+
+      $this->db->select('customers.id as id,customers.shop_name as name');
+      $this->db->from('customers');
+      $this->db->join('salesperson','salesperson.id = customers.salesperson_id');
+      $this->db->join('users','users.id = customers.driver_id');
+
+      $this->db->where('customers.is_deleted',0);
+
+      return $this->db->get()->result();
+
+  }
+
 
 }

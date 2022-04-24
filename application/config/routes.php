@@ -121,7 +121,11 @@ $route['invoices'] = 'Invoice';
 //evidence
 $route['evidence'] = 'Evidence';
 $route['add_evidence'] = 'Evidence/create';
+$route['save_evidence'] = 'Evidence/save_evidence';
 $route['edit_evidence/(:num)'] = 'Evidence/edit/$1';
+$route['delete_evidence/(:num)'] = 'Evidence/delete/$1';
+
+
 
 //salesperson
 $route['salesperson'] = 'Salesperson';

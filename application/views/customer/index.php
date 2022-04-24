@@ -36,7 +36,7 @@
                            <th>Email For E-receipt </th>
                            <th>Category</th>
                            <th>Salesperson </th>
-                           <th>Actions</th>
+                           <th class="dnr">Actions</th>
                         </tr>
                      </thead>
                      <tbody></tbody>

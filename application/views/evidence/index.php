@@ -16,7 +16,9 @@
 
                  <h4 class="card-title"><?= $page_head ?></h4>
                </div>
-
+               <?=
+               getHiddenField('ajax_url',$ajax_url);
+               ?>
                <a href="<?= site_url('add_evidence') ?>" class="btn btn-sm btn-primary">Add Evidence</a>
 
             </div>
@@ -31,35 +33,10 @@
                            <th>Comment</th>
                            <th>Added By </th>
                            <th>Added At </th>
-                           <th>Actions</th>
+                           <th class="dnr">Actions</th>
                         </tr>
                      </thead>
-                     <tbody>
-                       <tr>
-                          <td>1</td>
-                          <td>shopname</td>
-                          <td>
-                            <img src="<?= base_url('assets/images/avatars/01.png') ?>" class="table-img-design" alt="">
-                          </td>
-                          <td>Lorem ipsum dolor sit amet, consectetur adipisicing aliqua.</td>
-                          <td>Driver1</td>
-                          <td>03-03-2022,04:02 PM</td>
-                          <td>
-                            <span class="actions-icons">
-                              <a href="<?= site_url('edit_evidence/1') ?>" class="action-icons" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit">
-                                <i class="fa fa-pencil"></i>
-                              </a>
-                              <a href="javascript:void(0)" class="action-icons delete_record_" data-type-msg="Evidence" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete">
-                                <i class="fa-solid fa-trash"></i>
-                              </a>
-                              <a href="javascript:void(0)" class="action-icons view_details_" data-url="<?= site_url('AjaxController/getEvidenceDetails/1') ?>" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Details">
-                                <i class="fa fa-eye"></i>
-                              </a>
-                            </span>
-                          </td>
-                       </tr>
-
-                     </tbody>
+                     <tbody></tbody>
                   </table>
                </div>
             </div>
