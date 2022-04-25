@@ -81,5 +81,27 @@ class Setting_model extends CI_Model
 
   }
 
+  public function getAllTemplates()
+  {
+
+      $this->db->select('id as id,title as name');
+      $this->db->from('email_templates');
+
+      return $this->db->get()->result();
+
+  }
+
+  public function getGeneralSetting($type)
+  {
+
+      $this->db->select('*');
+      $this->db->from('general_setting');
+
+      $this->db->where('name',$type);
+
+      return $this->db->get()->row();
+
+  }
+
 
 }

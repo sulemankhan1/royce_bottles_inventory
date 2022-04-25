@@ -13,6 +13,7 @@ if ( ! function_exists('getSelectField'))
       $column = 'sm-6';
       $sel_classes = '';
       $col_classes = '';
+      $col_attributes = '';
       $options = '';
       $sel_first_option = 'select';
       //select column width
@@ -54,6 +55,20 @@ if ( ! function_exists('getSelectField'))
           }
 
       }
+      //to add attributes in column
+      if(isset($arr['col_attr']) && !empty($arr['col_attr']))
+      {
+
+          $c_attributes = explode(',',$arr['col_attr']);
+
+          foreach ($c_attributes as $k => $v)
+          {
+
+            $col_attributes .= $v.' ';
+
+          }
+
+      }
       //to add classes in column
       if(isset($arr['col_classes']) && !empty($arr['col_classes']))
       {
@@ -68,7 +83,7 @@ if ( ! function_exists('getSelectField'))
           }
 
       }
-      //to add id in select
+      //to add options in select
       if(isset($arr['data']) && !empty($arr['data']))
       {
 
@@ -116,7 +131,7 @@ if ( ! function_exists('getSelectField'))
         $sel_first_option = $arr['first_option'];
       }
 
-      $select_col = '<div class="col-'.$column.' mb-3 '.$col_classes.'">';
+      $select_col = '<div class="col-'.$column.' mb-3 '.$col_classes.'" '. $col_attributes .'>';
 
                       if($label != '')
                       {
@@ -230,9 +245,16 @@ if ( ! function_exists('getInputField'))
 
       }
 
-      $input_col = '<div class="col-'.$column.' mb-3 '.$col_classes.'">'.
-                     '<label for="'. ucfirst($label) .'" class="form-label">'. ucfirst($label) .'</label>'.
-                     '<input type="'. $type .'" class="form-control form-control-sm '. $inp_classes .'" name="'.$name.'" '. $id .' '.$required.' '.$inp_attributes.' '.$value.'>'.
+      $input_col = '<div class="col-'.$column.' mb-3 '.$col_classes.'">';
+
+                    if($label != '')
+                    {
+
+                      $input_col .= '<label for="'. ucfirst($label) .'" class="form-label">'. ucfirst($label) .'</label>';
+
+                    }
+
+                     $input_col .= '<input type="'. $type .'" class="form-control form-control-sm '. $inp_classes .'" name="'.$name.'" '. $id .' '.$required.' '.$inp_attributes.' '.$value.'>'.
                   '</div>';
 
       return $input_col;

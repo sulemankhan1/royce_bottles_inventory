@@ -12,8 +12,6 @@ $(document).on('click','.edit_template_',function () {
 
   let url = $(this).attr('data-url')
 
-  alert(url)
-
   $('#template_action_head').text('Edit Template')
 
   $.ajax({
@@ -38,26 +36,46 @@ $(document).on('click','.edit_template_',function () {
 
 })
 
+$('.template_commands_').click(function () {
+
+  let command = $(this).attr('data')
+
+})
 
 //check or uncheck all customers
 $('.check_all_customers').change(function () {
 
-    if($(this).is(':checked'))
-    {
+  if($(this).is(':checked'))
+  {
 
-      $('.customer_check').prop('checked',true)
+    $('.customer_check').prop('checked',true)
 
-    }
-    else
-    {
+  }
+  else
+  {
 
-      $('.customer_check').prop('checked',false)
+    $('.customer_check').prop('checked',false)
 
-    }
+  }
 })
 
-$('.template_commands_').click(function () {
+$('.sending_type').change(function () {
 
-  let command = $(this).attr('data')
+  let sending_type = $(this).val()
+
+  $('.sending_day,.sending_day_date').css('display','none')
+
+  if(sending_type == 'Weekly')
+  {
+
+    $('.sending_day').css('display','block')
+
+  }
+  else if(sending_type == 'Monthly')
+  {
+
+    $('.sending_day_date').css('display','block')
+
+  }
 
 })

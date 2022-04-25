@@ -33,7 +33,7 @@
                           <div class="tab-pane fade show active" id="pills-home1" role="tabpanel"
                               aria-labelledby="pills-home-tab1">
 
-                             <form class="row g-3 needs-validation" novalidate>
+                             <form action="<?= site_url('save_general_setting') ?>" method="post" class="row g-3 needs-validation" novalidate>
 
                                 <h4 class="mt-4 mb-2">General</h4>
 
@@ -46,7 +46,7 @@
                                   </div>
                                   <div class="col-sm-1">
                                       <div class="form-check form-check-inline">
-                                         <input type="checkbox" name="" class="form-check-input" id="customCheck5">
+                                         <input type="checkbox" name="is_invoice_sent_on_mail" class="form-check-input" id="customCheck5" <?= isset($is_invoice_sent_on_mail->value) && $is_invoice_sent_on_mail->value == 'yes'?'checked':'' ?>>
                                       </div>
                                   </div>
 
@@ -62,7 +62,7 @@
                                   </div>
                                   <div class="col-sm-1">
                                       <div class="form-check form-check-inline">
-                                         <input type="checkbox" class="form-check-input" id="customCheck5">
+                                         <input type="checkbox" name="is_invoice_sent_on_whatsapp" class="form-check-input" id="customCheck5" <?= isset($is_invoice_sent_on_whatsapp->value) && $is_invoice_sent_on_whatsapp->value == 'yes'?'checked':'' ?>>
                                       </div>
                                   </div>
 
@@ -83,32 +83,55 @@
 
                                           <?php
 
-                                            $pro_arr = [
-
-                                              ['id' => 1,'name' => 'Monthly'],
-                                              ['id' => 2,'name' => 'Weekly'],
-                                              ['id' => 3,'name' => 'Daily']
-
-                                            ];
-
                                             echo getSelectField([
                                               'name' => 'sending_type',
                                               'column' => 'sm-6',
-                                              'data' => $pro_arr
+                                              'static' => true,
+                                              'classes' => 'sending_type',
+                                              'data' => $recurring_timespan,
+                                              'required' => false,
+                                              'selected' => isset($recurring_send->send_type)?$recurring_send->send_type:''
                                             ]);
 
-                                            $pro_arr = [
+                                            $send_day = '';
+                                            $send_day_date = '';
+                                            if (isset($recurring_send->send_type))
+                                            {
 
-                                              ['id' => 1,'name' => 'Monday'],
-                                              ['id' => 2,'name' => 'Tuesday'],
-                                              ['id' => 3,'name' => 'Wednesday']
+                                              if($recurring_send->send_type == 'Monthly')
+                                              {
 
-                                            ];
+                                                $send_day = 'style="display:none"';
 
+                                              }
+                                              else if($recurring_send->send_type == 'Weekly')
+                                              {
+
+                                                $send_day_date = 'style="display:none"';
+
+                                              }
+
+                                            }
                                             echo getSelectField([
                                               'name' => 'sending_day',
                                               'column' => 'sm-6',
-                                              'data' => $pro_arr
+                                              'static' => true,
+                                              'col_classes' => 'sending_day',
+                                              'data' => $days,
+                                              'required' => false,
+                                              'col_attr' => $send_day,
+                                              'selected' => isset($recurring_send->send_on)?$recurring_send->send_on:''
+                                            ]);
+
+                                            echo getSelectField([
+                                              'name' => 'sending_day_date',
+                                              'col_classes' => 'sending_day_date',
+                                              'static' => true,
+                                              'column' => 'sm-6',
+                                              'required' => false,
+                                              'data' => $dates,
+                                              'col_attr' => $send_day_date,
+                                              'selected' => isset($recurring_send->send_on)?$recurring_send->send_on:''
                                             ]);
 
                                           ?>
@@ -130,18 +153,12 @@
                                     <div class="row">
                                       <?php
 
-                                        $pro_arr = [
-
-                                          ['id' => 1,'name' => 'template1'],
-                                          ['id' => 2,'name' => 'template2'],
-                                          ['id' => 3,'name' => 'template3']
-
-                                        ];
-
                                         echo getSelectField([
                                           'name' => 'invoice_template',
                                           'column' => 'sm-12',
-                                          'data' => $pro_arr
+                                          'data' => $templates,
+                                          'required' => false,
+                                          'selected' => isset($invoice_temp->value)?$invoice_temp->value:''
                                         ]);
 
                                       ?>
@@ -161,18 +178,12 @@
                                     <div class="row">
                                       <?php
 
-                                        $pro_arr = [
-
-                                          ['id' => 1,'name' => 'template1'],
-                                          ['id' => 2,'name' => 'template2'],
-                                          ['id' => 3,'name' => 'template3']
-
-                                        ];
-
                                         echo getSelectField([
-                                          'name' => 'invoice_template',
+                                          'name' => 'whatsapp_template',
                                           'column' => 'sm-12',
-                                          'data' => $pro_arr
+                                          'data' => $templates,
+                                          'required' => false,
+                                          'selected' => isset($whatsapp_temp->value)?$whatsapp_temp->value:''
                                         ]);
 
                                       ?>
@@ -190,18 +201,12 @@
                                     <div class="row">
                                       <?php
 
-                                        $pro_arr = [
-
-                                          ['id' => 1,'name' => 'template1'],
-                                          ['id' => 2,'name' => 'template2'],
-                                          ['id' => 3,'name' => 'template3']
-
-                                        ];
-
                                         echo getSelectField([
-                                          'name' => 'recurrig_template',
+                                          'name' => 'recurring_template',
                                           'column' => 'sm-12',
-                                          'data' => $pro_arr
+                                          'data' => $templates,
+                                          'required' => false,
+                                          'selected' => isset($recurr_temp->value)?$recurr_temp->value:''
                                         ]);
 
                                       ?>
@@ -333,7 +338,7 @@
                                           <th>Title</th>
                                           <th>Subject</th>
                                           <th>Template</th>
-                                          <th>Actions</th>
+                                          <th class="dnr">Actions</th>
                                        </tr>
                                     </thead>
                                     <tbody></tbody>

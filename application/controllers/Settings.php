@@ -134,6 +134,31 @@ class Settings extends MY_Controller
   public function email()
   {
 
+    $recurring_timespan = [
+        'Monthly',
+        'Weekly',
+        'Daily'
+    ];
+
+    $days = [
+        'Monday',
+        'Tuesday',
+        'Wednesdasy',
+        'Thursday',
+        'Friday',
+        'Saturday',
+        'Sunday'
+    ];
+
+     for ($i=1; $i < 32; $i++)
+     {
+
+       $dates[] = $i;
+
+     }
+
+    $this->load->model('Setting_model');
+
     $data = [
 
       'title' => 'Email Setting',
@@ -141,6 +166,16 @@ class Settings extends MY_Controller
       'active_menu' => 'setting',
       'active_submenu' => 'email_setting',
       'ajax_url' => base_url('Settings/getTemplates'),
+      'recurring_timespan' => $recurring_timespan,
+      'days' => $days,
+      'dates' => $dates,
+      'templates' => $this->Setting_model->getAllTemplates(),
+      'is_invoice_sent_on_mail' => $this->Setting_model->getGeneralSetting('INVOICE_EMAIL'),
+      'is_invoice_sent_on_whatsapp' => $this->Setting_model->getGeneralSetting('INVOICE_WHATSAPP'),
+      'recurring_send' => $this->Setting_model->getGeneralSetting('SENDING_TYPE'),
+      'invoice_temp' => $this->Setting_model->getGeneralSetting('INVOICE_TEMP'),
+      'whatsapp_temp' => $this->Setting_model->getGeneralSetting('WHATSAPP_TEMP'),
+      'recurr_temp' => $this->Setting_model->getGeneralSetting('RECURR_TEMP'),
       'styles' => [
         'my-dataTable.css'
       ],
@@ -162,34 +197,178 @@ class Settings extends MY_Controller
 
          $p = $this->inp_post();
 
-         $ID = (isset($p['ID'])?$p['ID']:'');
-         unset($p['ID']);
-
-         $arr = [
-
-            'title' => isset($p['title'])?$p['title']:'',
-            'subject' => isset($p['subject'])?$p['subject']:'',
-            'template' => isset($p['template'])?$p['template']:'',
-            'added_by' => $this->user_id_
-
-         ];
-
          $this->trans_('start');
 
-          if(!empty($ID))
-          {
+         $is_invoice_email = $this->bm->getRow('general_setting' , 'name' ,'INVOICE_EMAIL');
 
-            unset($arr['added_by']);
+         if(isset($p['is_invoice_sent_on_mail']))
+         {
 
-            $this->bm->update('email_templates',$arr,'id',$ID);
+           if(!empty($is_invoice_email))
+           {
 
-          }
-          else
-          {
+             $this->bm->update('general_setting',['value' => 'yes'],'name' , 'INVOICE_EMAIL');
 
-              $this->bm->insert_row('email_templates',$arr);
+           }
+           else
+           {
 
-          }
+             $this->bm->insert_row('general_setting',['name' => 'INVOICE_EMAIL' , 'value' => 'yes']);
+
+           }
+
+         }
+         else
+         {
+
+           if(!empty($is_invoice_email))
+           {
+
+             $this->bm->update('general_setting',['value' => 'no'],'name' , 'INVOICE_EMAIL');
+
+           }
+           else
+           {
+
+             $this->bm->insert_row('general_setting',['name' => 'INVOICE_EMAIL' , 'value' => 'no']);
+
+           }
+
+         }
+
+         $is_invoice_whatsapp = $this->bm->getRow('general_setting' , 'name' ,'INVOICE_WHATSAPP');
+
+         if(isset($p['is_invoice_sent_on_whatsapp']))
+         {
+
+           if(!empty($is_invoice_whatsapp))
+           {
+
+             $this->bm->update('general_setting',['value' => 'yes'],'name' , 'INVOICE_WHATSAPP');
+
+           }
+           else
+           {
+
+             $this->bm->insert_row('general_setting',['name' => 'INVOICE_WHATSAPP' , 'value' => 'yes']);
+
+           }
+
+         }
+         else
+         {
+
+           if(!empty($is_invoice_whatsapp))
+           {
+
+             $this->bm->update('general_setting',['value' => 'no'],'name' , 'INVOICE_WHATSAPP');
+
+           }
+           else
+           {
+
+             $this->bm->insert_row('general_setting',['name' => 'INVOICE_WHATSAPP' , 'value' => 'no']);
+
+           }
+
+         }
+
+         if(isset($p['sending_type']))
+         {
+
+           if($p['sending_type'] == 'Weekly')
+           {
+
+             $send_on = $p['sending_day'];
+
+           }
+           else if($p['sending_type'] == 'Monthly')
+           {
+
+             $send_on = $p['sending_day_date'];
+
+           }
+           else
+           {
+             $send_on = NULL;
+           }
+
+           $sending_type = $this->bm->getRow('general_setting' , 'name' ,'SENDING_TYPE');
+
+           if(!empty($sending_type))
+           {
+
+             $this->bm->update('general_setting',['send_type' => $p['sending_type'] , 'send_on' => $send_on],'name' , 'SENDING_TYPE');
+
+           }
+           else
+           {
+
+             $this->bm->insert_row('general_setting',['name' => 'SENDING_TYPE' , 'send_type' => $p['sending_type'],'send_on' => $send_on]);
+
+           }
+
+         }
+
+         if(isset($p['invoice_template']))
+         {
+
+           $invoice_template = $this->bm->getRow('general_setting' , 'name' ,'INVOICE_TEMP');
+
+           if(!empty($invoice_template))
+           {
+
+             $this->bm->update('general_setting',['value' => $p['invoice_template']],'name' , 'INVOICE_TEMP');
+
+           }
+           else
+           {
+
+             $this->bm->insert_row('general_setting',['name' => 'INVOICE_TEMP' , 'value' => $p['invoice_template']]);
+
+           }
+
+         }
+
+         if(isset($p['whatsapp_template']))
+         {
+
+           $whatsapp_template = $this->bm->getRow('general_setting' , 'name' ,'WHATSAPP_TEMP');
+
+           if(!empty($whatsapp_template))
+           {
+
+             $this->bm->update('general_setting',['value' => $p['whatsapp_template']],'name' , 'WHATSAPP_TEMP');
+
+           }
+           else
+           {
+
+             $this->bm->insert_row('general_setting',['name' => 'WHATSAPP_TEMP' , 'value' => $p['whatsapp_template']]);
+
+           }
+
+         }
+
+         if(isset($p['recurring_template']))
+         {
+
+           $recurring_template = $this->bm->getRow('general_setting' , 'name' ,'RECURR_TEMP');
+
+           if(!empty($recurring_template))
+           {
+
+             $this->bm->update('general_setting',['value' => $p['recurring_template']],'name' , 'RECURR_TEMP');
+
+           }
+           else
+           {
+
+             $this->bm->insert_row('general_setting',['name' => 'RECURR_TEMP' , 'value' => $p['recurring_template']]);
+
+           }
+
+         }
 
          $this->trans_('complete');
 
@@ -202,18 +381,7 @@ class Settings extends MY_Controller
          else
          {
 
-           if(!empty($ID))
-           {
-
-             $this->session->set_flashdata('_success','Template updated successfully');
-
-           }
-           else
-           {
-
-             $this->session->set_flashdata('_success','Template created successfully');
-
-           }
+             $this->session->set_flashdata('_success','General Setting updated successfully');
 
          }
 
