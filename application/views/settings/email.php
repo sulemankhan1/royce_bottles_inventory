@@ -110,6 +110,13 @@
                                                 $send_day_date = 'style="display:none"';
 
                                               }
+                                              else
+                                              {
+
+                                                $send_day_date = 'style="display:none"';
+                                                $send_day = 'style="display:none"';
+
+                                              }
 
                                             }
                                             echo getSelectField([
