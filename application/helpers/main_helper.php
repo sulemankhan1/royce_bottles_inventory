@@ -55,12 +55,29 @@ if ( ! function_exists('companySetting'))
     }
     else
     {
-      
+
       return $company_data;
 
     }
 
 
+  }
+
+}
+
+if ( ! function_exists('loginUserDetails'))
+{
+
+  function loginUserDetails($user_id)
+	{
+
+    $ci=& get_instance();
+    $ci->load->database();
+
+    $result = $ci->db->get_where('users',['id' => $user_id])->row();
+
+    return $result;
+    
   }
 
 }

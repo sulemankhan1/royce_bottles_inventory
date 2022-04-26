@@ -25,12 +25,12 @@
 
                         <?php
 
-                          echo getHiddenField('driver_id',1);
+                          echo getHiddenField('driver_id',$driver_id);
 
                           echo getInputField([
                             'label' => 'Driver',
                             'attr' => 'readonly',
-                            'value' => 'Driver'
+                            'value' => loginUserDetails($driver_id)->name
 
                           ]);
                           ?>
@@ -38,34 +38,34 @@
                       </div>
                       <div id="assign_products_to_driver">
 
+                        <?php foreach ($driver_request_products as $key => $v): ?>
+
                         <div class="row">
                           <?php
-                            $pro_arr = [
-
-                              ['id' => 1,'name' => 'Product1'],
-                              ['id' => 2,'name' => 'Product2'],
-                              ['id' => 3,'name' => 'Product3']
-
-                            ];
 
                             echo getSelectField([
                               'label' => 'Product',
                               'name' => 'product_id[]',
-                              'data' => $pro_arr
+                              'data' => $products,
+                              'selected' => $v->product_id
                             ]);
 
                             echo getInputField([
                               'label' => 'Qty',
                               'type' => 'number',
                               'name' => 'qty[]',
-                              'column' => 'sm-3'
+                              'column' => 'sm-3',
+                              'value' => $v->qty
                             ]);
 
                           ?>
 
                         </div>
 
+                        <?php endforeach; ?>
+
                       </div>
+
 
                       <div class="row">
                         <div class="col-sm-12">
@@ -98,18 +98,11 @@
 <div class="getProductRowToAssign" style="display:none!important">
   <div class="row">
     <?php
-      $pro_arr = [
-
-        ['id' => 1,'name' => 'Product1'],
-        ['id' => 2,'name' => 'Product2'],
-        ['id' => 3,'name' => 'Product3']
-
-      ];
 
       echo getSelectField([
         'label' => 'Product',
         'name' => 'product_id[]',
-        'data' => $pro_arr
+        'data' => $products
       ]);
 
       echo getInputField([

@@ -105,12 +105,17 @@ class Inventory extends MY_Controller
   public function assign_to_driver()
   {
 
+    $this->load->model('Product_model');
+    $this->load->model('Inventory_model');
     $data = [
 
       'title' => 'Assign Stock To Driver',
       'page_head' => 'Assign Stock To Driver',
       'active_menu' => 'inventory',
       'active_submenu' => 'assign_to_driver',
+      'driver_id' => $this->user_id_,
+      'products' => $this->Product_model->getAllProducts(),
+      'driver_request_products' => $this->Inventory_model->getDriverRequestStock($this->user_id_),
       'scripts' => [
         'inventory/assign_to_driver.js'
       ]
@@ -249,12 +254,18 @@ class Inventory extends MY_Controller
   public function request_stock()
   {
 
+    $this->load->model('Product_model');
+    $this->load->model('Inventory_model');
+
     $data = [
 
       'title' => 'Request Stock',
       'page_head' => 'Request Stock',
       'active_menu' => 'inventory',
       'active_submenu' => 'request_stock',
+      'driver_id' => $this->user_id_,
+      'products' => $this->Product_model->getAllProducts(),
+      'driver_request_products' => $this->Inventory_model->getDriverRequestStock($this->user_id_),
       'scripts' => [
         'inventory/assign_to_driver.js'
       ]
@@ -268,6 +279,7 @@ class Inventory extends MY_Controller
   public function save_driver_stock_request()
   {
 
+      $this->form_validation->set_rules('driver_id', 'Driver', 'required');
       $this->form_validation->set_rules('product_id[]', 'Product', 'required');
       $this->form_validation->set_rules('qty[]', 'Quantity', 'required');
 
@@ -340,7 +352,18 @@ class Inventory extends MY_Controller
            else
            {
 
+             if(!empty($is_driver))
+             {
+
+               $this->session->set_flashdata('_success','Request has updated');
+
+             }
+             else
+             {
+
                $this->session->set_flashdata('_success','Request has sent');
+
+             }
 
            }
 

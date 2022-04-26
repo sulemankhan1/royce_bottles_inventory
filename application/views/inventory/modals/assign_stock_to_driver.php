@@ -13,40 +13,26 @@
 
                   <?php
 
-                    $pro_arr = [
-
-                      ['id' => 1,'name' => 'Driver1'],
-                      ['id' => 2,'name' => 'Driver2'],
-                      ['id' => 3,'name' => 'Driver3']
-
-                    ];
-
                     echo getSelectField([
                       'label' => 'Driver',
                       'name' => 'driver_id',
                       'column' => 'sm-8',
-                      'data' => $pro_arr
+                      'data' => $products
                     ]);
-                    ?>
+
+                  ?>
 
                 </div>
                 <div id="assign_products_to_driver">
 
                   <div class="row">
                     <?php
-                      $pro_arr = [
-
-                        ['id' => 1,'name' => 'Product1'],
-                        ['id' => 2,'name' => 'Product2'],
-                        ['id' => 3,'name' => 'Product3']
-
-                      ];
-
+                    
                       echo getSelectField([
                         'label' => 'Product',
                         'name' => 'product_id',
                         'column' => 'sm-8',
-                        'data' => $pro_arr
+                        'data' => $products
                       ]);
 
                       echo getInputField([
@@ -85,19 +71,12 @@
 <div class="getProductRowToAssign" style="display:none!important">
   <div class="row">
     <?php
-      $pro_arr = [
-
-        ['id' => 1,'name' => 'Product1'],
-        ['id' => 2,'name' => 'Product2'],
-        ['id' => 3,'name' => 'Product3']
-
-      ];
 
       echo getSelectField([
         'label' => 'Product',
         'name' => 'product_id',
         'column' => 'sm-8',
-        'data' => $pro_arr
+        'data' => $products
       ]);
 
       echo getInputField([

@@ -88,5 +88,18 @@ class Product_model extends CI_Model
 
   }
 
+  public function getAllProducts()
+  {
+
+    $this->db->select('products.*,categories.name as cat_name');
+    $this->db->from('products');
+    $this->db->join('categories','categories.id = products.cat_id');
+
+    $this->db->where('products.is_deleted',0);
+
+    return $this->db->get()->result();
+
+  }
+
 
 }
