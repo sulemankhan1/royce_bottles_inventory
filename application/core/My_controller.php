@@ -2,7 +2,7 @@
 class MY_Controller extends CI_Controller
 {
 
-  public $user_id_ = 1;
+  public $user_id_ = 0;
 
   public function __construct()
   {
@@ -10,6 +10,8 @@ class MY_Controller extends CI_Controller
       parent::__construct();
 
       $this->check_user_login();
+
+      $this->user_id_ = $this->session->userdata('UID');
 
   }
 

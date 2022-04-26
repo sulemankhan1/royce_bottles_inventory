@@ -367,24 +367,40 @@
 					</button>
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
 						<ul class="mb-2 navbar-nav ms-auto align-items-center navbar-list mb-lg-0">
+							<?php
+
+								$login_user = loginUserDetails($this->session->userdata('UID'));
+
+							?>
 							<li class="nav-item dropdown">
 								<a class="py-0 nav-link d-flex align-items-center" href="#" id="navbarDropdown"
 									role="button" data-bs-toggle="dropdown" aria-expanded="false">
-									<img src="<?= base_url('assets/images/avatars/01.png" alt') ?>" alt="User-Profile"
+
+									<?php
+									if (@getimagesize(base_url('uploads/'.$login_user->type.'/'.$login_user->img)) && !empty($login_user->img))
+									{
+										 	$user_img_url = base_url('uploads/'.$login_user->type.'/'.$login_user->img);
+									}
+									else
+									{
+											$user_img_url = base_url('assets/images/avatars/01.png');
+									}
+									 ?>
+									<img src="<?= $user_img_url ?>" alt="User-Profile"
 										class="theme-color-default-img img-fluid avatar avatar-50 avatar-rounded">
 									<div class="caption ms-3 d-none d-md-block ">
-										<h6 class="mb-0 caption-title">Austin Robertson</h6>
-										<p class="mb-0 caption-sub-title">Admin</p>
+										<h6 class="mb-0 caption-title"><?= $login_user->name?></h6>
+										<p class="mb-0 caption-sub-title"><?= ucfirst($login_user->type )?></p>
 									</div>
 								</a>
 								<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
 									<li>
-										<a class="dropdown-item" href="<?= site_url('edit_profile/1') ?>">
+										<a class="dropdown-item" href="<?= site_url('edit_profile') ?>">
 											<i class="fa-solid fa-user-pen"></i> Edit Profile
 										</a>
 									</li>
 									<li>
-										<a class="dropdown-item" href="<?= site_url('view_profile/1') ?>">
+										<a class="dropdown-item" href="<?= site_url('view_profile') ?>">
 												<i class="fa-solid fa-id-card-clip"></i> View Profile
 										</a>
 									</li>

@@ -23,10 +23,26 @@
 
                         <div class="row">
                           <div class="col-sm-12">
-                            <img src="<?= base_url('assets/images/avatars/01.png') ?>" class="img-thumbnail user-form-img" alt="...">
+                            <?php
+
+                            //check image is exist in folder or not
+                            $type = $user->type;
+                            $folder = strtolower($type);
+
+                            if (@getimagesize(base_url('uploads/'.$folder.'/'.$user->img)) && !empty($user->img))
+                            {
+                                echo '<img src="'. base_url('uploads/'.$folder.'/'.$user->img) .'" class="img-thumbnail user-form-img" alt="...">';
+                            }
+                            else
+                            {
+                                echo '<img src="'. base_url('assets/images/avatars/01.png') .'" class="img-thumbnail user-form-img" alt="...">';
+                            }
+
+                             ?>
+
                           </div>
                           <div class="col-sm-12" style="text-align: center;margin-top: 10px;">
-                            <p class="view-details-txt"><span class="badge rounded-pill bg-secondary">Admin</span></p>
+                            <p class="view-details-txt"><span class="badge rounded-pill bg-secondary"><?= ucfirst($type) ?></span></p>
                           </div>
                         </div>
 
@@ -42,11 +58,60 @@
 
                       <?php
 
-                          echo viewDetailsCol('Name','Demo');
-                          echo viewDetailsCol('Email','Demo@gmail.com');
-                          echo viewDetailsCol('Username','Demo123');
-                          echo viewDetailsCol('Contact #','11111');
-                          echo viewDetailsCol('Status','<span class="badge rounded-pill bg-success">Active</span>');
+                      if($type == 'admin' || $type == 'driver' || $type == 'other' || $type == 'production')
+                      {
+
+                        echo viewDetailsCol('Name',$user->name);
+                        echo viewDetailsCol('Email',$user->email);
+                        echo viewDetailsCol('Username',$user->username);
+                        echo viewDetailsCol('Contact #',$user->contact_no);
+
+                        if($type == 'Driver' || $type == 'Other_user')
+                        {
+
+                          echo viewDetailsCol('License #',$user->license_no);
+
+                        }
+
+                        if($type != 'admin')
+                        {
+
+                          echo viewDetailsCol('FIN #',$user->fin_no);
+
+                        }
+
+                        if($type == 'driver' || $type == 'other')
+                        {
+
+                          echo viewDetailsCol('Car Plate',$user->car_plate);
+
+                        }
+
+                        $badge_clr = $user->status == 1?'bg-secondary':'bg-success';
+                        $status = $user->status == 1?'Deactivated':'Active';
+
+                        $status_row = '<span class="badge rounded-pill '. $badge_clr .'">'. $status .'</span>';
+
+                        echo viewDetailsCol('Status',$status_row);
+
+                      }
+                      else if($type == 'driver' || $type == 'other' || $type == 'production')
+                      {
+
+                        echo viewDetailsCol('Name',$user->name);
+                        echo viewDetailsCol('Email',$user->email);
+                        echo viewDetailsCol('Username',$user->username);
+                        echo viewDetailsCol('Contact #',$user->contact_no);
+
+
+                        $badge_clr = $user->status == 1?'bg-secondary':'bg-success';
+                        $status = $user->status == 1?'Deactivated':'Active';
+
+                        $status_row = '<span class="badge rounded-pill '. $badge_clr .'">'. $status .'</span>';
+
+                        echo viewDetailsCol('Status',$status_row);
+
+                      }
 
 
                       ?>
@@ -60,11 +125,16 @@
                       <?php
 
 
-                          echo viewDetailsCol('Date Of Birth','15-12-2001');
-                          echo viewDetailsCol('Country','country');
-                          echo viewDetailsCol('City','city');
-                          echo viewDetailsCol('Zip code','111233');
-                          echo viewDetailsCol('Residential Address','address',12);
+                        if($type == 'admin' || $type == 'driver' || $type == 'other' || $type == 'production')
+                        {
+
+                          echo viewDetailsCol('Date Of Birth',$user->dob == '0000-00-00'?'':$user->dob);
+                          echo viewDetailsCol('Country',$user->country);
+                          echo viewDetailsCol('City',$user->city);
+                          echo viewDetailsCol('Zip code',$user->zip_code == 0?'':$user->zip_code);
+                          echo viewDetailsCol('Residential Address',$user->address,12);
+
+                        }
 
 
                       ?>

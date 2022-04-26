@@ -12,7 +12,7 @@ class Profile extends MY_Controller
 
   }
 
-  public function edit_profile($id)
+  public function edit_profile()
   {
 
     $data = [
@@ -30,14 +30,15 @@ class Profile extends MY_Controller
 
   }
 
-  public function view_profile($id)
+  public function view_profile()
   {
 
     $data = [
 
       'title' => 'View Profile',
       'page_head' => 'View Profile',
-      'active_menu' => ''
+      'active_menu' => '',
+      'user' => $this->bm->getRow('users','id',$this->user_id_)
 
     ];
 

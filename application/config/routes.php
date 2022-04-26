@@ -80,8 +80,8 @@ $route['update_customer_products_price'] = 'Customer/update_products_price';
 
 
 //profile
-$route['edit_profile/(:num)'] = 'Profile/edit_profile/$1';
-$route['view_profile/(:num)'] = 'Profile/view_profile/$1';
+$route['edit_profile'] = 'Profile/edit_profile';
+$route['view_profile'] = 'Profile/view_profile';
 
 
 //inventory

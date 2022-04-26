@@ -139,9 +139,7 @@ class Auth extends CI_Controller
        {
 
          echo "this module is on maintenance";
-         // echo "<pre>";
-         // print_r($data);
-         // echo "</pre>";
+         
          die();
 
        }

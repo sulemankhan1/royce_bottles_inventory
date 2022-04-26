@@ -225,7 +225,7 @@ class Customer extends MY_Controller
 
              if($ID != '')
              {
-                  if (getimagesize(base_url('uploads/customer/'.$customer_img)) && !empty($customer_img))
+                  if (@getimagesize(base_url('uploads/customer/'.$customer_img)) && !empty($customer_img))
                   {
                       $dir_path = getcwd().'/uploads/customer/'.$customer_img;
 
