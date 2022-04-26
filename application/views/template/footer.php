@@ -59,9 +59,6 @@
     }
    ?>
 
-
-   <?php ?>
-
    <?php if ($this->session->flashdata('_success')): ?>
 
      <script type="text/javascript">

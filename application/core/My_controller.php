@@ -9,6 +9,8 @@ class MY_Controller extends CI_Controller
 
       parent::__construct();
 
+      $this->check_user_login();
+
   }
 
   public function template($path,$data = '')
@@ -119,10 +121,15 @@ class MY_Controller extends CI_Controller
 
   }
 
-  public function is_login()
+  public function check_user_login()
   {
 
+    $uid = $this->session->userdata('UID');
+
+    if(empty($uid))
+    {
       redirect('login');
+    }
 
   }
 

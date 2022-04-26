@@ -7,7 +7,9 @@ $route['translate_uri_dashes'] = FALSE;
 
 // auth
 $route['login'] = 'Auth/login';
+$route['login_user'] = 'Auth/checkLoginDetails';
 $route['forget_password'] = 'Auth/forget_password';
+$route['send_forgetpassword_link'] = 'Auth/send_forgetpassword_link';
 $route['logout'] = 'Auth/logout';
 
 //dashbaord
