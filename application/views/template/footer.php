@@ -38,9 +38,15 @@
   <!-- App Script -->
   <script src="<?= base_url('assets/js/hope-ui.js') ?>" defer></script>
 
+  <!--select2 js-->
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
   <!-- toastr  js -->
   <script src="<?= base_url('assets/js/toastr/toastr.min.js') ?>"></script>
 
+  <script type="text/javascript">
+    $('select').select2();
+  </script>
   <?php
 
     if(isset($scripts) && !empty($scripts))

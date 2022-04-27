@@ -69,7 +69,7 @@ class Product extends MY_Controller
           $img_url = base_url('assets/images/avatars/01.png');
       }
 
-      $name = '<img src="'. $img_url .'" class="table-img-design" alt="">'.
+      $name = '<div class="table-circular-img"><img src="'. $img_url .'" class="" alt=""></div>'.
         '<span class="table-img-txt-design">'.$v->name.'</span>';
 
       $nestedData[] = $name;
@@ -139,7 +139,31 @@ class Product extends MY_Controller
   public function save_product()
   {
 
-      $this->form_validation->set_rules('name', 'Product Name', 'required');
+      $p = $this->inp_post();
+      $is_unique = '';
+      if(isset($p['old_name']))
+      {
+
+        if ($p['name'] != $p['old_name'])
+        {
+
+          $is_unique = '|is_unique[products.name]';
+
+        }
+
+      }
+      else
+      {
+
+        $is_unique = '|is_unique[products.name]';
+
+      }
+
+      $this->form_validation->set_rules('name', 'Product Name', 'required'.$is_unique,[
+        'required'      => 'The %s field is required',
+        'is_unique'     => 'The %s already exist'
+      ]);
+
       $this->form_validation->set_rules('product_code', 'Product Code', 'required');
       $this->form_validation->set_rules('sku', 'Sku', 'required');
       $this->form_validation->set_rules('cat_id', 'Product Category', 'required');
@@ -152,13 +176,22 @@ class Product extends MY_Controller
 
         $this->session->set_flashdata('_error',$error);
 
-        redirect('add_product');
+        if(isset($p['ID']))
+        {
+
+          redirect('edit_product/'.$p['ID']);
+
+        }
+        else
+        {
+
+          redirect('add_product');
+
+        }
 
       }
       else
       {
-
-           $p = $this->inp_post();
 
            $ID = (isset($p['ID'])?$p['ID']:'');
            unset($p['ID']);

@@ -40,23 +40,27 @@
                         echo getInputField([
                           'label' => 'Product Name',
                           'name' => 'name',
-                          'column' => 'sm-12'
+                          'column' => 'sm-12',
+                          'value' => getPostValue('name')
                         ]);
                         echo getInputField([
                           'label' => 'Product Code',
                           'name' => 'product_code',
-                          'column' => 'sm-12'
+                          'column' => 'sm-12',
+                          'value' => set_value('product_code')
                         ]);
                         echo getInputField([
                           'label' => 'SKU',
                           'name' => 'sku',
-                          'column' => 'sm-12'
+                          'column' => 'sm-12',
+                          'value' => set_value('sku')
                         ]);
                         echo getSelectField([
                           'label' => 'Product Category',
                           'name' => 'cat_id',
                           'column' => 'sm-12',
-                          'data' => $categories
+                          'data' => $categories,
+                          'selected' => set_value('cat_id')
                         ]);
                         echo getInputField([
                           'label' => 'Price',
@@ -69,7 +73,8 @@
                           'label' => 'Description',
                           'name' => 'description',
                           'column' => 'sm-12',
-                          'required' => false
+                          'required' => false,
+                          'value' => set_value('description')
                         ]);
 
                             echo getSubmitBtn('Add Product');

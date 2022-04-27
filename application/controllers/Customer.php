@@ -71,7 +71,7 @@ class Customer extends MY_Controller
           $img_url = base_url('assets/images/avatars/01.png');
       }
 
-      $name = '<img src="'. $img_url .'" class="table-img-design" alt="">'.
+      $name = '<div class="table-circular-img"><img src="'. $img_url .'" class="" alt=""></div>'.
         '<span class="table-img-txt-design">'.$v->name.'</span>';
 
       $nestedData[] = $name;
@@ -184,7 +184,6 @@ class Customer extends MY_Controller
       $this->form_validation->set_rules('shop_acronym', 'Shop Acronym', 'required');
       $this->form_validation->set_rules('shop_id', 'Shop ID', 'required');
       $this->form_validation->set_rules('primary_contact', 'Primary Contact', 'required');
-      $this->form_validation->set_rules('secondary_contact', 'Secondary Contact', 'required');
       $this->form_validation->set_rules('email', 'Email Address For E-Receipt', 'required');
       $this->form_validation->set_rules('soa_email', 'Email Address For SOA', 'required');
       $this->form_validation->set_rules('cat_type', 'Category', 'required');

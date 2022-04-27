@@ -1,19 +1,25 @@
 <div class="row mt-5">
   <?php if ($type != 'Rights'): ?>
-    <div class="col-sm-12 text-center">
+    <div class="col-sm-12">
+
+      <div class="details-circular-img">
+
       <?php
         //check image is exist in folder or not
         $folder = strtolower($type);
 
         if (@getimagesize(base_url('uploads/'.$folder.'/'.$user->img)) && !empty($user->img))
         {
-            echo '<img src="'. base_url('uploads/'.$folder.'/'.$user->img) .'" class="img-thumbnail user-form-img" alt="...">';
+            echo '<img src="'. base_url('uploads/'.$folder.'/'.$user->img) .'" alt="...">';
         }
         else
         {
-            echo '<img src="'. base_url('assets/images/avatars/01.png') .'" class="img-thumbnail user-form-img" alt="...">';
+            echo '<img src="'. base_url('assets/images/avatars/01.png') .'" alt="...">';
         }
        ?>
+
+      </div>
+
     </div>
     <div class="col-sm-12">
 

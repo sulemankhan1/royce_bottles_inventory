@@ -26,6 +26,7 @@
                         <?php
 
                         echo getHiddenField('ID',$category->id);
+                        echo getHiddenField('old_name',$category->name);
 
                         echo getInputField([
                           'label' => 'Category',

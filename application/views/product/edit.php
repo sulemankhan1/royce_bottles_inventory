@@ -49,6 +49,7 @@
 
                         echo getHiddenField('ID',$product->id);
                         echo getHiddenField('old_img',$product->img);
+                        echo getHiddenField('old_name',$product->name);
 
                         echo getInputField([
                           'label' => 'Product Name',

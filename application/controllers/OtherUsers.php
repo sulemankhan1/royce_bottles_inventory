@@ -74,7 +74,7 @@ class OtherUsers extends MY_Controller
           $img_url = base_url('assets/images/avatars/01.png');
       }
 
-      $name = '<img src="'. $img_url .'" class="table-img-design" alt="">'.
+      $name = '<div class="table-circular-img"><img src="'. $img_url .'" class="" alt=""></div>'.
         '<span class="table-img-txt-design">'.$v->name.'</span>';
 
 			$nestedData[] = $name;
@@ -245,7 +245,7 @@ class OtherUsers extends MY_Controller
            }
            else
            {
-             
+
              if(!empty($ID))
              {
 

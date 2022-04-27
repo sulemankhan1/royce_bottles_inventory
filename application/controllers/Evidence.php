@@ -70,7 +70,7 @@ class Evidence extends MY_Controller
           $img_url = base_url('assets/images/avatars/01.png');
       }
 
-      $image = '<img src="'. $img_url .'" class="table-img-design" alt="">';
+      $image = '<div class="table-circular-img"><img src="'. $img_url .'" class="" alt=""></div>';
 
       $nestedData[] = $v->shop_name;
       $nestedData[] = $image;

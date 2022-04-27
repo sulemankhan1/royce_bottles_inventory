@@ -34,7 +34,7 @@
                            <th>Primary Contact </th>
                            <th>Secondary Contact </th>
                            <th>Email For E-receipt </th>
-                           <th>Category</th>
+                           <th>Payment Type</th>
                            <th>Salesperson </th>
                            <th class="dnr">Actions</th>
                         </tr>

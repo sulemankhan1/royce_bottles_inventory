@@ -77,7 +77,7 @@ if ( ! function_exists('loginUserDetails'))
     $result = $ci->db->get_where('users',['id' => $user_id])->row();
 
     return $result;
-    
+
   }
 
 }

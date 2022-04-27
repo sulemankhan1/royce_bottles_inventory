@@ -27,6 +27,7 @@ table tbody tr {
 
 table.dataTable {
   margin-bottom: 20px!important;
+  width: 100%!important;
 }
 
 .actions-icons a
@@ -34,15 +35,11 @@ table.dataTable {
   padding: 2px!important;
 }
 
-.table-img-design
-{
-    width: 45px!important;
-    border-radius: 23px!important;
-}
-
 .table-img-txt-design
 {
-  margin-left: 3px!important;
+  position: absolute;
+  margin-left: 5px!important;
+  margin-top: 17.5px!important;
 }
 
 table thead tr th:first-child{
@@ -51,4 +48,29 @@ table thead tr th:first-child{
 
 table thead tr th:last-child{
     width: 10%!important;
+}
+
+
+/* tablecircular img */
+.table-circular-img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  float: left;
+}
+.table-circular-img img {
+  min-width: 60px;
+  min-height: 60px;
+  width: auto;
+  height: 100%;
+  position: absolute;
+  background-size: 100%;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }

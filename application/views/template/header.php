@@ -36,6 +36,9 @@
 	<!-- toastr  css -->
 	<link rel="stylesheet" href="<?= base_url('assets/css/toastr.min.css') ?>" />
 
+	<!-- select 2 css-->
+	<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
 
 	<!-- Font Awesome script -->
 	<script src="https://kit.fontawesome.com/b04cb78fd5.js" crossorigin="anonymous"></script>
@@ -63,12 +66,6 @@
 				.form-control,.form-select
 				{
 					border: 1px solid #c7c7c7!important;
-				}
-
-				.user-form-img
-				{
-					max-width: 135px!important;
-					border-radius: 70px!important;
 				}
 
 				.action-icons,.action-icons:hover
@@ -174,6 +171,31 @@
 						margin-right: 7px;
 					}
 				}
+
+				/* deetails circular img */
+				.details-circular-img {
+				  width: 135px;
+				  height: 135px;
+				  border-radius: 50%;
+				  position: relative;
+				  overflow: hidden;
+					margin:auto;
+				}
+				.details-circular-img img {
+				  min-width: 135px;
+				  min-height: 135px;
+				  width: auto;
+				  height: 100%;
+				  position: absolute;
+				  background-size: 100%;
+				  left: 50%;
+				  top: 50%;
+				  -webkit-transform: translate(-50%, -50%);
+				  -moz-transform: translate(-50%, -50%);
+				  -ms-transform: translate(-50%, -50%);
+				  transform: translate(-50%, -50%);
+				}
+
 		 </style>
 
 </head>

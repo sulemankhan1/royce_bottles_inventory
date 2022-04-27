@@ -72,14 +72,13 @@
                           echo getInputField([
                               'label' => 'Primary Contact',
                               'name' => 'primary_contact',
-                              'type' => 'number',
                               'value' => $customer->primary_contact
                             ]);
                           echo getInputField([
                               'label' => 'Secondary Contact',
                               'name' => 'secondary_contact',
-                              'type' => 'number',
-                              'value' => $customer->secondary_contact
+                              'value' => $customer->secondary_contact,
+                              'required' => false
                             ]);
                           echo getInputField([
                               'label' => 'Email Address For E-Receipt',
@@ -95,7 +94,7 @@
                             ]);
 
                           echo getSelectField([
-                            'label' => 'Category',
+                            'label' => 'Payment Type',
                             'name' => 'cat_type',
                             'static' => true,
                             'data' => $cat_types,
@@ -110,14 +109,14 @@
                           ]);
 
                           echo getSelectField([
-                            'label' => 'Driver',
+                            'label' => 'Assign Driver To This Customer',
                             'name' => 'driver_id',
                             'data' => $drivers,
                             'selected' => $customer->driver_id
                           ]);
 
                           echo getSelectField([
-                            'label' => 'Days',
+                            'label' => 'Day',
                             'name' => 'day',
                             'static' => true,
                             'data' => $days,

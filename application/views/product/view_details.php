@@ -1,5 +1,7 @@
 <div class="row mt-5">
-  <div class="col-sm-12 text-center">
+  <div class="col-sm-12">
+
+    <div class="details-circular-img">
 
     <?php
 
@@ -7,14 +9,15 @@
 
       if (@getimagesize(base_url('uploads/'.$folder.'/'.$product->img)) && !empty($product->img))
       {
-          echo '<img src="'. base_url('uploads/'.$folder.'/'.$product->img) .'" class="img-thumbnail user-form-img" alt="...">';
+          echo '<img src="'. base_url('uploads/'.$folder.'/'.$product->img) .'" alt="...">';
       }
       else
       {
-          echo '<img src="'. base_url('assets/images/avatars/01.png') .'" class="img-thumbnail user-form-img" alt="...">';
+          echo '<img src="'. base_url('assets/images/avatars/01.png') .'" alt="...">';
       }
 
      ?>
+    </div>
 
   </div>
   <div class="col-sm-12">

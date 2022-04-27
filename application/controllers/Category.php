@@ -114,8 +114,31 @@ class Category extends MY_Controller
 
   public function save_category()
   {
+      $p = $this->inp_post();
+      $is_unique = '';
+      if(isset($p['old_name']))
+      {
 
-      $this->form_validation->set_rules('name', 'Name', 'required');
+        if ($p['name'] != $p['old_name'])
+        {
+
+          $is_unique = '|is_unique[categories.name]';
+
+        }
+
+      }
+      else
+      {
+
+        $is_unique = '|is_unique[categories.name]';
+
+      }
+
+      $this->form_validation->set_rules('name', 'Category', 'required'.$is_unique,[
+        'required'      => 'The %s field is required',
+        'is_unique'     => 'The %s already exist'
+      ]);
+
       $this->form_validation->set_rules('price', 'Price', 'required');
 
       if ($this->form_validation->run() == FALSE)
@@ -125,13 +148,22 @@ class Category extends MY_Controller
 
         $this->session->set_flashdata('_error',$error);
 
-        redirect('add_category');
+        if(isset($p['ID']))
+        {
+
+          redirect('edit_category/'.$p['ID']);
+
+        }
+        else
+        {
+
+          redirect('add_category');
+
+        }
 
       }
       else
       {
-
-           $p = $this->inp_post();
 
            $ID = (isset($p['ID'])?$p['ID']:'');
            unset($p['ID']);
