@@ -48,6 +48,8 @@
 
                           echo getHiddenField('ID',$customer->id);
                           echo getHiddenField('old_img',$customer->img);
+                          echo getHiddenField('old_email',$customer->e_receipt_email);
+                          echo getHiddenField('old_soa_email',$customer->soa_email);
 
                           echo getInputField([
                               'label' => 'Customer Name',

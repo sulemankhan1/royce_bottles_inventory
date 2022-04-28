@@ -179,13 +179,62 @@ class Customer extends MY_Controller
   public function save_customer()
   {
 
+      $p = $this->inp_post();
+      $is_email_unique = '';
+      $is_soa_email_unique = '';
+
       $this->form_validation->set_rules('name', 'Customer Name', 'required');
       $this->form_validation->set_rules('shop_name', 'Shop Name', 'required');
       $this->form_validation->set_rules('shop_acronym', 'Shop Acronym', 'required');
       $this->form_validation->set_rules('shop_id', 'Shop ID', 'required');
       $this->form_validation->set_rules('primary_contact', 'Primary Contact', 'required');
-      $this->form_validation->set_rules('email', 'Email Address For E-Receipt', 'required');
-      $this->form_validation->set_rules('soa_email', 'Email Address For SOA', 'required');
+
+      if(isset($p['old_email']))
+      {
+
+        if ($p['email'] != $p['old_email'])
+        {
+
+          $is_email_unique = '|is_unique[customers.e_receipt_email]';
+
+        }
+
+      }
+      else
+      {
+
+        $is_email_unique = '|is_unique[customers.e_receipt_email]';
+
+      }
+
+      $this->form_validation->set_rules('email', 'Email Address For E-Receipt', 'required'.$is_email_unique,[
+        'required'      => 'The %s field is required',
+        'is_unique'     => 'The %s already exist'
+      ]);
+
+      if(isset($p['old_soa_email']))
+      {
+
+        if ($p['soa_email'] != $p['old_soa_email'])
+        {
+
+          $is_soa_email_unique = '|is_unique[customers.soa_email]';
+
+        }
+
+      }
+      else
+      {
+
+        $is_soa_email_unique = '|is_unique[customers.soa_email]';
+
+      }
+
+      $this->form_validation->set_rules('soa_email', 'Email Address For SOA', 'required'.$is_soa_email_unique.'|callback_check_customer_email['.$p['soa_email'].']',[
+        'required'      => 'The %s field is required',
+        'is_unique'     => 'The %s already exist'
+      ]);
+
       $this->form_validation->set_rules('cat_type', 'Category', 'required');
       $this->form_validation->set_rules('salesperson_id', 'Salesperson', 'required');
       $this->form_validation->set_rules('driver_id', 'Driver', 'required');
@@ -200,13 +249,22 @@ class Customer extends MY_Controller
 
         $this->session->set_flashdata('_error',$error);
 
-        redirect('add_customer');
+        if(isset($p['ID']))
+        {
+
+          redirect('edit_customer/'.$p['ID']);
+
+        }
+        else
+        {
+
+          redirect('add_customer');
+
+        }
 
       }
       else
       {
-
-           $p = $this->inp_post();
 
            $ID = (isset($p['ID'])?$p['ID']:'');
            unset($p['ID']);
@@ -325,6 +383,19 @@ class Customer extends MY_Controller
 
 
       }
+
+  }
+
+  function check_customer_email($second_field,$first_field)
+  {
+
+    if ($second_field == $first_field)
+    {
+        $this->form_validation->set_message('check_customer_email', 'The Email Address For E-Receipt and Email Address For SOA should not be same');
+        return false;
+    }
+
+    return true;
 
   }
 
