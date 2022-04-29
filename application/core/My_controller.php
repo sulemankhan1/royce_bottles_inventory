@@ -119,7 +119,7 @@ class MY_Controller extends CI_Controller
   {
 
       $this->load->library('email');
-      
+
       $to = $arr['to'];
       $subject = $arr['subject'];
       $body = $arr['body'];

@@ -26,7 +26,8 @@ class Category extends MY_Controller
       ],
       'scripts' => [
         'DataTable/myDataTable.js',
-        'main.js'
+        'main.js',
+        'dataTable_buttons'
       ]
 
     ];

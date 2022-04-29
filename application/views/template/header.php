@@ -31,13 +31,13 @@
 	<link rel="stylesheet" href="<?= base_url('assets/css/custom.min.css?v=1.2.0') ?>" />
 
 	<!-- datatable button Css -->
-	<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css" />
+	<link rel="stylesheet" href="<?= base_url('assets/css/dataTable/buttons.dataTables.min.css') ?>" />
 
 	<!-- toastr  css -->
 	<link rel="stylesheet" href="<?= base_url('assets/css/toastr.min.css') ?>" />
 
 	<!-- select 2 css-->
-	<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+	<link href="<?= base_url('assets/css/select2/select2.min.css') ?>" rel="stylesheet" />
 
 
 	<!-- Font Awesome script -->

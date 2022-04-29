@@ -81,3 +81,26 @@ if ( ! function_exists('loginUserDetails'))
   }
 
 }
+
+if ( ! function_exists('getDateTimeFormat'))
+{
+
+  function getDateTimeFormat($value ,$type = 'time')
+  {
+
+    if($type == 'time')
+    {
+
+      return date('d-m-Y H:i A',strtotime($value));
+
+    }
+    else
+    {
+
+      return date('d-m-Y',strtotime($value));
+
+    }
+
+  }
+
+}

@@ -28,6 +28,7 @@ class Customer extends MY_Controller
         'DataTable/myDataTable.js',
         'users/customers.js',
         'main.js',
+        'dataTable_buttons'
       ]
 
     ];

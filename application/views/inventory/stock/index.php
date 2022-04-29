@@ -17,7 +17,9 @@
 
                  <h4 class="card-title"><?= $page_head ?></h4>
                </div>
-
+               <?=
+               getHiddenField('ajax_url',$ajax_url);
+               ?>
                  <a href="javascript:void(0)" class="btn btn-sm btn-primary" id="add_stock_" data-redirect="view_stock">Add Stock</a>
 
             </div>
@@ -31,7 +33,7 @@
                            <th>Qty</th>
                            <th>Added By</th>
                            <th>Added At</th>
-                           <th>Action</th>
+                           <th class="dnr">Action</th>
                         </tr>
                      </thead>
                      <tbody>

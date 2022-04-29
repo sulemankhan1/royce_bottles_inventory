@@ -30,7 +30,8 @@ class Admin extends MY_Controller
       'scripts' => [
         'DataTable/usersDataTable.js',
         'users/main.js',
-        'main.js'
+        'main.js',
+        'dataTable_buttons'
       ]
 
     ];

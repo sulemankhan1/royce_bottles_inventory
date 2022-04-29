@@ -30,7 +30,8 @@ class Driver extends MY_Controller
       'scripts' => [
         'DataTable/usersDataTable.js',
         'users/main.js',
-        'main.js'
+        'main.js',
+        'dataTable_buttons'
       ]
 
     ];
@@ -42,7 +43,7 @@ class Driver extends MY_Controller
 
   public function getDrivers()
 	{
-    
+
     $this->load->model('Driver_model');
 
 		$records = $this->Driver_model->getDrivers($_REQUEST,'records');

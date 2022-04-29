@@ -47,10 +47,70 @@ class Inventory extends MY_Controller
       'page_head' => 'Add Stock',
       'active_menu' => 'inventory',
       'active_submenu' => 'add_stock',
+      'products' => $this->bm->getRows('products','is_deleted',0)
 
     ];
 
     $this->template('inventory/stock/add',$data);
+
+  }
+
+  public function save_stock()
+  {
+
+      $this->form_validation->set_rules('product_id', 'Product', 'required');
+      $this->form_validation->set_rules('qty', 'Qty', 'required');
+
+      if ($this->form_validation->run() == FALSE)
+      {
+
+        $error = validation_errors();
+
+        $this->session->set_flashdata('_error',$error);
+
+        redirect('add_stock');
+
+      }
+      else
+      {
+
+          $p = $this->inp_post();
+
+           $arr = [
+
+              'product_id' => $p['product_id'],
+              'qty' => $p['qty'],
+              'type' => 'add',
+              'added_by' => $this->user_id_
+
+           ];
+
+           $this->trans_('start');
+
+                $this->bm->insert_row('stock',$arr);
+
+                $arr['type'] = 'add_stock';
+
+                $this->bm->insert_row('logs',$arr);
+
+           $this->trans_('complete');
+
+           if ($this->trans_('status') === FALSE)
+           {
+
+               $this->session->set_flashdata('_error','Connection error Try Again');
+
+           }
+           else
+           {
+
+               $this->session->set_flashdata('_success','Stock added successfully');
+
+           }
+
+           redirect('add_stock');
+
+      }
 
   }
 
@@ -63,18 +123,107 @@ class Inventory extends MY_Controller
       'page_head' => 'View Stock',
       'active_menu' => 'inventory',
       'active_submenu' => 'view_stock',
+      'ajax_url' => site_url('Inventory/getStocks'),
       'styles' => [
         'my-dataTable.css'
       ],
       'scripts' => [
-        'DataTable/myDataTable.js',
+        'DataTable/stockDataTable.js',
         'inventory/add_stock.js',
-        'main.js'
+        'main.js',
+        'dataTable_buttons'
       ]
 
     ];
 
     $this->template('inventory/stock/index',$data);
+
+  }
+
+	public function getStocks()
+	{
+
+    $this->load->model('Stock_model');
+
+		$records = $this->Stock_model->getStocks($_REQUEST,'records');
+		$totalFilteredRecords = $this->Stock_model->getStocks($_REQUEST,'filter');
+		$recordsTotal = $this->Stock_model->getStocks($_REQUEST,'recordsTotal');
+
+		$data = array();
+		$SNo = 0;
+		$Style = "";
+
+		foreach ($records as $key => $v)
+		{
+
+      $ID = $v->id;
+
+			$SNo++;
+
+			$nestedData = array();
+
+			$nestedData[] = $SNo;
+
+			$nestedData[] = $v->product_name;
+      $nestedData[] = $v->qty;
+      $nestedData[] = $v->added_by_name;
+			$nestedData[] = getDateTimeFormat($v->added_at);
+
+        $delete_url = site_url('delete_stock/'.$ID);
+
+  			$actions = '';
+
+          $actions .= '<span class="actions-icons">';
+
+  					$actions .= '<a href="javascript:void(0)" class="action-icons delete_record_" data-msg="Are you sure you want to delete this Stock?" data-url="'. $delete_url .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete">
+              <i class="fa-solid fa-trash"></i>
+            </a>';
+
+          $actions .= '</span>';
+
+			     $nestedData[] = $actions;
+
+           $data[] = $nestedData;
+
+		}
+
+		$json_data = array(
+			"draw" => intval($_REQUEST['draw']), // for every request/draw by clientside , they send a number as a parameter, when they recieve a response/data they first check the draw number, so we are sending same number in draw.
+			"recordsTotal" => intval($recordsTotal), // total number of records
+			"recordsFiltered" => intval($totalFilteredRecords), // total number of records after searching, if there is no searching then totalFiltered = totalData
+			"data" => $data // total data array
+		);
+
+
+		echo json_encode($json_data);
+
+	}
+
+  public function delete_stock($stock_id)
+  {
+
+      $arr = [
+
+        'type' => 'remove'
+
+      ];
+
+      $res = $this->bm->update('stock',$arr,'id',$stock_id);
+
+      if ($res)
+      {
+
+        $this->session->set_flashdata('_success','Stock deleted successfully');
+
+      }
+      else
+      {
+
+        $this->session->set_flashdata('_error','Connection error Try Again');
+
+      }
+
+      redirect('view_stock');
 
   }
 

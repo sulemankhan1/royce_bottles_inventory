@@ -26,7 +26,8 @@ class Evidence extends MY_Controller
       ],
       'scripts' => [
         'DataTable/evidenceDataTable.js',
-        'main.js'
+        'main.js',
+        'dataTable_buttons'
       ]
 
     ];

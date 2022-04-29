@@ -17,7 +17,7 @@
                </div>
             </div>
             <div class="card-body">
-              <form class="row g-3 needs-validation" novalidate>
+              <form class="row g-3 needs-validation" novalidate action="<?= site_url('save_stock') ?>" method="post">
                 <div class="row mt-4">
 
                     <div class="col-sm-12">
@@ -25,27 +25,20 @@
 
                         <?php
 
-                          $pro_arr = [
-
-                            ['id' => 1,'name' => 'Product1'],
-                            ['id' => 2,'name' => 'Product2'],
-                            ['id' => 3,'name' => 'Product3']
-
-                          ];
-
                           echo getHiddenField('redirect_to','add_stock');
 
                           echo getSelectField([
                             'label' => 'Product',
                             'name' => 'product_id',
-                            'data' => $pro_arr
+                            'data' => $products
                           ]);
 
                           echo getInputField([
                             'label' => 'Qty',
                             'type' => 'number',
                             'name' => 'qty',
-                            'column' => 'sm-3'
+                            'column' => 'sm-3',
+                            'attr' => 'min="1"'
                           ]);
 
                           echo getSubmitBtn('Add Stock');

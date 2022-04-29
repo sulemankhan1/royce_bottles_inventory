@@ -85,16 +85,19 @@ $route['update_profile'] = 'Profile/update_profile';
 $route['view_profile'] = 'Profile/view_profile';
 
 
-//inventory
+//inventory //view inventory
 $route['view_inventory'] = 'Inventory';
+
+//inventory //stock
 $route['add_stock'] = 'Inventory/add_stock';
+$route['save_stock'] = 'Inventory/save_stock';
 $route['view_stock'] = 'Inventory/view_stock';
+$route['delete_stock/(:num)'] = 'Inventory/delete_stock/$1';
 $route['stock_history'] = 'Inventory/stock_history';
 $route['return_stock'] = 'Inventory/return_stock';
 $route['live_stock'] = 'Inventory/live_stock';
 
 // inventory //request_stock
-
 $route['request_stock'] = 'Inventory/request_stock';
 $route['save_driver_request'] = 'Inventory/save_driver_stock_request';
 
