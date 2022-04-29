@@ -36,64 +36,7 @@
                            <th class="dnr">Action</th>
                         </tr>
                      </thead>
-                     <tbody>
-                       <tr>
-                          <td>1</td>
-                          <td>Product1</td>
-                          <td>10</td>
-                          <td>Demo</td>
-                          <td>03-04-2021,5:10 PM</td>
-                          <td>
-                            <span class="actions-icons">
-                              <a href="javascript:void(0)" class="action-icons delete_record_" data-type-msg="Stock" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete">
-                                <i class="fa-solid fa-trash"></i>
-                              </a>
-                            </span>
-                          </td>
-                       </tr>
-                       <tr>
-                          <td>1</td>
-                          <td>Product1</td>
-                          <td>10</td>
-                          <td>Demo</td>
-                          <td>03-04-2021,5:10 PM</td>
-                          <td>
-                            <span class="actions-icons">
-                              <a href="javascript:void(0)" class="action-icons delete_record_" data-type-msg="Stock" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete">
-                                <i class="fa-solid fa-trash"></i>
-                              </a>
-                            </span>
-                          </td>
-                       </tr>
-                       <tr>
-                          <td>1</td>
-                          <td>Product1</td>
-                          <td>10</td>
-                          <td>Demo</td>
-                          <td>03-04-2021,5:10 PM</td>
-                          <td>
-                            <span class="actions-icons">
-                              <a href="javascript:void(0)" class="action-icons delete_record_" data-type-msg="Stock" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete">
-                                <i class="fa-solid fa-trash"></i>
-                              </a>
-                            </span>
-                          </td>
-                       </tr>
-                       <tr>
-                          <td>1</td>
-                          <td>Product1</td>
-                          <td>10</td>
-                          <td>Demo</td>
-                          <td>03-04-2021,5:10 PM</td>
-                          <td>
-                            <span class="actions-icons">
-                              <a href="javascript:void(0)" class="action-icons delete_record_" data-type-msg="Stock" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete">
-                                <i class="fa-solid fa-trash"></i>
-                              </a>
-                            </span>
-                          </td>
-                       </tr>
-                     </tbody>
+                     <tbody></tbody>
                   </table>
                </div>
             </div>

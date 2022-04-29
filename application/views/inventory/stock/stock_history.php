@@ -14,7 +14,9 @@
          <div class="card">
             <div class="card-header d-flex justify-content-between">
                <div class="header-title">
-
+                 <?=
+                 getHiddenField('ajax_url',$ajax_url);
+                 ?>
                  <h4 class="card-title"><?= $page_head ?></h4>
                </div>
 
@@ -32,38 +34,7 @@
                            <th>Added At</th>
                         </tr>
                      </thead>
-                     <tbody>
-                       <tr>
-                          <td>1</td>
-                          <td>Product1</td>
-                          <td>10</td>
-                          <td>
-                              <span class="badge rounded-pill bg-success">Add</span>
-                          </td>
-                          <td>Demo</td>
-                          <td>03-04-2021,5:10 PM</td>
-                       </tr>
-                       <tr>
-                          <td>1</td>
-                          <td>Product1</td>
-                          <td>10</td>
-                          <td>
-                              <span class="badge rounded-pill bg-danger">Remove</span>
-                          </td>
-                          <td>Demo</td>
-                          <td>03-04-2021,5:10 PM</td>
-                       </tr>
-                       <tr>
-                          <td>1</td>
-                          <td>Product1</td>
-                          <td>10</td>
-                          <td>
-                              <span class="badge rounded-pill bg-success">Add</span>
-                          </td>
-                          <td>Demo</td>
-                          <td>03-04-2021,5:10 PM</td>
-                       </tr>
-                     </tbody>
+                     <tbody></tbody>
                   </table>
                </div>
             </div>

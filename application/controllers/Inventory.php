@@ -21,6 +21,8 @@ class Inventory extends MY_Controller
       'page_head' => 'Inventory',
       'active_menu' => 'inventory',
       'active_submenu' => 'view_inventory',
+      'products' => $this->bm->getRows('products','is_deleted',0),
+      'redirect_to' => site_url('view_inventory'),
       'styles' => [
         'my-dataTable.css'
       ],
@@ -57,6 +59,9 @@ class Inventory extends MY_Controller
 
   public function save_stock()
   {
+      $p = $this->inp_post();
+
+      $rediect_to = $p['redirect_to'];
 
       $this->form_validation->set_rules('product_id', 'Product', 'required');
       $this->form_validation->set_rules('qty', 'Qty', 'required');
@@ -68,13 +73,11 @@ class Inventory extends MY_Controller
 
         $this->session->set_flashdata('_error',$error);
 
-        redirect('add_stock');
+        redirect($rediect_to);
 
       }
       else
       {
-
-          $p = $this->inp_post();
 
            $arr = [
 
@@ -108,7 +111,7 @@ class Inventory extends MY_Controller
 
            }
 
-           redirect('add_stock');
+           redirect($rediect_to);
 
       }
 
@@ -124,6 +127,8 @@ class Inventory extends MY_Controller
       'active_menu' => 'inventory',
       'active_submenu' => 'view_stock',
       'ajax_url' => site_url('Inventory/getStocks'),
+      'products' => $this->bm->getRows('products','is_deleted',0),
+      'redirect_to' => site_url('view_stock'),
       'styles' => [
         'my-dataTable.css'
       ],
@@ -204,22 +209,42 @@ class Inventory extends MY_Controller
 
       $arr = [
 
-        'type' => 'remove'
+        'is_deleted' => 1
 
       ];
 
-      $res = $this->bm->update('stock',$arr,'id',$stock_id);
+      $this->trans_('start');
 
-      if ($res)
+           $this->bm->update('stock',$arr,'id',$stock_id);
+
+           $stock = $this->bm->getRow('stock','id',$stock_id);
+
+           $stock_arr = [
+
+              'product_id' => $stock->product_id,
+              'qty' => $stock->qty,
+              'type' => 'remove',
+              'added_by' => $this->user_id_
+
+           ];
+
+           $this->bm->insert_row('stock',$stock_arr);
+
+           $stock_arr['type'] = 'remove_stock';
+
+           $this->bm->insert_row('logs',$stock_arr);
+
+      $this->trans_('complete');
+
+      if ($this->trans_('status') === FALSE)
       {
 
-        $this->session->set_flashdata('_success','Stock deleted successfully');
+          $this->session->set_flashdata('_error','Connection error Try Again');
 
       }
       else
       {
-
-        $this->session->set_flashdata('_error','Connection error Try Again');
+          $this->session->set_flashdata('_success','Stock deleted successfully');
 
       }
 
@@ -236,13 +261,15 @@ class Inventory extends MY_Controller
       'page_head' => 'Stock History',
       'active_menu' => 'inventory',
       'active_submenu' => 'stock_history',
+      'ajax_url' => base_url('Inventory/getStockHistory'),
       'styles' => [
         'my-dataTable.css'
       ],
       'scripts' => [
-        'DataTable/myDataTable.js',
+        'DataTable/stockHistoryDataTable.js',
         'inventory/add_stock.js',
-        'main.js'
+        'main.js',
+        'dataTable_buttons'
       ]
 
     ];
@@ -250,6 +277,81 @@ class Inventory extends MY_Controller
     $this->template('inventory/stock/stock_history',$data);
 
   }
+
+  public function getStockHistory()
+	{
+
+    $this->load->model('Stock_model');
+
+		$records = $this->Stock_model->getStockHistory($_REQUEST,'records');
+		$totalFilteredRecords = $this->Stock_model->getStockHistory($_REQUEST,'filter');
+		$recordsTotal = $this->Stock_model->getStockHistory($_REQUEST,'recordsTotal');
+
+		$data = array();
+		$SNo = 0;
+		$Style = "";
+
+		foreach ($records as $key => $v)
+		{
+
+      $ID = $v->id;
+
+			$SNo++;
+
+			$nestedData = array();
+
+			$nestedData[] = $SNo;
+
+			$nestedData[] = $v->product_name;
+      $nestedData[] = $v->qty;
+
+      if($v->type == 'add')
+      {
+
+        $type = '<span class="badge rounded-pill bg-success">'.ucfirst($v->type).'</span>';
+
+      }
+      else
+      {
+
+        $type = '<span class="badge rounded-pill bg-danger">'.ucfirst($v->type).'</span>';
+
+      }
+
+      $nestedData[] = $type;
+
+      $nestedData[] = $v->added_by_name;
+			$nestedData[] = getDateTimeFormat($v->added_at);
+
+        $delete_url = site_url('delete_stock/'.$ID);
+
+  			$actions = '';
+
+          $actions .= '<span class="actions-icons">';
+
+  					$actions .= '<a href="javascript:void(0)" class="action-icons delete_record_" data-msg="Are you sure you want to delete this Stock?" data-url="'. $delete_url .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete">
+              <i class="fa-solid fa-trash"></i>
+            </a>';
+
+          $actions .= '</span>';
+
+			     $nestedData[] = $actions;
+
+           $data[] = $nestedData;
+
+		}
+
+		$json_data = array(
+			"draw" => intval($_REQUEST['draw']), // for every request/draw by clientside , they send a number as a parameter, when they recieve a response/data they first check the draw number, so we are sending same number in draw.
+			"recordsTotal" => intval($recordsTotal), // total number of records
+			"recordsFiltered" => intval($totalFilteredRecords), // total number of records after searching, if there is no searching then totalFiltered = totalData
+			"data" => $data // total data array
+		);
+
+
+		echo json_encode($json_data);
+
+	}
 
   public function assign_to_driver()
   {
