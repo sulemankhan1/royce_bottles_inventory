@@ -23,6 +23,7 @@
 
                         <div class="row">
                           <div class="col-sm-12">
+                            <div class="details-circular-img">
                             <?php
 
                             //check image is exist in folder or not
@@ -31,7 +32,7 @@
 
                             if (@getimagesize(base_url('uploads/'.$folder.'/'.$user->img)) && !empty($user->img))
                             {
-                                echo '<img src="'. base_url('uploads/'.$folder.'/'.$user->img) .'" class="img-thumbnail user-form-img" alt="...">';
+                                echo '<img src="'. base_url('uploads/'.$folder.'/'.$user->img) .'" class="user-form-img" alt="...">';
                             }
                             else
                             {
@@ -39,7 +40,7 @@
                             }
 
                              ?>
-
+                           </div>
                           </div>
                           <div class="col-sm-12" style="text-align: center;margin-top: 10px;">
                             <p class="view-details-txt"><span class="badge rounded-pill bg-secondary"><?= ucfirst($type) ?></span></p>
@@ -66,7 +67,7 @@
                         echo viewDetailsCol('Username',$user->username);
                         echo viewDetailsCol('Contact #',$user->contact_no);
 
-                        if($type == 'Driver' || $type == 'Other_user')
+                        if($type == 'driver' || $type == 'other')
                         {
 
                           echo viewDetailsCol('License #',$user->license_no);

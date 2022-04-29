@@ -24,7 +24,9 @@
 
                          <div class="row">
                            <div class="col-sm-12">
-                             <img src="<?= base_url('assets/images/evidence_demo.png') ?>" class="img-thumbnail user-form-img" alt="..." style="border-radius:0px!important;">
+                             <div class="details-circular-img" style="margin:inherit!important;">
+                               <img src="<?= base_url('assets/images/evidence_demo.png') ?>" class="user-form-img" alt="...">
+                             </div>
                              <input type="file" class="choose_img" name="img" accept="image/*" capture style="display:none;">
                            </div>
                            <div class="col-sm-12 mt-4" style="margin-left:5px;">

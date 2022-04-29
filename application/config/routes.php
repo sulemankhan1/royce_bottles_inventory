@@ -81,6 +81,7 @@ $route['update_customer_products_price'] = 'Customer/update_products_price';
 
 //profile
 $route['edit_profile'] = 'Profile/edit_profile';
+$route['update_profile'] = 'Profile/update_profile';
 $route['view_profile'] = 'Profile/view_profile';
 
 

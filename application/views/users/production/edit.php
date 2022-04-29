@@ -49,6 +49,8 @@
 
                             echo getHiddenField('ID',$production->id);
                             echo getHiddenField('old_img',$production->img);
+                            echo getHiddenField('old_email',$production->email);
+                            echo getHiddenField('old_username',$production->username);
 
                             echo getInputField([
                               'label' => 'Name',

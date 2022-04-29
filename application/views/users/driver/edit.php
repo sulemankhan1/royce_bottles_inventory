@@ -56,6 +56,8 @@
 
                         echo getHiddenField('ID',$driver->id);
                         echo getHiddenField('old_img',$driver->img);
+                        echo getHiddenField('old_email',$driver->email);
+                        echo getHiddenField('old_username',$driver->username);
 
                         echo getInputField([
                           'label' => 'Name',

@@ -57,6 +57,8 @@
 
                         echo getHiddenField('ID',$admin->id);
                         echo getHiddenField('old_img',$admin->img);
+                        echo getHiddenField('old_email',$admin->email);
+                        echo getHiddenField('old_username',$admin->username);
 
                         echo getInputField([
                           'label' => 'Name',

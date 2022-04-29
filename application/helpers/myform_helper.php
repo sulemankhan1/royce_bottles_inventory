@@ -298,7 +298,7 @@ if ( ! function_exists('getImgField'))
 
       $img_row = '<div class="row">'.
                     '<div class="col-sm-12">'.
-                      '<img src="'. $img_url .'" class="img-thumbnail user-form-img" alt="...">'.
+                      '<div class="details-circular-img"><img src="'. $img_url .'" class="user-form-img" alt="..."></div>'.
                       '<input type="file" class="choose_img" name="'.$name.'" style="display:none;">'.
                     '</div>'.
                     '<div class="col-sm-12 mt-4" style="margin-left:10px;">'.

@@ -139,7 +139,26 @@ class Auth extends CI_Controller
        {
 
          echo "this module is on maintenance";
-         
+
+         $mail_credentails = [
+
+            'to' => $email,
+            'subject' => 'Forget Password',
+            'body' => 'This is forget password'
+
+         ];
+
+         $is_send = $this->send_mail_($mail_credentails);
+
+         if($is_send)
+         {
+           echo "sent";
+         }
+         else
+         {
+           echo "not";
+         }
+
          die();
 
        }
@@ -173,6 +192,48 @@ class Auth extends CI_Controller
       echo "Connection error";
 
     }
+
+  }
+
+  public function send_mail_($arr)
+  {
+
+      $this->load->library('email');
+
+      $to = $arr['to'];
+      $subject = $arr['subject'];
+      $body = $arr['body'];
+
+      $company_name = companySetting('name');
+
+      $config['crlf']     = "\r\n";
+      $config['newline']  = "\r\n";
+      $config['mailtype'] = 'html';
+      $config['charset']  = 'utf-8';
+
+      $this->email->initialize($config);
+      $this->email->from('Royce',$company_name);
+      $this->email->to($to);
+
+      $this->email->subject($subject);
+
+      $this->email->message($body);
+
+      if(isset($arr['attachment']))
+      {
+
+        $this->email->attach($_SERVER["DOCUMENT_ROOT"].$arr['attachment']);
+
+      }
+
+      if($this->email->send() == true)
+      {
+        return true;
+      }
+      else
+      {
+        return false;
+      }
 
   }
 

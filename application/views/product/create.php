@@ -40,8 +40,7 @@
                         echo getInputField([
                           'label' => 'Product Name',
                           'name' => 'name',
-                          'column' => 'sm-12',
-                          'value' => getPostValue('name')
+                          'column' => 'sm-12'
                         ]);
                         echo getInputField([
                           'label' => 'Product Code',

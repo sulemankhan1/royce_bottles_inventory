@@ -49,6 +49,8 @@
 
                         echo getHiddenField('ID',$otherUser->id);
                         echo getHiddenField('old_img',$otherUser->img);
+                        echo getHiddenField('old_email',$otherUser->email);
+                        echo getHiddenField('old_username',$otherUser->username);
 
                         echo getInputField([
                           'label' => 'Name',

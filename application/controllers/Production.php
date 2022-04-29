@@ -166,9 +166,58 @@ class Production extends MY_Controller
   public function save_production()
   {
 
+      $p = $this->inp_post();
+      $is_email_unique = '';
+      $is_username_unique = '';
+
       $this->form_validation->set_rules('name', 'Name', 'required');
-      $this->form_validation->set_rules('email', 'Email', 'required');
-      $this->form_validation->set_rules('username', 'Username', 'required');
+
+      if(isset($p['old_email']))
+      {
+
+        if ($p['email'] != $p['old_email'])
+        {
+
+          $is_email_unique = '|is_unique[users.email]';
+
+        }
+
+      }
+      else
+      {
+
+        $is_email_unique = '|is_unique[users.email]';
+
+      }
+
+      $this->form_validation->set_rules('email', 'Email', 'required'.$is_email_unique,[
+        'required'      => 'The %s field is required',
+        'is_unique'     => 'The %s already exist'
+      ]);
+
+      if(isset($p['old_username']))
+      {
+
+        if ($p['username'] != $p['old_username'])
+        {
+
+          $is_username_unique = '|is_unique[users.username]';
+
+        }
+
+      }
+      else
+      {
+
+        $is_username_unique = '|is_unique[users.username]';
+
+      }
+
+      $this->form_validation->set_rules('username', 'Username', 'required'.$is_username_unique,[
+        'required'      => 'The %s field is required',
+        'is_unique'     => 'The %s already exist'
+      ]);
+
       $this->form_validation->set_rules('password', 'Password', 'required');
       $this->form_validation->set_rules('contact_no', 'Contact #', 'required');
       $this->form_validation->set_rules('fin_no', 'FIN #', 'required');
@@ -180,13 +229,22 @@ class Production extends MY_Controller
 
         $this->session->set_flashdata('_error',$error);
 
-        redirect('add_production');
+        if(isset($p['ID']))
+        {
+
+            redirect('edit_production/'.$p['ID']);
+
+        }
+        else
+        {
+
+          redirect('add_production');
+
+        }
 
       }
       else
       {
-
-           $p = $this->inp_post();
 
            $ID = (isset($p['ID'])?$p['ID']:'');
            unset($p['ID']);

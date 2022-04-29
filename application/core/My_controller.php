@@ -113,13 +113,50 @@ class MY_Controller extends CI_Controller
           break;
       }
 
-      // $this->maincategory_model->first_function($maincategoryData);
-      // $this->market_model->second_function($marketData);
-      // $this->db->trans_complete();
-      // if ($this->db->trans_status() === FALSE) {
-      //   throw error
-      //       `enter code here`
-      // }
+  }
+
+  public function send_mail_($arr)
+  {
+
+      $this->load->library('email');
+      
+      $to = $arr['to'];
+      $subject = $arr['subject'];
+      $body = $arr['body'];
+
+      echo $company_name = companySetting('name');
+
+      die();
+
+
+      $config['crlf']     = "\r\n";
+      $config['newline']  = "\r\n";
+      $config['mailtype'] = 'html';
+      $config['charset']  = 'utf-8';
+
+      $this->email->initialize($config);
+      $this->email->from('Royce',$company_name);
+      $this->email->to($to);
+
+      $this->email->subject($subject);
+
+      $this->email->message($body);
+
+      if(isset($arr['attachment']))
+      {
+
+        $this->email->attach($_SERVER["DOCUMENT_ROOT"].$arr['attachment']);
+
+      }
+
+      if($this->email->send() == true)
+      {
+        return true;
+      }
+      else
+      {
+        return false;
+      }
 
   }
 
