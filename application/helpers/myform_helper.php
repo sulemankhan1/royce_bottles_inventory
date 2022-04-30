@@ -140,7 +140,7 @@ if ( ! function_exists('getSelectField'))
 
                       }
 
-                     $select_col .='<select class="form-select form-select-sm '. $sel_classes .'" name="'.$name.'" '.$id.' '.$required.'>'.
+                     $select_col .='<select class="form-select form-select-sm '. $sel_classes .'" data-width="100%" name="'.$name.'" '.$id.' '.$required.'>'.
                      '<option value="">'.$sel_first_option.'</option>'.$options;
                       $select_col .='</select>'.
                   '</div>';

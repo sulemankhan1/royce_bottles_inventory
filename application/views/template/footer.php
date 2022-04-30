@@ -66,7 +66,15 @@
   <script src="<?= base_url('assets/js/toastr/toastr.min.js') ?>"></script>
 
   <script type="text/javascript">
+
     $('select').select2();
+
+    $('.modal_select_').select2({
+
+       dropdownParent: $('.select2_modal_')
+
+    });
+
   </script>
   <?php
 
