@@ -161,7 +161,7 @@ class Product extends MY_Controller
       }
 
       $this->form_validation->set_rules('name', 'Product Name', 'required'.$is_unique,[
-        'required'      => 'The %s field is required',
+        'required'      => 'The %s is required',
         'is_unique'     => 'The %s already exist'
       ]);
 

@@ -38,31 +38,56 @@
                       </div>
                       <div id="assign_products_to_driver">
 
-                        <?php foreach ($driver_request_products as $key => $v): ?>
+                        <?php if (!empty($driver_request_products)): ?>
 
-                        <div class="row">
-                          <?php
+                          <?php foreach ($driver_request_products as $key => $v): ?>
 
-                            echo getSelectField([
-                              'label' => 'Product',
-                              'name' => 'product_id[]',
-                              'data' => $products,
-                              'selected' => $v->product_id
-                            ]);
+                          <div class="row">
+                            <?php
 
-                            echo getInputField([
-                              'label' => 'Qty',
-                              'type' => 'number',
-                              'name' => 'qty[]',
-                              'column' => 'sm-3',
-                              'value' => $v->qty
-                            ]);
+                              echo getSelectField([
+                                'label' => 'Product',
+                                'name' => 'product_id[]',
+                                'data' => $products,
+                                'selected' => $v->product_id
+                              ]);
 
-                          ?>
+                              echo getInputField([
+                                'label' => 'Qty',
+                                'type' => 'number',
+                                'name' => 'qty[]',
+                                'column' => 'sm-3',
+                                'value' => $v->qty
+                              ]);
 
-                        </div>
+                            ?>
 
-                        <?php endforeach; ?>
+                          </div>
+
+                          <?php endforeach; ?>
+                          <?php else: ?>
+
+                            <div class="row">
+                              <?php
+
+                                echo getSelectField([
+                                  'label' => 'Product',
+                                  'name' => 'product_id[]',
+                                  'data' => $products
+                                ]);
+
+                                echo getInputField([
+                                  'label' => 'Qty',
+                                  'type' => 'number',
+                                  'name' => 'qty[]',
+                                  'column' => 'sm-3'
+                                ]);
+
+                              ?>
+
+                            </div>
+
+                        <?php endif; ?>
 
                       </div>
 
@@ -102,6 +127,7 @@
       echo getSelectField([
         'label' => 'Product',
         'name' => 'product_id[]',
+        'select2_class' => 'select22',
         'data' => $products
       ]);
 

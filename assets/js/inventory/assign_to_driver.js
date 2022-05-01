@@ -5,6 +5,8 @@ $('.add_assign_products_to_driver').click(function () {
 
   $('#assign_products_to_driver').append(pro_row)
 
+  $('.select22').select2();
+
 })
 
 // remove_assign_products_to_driver

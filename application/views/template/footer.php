@@ -67,7 +67,7 @@
 
   <script type="text/javascript">
 
-    $('select').select2();
+    $('.select2').select2();
 
     $('.modal_select_').select2({
 

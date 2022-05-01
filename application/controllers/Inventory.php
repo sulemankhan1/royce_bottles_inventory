@@ -506,8 +506,10 @@ class Inventory extends MY_Controller
   {
 
     $this->load->model('Product_model');
-    $this->load->model('Inventory_model');
+    $this->load->model('Stock_model');
 
+    $this->Stock_model->getProductStock(2);
+    
     $data = [
 
       'title' => 'Request Stock',
@@ -516,7 +518,7 @@ class Inventory extends MY_Controller
       'active_submenu' => 'request_stock',
       'driver_id' => $this->user_id_,
       'products' => $this->Product_model->getAllProducts(),
-      'driver_request_products' => $this->Inventory_model->getDriverRequestStock($this->user_id_),
+      'driver_request_products' => $this->Stock_model->getDriverRequestStock($this->user_id_),
       'scripts' => [
         'inventory/assign_to_driver.js'
       ]

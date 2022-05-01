@@ -166,5 +166,46 @@ class Stock_model extends CI_Model
 
   }
 
+  public function getProductStock($product_id)
+  {
+
+    $this->db->select("logs.product_id,products.name as product_name,sum(if(logs.type='request',qty,0)) as total_request_qty,sum(if(logs.type='assign',qty,0)) as total_assign_qty,sum(if(logs.type='sold',qty,0)) as total_sold_qty,sum(if(logs.type='return',qty,0)) as total_return_qty,sum(if(logs.type='add_stock',qty,0)) as total_add_stock_qty,sum(if(logs.type='remove_stock',qty,0)) as total_remove_stock_qty,sum(if(logs.type='missing',qty,0)) as total_missing_qty,sum(if(logs.type='exchange',qty,0)) as total_exchange_qty", FALSE);
+    $this->db->from('logs');
+    $this->db->join('products','products.id = logs.product_id');
+
+    $this->db->where('logs.product_id',$product_id);
+
+    $result = $this->db->get()->row();
+
+
+    $total_add = $result->total_add_stock_qty + $result->total_return_qty;
+    $total_remove = $result->total_sold_qty + $result->total_remove_stock_qty + $result->total_missing_qty + $result->total_exchange_qty;
+
+    $total = $total_add - $total_remove;
+
+    $arr = [
+
+      'product_id' => $result->product_id,
+      'available_qty' => $total,
+
+    ];
+
+    return $arr;
+    
+  }
+
+
+  public function getDriverRequestStock($driver_id)
+  {
+
+    $this->db->select('driver_request_details.*');
+    $this->db->from('driver_request');
+    $this->db->join('driver_request_details','driver_request_details.driver_request_id = driver_request.id');
+
+    $this->db->where('driver_request.driver_id',$driver_id);
+
+    return $this->db->get()->result();
+
+  }
 
 }

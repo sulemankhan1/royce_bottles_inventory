@@ -17,8 +17,8 @@ class Invoice extends MY_Controller
 
     $data = [
 
-      'title' => 'Invocies',
-      'page_head' => 'Invocies',
+      'title' => 'Invoices',
+      'page_head' => 'Invoices',
       'active_menu' => 'invoices',
       'styles' => [
         'invoice.css'

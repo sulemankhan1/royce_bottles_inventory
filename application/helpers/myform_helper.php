@@ -16,6 +16,7 @@ if ( ! function_exists('getSelectField'))
       $col_attributes = '';
       $options = '';
       $sel_first_option = 'select';
+      $select2_class = 'select2';
       //select column width
       if(isset($arr['column']))
       {
@@ -40,6 +41,22 @@ if ( ! function_exists('getSelectField'))
       if(isset($arr['id']))
       {
         $id = "id=".$arr['id'];
+      }
+      //to add select2 class in select
+      if(isset($arr['select2_class']))
+      {
+
+          if($arr['select2_class'] != false)
+          {
+
+            $select2_class = $arr['select2_class'];
+
+          }
+          else
+          {
+            $select2_class = '';
+          }
+
       }
       //to add classes in select
       if(isset($arr['classes']) && !empty($arr['classes']))
@@ -140,7 +157,7 @@ if ( ! function_exists('getSelectField'))
 
                       }
 
-                     $select_col .='<select class="form-select form-select-sm '. $sel_classes .'" data-width="100%" name="'.$name.'" '.$id.' '.$required.'>'.
+                     $select_col .='<select class="form-select form-select-sm '.$select2_class.' '. $sel_classes .'" data-width="100%" name="'.$name.'" '.$id.' '.$required.'>'.
                      '<option value="">'.$sel_first_option.'</option>'.$options;
                       $select_col .='</select>'.
                   '</div>';

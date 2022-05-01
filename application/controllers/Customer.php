@@ -209,7 +209,7 @@ class Customer extends MY_Controller
       }
 
       $this->form_validation->set_rules('email', 'Email Address For E-Receipt', 'required'.$is_email_unique,[
-        'required'      => 'The %s field is required',
+        'required'      => 'The %s is required',
         'is_unique'     => 'The %s already exist'
       ]);
 
