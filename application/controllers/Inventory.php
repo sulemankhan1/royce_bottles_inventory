@@ -641,19 +641,330 @@ class Inventory extends MY_Controller
       'page_head' => 'Pending Requests',
       'active_menu' => 'inventory',
       'active_submenu' => 'pending_request',
+      'ajax_url' => site_url('Inventory/getDeliveryOrders'),
+      'ajax_url1' => site_url('Inventory/getCallOrders'),
       'styles' => [
         'my-dataTable.css'
       ],
       'scripts' => [
         'DataTable/pendingRequest.js',
         'main.js',
-        'users/main.js',
-        'pending_request/pending_request.js'
+        'pending_request/pending_request.js',
+        'inventory/change_status.js',
+        'dataTable_buttons'
       ]
 
     ];
 
     $this->template('inventory/stock/pending_page',$data);
+
+  }
+
+  public function getDeliveryOrders()
+	{
+
+    $this->load->model('Inventory_model');
+
+		$records = $this->Inventory_model->getDeliveryOrders($_REQUEST,'records');
+		$totalFilteredRecords = $this->Inventory_model->getDeliveryOrders($_REQUEST,'filter');
+		$recordsTotal = $this->Inventory_model->getDeliveryOrders($_REQUEST,'recordsTotal');
+
+		$data = array();
+		$SNo = 0;
+		$Style = "";
+
+		foreach ($records as $key => $v)
+		{
+
+      $ID = $v->id;
+
+			$SNo++;
+
+			$nestedData = array();
+
+			$nestedData[] = $SNo;
+
+			$nestedData[] = $v->driver_name;
+      $nestedData[] = $v->total_products;
+      $nestedData[] = $v->total_qty;
+
+        $change_status_url = site_url('update_delivery_order_status/'.$ID);
+
+        $status = '<a href="javascript:void(0)" class="changeInv_status_ action-icons" data-btn-txt="Confirm" data-msg="Are you sure you want to Confirm this delivery order?" data-url="'. $change_status_url .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Confirm">
+                 <span class="badge rounded-pill bg-secondary">Pending</span>
+           </a>';
+
+      $nestedData[] = $status;
+
+
+        $delete_url = site_url('delete_delivery_order/'.$ID);
+
+  			$actions = '';
+
+          $actions .= '<span class="actions-icons">';
+
+  					$actions .= '<a href="javascript:void(0)" class="action-icons delete_record_" data-msg="Are you sure you want to delete this Delivery Order?" data-url="'. $delete_url .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete">
+              <i class="fa-solid fa-trash"></i>
+            </a>';
+
+            $actions .= '<a href="javascript:void(0)" class="action-icons view_details_" data-url="'. site_url('AjaxController/getPendingPageStockDetails/delivery_order/'.$ID) .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Details">
+              <i class="fa fa-eye"></i>
+            </a>';
+
+          $actions .= '</span>';
+
+			     $nestedData[] = $actions;
+
+           $data[] = $nestedData;
+
+		}
+
+		$json_data = array(
+			"draw" => intval($_REQUEST['draw']), // for every request/draw by clientside , they send a number as a parameter, when they recieve a response/data they first check the draw number, so we are sending same number in draw.
+			"recordsTotal" => intval($recordsTotal), // total number of records
+			"recordsFiltered" => intval($totalFilteredRecords), // total number of records after searching, if there is no searching then totalFiltered = totalData
+			"data" => $data // total data array
+		);
+
+
+		echo json_encode($json_data);
+
+	}
+
+  public function update_delivery_order_status($delivery_order_id)
+  {
+
+      $arr = [
+
+        'status' => 'confirmed'
+
+      ];
+
+
+      $this->trans_('start');
+
+         $this->bm->update('assign_stock',$arr,'id',$delivery_order_id);
+
+         $assign_stock_row = $this->bm->getRow('assign_stock','id',$delivery_order_id);
+         $products = $this->bm->getRows('assign_stock_details','assign_stock_id',$delivery_order_id);
+
+         $logs = [];
+         foreach ($products as $key => $v) {
+
+             $logs[] = [
+
+                 'product_id' => $v->product_id,
+                 'driver_id' => $assign_stock_row->driver_id,
+                 'qty' => $v->qty,
+                 'type' => 'assign_stock_confirmed',
+                 'added_by' => $this->user_id_
+
+             ];
+
+         }
+
+         $this->bm->insert_rows('logs',$logs);
+
+      $this->trans_('complete');
+
+      if ($this->trans_('status') === FALSE)
+      {
+
+          $this->session->set_flashdata('_error','Connection error Try Again');
+
+      }
+      else
+      {
+
+          $this->session->set_flashdata('_success','Delivery Order has confirmed successfully');
+
+      }
+
+      redirect('pending_request');
+
+  }
+
+  public function delete_delivery_order($delivery_order_id)
+  {
+
+      $arr = [
+
+        'is_deleted' => 1
+
+      ];
+
+      $res = $this->bm->update('assign_stock',$arr,'id',$delivery_order_id);
+
+      if ($res)
+      {
+
+        $this->session->set_flashdata('_success','Delivery Order deleted successfully');
+
+      }
+      else
+      {
+
+        $this->session->set_flashdata('_error','Connection error Try Again');
+
+      }
+
+      redirect('pending_request');
+
+  }
+
+  public function getCallOrders()
+  {
+
+    $this->load->model('Inventory_model');
+
+    $records = $this->Inventory_model->getCallOrders($_REQUEST,'records');
+    $totalFilteredRecords = $this->Inventory_model->getCallOrders($_REQUEST,'filter');
+    $recordsTotal = $this->Inventory_model->getCallOrders($_REQUEST,'recordsTotal');
+
+    $data = array();
+    $SNo = 0;
+    $Style = "";
+
+    foreach ($records as $key => $v)
+    {
+
+      $ID = $v->id;
+
+      $SNo++;
+
+      $nestedData = array();
+
+      $nestedData[] = $SNo;
+
+      $nestedData[] = $v->customer_name;
+      $nestedData[] = $v->driver_name;
+      $nestedData[] = $v->delivery_day;
+      $nestedData[] = $v->total_products;
+      $nestedData[] = $v->total_qty;
+      // $nestedData[] = change_number_format($v->total_price);
+
+
+        $change_status_url = site_url('update_pending_call_order_status/'.$ID);
+
+        $status = '<a href="javascript:void(0)" class="changeInv_status_ action-icons" data-btn-txt="Confirm" data-msg="Are you sure you want to Confirm this Call Order?" data-url="'. $change_status_url .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Confirm">
+                 <span class="badge rounded-pill bg-secondary">Pending</span>
+           </a>';
+
+        $nestedData[] = $status;
+
+        $delete_url = site_url('delete_pending_call_order/'.$ID);
+
+        $actions = '';
+
+          $actions .= '<span class="actions-icons">';
+
+            $actions .= '<a href="javascript:void(0)" class="action-icons delete_record_" data-msg="Are you sure you want to delete this Call Order?" data-url="'. $delete_url .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete">
+              <i class="fa-solid fa-trash"></i>
+            </a>';
+
+            $actions .= '<a href="javascript:void(0)" class="action-icons view_details_" data-url="'. site_url('AjaxController/getPendingPageStockDetails/call_order/'.$ID) .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Details">
+              <i class="fa fa-eye"></i>
+            </a>';
+
+          $actions .= '</span>';
+
+           $nestedData[] = $actions;
+
+           $data[] = $nestedData;
+
+    }
+
+    $json_data = array(
+      "draw" => intval($_REQUEST['draw']), // for every request/draw by clientside , they send a number as a parameter, when they recieve a response/data they first check the draw number, so we are sending same number in draw.
+      "recordsTotal" => intval($recordsTotal), // total number of records
+      "recordsFiltered" => intval($totalFilteredRecords), // total number of records after searching, if there is no searching then totalFiltered = totalData
+      "data" => $data // total data array
+    );
+
+
+    echo json_encode($json_data);
+
+  }
+
+  public function update_pending_call_order_status($call_order_id)
+  {
+
+      $arr = [
+
+        'pending_request_status' => 'confirmed'
+
+      ];
+
+
+      $this->trans_('start');
+
+         $this->bm->update('call_orders',$arr,'id',$call_order_id);
+
+         $call_order_row = $this->bm->getRow('call_orders','id',$call_order_id);
+         $products = $this->bm->getRows('call_orders_details','call_order_id',$call_order_id);
+
+         $logs = [];
+         foreach ($products as $key => $v) {
+
+             $logs[] = [
+
+                 'product_id' => $v->product_id,
+                 'customer_id' => $call_order_id->customer_id,
+                 'driver_id' => $call_order_id->driver_id,
+                 'qty' => $v->qty,
+                 'type' => 'pending_call_order_confirmed',
+                 'added_by' => $this->user_id_
+
+             ];
+
+         }
+
+         $this->bm->insert_rows('logs',$logs);
+
+      $this->trans_('complete');
+
+      if ($this->trans_('status') === FALSE)
+      {
+
+          $this->session->set_flashdata('_error','Connection error Try Again');
+
+      }
+      else
+      {
+
+          $this->session->set_flashdata('_success','Call Order has confirmed successfully');
+
+      }
+
+      redirect('pending_request');
+
+  }
+
+  public function delete_pending_call_order($call_order_id)
+  {
+
+      $arr = [
+
+        'is_deleted' => 1
+
+      ];
+
+      $res = $this->bm->update('call_orders',$arr,'id',$call_order_id);
+
+      if ($res)
+      {
+
+        $this->session->set_flashdata('_success','Call Order deleted successfully');
+
+      }
+      else
+      {
+
+        $this->session->set_flashdata('_error','Connection error Try Again');
+
+      }
+
+      redirect('pending_request');
 
   }
 

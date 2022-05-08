@@ -1,4 +1,6 @@
-<?php if ($type == 'driver'): ?>
+<?php
+  $row = $data[0];
+if ($type == 'delivery_order'): ?>
 
 <div class="row mt-2">
     <div class="col-sm-12">
@@ -16,18 +18,36 @@
 
           <?php
 
-            echo viewDetailsCol('Name','Driver');
-            echo viewDetailsCol('Email','demo@gmail.com');
-            echo viewDetailsCol('Contact #','11111111');
-            echo viewDetailsCol('Added By','Demo');
-            echo viewDetailsCol('Added At ', '03-04-2022 03:03 PM','6');
+            echo viewDetailsCol('Name',$row->driver_name,6);
+            echo viewDetailsCol('Email',$row->driver_email,6);
+            echo viewDetailsCol('Contact #',$row->driver_number,6);
+            echo viewDetailsCol('Added By',$row->added_by_name,6);
+            echo viewDetailsCol('Added At ', getDateTimeFormat($row->added_at),'12');
 
           ?>
 
             </div>
           </div>
           <div class="col-sm-4 text-center">
-              <img src="<?= base_url('assets/images/avatars/01.png') ?>" class="img-thumbnail user-form-img" alt="...">
+
+            <div class="details-circular-img">
+
+            <?php
+              //check image is exist in folder or not
+              $folder = 'driver';
+
+              if (@getimagesize(base_url('uploads/'.$folder.'/'.$row->img)) && !empty($row->img))
+              {
+                  echo '<img src="'. base_url('uploads/'.$folder.'/'.$row->img) .'" alt="...">';
+              }
+              else
+              {
+                  echo '<img src="'. base_url('assets/images/avatars/01.png') .'" alt="...">';
+              }
+             ?>
+
+            </div>
+
           </div>
 
         <div class="col-sm-12">
@@ -40,26 +60,15 @@
           </tr>
         </thead>
         <tbody>
+          <?php foreach ($data as $key => $v): ?>
+
           <tr>
-            <td>1</td>
-            <td>Product1</td>
-            <td>100</td>
+            <td><?= $key+1 ?></td>
+            <td><?= $v->product_name ?></td>
+            <td><?= $v->qty ?></td>
           </tr>
-          <tr>
-            <td>1</td>
-            <td>Product1</td>
-            <td>100</td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>Product1</td>
-            <td>100</td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>Product1</td>
-            <td>100</td>
-          </tr>
+
+        <?php endforeach; ?>
         </tbody>
       </table>
         </div>
@@ -89,10 +98,10 @@
 
             <?php
 
-              echo viewDetailsCol('Name','Customer');
-              echo viewDetailsCol('Email','customer@gmail.com');
-              echo viewDetailsCol('Contact #','11111111');
-              echo viewDetailsCol('Address','Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',12);
+            echo viewDetailsCol('Name',$row->customer_name);
+            echo viewDetailsCol('Email',$row->customer_email);
+            echo viewDetailsCol('Contact #',$row->customer_number);
+            echo viewDetailsCol('Address',$row->customer_address,12);
 
             ?>
 
@@ -105,8 +114,8 @@
 
             <?php
 
-              echo viewDetailsCol('Name','Driver');
-              echo viewDetailsCol('Day','Monday');
+            echo viewDetailsCol('Name',$row->driver_name);
+            echo viewDetailsCol('Day',$row->delivery_day);
             ?>
 
               </div>
@@ -117,8 +126,8 @@
               </div>
               <?php
 
-              echo viewDetailsCol('Added By','Demo');
-              echo viewDetailsCol('Added At ', '03-04-2022 03:03 PM','6');
+              echo viewDetailsCol('Added By',$row->added_by_name);
+              echo viewDetailsCol('Added At ',getDateTimeFormat($row->added_at),'6');
 
               ?>
             </div>
@@ -137,26 +146,15 @@
             </tr>
           </thead>
           <tbody>
+            <?php foreach ($data as $key => $v): ?>
+
             <tr>
-              <td>1</td>
-              <td>Product1</td>
-              <td>100</td>
+              <td><?= $key+1 ?></td>
+              <td><?= $v->product_name ?></td>
+              <td><?= $v->qty ?></td>
             </tr>
-            <tr>
-              <td>1</td>
-              <td>Product1</td>
-              <td>100</td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>Product1</td>
-              <td>100</td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>Product1</td>
-              <td>100</td>
-            </tr>
+
+            <?php endforeach; ?>
           </tbody>
         </table>
           </div>

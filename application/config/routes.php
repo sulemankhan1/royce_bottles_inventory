@@ -105,7 +105,15 @@ $route['save_driver_request'] = 'Inventory/save_driver_stock_request';
 $route['assign_to_driver'] = 'Inventory/assign_to_driver';
 $route['save_assign_to_driver'] = 'Inventory/save_assign_to_driver';
 
+// inventory //pending_request
 $route['pending_request'] = 'Inventory/pending_request';
+$route['update_delivery_order_status/(:num)'] = 'Inventory/update_delivery_order_status/$1';
+$route['delete_delivery_order/(:num)'] = 'Inventory/delete_delivery_order/$1';
+$route['update_pending_call_order_status/(:num)'] = 'Inventory/update_pending_call_order_status/$1';
+$route['delete_pending_call_order/(:num)'] = 'Inventory/delete_pending_call_order/$1';
+
+
+// inventory //logs
 $route['logs'] = 'Inventory/logs';
 $route['view_logs'] = 'Inventory/view_logs';
 

@@ -283,11 +283,31 @@ class AjaxController extends MY_Controller
 
   }
 
-  public function getPendingPageStockDetails($pending_request_id,$type)
+  public function getPendingPageStockDetails($type,$id)
   {
 
+    if($type == 'call_order')
+    {
+
+      $this->load->model('Order_model');
+
+      $details = $this->Order_model->getCallOrderDetails($id);
+
+    }
+    else
+    {
+
+      $this->load->model('Stock_model');
+
+      $details = $this->Stock_model->getAssignStockDetails($id);
+
+    }
+
     $data = [
-      'type' => $type
+
+      'type' => $type,
+      'data' => $details
+
     ];
 
     $output['html'] = $this->load_view('inventory/modals/pending_page_details',$data,true);

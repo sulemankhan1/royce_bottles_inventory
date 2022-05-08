@@ -14,7 +14,10 @@
          <div class="card">
             <div class="card-header d-flex justify-content-between">
                <div class="header-title">
-
+                 <?php
+                  echo getHiddenField('ajax_url',$ajax_url);
+                  echo getHiddenField('ajax_url1',$ajax_url1);
+                 ?>
                  <h4 class="card-title"><?= $page_head ?></h4>
                </div>
 
@@ -41,54 +44,7 @@
                           <th>Actions</th>
                        </tr>
                     </thead>
-                    <tbody>
-                      <tr>
-                         <td>1</td>
-                         <td>
-                             Driver
-                         </td>
-                         <td>10</td>
-                         <td>50</td>
-                         <td>
-                           <a href="javascript:void(0)" class="changeUser_status_" data-type-msg="" data-type-status="confirm">
-
-                                 <span class="badge rounded-pill bg-secondary">Pending</span>
-                           </a>
-                         </td>
-                         <td>
-                           <span class="actions-icons">
-                             <a href="javascript:void(0)" class="action-icons delete_record_" data-type-msg="Pending Request" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete">
-                               <i class="fa-solid fa-trash"></i>
-                             </a>
-                             <a href="javascript:void(0)" class="action-icons view_details_" data-url="<?= site_url('AjaxController/getPendingPageStockDetails/1/driver') ?>" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Details">
-                               <i class="fa fa-eye"></i>
-                             </a>
-                           </span>
-                         </td>
-                      </tr>
-                      <tr>
-                         <td>1</td>
-                         <td>
-                             Driver
-                         </td>
-                         <td>10</td>
-                         <td>50</td>
-                         <td>
-                           <a href="javascript:void(0)" class="" data-type-msg="" data-type-status="confirm">
-
-                                 <span class="badge rounded-pill bg-success">Confirmed</span>
-                           </a>
-                         </td>
-                         <td>
-                           <span class="actions-icons">
-                             <a href="javascript:void(0)" class="action-icons view_details_" data-url="<?= site_url('AjaxController/getPendingPageStockDetails/1/driver') ?>" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Details">
-                               <i class="fa fa-eye"></i>
-                             </a>
-                           </span>
-                         </td>
-                      </tr>
-
-                    </tbody>
+                    <tbody></tbody>
                  </table>
               </div>
               <div class="table-responsive call_order_requests tabs_table" style="display:none">
@@ -147,7 +103,7 @@
 </div>
 
 <?php
+include(APPPATH.'views/inventory/modals/status_modal.php');
 include(APPPATH.'views/modals/delete-modal.php');
 include(APPPATH.'views/modals/view-details-modal.php');
-include(APPPATH.'views/users/modals/status-modal.php');
- ?>
+?>
