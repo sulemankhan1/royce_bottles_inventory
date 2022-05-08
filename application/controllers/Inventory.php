@@ -357,16 +357,17 @@ class Inventory extends MY_Controller
   {
 
     $this->load->model('Product_model');
-    $this->load->model('Inventory_model');
+    $this->load->model('Stock_model');
+
     $data = [
 
       'title' => 'Assign Stock To Driver',
       'page_head' => 'Assign Stock To Driver',
       'active_menu' => 'inventory',
       'active_submenu' => 'assign_to_driver',
-      'driver_id' => $this->user_id_,
+      'drivers' => $this->bm->getRowsWithConditions('users',['is_deleted' => 0,'type' => 'driver']),
       'products' => $this->Product_model->getAllProducts(),
-      'driver_request_products' => $this->Inventory_model->getDriverRequestStock($this->user_id_),
+      'driver_request_products' => $this->Stock_model->getDriverRequestStock($this->user_id_),
       'scripts' => [
         'inventory/assign_to_driver.js'
       ]
@@ -398,8 +399,6 @@ class Inventory extends MY_Controller
 
            $p = $this->inp_post();
 
-           $is_driver = $this->bm->getRow('driver_request','driver_id',$p['driver_id']);
-
            $arr = [
 
               'driver_id' => $p['driver_id'],
@@ -409,37 +408,34 @@ class Inventory extends MY_Controller
 
            $this->trans_('start');
 
-            if(!empty($is_driver))
-            {
+              $last_id = $this->bm->insert_row('assign_stock',$arr);
 
-              $last_id = $is_driver->id;
-              $this->bm->update('driver_request',$arr,'id',$last_id);
-
-              $this->bm->delete('driver_request_details','driver_request_id',$last_id);
-
-            }
-            else
-            {
-
-                $last_id = $this->bm->insert_row('driver_request',$arr);
-
-            }
-
-              $request_products = [];
+              $assign_products = [];
 
               foreach ($p['product_id'] as $key => $v) {
 
-                  $request_products[] = [
+                  $assign_products[] = [
 
-                    'driver_request_id' => $last_id,
+                    'assign_stock_id' => $last_id,
                     'product_id' => $v,
                     'qty' => $p['qty'][$key]
 
                   ];
 
+                  $logs[] = [
+
+                      'product_id' => $v,
+                      'driver_id' => $p['driver_id'],
+                      'qty' => $p['qty'][$key],
+                      'type' => 'assign',
+                      'added_by' => $this->user_id_
+
+                  ];
+
               }
 
-              $this->bm->insert_rows('driver_request_details',$request_products);
+              $this->bm->insert_rows('assign_stock_details',$assign_products);
+              $this->bm->insert_rows('logs',$logs);
 
            $this->trans_('complete');
 
@@ -452,7 +448,7 @@ class Inventory extends MY_Controller
            else
            {
 
-               $this->session->set_flashdata('_success','Request has sent');
+               $this->session->set_flashdata('_success','Assigned to driver');
 
            }
 
@@ -508,8 +504,6 @@ class Inventory extends MY_Controller
     $this->load->model('Product_model');
     $this->load->model('Stock_model');
 
-    $this->Stock_model->getProductStock(2);
-    
     $data = [
 
       'title' => 'Request Stock',
@@ -580,7 +574,8 @@ class Inventory extends MY_Controller
 
               $request_products = [];
 
-              foreach ($p['product_id'] as $key => $v) {
+              foreach ($p['product_id'] as $key => $v)
+              {
 
                   $request_products[] = [
 
@@ -590,9 +585,20 @@ class Inventory extends MY_Controller
 
                   ];
 
+                  $log_req[] = [
+
+                      'product_id' => $v,
+                      'driver_id' => $p['driver_id'],
+                      'qty' => $p['qty'][$key],
+                      'type' => 'request',
+                      'added_by' => $this->user_id_
+
+                  ];
+
               }
 
               $this->bm->insert_rows('driver_request_details',$request_products);
+              $this->bm->insert_rows('logs',$log_req);
 
            $this->trans_('complete');
 

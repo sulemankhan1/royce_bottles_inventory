@@ -191,7 +191,7 @@ class Stock_model extends CI_Model
     ];
 
     return $arr;
-    
+
   }
 
 
@@ -201,6 +201,20 @@ class Stock_model extends CI_Model
     $this->db->select('driver_request_details.*');
     $this->db->from('driver_request');
     $this->db->join('driver_request_details','driver_request_details.driver_request_id = driver_request.id');
+
+    $this->db->where('driver_request.driver_id',$driver_id);
+
+    return $this->db->get()->result();
+
+  }
+
+  public function getDriverRequestedProducts($driver_id)
+  {
+
+    $this->db->select('driver_request_details.*,products.name as product_name');
+    $this->db->from('driver_request');
+    $this->db->join('driver_request_details','driver_request_details.driver_request_id = driver_request.id');
+    $this->db->join('products','products.id = driver_request_details.product_id');
 
     $this->db->where('driver_request.driver_id',$driver_id);
 

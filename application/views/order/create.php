@@ -17,7 +17,7 @@
                </div>
             </div>
             <div class="card-body">
-              <form class="row g-3 needs-validation" novalidate>
+              <form class="row g-3 needs-validation" novalidate action="<?= site_url('save_call_order') ?>" method="post" >
                 <div class="row mt-4">
 
                     <div class="col-sm-12">
@@ -28,43 +28,36 @@
                         </div>
                         <?php
 
-                        $cs_arr = [
-
-                          ['id' => 1,'name' => 'Customer1'],
-                          ['id' => 2,'name' => 'Customer2'],
-                          ['id' => 3,'name' => 'Customer3']
-
-                        ];
-
                         echo getSelectField([
                           'label' => 'Customer',
                           'name' => 'customer_id',
-                          'data' => $cs_arr,
+                          'id' => 'customer_id',
+                          'data' => $customers,
                           'column' => 'sm-6'
                         ]);
 
                         echo getInputField([
                           'label' => 'Customer Name',
-                          'name' => 'customer_name',
+                          'id' => 'customer_name_',
                           'attr' => 'readonly'
                         ]);
 
                         echo getInputField([
                           'label' => 'Contact #',
-                          'name' => 'contact_no',
+                          'id' => 'customer_cno_',
                           'attr' => 'readonly'
                         ]);
 
                         echo getInputField([
                           'label' => 'Email',
-                          'name' => 'customer_email',
+                          'id' => 'customer_email_',
                           'type' => 'email',
                           'attr' => 'readonly'
                         ]);
 
                         echo getInputField([
                           'label' => 'Address',
-                          'name' => 'customer_address',
+                          'id' => 'customer_addr_',
                           'attr' => 'readonly'
                         ]);
 
@@ -75,30 +68,24 @@
                         </div>
                         <?php
 
-                        $pro_arr = [
-
-                          ['id' => 1,'name' => 'Driver1'],
-                          ['id' => 2,'name' => 'Driver2'],
-                          ['id' => 3,'name' => 'Driver3']
-
-                        ];
-
                         echo getSelectField([
                           'label' => 'Driver',
                           'name' => 'driver_id',
-                          'data' => $pro_arr,
+                          'data' => $drivers,
                           'column' => 'sm-6'
                         ]);
                         echo getSelectField([
                           'label' => 'Day',
                           'name' => 'day',
-                          'column' => 'sm-6'
+                          'column' => 'sm-6',
+                          'static' => true,
+                          'data' => $days
                         ]);
 
                           ?>
 
                       </div>
-                      <div id="assign_products_to_driver">
+                      <div id="call_order_products_">
 
                         <div class="row">
 
@@ -106,25 +93,22 @@
                               <h5>Stock Details</h5>
                           </div>
                           <?php
-                            $pro_arr = [
 
-                              ['id' => 1,'name' => 'Product1'],
-                              ['id' => 2,'name' => 'Product2'],
-                              ['id' => 3,'name' => 'Product3']
+                          echo getSelectField([
+                            'label' => 'Product',
+                            'name' => 'product_id[]',
+                            'classes' => 'product_id_',
+                            'data' => $products
+                          ]);
 
-                            ];
-
-                            echo getSelectField([
-                              'label' => 'Product',
-                              'name' => 'product_id',
-                              'data' => $pro_arr
-                            ]);
-
-                            echo getInputField([
-                              'label' => 'Qty',
-                              'type' => 'number',
-                              'name' => 'qty'
-                            ]);
+                          echo getInputField([
+                            'label' => 'Qty',
+                            'type' => 'number',
+                            'name' => 'qty[]',
+                            'column' => 'sm-5',
+                            'classes' => 'qty_',
+                            'attr' => 'min="1"'
+                          ]);
 
                           ?>
 
@@ -134,7 +118,7 @@
 
                       <div class="row">
                         <div class="col-sm-12">
-                          <a href="javascript:void(0)" class="add_assign_products_to_driver">
+                          <a href="javascript:void(0)" class="add_call_order_products_">
                             + Add Row
                           </a>
                         </div>
@@ -160,36 +144,12 @@
    </div>
 </div>
 
-<div class="getProductRowToAssign" style="display:none!important">
-  <div class="row">
-    <?php
-      $pro_arr = [
 
-        ['id' => 1,'name' => 'Product1'],
-        ['id' => 2,'name' => 'Product2'],
-        ['id' => 3,'name' => 'Product3']
+<div class="getProductOptionsToAssign" style="display:none!important">
 
-      ];
+    <option value="">select</option>
+    <?php foreach ($products as $key => $v): ?>
+      <option value="<?= $v->id ?>"><?= $v->name ?></option>
+    <?php endforeach; ?>
 
-      echo getSelectField([
-        'label' => 'Product',
-        'name' => 'product_id',
-        'data' => $pro_arr
-      ]);
-
-      echo getInputField([
-        'label' => 'Qty',
-        'type' => 'number',
-        'name' => 'qty',
-        'column' => 'sm-5'
-      ]);
-
-    ?>
-
-    <div class="col-sm-1" style="padding:0px!important;">
-      <a href="javascript:void(0)" class="remove_assign_products_to_driver">
-        <i class="fa-solid fa-x" style="font-size: 20px;margin-top: 38px;margin-left:8px;;color:#fd6262!important;"></i>
-      </a>
-    </div>
-  </div>
 </div>

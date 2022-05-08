@@ -17,8 +17,7 @@
                </div>
             </div>
             <div class="card-body">
-              <?= getHiddenField('url',site_url('AjaxController/getDriverRequestedProducts'))?>
-              <form class="row g-3 needs-validation" novalidate>
+              <form class="row g-3 needs-validation" novalidate method="post" action="<?= site_url('save_assign_to_driver') ?>">
                 <div class="row mt-4">
 
                     <div class="col-sm-12">
@@ -30,7 +29,8 @@
                             'label' => 'Driver',
                             'name' => 'driver_id',
                             'column' => 'sm-5',
-                            'data' => $products
+                            'id' => 'driver_id',
+                            'data' => $drivers
                           ]);
                           ?>
                       </div>
@@ -86,37 +86,11 @@
 </div>
 
 
-<div class="getProductRowToAssign" style="display:none!important">
-  <div class="row">
-    <?php
-      $pro_arr = [
+<div class="getProductOptionsToAssign" style="display:none!important">
 
-        ['id' => 1,'name' => 'Product1'],
-        ['id' => 2,'name' => 'Product2'],
-        ['id' => 3,'name' => 'Product3']
+    <option value="">select</option>
+    <?php foreach ($products as $key => $v): ?>
+      <option value="<?= $v->id ?>"><?= $v->name ?></option>
+    <?php endforeach; ?>
 
-      ];
-
-      echo getSelectField([
-        'label' => 'Product',
-        'name' => 'product_id',
-        'column' => 'sm-5',
-        'data' => $pro_arr
-      ]);
-
-      echo getInputField([
-        'label' => 'Qty',
-        'type' => 'number',
-        'name' => 'qty',
-        'column' => 'sm-2'
-      ]);
-
-    ?>
-
-    <div class="col-sm-1" style="padding:0px!important;">
-      <a href="javascript:void(0)" class="remove_assign_products_to_driver">
-        <i class="fa-solid fa-x" style="font-size: 20px;margin-top: 38px;margin-left:8px;;color:#fd6262!important;"></i>
-      </a>
-    </div>
-  </div>
 </div>

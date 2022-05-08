@@ -14,10 +14,12 @@
 
           <?php
 
-            echo viewDetailsCol('Name','Customer');
-            echo viewDetailsCol('Email','customer@gmail.com');
-            echo viewDetailsCol('Contact #','11111111');
-            echo viewDetailsCol('Address','Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',12);
+            $order_row = $call_order[0];
+
+            echo viewDetailsCol('Name',$order_row->customer_name);
+            echo viewDetailsCol('Email',$order_row->customer_email);
+            echo viewDetailsCol('Contact #',$order_row->customer_number);
+            echo viewDetailsCol('Address',$order_row->customer_address,12);
 
           ?>
 
@@ -30,8 +32,8 @@
 
           <?php
 
-            echo viewDetailsCol('Name','Driver');
-            echo viewDetailsCol('Day','Monday');
+            echo viewDetailsCol('Name',$order_row->driver_name);
+            echo viewDetailsCol('Day',$order_row->delivery_day);
           ?>
 
             </div>
@@ -42,8 +44,8 @@
             </div>
             <?php
 
-            echo viewDetailsCol('Added By','Demo');
-            echo viewDetailsCol('Added At ', '03-04-2022 03:03 PM','6');
+            echo viewDetailsCol('Added By',$order_row->added_by_name);
+            echo viewDetailsCol('Added At ',getDateTimeFormat($order_row->added_at),'6');
 
             ?>
           </div>
@@ -62,26 +64,16 @@
           </tr>
         </thead>
         <tbody>
+          <?php foreach ($call_order as $key => $v): ?>
+
           <tr>
-            <td>1</td>
-            <td>Product1</td>
-            <td>100</td>
+            <td><?= $key+1 ?></td>
+            <td><?= $v->product_name ?></td>
+            <td><?= $v->qty ?></td>
           </tr>
-          <tr>
-            <td>1</td>
-            <td>Product1</td>
-            <td>100</td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>Product1</td>
-            <td>100</td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>Product1</td>
-            <td>100</td>
-          </tr>
+
+        <?php endforeach; ?>
+
         </tbody>
       </table>
         </div>

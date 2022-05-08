@@ -271,7 +271,7 @@ if ( ! function_exists('getInputField'))
 
                     }
 
-                     $input_col .= '<input type="'. $type .'" class="form-control form-control-sm '. $inp_classes .'" name="'.$name.'" '. $id .' '.$required.' '.$inp_attributes.' '.$value.'>'.
+                     $input_col .= '<input type="'. $type .'" class="form-control form-control-sm '. $inp_classes .'" name="'.$name.'" '. $id .' '.$required.' '.$inp_attributes.' '.$value.' />'.
                   '</div>';
 
       return $input_col;

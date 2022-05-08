@@ -118,6 +118,9 @@ $route['view_sale'] = 'Sales/view_sale';
 //call order
 $route['call_order'] = 'Order';
 $route['add_call_order'] = 'Order/create';
+$route['save_call_order'] = 'Order/save';
+$route['update_call_order_status/(:num)'] = 'Order/update_status/$1';
+$route['delete_call_order/(:num)'] = 'Order/delete/$1';
 
 
 // invoices

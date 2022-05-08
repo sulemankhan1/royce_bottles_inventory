@@ -124,6 +124,39 @@ class AjaxController extends MY_Controller
 
   }
 
+  public function getProductAvailableQty($product_id)
+  {
+
+    $this->load->model('Stock_model');
+
+    $output['data'] = $this->Stock_model->getProductStock($product_id);
+
+    echo json_encode($output);
+
+  }
+
+  public function getCustomersData($customer_id)
+  {
+
+    $output['data'] = $this->bm->getRow('customers','id',$customer_id);
+
+    echo json_encode($output);
+
+  }
+
+  public function getCallOrderDetails($call_order_id)
+  {
+
+    $this->load->model('Order_model');
+
+    $data['call_order'] = $this->Order_model->getCallOrderDetails($call_order_id);
+
+    $output['html'] = $this->load_view('order/view_details',$data,true);
+
+    echo json_encode($output);
+
+  }
+
   public function getReturnStockProductsByDriverId($driver_id)
   {
       $data = [];
@@ -263,41 +296,61 @@ class AjaxController extends MY_Controller
 
   }
 
-  public function showCallOrderDetails($call_order_id)
-  {
-
-    $data = [
-
-    ];
-
-    $output['html'] = $this->load_view('order/view_details',$data,true);
-
-    echo json_encode($output);
-
-  }
-
   public function getDriverRequestedProducts($driver_id)
   {
 
-    $driver = $this->bm->getRow('driver_request','driver_id',$driver_id);
-    $driver_request_products = $this->bm->getRows('driver_request_details','driver_request_id',$driver->id);
+    $this->load->model('Stock_model');
 
-    $pro_arr = [
+    $driver_request_products = $this->Stock_model->getDriverRequestedProducts($driver_id);
 
-      ['id' => 1,'name' => 'Driver1'],
-      ['id' => 2,'name' => 'Driver2'],
-      ['id' => 3,'name' => 'Driver3']
+    $products = $this->bm->getRows('products','is_deleted',0);
 
-    ];
+    $output = [
 
-    $data = [
-
-      'driver_request_products' => $driver_request_products,
-      'products' => $pro_arr
+        'driver_request' => $driver_request_products,
+        'products' => $products
 
     ];
 
-    $output['html'] = $this->load_view('order/view_details',$data,true);
+    $html = '';
+
+    foreach ($driver_request_products as $key => $v)
+    {
+
+
+
+
+      $p_stock = getProductAvailableStock($v->product_id);
+
+      $available_stock = $p_stock['available_qty'] > 0?'max="'.$p_stock['available_qty'].'"':'';
+
+      $html .= '<div class="row">'.
+                      '<div class="col-sm-5 mb-3">'.
+                        '<label for="product_" class="form-label">Product</label>'.
+                        '<select class="form-select form-select-sm product_id_" data-width="100%" name="product_id[]" required>'.
+                          '<option value="">select</option>';
+
+                          foreach ($products as $product)
+                          {
+
+                            $html .='<option value="'. $product->id .'" "'. $v->product_id == $product->id?'selected':''.'">'. $product->name .'</option>';
+
+                          }
+
+              $html .='</select>'.
+                      '</div>'.
+                      '<div class="col-sm-2 mb-3">'.
+                        '<label for="qty" class="form-label">Qty</label>'.
+                        '<input type="number" class="form-control form-control-sm qty_" min="1" '. $available_stock .' name="qty" value="'. $v->qty .'">'.
+                      '</div>'.
+                      '<div class="col-sm-1" style="padding:0px!important;">'.
+                        '<a href="javascript:void(0)" class="remove_assign_products_to_driver">'.
+                          '<i class="fa-solid fa-x" style="font-size: 20px;margin-top: 38px;margin-left:8px;;color:#fd6262!important;"></i>'.
+                        '</a>'.
+                      '</div>'.
+                    '</div>';
+
+    }
 
     echo json_encode($output);
 

@@ -104,3 +104,52 @@ if ( ! function_exists('getDateTimeFormat'))
   }
 
 }
+
+if ( ! function_exists('change_number_format'))
+{
+
+  function change_number_format($value)
+  {
+
+
+    return number_format(floatval($value),2,'.','');
+
+  }
+
+}
+
+if ( ! function_exists('getProductAvailableStock'))
+{
+
+  function getProductAvailableStock($product_id)
+  {
+
+      $ci=& get_instance();
+      $ci->load->database();
+
+      $ci->db->select("logs.product_id,products.name as product_name,sum(if(logs.type='request',qty,0)) as total_request_qty,sum(if(logs.type='assign',qty,0)) as total_assign_qty,sum(if(logs.type='sold',qty,0)) as total_sold_qty,sum(if(logs.type='return',qty,0)) as total_return_qty,sum(if(logs.type='add_stock',qty,0)) as total_add_stock_qty,sum(if(logs.type='remove_stock',qty,0)) as total_remove_stock_qty,sum(if(logs.type='missing',qty,0)) as total_missing_qty,sum(if(logs.type='exchange',qty,0)) as total_exchange_qty", FALSE);
+      $ci->db->from('logs');
+      $ci->db->join('products','products.id = logs.product_id');
+
+      $ci->db->where('logs.product_id',$product_id);
+
+      $result = $ci->db->get()->row();
+
+
+      $total_add = $result->total_add_stock_qty + $result->total_return_qty;
+      $total_remove = $result->total_sold_qty + $result->total_remove_stock_qty + $result->total_missing_qty + $result->total_exchange_qty;
+
+      $total = $total_add - $total_remove;
+
+      $arr = [
+
+        'product_id' => $result->product_id,
+        'available_qty' => $total,
+
+      ];
+
+      return $arr;
+
+  }
+
+}
