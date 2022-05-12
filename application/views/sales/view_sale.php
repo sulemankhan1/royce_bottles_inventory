@@ -107,12 +107,12 @@
                 <div class="row">
 
                   <div class="col-12 col-sm-6 col-md-8">
-                    <img src="<?= base_url('assets/images/company_logo.jpg')?>" alt="company_logo" class="company_logo">
+                    <img src="<?= companySetting('logo') ?>" alt="company_logo" class="company_logo">
                   </div>
                   <div class="col-12 col-sm-6 col-md-4">
-                    <h5 id="company_head">Alphinex Solutions</h5>
+                    <h5 id="company_head"><?= companySetting('name') ?></h5>
                     <label id="company_address">
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+                      <?= companySetting('address') ?>
                     </label>
                   </div>
 
@@ -137,7 +137,7 @@
                               <span class="font_design font_uppercase">Invoice #:</span>
                             </div>
                             <div class="col-12 col-sm-8 col-md-7 col-lg-8">
-                              <span class="font_design font_uppercase">14234</span>
+                              <span class="font_design font_uppercase"><?= $sale->invoice_no ?></span>
                             </div>
                           </div>
                       </div>
@@ -148,7 +148,7 @@
                               <span class="font_design font_uppercase">Invoice Date:</span>
                             </div>
                             <div class="col-12 col-sm-7 col-md-6 col-lg-6 col-xl-7">
-                              <span class="font_design font_uppercase">03-04-2022</span>
+                              <span class="font_design font_uppercase"><?= getDateTimeFormat($sale->added_at) ?></span>
                             </div>
                           </div>
                       </div>
@@ -160,7 +160,11 @@
                             </div>
                             <div class="col-9 col-sm-8 col-md-8 col-lg-8 col-xl-8">
                               <span class="font_design font_uppercase">
-                                <span class="badge rounded-pill bg-warning">Credit</span>
+                                <?php if ($sale->customer_category == 'cash'){ ?>
+                                  <span class="badge rounded-pill bg-success">Cash</span>
+                                <?php }elseif ($sale->customer_category == 'credit') { ?>
+                                  <span class="badge rounded-pill bg-warning">Credit</span>
+                                <?php } ?>
                               </span>
                             </div>
                           </div>
@@ -173,7 +177,22 @@
                             </div>
                             <div class="col-9 col-sm-8 col-md-8 col-lg-8 col-xl-8">
                               <span class="font_design font_uppercase">
-                                <span class="badge rounded-pill bg-success">Paid</span>
+
+                                <?php if ($sale->status == 'paid'){ ?>
+
+                                  <span class="badge rounded-pill bg-success">Paid</span>
+
+                                <?php }elseif ($sale->status == 'unpaid' || $sale->status == 'credit') { ?>
+
+                                  <span class="badge rounded-pill bg-warning"><?= ucfirst($sale->status) ?></span>
+
+                                <?php }elseif ($sale->status == 'pending') { ?>
+
+                                  <span class="badge rounded-pill bg-secondary">Pending</span>
+
+                                <?php }
+                                 ?>
+
                               </span>
                             </div>
                           </div>
@@ -189,11 +208,11 @@
 
                         <h6 class="text-primary font_uppercase">Invoice To</h6>
                         <div class="col-sm-12 mt-1">
-                          <span class="font_design font_uppercase">Demo Customer</span>
+                          <span class="font_design font_uppercase"><?= $sale->customer_name ?></span>
                         </div>
                         <div class="col-sm-12">
                           <label id="customer_address">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+                            <?= $sale->customer_address ?>
                           </label>
                         </div>
                       </div>
@@ -220,20 +239,19 @@
                           </tr>
                         </thead>
                         <tbody>
+
+                          <?php foreach ($sales_details as $key => $v): ?>
+
                           <tr>
-                            <td>Product1</td>
-                            <td>10</td>
-                            <td>100</td>
-                            <td>10</td>
-                            <td style="text-align:right">1000</td>
+                            <td><?= $v->product_name ?></td>
+                            <td><?= $v->sale_qty ?></td>
+                            <td><?= $v->exchange_qty ?></td>
+                            <td><?= $v->price ?></td>
+                            <td style="text-align:right"><?= $v->amount?></td>
                           </tr>
-                          <tr>
-                            <td>Product1</td>
-                            <td>10</td>
-                            <td>10</td>
-                            <td>100</td>
-                            <td style="text-align:right">1000</td>
-                          </tr>
+
+                          <?php endforeach; ?>
+
                         </tbody>
                       </table>
                     </div>
@@ -245,23 +263,23 @@
                         <tr>
                           <th width="78%"></th>
                           <td>SubTotal</td>
-                          <td id="totals_color">2000</td>
+                          <td id="totals_color"><?= $sale->total_amount ?></td>
                         </tr>
-                        <tr>
+                        <!-- <tr>
                           <th width="78%"></th>
                           <td>Taxes</td>
                           <td id="totals_color">1000</td>
-                        </tr>
-                        <tr>
+                        </tr> -->
+                        <!-- <tr>
                           <th width="78%"></th>
                           <td>Discount</td>
                           <td id="totals_color">100</td>
-                        </tr>
-                        <tr>
+                        </tr> -->
+                        <!-- <tr>
                           <th width="78%"></th>
                           <td>Net Amount</td>
                           <td id="totals_color">2900</td>
-                        </tr>
+                        </tr> -->
                       </thead>
                     </table>
                   </div>
@@ -277,9 +295,9 @@
                   </div>
                   <div class="col-10 col-sm-10 col-md-8 col-lg-7">
                     <label id="customer_address">
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+                      <?= companySetting('terms_and_condition') ?>
                     </label>
-                  </div>
+                  </div> 
                 </div>
                 <!-- terms & condition row end -->
 

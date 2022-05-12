@@ -18,7 +18,8 @@
                <span id="total_unpaid_inv"></span>
             </div>
             <div class="card-body">
-              <form class="row g-3 needs-validation" novalidate>
+              <?php echo getHiddenField('total_products',0); ?>
+                <form class="row g-3 needs-validation" novalidate action="javascript:void(0)" method="post" id="save_sale">
                 <div class="row mt-4">
 
                     <div class="col-sm-12">
@@ -26,24 +27,18 @@
 
                         <?php
 
-                          $pro_arr = [
-
-                            ['id' => 1,'name' => 'Customer1'],
-                            ['id' => 2,'name' => 'Customer2 (Pending Sale)'],
-                            ['id' => 3,'name' => 'Customer3']
-
-                          ];
-
-                          echo getHiddenField('getCustomerSaleInfo',base_url('AjaxController/getCustomerSaleInfo'));
-                          echo getHiddenField('show_view_sale',base_url('AjaxController/showSalesDetails'));
+                          echo getHiddenField('customer_category');
+                          echo getHiddenField('total_amount',0);
 
                           echo getSelectField([
                             'label' => 'Customer',
                             'name' => 'customer_id',
                             'id' => 'sale_customer_id',
                             'column' => 'sm-4',
-                            'data' => $pro_arr
+                            'data' => $customers
                           ]);
+
+
                           ?>
 
                         <div class="col-md-8">
@@ -58,10 +53,9 @@
                             'name' => 'is_customer_pay',
                             'id' => 'is_customer_pay',
                             'column' => 'sm-4',
-                            'data' => [
-                              ['id' => 'Yes','name' => 'Yes'],
-                              ['id' => 'No','name' => 'No'],
-                            ]
+                            'static' => true,
+                            'data' => ['Yes','No'],
+                            'attr' => 'readonly'
                           ]);
 
                           echo getSelectField([
@@ -70,11 +64,8 @@
                             'classes' => 'payment_type',
                             'column' => 'sm-4',
                             'col_classes' => 'payment_type_col',
-                            'data' => [
-                              ['id' => 'Cash','name' => 'Cash'],
-                              ['id' => 'Cheque','name' => 'Cheque'],
-                              ['id' => 'Bank','name' => 'Bank']
-                            ]
+                            'static' => true,
+                            'data' => ['Cash','Cheque','Bank']
                           ]);
 
                           echo getInputField([
@@ -124,15 +115,10 @@
 
                       <div class="row mt-1 mb-1">
 
-                        <div class="col-sm-3">
-
-                          <a href="javascript:void(0)" class="btn btn-sm btn-primary add_sale_">Add Sale</a>
-
-                        </div>
 
                         <?php
 
-                          getSubmitBtn('Add Sale');
+                          echo getSubmitBtn('Add Sale');
 
                         ?>
 

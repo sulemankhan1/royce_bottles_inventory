@@ -412,13 +412,16 @@ class Inventory extends MY_Controller
 
               $assign_products = [];
 
+              $logs = [];
+
               foreach ($p['product_id'] as $key => $v) {
 
                   $assign_products[] = [
 
                     'assign_stock_id' => $last_id,
                     'product_id' => $v,
-                    'qty' => $p['qty'][$key]
+                    'qty' => $p['qty'][$key],
+                    'available_qty' => $p['qty'][$key]
 
                   ];
 
