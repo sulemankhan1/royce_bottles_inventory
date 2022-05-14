@@ -47,3 +47,7 @@
       </div>
    </div>
 </div>
+
+<?php
+include(APPPATH.'views/sales/status_modal.php');
+?>

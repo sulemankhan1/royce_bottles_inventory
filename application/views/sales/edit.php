@@ -6,8 +6,8 @@
         <?=
         showBreadCumbs([
           ['label'=>'Home','url' => 'dashboard'],
-          ['label'=>'Inventory','url' => 'return_stock'],
-          ['label'=>'Return Stock']
+          ['label'=>'Sales','url' => 'sales'],
+          ['label'=>'Edit Sale']
         ])
         ?>
          <div class="card">
@@ -18,7 +18,12 @@
                <span id="total_unpaid_inv"></span>
             </div>
             <div class="card-body">
-              <form class="row g-3 needs-validation" novalidate>
+              <?php
+                echo getHiddenField('total_products',count($sales_details));
+                echo getHiddenField('save_sale',site_url('Sales/save_sale'));
+                echo getHiddenField('show_details',site_url('AjaxController/showSalesDetails'));
+               ?>
+              <form class="row g-3 needs-validation" novalidate action="javascript:void(0)" method="post" id="save_sale">
                 <div class="row mt-4">
 
                     <div class="col-sm-12">
@@ -26,29 +31,25 @@
 
                         <?php
 
-                          $pro_arr = [
+                          echo getHiddenField('ID',$sale->id);
+                          echo getHiddenField('customer_category',$sale->customer_category);
+                          echo getHiddenField('total_amount',$sale->total_amount);
 
-                            ['id' => 1,'name' => 'Customer1'],
-                            ['id' => 2,'name' => 'Customer2'],
-                            ['id' => 3,'name' => 'Customer3']
+                          echo getHiddenField('customer_id',$sale->customer_id);
 
-                          ];
-
-                          echo getHiddenField('getCustomerSaleInfo',base_url('AjaxController/getCustomerSaleInfo'));
-                          echo getHiddenField('show_view_sale',base_url('AjaxController/showSalesDetails'));
-
-                          echo getSelectField([
+                          echo getInputField([
                             'label' => 'Customer',
-                            'name' => 'customer_id',
-                            'id' => 'sale_customer_id',
+                            'attr' => 'readonly',
                             'column' => 'sm-4',
-                            'data' => $pro_arr
+                            'value' => $sale->customer_name
+
                           ]);
+
                           ?>
 
                         <div class="col-md-8">
                           <label for="Customer Remarks" class="form-label">Customer Remarks</label>
-                          <p id="customer_remarks"></p>
+                          <p id="customer_remarks"><?= $sale->customer_remarks ?></p>
                         </div>
 
                         <?php
@@ -58,11 +59,25 @@
                             'name' => 'is_customer_pay',
                             'id' => 'is_customer_pay',
                             'column' => 'sm-4',
-                            'data' => [
-                              ['id' => 'Yes','name' => 'Yes'],
-                              ['id' => 'No','name' => 'No'],
-                            ]
+                            'static' => true,
+                            'data' => ['Yes','No'],
+                            'selected' => $sale->is_pay == 0?'No':'Yes'
                           ]);
+
+                          $select_pay_type = '';
+
+                          if($sale->pay_type == 'Cash')
+                          {
+                            $select_pay_type = 'Cash';
+                          }
+                          elseif ($sale->pay_type == 'Cheque')
+                          {
+                            $select_pay_type = 'Cheque';
+                          }
+                          elseif ($sale->pay_type == 'Bank')
+                          {
+                            $select_pay_type = 'Bank';
+                          }
 
                           echo getSelectField([
                             'label' => 'Payment Type',
@@ -70,11 +85,11 @@
                             'classes' => 'payment_type',
                             'column' => 'sm-4',
                             'col_classes' => 'payment_type_col',
-                            'data' => [
-                              ['id' => 'Cash','name' => 'Cash'],
-                              ['id' => 'Cheque','name' => 'Cheque'],
-                              ['id' => 'Bank','name' => 'Bank']
-                            ]
+                            'static' => true,
+                            'data' => ['Cash','Cheque','Bank'],
+                            'selected' => $select_pay_type,
+                            'col_attr' => $sale->is_pay == 0?'':'style="display:block;"',
+                            'required' => $sale->is_pay == 0?false:''
                           ]);
 
                           echo getInputField([
@@ -82,7 +97,9 @@
                             'name' => 'reason',
                             'column' => 'sm-8',
                             'col_classes' => 'reason_col',
-                            'required' => false
+                            'required' => false,
+                            'value' => $sale->reason,
+                            'col_attr' => $sale->is_pay == 0?'style="display:block;"':''
                           ]);
 
                         ?>
@@ -97,21 +114,30 @@
                             'name' => 'bank_name',
                             'id' => 'bank_name',
                             'column' => 'sm-4',
-                            'col_classes' => 'bank_name_col'
+                            'col_classes' => 'bank_name_col',
+                            'value' => $sale->bank,
+                            'col_attr' => $sale->pay_type == 'Bank' || $sale->pay_type == 'Cheque'?'style="display:block;"':'',
+                            'required' => $sale->pay_type == 'Bank' || $sale->pay_type == 'Cheque'?'':false
                           ]);
                           echo getInputField([
                             'label' => 'Account Number',
                             'name' => 'acc_no',
                             'id' => 'acc_no',
                             'column' => 'sm-4',
-                            'col_classes' => 'acc_no_col'
+                            'col_classes' => 'acc_no_col',
+                            'value' => $sale->acc_no,
+                            'col_attr' => $sale->pay_type == 'Bank' || $sale->pay_type == 'Cheque'?'style="display:block;"':'',
+                            'required' => $sale->pay_type == 'Bank' || $sale->pay_type == 'Cheque'?'':false
                           ]);
                           echo getInputField([
                             'label' => 'Cheque No',
                             'name' => 'cheque_no',
                             'id' => 'cheque_no',
                             'column' => 'sm-4',
-                            'col_classes' => 'cheque_no_col'
+                            'col_classes' => 'cheque_no_col',
+                            'value' => $sale->cheque_no,
+                            'col_attr' => $sale->pay_type == 'Cheque'?'style="display:block;"':'',
+                            'required' => $sale->pay_type == 'Cheque'?'':false
                           ]);
 
                          ?>
@@ -119,20 +145,89 @@
                       </div>
 
                       <div id="showCustomerSaleProducts_">
+                        <?php foreach ($sales_details as $key => $v): ?>
+
+                        <?php if ($v->available_qty != 0): ?>
+
+                        <div class="row">
+
+                          <?php
+
+                            echo getHiddenField('product_id[]',$v->product_id);
+                            echo getHiddenField('price[]',$v->price,'price_');
+
+                            echo getInputField([
+                              'label' => 'Product',
+                              'value' => $v->product_name,
+                              'column' => 'sm-4',
+                              'attr' => 'readonly'
+                            ]);
+                            echo getInputField([
+                              'label' => 'Available Qty',
+                              'name' => 'available_qty[]',
+                              'column' => 'sm-1',
+                              'col_classes' => 'sale_stock_inp_cols',
+                              'classes' => 'available_qty_',
+                              'attr' => 'readonly',
+                              'value' => $v->available_qty
+                            ]);
+                            echo getInputField([
+                              'label' => 'Sale Qty',
+                              'name' => 'sale_qty[]',
+                              'column' => 'sm-1',
+                              'col_classes' => 'sale_stock_inp_cols',
+                              'classes' => 'sale_qty_',
+                              'value' => $v->sale_qty
+                            ]);
+                            echo getInputField([
+                              'label' => 'Exchange Qty',
+                              'name' => 'exchange_qty[]',
+                              'column' => 'sm-1',
+                              'col_classes' => 'sale_stock_inp_cols',
+                              'classes' => 'exchange_qty_',
+                              'value' => $v->exchange_qty
+                            ]);
+                            echo getInputField([
+                              'label' => 'Foc Qty',
+                              'name' => 'foc_qty[]',
+                              'column' => 'sm-1',
+                              'col_classes' => 'sale_stock_inp_cols',
+                              'classes' => 'foc_qty_',
+                              'value' => $v->foc_qty
+                            ]);
+                            echo getInputField([
+                              'label' => 'Total',
+                              'name' => 'total[]',
+                              'column' => 'sm-1',
+                              'col_classes' => 'sale_stock_inp_cols',
+                              'classes' => 'total_qty_',
+                              'attr' => 'readonly,max="'.$v->available_qty.'"',
+                              'value' => $v->sale_qty + $v->exchange_qty + $v->foc_qty
+
+                            ]);
+
+                            echo getHiddenField('amount[]',$v->amount,'amount_');
+
+                            ?>
+
+                            <div class="col-sm-1" style="padding:0px!important;width:1.333333%!important;">
+                              <a href="javascript:void(0)" class="remove_customer_sale_product">
+                                <i class="fa-solid fa-x" style="font-size: 20px;margin-top: 38px;margin-left:8px;;color:#fd6262!important;"></i>
+                              </a>
+                            </div>
+
+                        </div>
+
+                        <?php endif; ?>
+                        <?php endforeach; ?>
 
                       </div>
 
                       <div class="row mt-1 mb-1">
 
-                        <div class="col-sm-3">
-
-                          <a href="javascript:void(0)" class="btn btn-sm btn-primary add_sale_">Update Sale</a>
-
-                        </div>
-
                         <?php
 
-                          getSubmitBtn('Add Sale');
+                          echo getSubmitBtn('Update Sale');
 
                         ?>
 

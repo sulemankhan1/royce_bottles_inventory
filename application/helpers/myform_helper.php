@@ -184,6 +184,7 @@ if ( ! function_exists('getInputField'))
       $inp_classes = '';
       $col_classes = '';
       $inp_attributes = '';
+      $col_attributes = '';
       //input column width
       if(isset($arr['column']))
       {
@@ -212,7 +213,14 @@ if ( ! function_exists('getInputField'))
       // input value
       if(isset($arr['value']))
       {
-        $value = "value=".$arr['value'];
+
+        if(!empty($arr['value']))
+        {
+
+          $value = "value=".$arr['value'];
+
+        }
+
       }
       //to add id in input
       if(isset($arr['id']))
@@ -262,7 +270,22 @@ if ( ! function_exists('getInputField'))
 
       }
 
-      $input_col = '<div class="col-'.$column.' mb-3 '.$col_classes.'">';
+      //to add attributes in column
+      if(isset($arr['col_attr']) && !empty($arr['col_attr']))
+      {
+
+          $i_col_attributes = explode(',',$arr['col_attr']);
+
+          foreach ($i_col_attributes as $k => $v)
+          {
+
+            $col_attributes .= $v.' ';
+
+          }
+
+      }
+
+      $input_col = '<div class="col-'.$column.' mb-3 '.$col_classes.'" '. $col_attributes .'>';
 
                     if($label != '')
                     {

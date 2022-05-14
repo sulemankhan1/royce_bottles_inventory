@@ -84,10 +84,15 @@
                 </div>
                 <span>
 
-                  <?php if ($type != 'details' && $type != 'invoice' && $type != 'invoice_print'): ?>
+                  <?php if (($type == 'details' || $type == 'save_sale') && $sale->status == 'pending'): ?>
 
-                    <a href="javascript:void(0)" class="btn btn-sm btn-success" id="mark_as_done">Mark As Done</a>
-                  <a href="javascript:void(0)" class="btn btn-sm btn-primary" id="return_to_sale" data-url="<?= site_url('edit_sale/1') ?>">Return To Sale</a>
+                        <a href="javascript:void(0)" class="btn btn-sm btn-success" id="mark_as_done">Mark As Done</a>
+
+                  <?php endif; ?>
+
+                  <?php if ($type == 'save_sale'): ?>
+
+                        <a href="javascript:void(0)" class="btn btn-sm btn-primary" id="return_to_sale" data-url="<?= site_url('edit_sale/'.$sale->id) ?>">Return To Sale</a>
 
                   <?php endif; ?>
 
@@ -148,7 +153,7 @@
                               <span class="font_design font_uppercase">Invoice Date:</span>
                             </div>
                             <div class="col-12 col-sm-7 col-md-6 col-lg-6 col-xl-7">
-                              <span class="font_design font_uppercase"><?= getDateTimeFormat($sale->added_at) ?></span>
+                              <span class="font_design font_uppercase"><?= getDateTimeFormat($sale->added_at,'date') ?></span>
                             </div>
                           </div>
                       </div>
@@ -297,7 +302,7 @@
                     <label id="customer_address">
                       <?= companySetting('terms_and_condition') ?>
                     </label>
-                  </div> 
+                  </div>
                 </div>
                 <!-- terms & condition row end -->
 
@@ -315,7 +320,7 @@
                   <p>Are you sure you want to submit this sale?</p>
               </div>
               <div class="modal-footer">
-                  <button type="button" class="btn btn-sm btn-primary" id="confirm_sale" data-url="<?= site_url('AjaxController/updateSale/1')?>" data-redirect="<?= site_url('sales')?>">Submit</button>
+                  <button type="button" class="btn btn-sm btn-primary" id="confirm_sale" data-url="<?= site_url('Sales/mark_as_done')?>" data-id="<?= $sale->id ?>" data-redirect="<?= site_url('sales')?>">Submit</button>
                   <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Cancel</button>
               </div>
           </div>
@@ -341,22 +346,21 @@
 
       let url = $(this).attr('data-url')
 
-      let redirect = $(this).attr('data-redirect')
+      let sale_id = $(this).attr('data-id')
+
+      var redirect = $(this).attr('data-redirect')
+
       // update status of sale
       $.ajax({
         url : url,
+        type : 'post',
+        data : {sale_id : sale_id},
         dataType : 'json',
         success : function (data) {
-
-          if(data)
-          {
-
 
             self.opener.location.href = redirect
 
             window.close()
-
-          }
 
         }
       })
@@ -376,6 +380,14 @@
     $('#print_details').click(function () {
 
         window.print()
+
+    })
+
+    $(function () {
+
+      window.onbeforeunload = function(){
+        alert("You are now leaving, are you sure?")
+      }
 
     })
 

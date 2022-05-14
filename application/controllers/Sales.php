@@ -70,9 +70,9 @@ class Sales extends MY_Controller
         if($v->status == 'unpaid')
         {
 
-          $change_status_url = site_url('update_sales_status/active/'.$ID);
+          $change_status_url = site_url('update_sales_status/paid/'.$ID);
 
-          $status = '<a href="javascript:void(0)" class="changeSalesStatus action-icons" data-type-status="active" data-msg="Admin" data-url="'. $change_status_url .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Paid">
+          $status = '<a href="javascript:void(0)" class="changeSalesStatus action-icons" data-msg="Are you sure you want to Paid this invoice?" data-btn="Paid" data-url="'. $change_status_url .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Paid">
                    <span class="badge rounded-pill bg-danger">Unpaid</span>
              </a>';
 
@@ -91,9 +91,7 @@ class Sales extends MY_Controller
             $bg = 'secondary';
           }
 
-          $status = '<a href="javascript:void(0)" class="action-icons" data-bs-toggle="tooltip" data-bs-placement="bottom" title="'. ucfirst($v->status) .'">
-                 <span class="badge rounded-pill bg-'. $bg .'">'. ucfirst($v->status) .'</span>
-           </a>';
+          $status = '<span class="badge rounded-pill bg-'. $bg .'">'. ucfirst($v->status) .'</span>';
 
         }
 
@@ -109,7 +107,7 @@ class Sales extends MY_Controller
               <i class="fa fa-pencil"></i>
             </a>';
 
-            $actions .= '<a href="javascript:void(0)" class="action-icons view_details_" data-url="'. site_url('AjaxController/showSalesDetails/'.$ID.'/details') .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Details">
+            $actions .= '<a href="javascript:void(0)" class="action-icons view_sale_details_" data-url="'. site_url('AjaxController/showSalesDetails/'.$ID.'/details') .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Details">
               <i class="fa fa-eye"></i>
             </a>';
 
@@ -162,21 +160,29 @@ class Sales extends MY_Controller
 
       $sale_row = $this->Sale_model->getLastInvoiceNo();
 
-      if(!empty($sale_row))
+      $p = $this->inp_post();
+
+      $ID = (isset($p['ID'])?$p['ID']:'');
+      unset($p['ID']);
+
+      $NewInvoiceNo = '';
+      if ($ID == '')
       {
 
+        if(!empty($sale_row))
+        {
 
-         $NewInvoiceNo = str_pad($sale_row->invoice_no, 5, '0', STR_PAD_LEFT);
+           $NewInvoiceNo = str_pad($sale_row->invoice_no + 1, 5, '0', STR_PAD_LEFT);
+
+         }
+         else
+         {
+
+           $NewInvoiceNo = "00001";
+
+         }
 
        }
-       else
-       {
-
-         $NewInvoiceNo = "00001";
-
-       }
-
-       $p = $this->inp_post();
 
        $arr = [
          'invoice_no' => $NewInvoiceNo,
@@ -195,7 +201,26 @@ class Sales extends MY_Controller
 
        $this->trans_('start');
 
-            $last_id = $this->bm->insert_row('sales',$arr);
+             if(!empty($ID))
+             {
+
+               unset($arr['invoice_no']);
+               unset($arr['added_by']);
+
+               $this->bm->update('sales',$arr,'id',$ID);
+
+               $last_id = $ID;
+
+               $this->bm->delete('sales_details','sale_id',$ID);
+
+             }
+             else
+             {
+
+               $last_id = $this->bm->insert_row('sales',$arr);
+
+             }
+
 
             $sale_products = [];
 
@@ -210,7 +235,8 @@ class Sales extends MY_Controller
                   'price' => $p['price'][$key],
                   'sale_qty' => $p['sale_qty'][$key] == ''?0:$p['sale_qty'][$key],
                   'exchange_qty' => $p['exchange_qty'][$key] == ''?0:$p['exchange_qty'][$key],
-                  'foc_qty' => $p['foc_qty'][$key] == ''?0:$p['foc_qty'][$key]
+                  'foc_qty' => $p['foc_qty'][$key] == ''?0:$p['foc_qty'][$key],
+                  'amount' => $p['amount'][$key] == ''?0:$p['amount'][$key]
 
                 ];
 
@@ -220,7 +246,7 @@ class Sales extends MY_Controller
                     'customer_id' => $p['customer_id'],
                     'driver_id' => $this->user_id_,
                     'qty' => $p['sale_qty'][$key] == ''?0:$p['sale_qty'][$key],
-                    'type' => 'add_sale',
+                    'type' => $ID == ''?'add_sale':'edit_sale',
                     'added_by' => $this->user_id_
 
                 ];
@@ -230,7 +256,7 @@ class Sales extends MY_Controller
                   'customer_id' => $p['customer_id'],
                   'driver_id' => $this->user_id_,
                   'qty' => $p['exchange_qty'][$key] == ''?0:$p['exchange_qty'][$key],
-                  'type' => 'add_sale',
+                  'type' => $ID == ''?'add_sale':'edit_sale',
                   'added_by' => $this->user_id_
 
                 ];
@@ -240,7 +266,7 @@ class Sales extends MY_Controller
                   'customer_id' => $p['customer_id'],
                   'driver_id' => $this->user_id_,
                   'qty' => $p['foc_qty'][$key] == ''?0:$p['foc_qty'][$key],
-                  'type' => 'add_sale',
+                  'type' => $ID == ''?'add_sale':'edit_sale',
                   'added_by' => $this->user_id_
 
                 ];
@@ -264,7 +290,20 @@ class Sales extends MY_Controller
        {
 
          $output['status'] = true;
-         $output['msg'] = 'Sale added successfully';
+
+         if($ID != '')
+         {
+
+           $output['msg'] = 'Sale updated successfully';
+
+         }
+         else
+         {
+
+           $output['msg'] = 'Sale added successfully';
+
+         }
+
          $output['sale_id'] = $last_id;
 
        }
@@ -273,14 +312,22 @@ class Sales extends MY_Controller
 
   }
 
-  public function edit($id)
+  public function edit($sale_id)
   {
+
+    $this->load->model('Sale_model');
+
+    $sales_details = $this->Sale_model->getEditSaleDetails($sale_id,$this->user_id_);
+
+    $sale = @$sales_details[0];
 
     $data = [
 
       'title' => 'Edit Sale',
       'page_head' => 'Edit Sale',
       'active_menu' => 'sales',
+      'sale' => $sale,
+      'sales_details' => $sales_details,
       'styles' => [
         'add_sale.css'
       ],
@@ -291,6 +338,117 @@ class Sales extends MY_Controller
     ];
 
     $this->template('sales/edit',$data);
+
+  }
+
+  public function mark_as_done()
+  {
+
+      $this->load->model('Sale_model');
+
+      $sale_id = $this->inp_post('sale_id');
+
+      $this->trans_('start');
+
+          $sale_row = $this->bm->getRow('sales','id',$sale_id);
+
+          if($sale_row->customer_category == 'cash')
+          {
+
+            if($sale_row->is_pay == 0)
+            {
+
+              $arr['status'] = 'unpaid';
+
+            }
+            else if($sale_row->is_pay == 1)
+            {
+
+              $arr['status'] = 'paid';
+
+            }
+
+          }
+          elseif ($sale_row->customer_category == 'credit')
+          {
+
+            $arr['status'] = 'credit';
+
+          }
+
+          $this->bm->update('sales',$arr,'id',$sale_id);
+
+          $sales_products = $this->bm->getRows('sales_details','sale_id',$sale_id);
+
+          $logs = [];
+          foreach ($sales_products as $key => $v)
+          {
+
+              $total_qty = $v->sale_qty + $v->exchange_qty + $v->foc_qty;
+              $assign_stock_row = $this->Sale_model->getDriverProductStockByProductId($v->product_id,$this->user_id_);
+
+              if(!empty($assign_stock_row))
+              {
+
+                $update_assignstock_qty['available_qty'] = $assign_stock_row->available_qty - $total_qty;
+
+                $this->bm->update('assign_stock_details',$update_assignstock_qty,'id',$assign_stock_row->id);
+
+              }
+
+              $logs[] = [
+
+                  'product_id' => $v->product_id,
+                  'customer_id' => $sale_row->customer_id,
+                  'driver_id' => $this->user_id_,
+                  'qty' => $v->sale_qty,
+                  'type' => 'mark_sale_done',
+                  'added_by' => $this->user_id_
+
+              ];
+              $logs[] = [
+
+                'product_id' => $v->product_id,
+                'customer_id' => $sale_row->customer_id,
+                'driver_id' => $this->user_id_,
+                'qty' => $v->exchange_qty,
+                'type' => 'mark_sale_done',
+                'added_by' => $this->user_id_
+
+              ];
+              $logs[] = [
+
+                'product_id' => $v->product_id,
+                'customer_id' => $sale_row->customer_id,
+                'driver_id' => $this->user_id_,
+                'qty' => $v->foc_qty,
+                'type' => 'mark_sale_done',
+                'added_by' => $this->user_id_
+
+              ];
+
+          }
+
+           $this->bm->insert_rows('logs',$logs);
+
+      $this->trans_('complete');
+
+      if ($this->trans_('status') === FALSE)
+      {
+
+          $output['status'] = false;
+          $output['msg'] = 'Connection error Try Again';
+
+      }
+      else
+      {
+
+        $output['status'] = true;
+        $output['msg'] = 'Sale submit successfully';
+
+      }
+
+      echo json_encode($output);
 
   }
 

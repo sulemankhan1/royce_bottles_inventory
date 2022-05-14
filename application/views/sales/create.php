@@ -18,7 +18,11 @@
                <span id="total_unpaid_inv"></span>
             </div>
             <div class="card-body">
-              <?php echo getHiddenField('total_products',0); ?>
+              <?php
+                echo getHiddenField('total_products',0);
+                echo getHiddenField('save_sale',site_url('Sales/save_sale'));
+                echo getHiddenField('show_details',site_url('AjaxController/showSalesDetails'));
+              ?>
                 <form class="row g-3 needs-validation" novalidate action="javascript:void(0)" method="post" id="save_sale">
                 <div class="row mt-4">
 
@@ -54,8 +58,7 @@
                             'id' => 'is_customer_pay',
                             'column' => 'sm-4',
                             'static' => true,
-                            'data' => ['Yes','No'],
-                            'attr' => 'readonly'
+                            'data' => ['Yes','No']
                           ]);
 
                           echo getSelectField([

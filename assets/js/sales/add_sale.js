@@ -149,6 +149,9 @@ $('#save_sale').submit(function (e) {
 
   e.preventDefault()
 
+  let url = $('input[name=save_sale]').val()
+  let show_details_url = $('input[name=show_details]').val()
+
   let data = $('#save_sale').serialize()
 
   let total_products = $('input[name=total_products]').val()
@@ -158,7 +161,7 @@ $('#save_sale').submit(function (e) {
 
     $.ajax({
 
-      url : 'Sales/save_sale',
+      url : url,
       type : 'post',
       data : data,
       dataType : 'json',
@@ -171,7 +174,7 @@ $('#save_sale').submit(function (e) {
 
           show_success_(data.msg)
 
-          window.open('AjaxController/showSalesDetails/'+data.sale_id,'Sale Information','height=800,width=800');
+          window.open(show_details_url+'/'+data.sale_id+'/save_sale','Sale Information','height=800,width=800');
 
         }
         else
@@ -194,7 +197,6 @@ $('#save_sale').submit(function (e) {
   }
 
 })
-
 
 // calculate qty
 $(document).on('keyup','.sale_qty_,.exchange_qty_,.foc_qty_',function () {
