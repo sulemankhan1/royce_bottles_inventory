@@ -98,7 +98,7 @@
 
                   <?php if ($type == 'invoice' || $type == 'invoice_print'): ?>
 
-                    <a href="javascript:void(0)" class="btn btn-sm btn-success" id="send_pdf_to_whtaspp"><i class="fa-brands fa-whatsapp"></i> Send Pdf To WhatsApp</a>
+                    <a href="javascript:void(0)" class="btn btn-sm btn-success hide_content" id="send_pdf_to_whtaspp"><i class="fa-brands fa-whatsapp"></i> Send Pdf To WhatsApp</a>
                     <a href="javascript:void(0)" class="btn btn-sm btn-success hide_content" id="send_invoice_email">Send Email</a>
                     <a href="javascript:void(0)" class="btn btn-sm btn-primary hide_content" id="print_details">Print</a>
 
@@ -239,6 +239,7 @@
                             <th width="55%">Products</th>
                             <th width="10%">Sale Qty</th>
                             <th width="13%">Exchange Qty</th>
+                            <th width="13%">Foc Qty</th>
                             <th width="10%">Price</th>
                             <th style="text-align:right">Total</th>
                           </tr>
@@ -251,6 +252,7 @@
                             <td><?= $v->product_name ?></td>
                             <td><?= $v->sale_qty ?></td>
                             <td><?= $v->exchange_qty ?></td>
+                            <td><?= $v->foc_qty ?></td>
                             <td><?= $v->price ?></td>
                             <td style="text-align:right"><?= $v->amount?></td>
                           </tr>

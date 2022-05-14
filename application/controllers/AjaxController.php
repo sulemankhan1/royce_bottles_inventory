@@ -24,7 +24,6 @@ class AjaxController extends MY_Controller
 
       $output['html'] = $this->load_view('users/modals/view_details',$data,true);
 
-
       echo json_encode($output);
 
 	}
@@ -249,8 +248,17 @@ class AjaxController extends MY_Controller
     $sales_details = $this->Sale_model->getSaleDetails($sale_id);
 
     $sale = @$sales_details[0];
+
+    $page_title = 'Sale Information';
+    if ($type == 'invoice' || $type == 'invoice_print')
+    {
+
+      $page_title = 'Invoice Details';
+
+    }
+
     $data = [
-      'page_title' => 'Sale Information',
+      'page_title' => $page_title,
       'type' => $type,
       'sale' => $sale,
       'sales_details' => $sales_details
@@ -265,18 +273,6 @@ class AjaxController extends MY_Controller
   {
 
       echo json_encode(true);
-
-  }
-
-  public function showInvoiceDetails($invoice_id,$type)
-  {
-
-    $data = [
-      'page_title' => 'Invoice Details',
-      'type' => $type
-    ];
-
-    $output['html'] = $this->load_view('sales/view_sale',$data);
 
   }
 
