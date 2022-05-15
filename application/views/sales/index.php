@@ -36,7 +36,7 @@
                            <th>Total Qty</th>
                            <th>Total Price</th>
                            <th>Status</th>
-                           <th>Action</th>
+                           <th class="dnr">Action</th>
                         </tr>
                      </thead>
                      <tbody></tbody>

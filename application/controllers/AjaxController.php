@@ -172,12 +172,19 @@ class AjaxController extends MY_Controller
 
   }
 
-  public function getInventoryDetailsByType($type,$id)
+  public function getInventoryDetailsByType($tab,$product_id)
   {
+      $this->load->model('Inventory_model');
+
+      $stock_details = $this->Inventory_model->getProdudtStockDetails($tab,$product_id);
+
+      $product = $this->bm->getRow('products','id',$product_id);
 
       $data = [
 
-        'type' => $type
+        'type' => $tab,
+        'product' => $product,
+        'stock_details' => $stock_details
 
       ];
 

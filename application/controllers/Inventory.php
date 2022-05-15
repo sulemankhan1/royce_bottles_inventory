@@ -24,6 +24,7 @@ class Inventory extends MY_Controller
       'drivers' => $this->bm->getRowsWithConditions('users',['is_deleted' =>0,'type' => 'driver']),
       'products' => $this->bm->getRows('products','is_deleted',0),
       'redirect_to' => site_url('view_inventory'),
+      'ajax_url' => site_url('Inventory/getInventory'),
       'styles' => [
         'my-dataTable.css'
       ],
@@ -32,7 +33,8 @@ class Inventory extends MY_Controller
         'inventory/main.js',
         'inventory/assign_to_driver.js',
         'inventory/return_stock.js',
-        'inventory/add_stock.js'
+        'inventory/add_stock.js',
+        'dataTable_buttons'
       ]
 
     ];
@@ -40,6 +42,91 @@ class Inventory extends MY_Controller
     $this->template('inventory/index',$data);
 
 	}
+
+  public function getInventory($tab = 'available')
+  {
+
+    $this->load->model('Inventory_model');
+
+    $records = $this->Inventory_model->getInventory($_REQUEST,'records',$tab);
+    $totalFilteredRecords = $this->Inventory_model->getInventory($_REQUEST,'filter',$tab);
+    $recordsTotal = $this->Inventory_model->getInventory($_REQUEST,'recordsTotal',$tab);
+
+    $data = array();
+    $SNo = 0;
+    $Style = "";
+
+    foreach ($records as $key => $v)
+    {
+
+      $total_qty = 0;
+
+      $ID = $v->product_id;
+
+      $SNo++;
+
+      $nestedData = array();
+
+      $nestedData[] = $SNo;
+
+      if($tab == 'available')
+      {
+
+        $total_add = $v->total_add_stock_qty + $v->total_return;
+        $total_remove = $v->total_remove_stock_qty + $v->total_assign_stock_confirmed + $v->total_pending_call_order_confirmed + $v->total_return_missing;
+
+        $total_qty = $total_add - $total_remove;
+
+      }
+      else if($tab == 'missing')
+      {
+
+        $total_qty = $v->total_return_missing;
+
+      }
+      else if($tab == 'return')
+      {
+
+        $total_qty = $v->total_return;
+
+      }
+      else if($tab == 'exchange')
+      {
+
+        $total_qty = $v->exchange;
+
+      }
+
+      $nestedData[] = $v->product_name;
+      $nestedData[] = $total_qty;
+
+        $actions = '';
+
+          $actions .= '<span class="actions-icons">';
+
+            $actions .= '<a href="javascript:void(0)" class="action-icons view_details_" data-url="'. site_url('AjaxController/getInventoryDetailsByType/'.$tab.'/'.$ID) .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Details">
+              <i class="fa fa-eye"></i>
+            </a>';
+
+          $actions .= '</span>';
+
+           $nestedData[] = $actions;
+
+           $data[] = $nestedData;
+
+    }
+
+    $json_data = array(
+      "draw" => intval($_REQUEST['draw']), // for every request/draw by clientside , they send a number as a parameter, when they recieve a response/data they first check the draw number, so we are sending same number in draw.
+      "recordsTotal" => intval($recordsTotal), // total number of records
+      "recordsFiltered" => intval($totalFilteredRecords), // total number of records after searching, if there is no searching then totalFiltered = totalData
+      "data" => $data // total data array
+    );
+
+
+    echo json_encode($json_data);
+
+  }
 
   public function add_stock()
   {

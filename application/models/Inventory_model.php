@@ -6,6 +6,131 @@
 class Inventory_model extends CI_Model
 {
 
+  public function getInventory($requestData,$type,$tab)
+  {
+      // storing request (ie, get/post) global array to a variable
+      $columns = [
+          // datatable column index => database column name
+          0 => NULL,
+          1 => 'products.name',
+          2 => Null,
+          3 => NULL
+
+      ];
+
+      if($tab == 'available')
+      {
+
+        $select = "sum(if(logs.type='add_stock',qty,0)) as total_add_stock_qty,sum(if(logs.type='remove_stock',qty,0)) as total_remove_stock_qty,sum(if(logs.type='assign_stock_confirmed',qty,0)) as total_assign_stock_confirmed,sum(if(logs.type='pending_call_order_confirmed',qty,0)) as total_pending_call_order_confirmed,sum(if(logs.type='return' && logs.qty_type='missing_qty',qty,0)) as total_return_missing,sum(if(logs.type='return' && logs.qty_type='return_qty',qty,0)) as total_return";
+
+      }
+      else if($tab == 'missing')
+      {
+
+        $select = "sum(if(logs.type='return' && logs.qty_type='missing_qty',qty,0)) as total_return_missing";
+
+      }
+      else if($tab == 'return')
+      {
+
+        $select = "sum(if(logs.type='return' && logs.qty_type='return_qty',qty,0)) as total_return";
+
+      }
+      else if($tab == 'exchange')
+      {
+
+        $select = "sum(if(logs.type='mark_sale_done' && logs.qty_type='exchange_qty',qty,0)) as total_exchange";
+
+      }
+
+      $this->db->select("logs.product_id,products.name as product_name,".$select, FALSE);
+
+      $this->db->from('products');
+      $this->db->join('logs','logs.product_id = products.id','left');
+
+      $this->db->where('products.is_deleted',0);
+
+      if($tab == 'missing')
+      {
+
+        $this->db->where('logs.type','return');
+        $this->db->where('logs.qty_type','missing_qty');
+
+      }
+      else if($tab == 'return')
+      {
+
+        $this->db->where('logs.type','return');
+        $this->db->where('logs.qty_type','return_qty');
+
+      }
+      else if($tab == 'exchange')
+      {
+
+        $this->db->where('logs.type','mark_sale_done');
+        $this->db->where('logs.qty_type','exchange_qty');
+
+      }
+
+      $this->db->group_by('logs.product_id');
+
+      if($type == 'recordsTotal')
+      {
+          return $this->db->count_all_results();
+      }
+
+      else if($type == 'filter' || $type == 'records')
+      {
+
+        if (!empty($requestData['search']['value']))
+        {
+
+           $this->db->group_start();
+
+            $this->db->or_like('products.name',$requestData['search']['value']);
+
+           $this->db->group_end();
+
+        }
+
+        if($type == 'records')
+        {
+
+          if(isset($requestData['order']))
+          {
+
+              $this->db->order_by($columns[$requestData['order'][0]['column']],$requestData['order'][0]['dir']);
+
+          }
+          else
+          {
+
+            $this->db->order_by('products.id','desc');
+
+          }
+
+          if(isset($requestData["length"]))
+          {
+
+               $this->db->limit(@$_POST['length'], @$_POST['start']);
+
+          }
+
+          return $this->db->get()->result();
+
+        }
+        else
+        {
+
+            return $this->db->count_all_results();
+
+        }
+
+
+      }
+
+  }
+
   public function getDeliveryOrders($requestData,$type)
   {
       // storing request (ie, get/post) global array to a variable
@@ -175,6 +300,75 @@ class Inventory_model extends CI_Model
 
 
       }
+
+  }
+
+  public function getProdudtStockDetails($tab,$product_id)
+  {
+
+    if($tab == 'available')
+    {
+
+      $select = "sum(if(logs.type='add_stock',qty,0)) as total_add_stock_qty,sum(if(logs.type='remove_stock',qty,0)) as total_remove_stock_qty,sum(if(logs.type='assign_stock_confirmed',qty,0)) as total_assign_stock_confirmed,sum(if(logs.type='pending_call_order_confirmed',qty,0)) as total_pending_call_order_confirmed,sum(if(logs.type='return' && logs.qty_type='missing_qty',qty,0)) as total_return_missing,sum(if(logs.type='return' && logs.qty_type='return_qty',qty,0)) as total_return,sum(if(logs.type='mark_sale_done' && logs.qty_type='sale_qty',qty,0)) as total_sold_qty,sum(if(logs.type='mark_sale_done' && logs.qty_type='exchange_qty',qty,0)) as total_exchange";
+
+    }
+    else if($tab == 'missing')
+    {
+
+      $select = "sum(if(logs.type='return' && logs.qty_type='missing_qty',qty,0)) as total_return_missing";
+
+    }
+    else if($tab == 'return')
+    {
+
+      $select = "sum(if(logs.type='return' && logs.qty_type='return_qty',qty,0)) as total_return";
+
+    }
+    else if($tab == 'exchange')
+    {
+
+      $select = "sum(if(logs.type='mark_sale_done' && logs.qty_type='exchange_qty',qty,0)) as total_exchange";
+
+    }
+
+    $this->db->select("logs.*,DATE(logs.added_at) AS added_at_formatted,driver.name as driver_name,customer.name as customer_name,added_by.name as added_by_name,products.name as product_name,".$select, FALSE);
+
+    $this->db->from('logs');
+    $this->db->join('products','logs.product_id = products.id');
+    $this->db->join('users driver','logs.driver_id = driver.id','left');
+    $this->db->join('users customer','logs.customer_id = customer.id','left');
+    $this->db->join('users added_by','logs.added_by = added_by.id','left');
+
+    $this->db->where('logs.product_id',$product_id);
+
+    if($tab == 'missing')
+    {
+
+      $this->db->where('logs.type','return');
+      $this->db->where('logs.qty_type','missing_qty');
+      $this->db->group_by('logs.driver_id');
+
+    }
+    else if($tab == 'return')
+    {
+
+      $this->db->where('logs.type','return');
+      $this->db->where('logs.qty_type','return_qty');
+      $this->db->group_by('logs.driver_id');
+
+    }
+    else if($tab == 'exchange')
+    {
+
+      $this->db->where('logs.type','mark_sale_done');
+      $this->db->where('logs.qty_type','exchange_qty');
+      $this->db->group_by('logs.driver_id');
+
+    }
+
+    $this->db->group_by('added_at_formatted');
+
+    return $this->db->get()->result();
 
   }
 

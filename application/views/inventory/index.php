@@ -16,6 +16,15 @@
 
                <div class="header-title">
 
+                 <?php
+
+                   echo getHiddenField('available_inv',$ajax_url.'/available');
+                   echo getHiddenField('missing_inv',$ajax_url.'/missing');
+                   echo getHiddenField('return_inv',$ajax_url.'/return');
+                   echo getHiddenField('exchange_inv',$ajax_url.'/exchange');
+
+                 ?>
+
                  <h4 class="card-title"><?= $page_head ?></h4>
 
                </div>
@@ -53,24 +62,10 @@
                           <th>#</th>
                           <th style="width:60%">Product Name</th>
                           <th>Available Qty</th>
-                          <th>Action</th>
+                          <th class="dnr">Action</th>
                        </tr>
                     </thead>
-                    <tbody>
-                      <tr>
-                         <td>1</td>
-                         <td>Product1</td>
-                         <td>13</td>
-                         <th>
-                           <span class="actions-icons">
-                             <a href="javascript:void(0)" class="action-icons view_details_" data-url="<?= site_url('AjaxController/getInventoryDetailsByType/available/1') ?>" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Details">
-                               <i class="fa fa-eye"></i>
-                             </a>
-                           </span>
-                         </th>
-                      </tr>
-
-                    </tbody>
+                    <tbody></tbody>
                  </table>
               </div>
               <div class="table-responsive tabs_table missing_table_" style="display:none">
@@ -80,24 +75,10 @@
                           <th>#</th>
                           <th>Product Name</th>
                           <th>Missing Qty</th>
-                          <th>Action</th>
+                          <th class="dnr">Action</th>
                        </tr>
                     </thead>
-                    <tbody>
-                      <tr>
-                         <td>1</td>
-                         <td>Product1</td>
-                         <td>13</td>
-                         <th>
-                           <span class="actions-icons">
-                             <a href="javascript:void(0)" class="action-icons view_details_" data-url="<?= site_url('AjaxController/getInventoryDetailsByType/missing/1') ?>" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Details">
-                               <i class="fa fa-eye"></i>
-                             </a>
-                           </span>
-                         </th>
-                      </tr>
-
-                    </tbody>
+                    <tbody></tbody>
                  </table>
               </div>
               <div class="table-responsive tabs_table return_table_" style="display:none">
@@ -107,24 +88,10 @@
                           <th>#</th>
                           <th>Product Name</th>
                           <th>Return Qty</th>
-                          <th>Action</th>
+                          <th class="dnr">Action</th>
                        </tr>
                     </thead>
-                    <tbody>
-                      <tr>
-                         <td>1</td>
-                         <td>Product1</td>
-                         <td>13</td>
-                         <th>
-                           <span class="actions-icons">
-                             <a href="javascript:void(0)" class="action-icons view_details_" data-url="<?= site_url('AjaxController/getInventoryDetailsByType/return/1') ?>" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Details">
-                               <i class="fa fa-eye"></i>
-                             </a>
-                           </span>
-                         </th>
-                      </tr>
-
-                    </tbody>
+                    <tbody></tbody>
                  </table>
               </div>
               <div class="table-responsive tabs_table exchange_table_" style="display:none">
@@ -134,24 +101,10 @@
                           <th>#</th>
                           <th>Product Name</th>
                           <th>Exchange Qty</th>
-                          <th>Action</th>
+                          <th class="dnr">Action</th>
                        </tr>
                     </thead>
-                    <tbody>
-                      <tr>
-                         <td>1</td>
-                         <td>Product1</td>
-                         <td>13</td>
-                         <th>
-                           <span class="actions-icons">
-                             <a href="javascript:void(0)" class="action-icons view_details_" data-url="<?= site_url('AjaxController/getInventoryDetailsByType/exchange/1') ?>" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Details">
-                               <i class="fa fa-eye"></i>
-                             </a>
-                           </span>
-                         </th>
-                      </tr>
-
-                    </tbody>
+                    <tbody></tbody>
                  </table>
               </div>
             </div>

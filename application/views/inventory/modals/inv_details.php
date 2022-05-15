@@ -10,122 +10,110 @@
 
         <?php
 
-          echo viewDetailsCol('Product Name','Product1',4);
-          echo viewDetailsCol('Product Code','002',4);
-          echo viewDetailsCol('SKU','XYZ-123',4);
-          echo viewDetailsCol('Description','Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',12);
+          echo viewDetailsCol('Product Name',$product->name,4);
+          echo viewDetailsCol('Product Code',$product->code,4);
+          echo viewDetailsCol('SKU',$product->sku,4);
+          echo viewDetailsCol('Description',$product->description,12);
 
         ?>
 
           </div>
         </div>
         <div class="col-sm-4 text-center">
-            <img src="<?= base_url('assets/images/avatars/01.png') ?>" class="img-thumbnail user-form-img" alt="...">
+
+          <div class="details-circular-img">
+            <?php
+
+              $folder = 'product';
+
+              if (@getimagesize(base_url('uploads/'.$folder.'/'.$product->img)) && !empty($product->img))
+              {
+                  echo '<img src="'. base_url('uploads/'.$folder.'/'.$product->img) .'" alt="...">';
+              }
+              else
+              {
+                  echo '<img src="'. base_url('assets/images/avatars/01.png') .'" alt="...">';
+              }
+
+             ?>
+         </div>
+
         </div>
 
       </div>
       <div class="row">
         <div class="col-sm-12" style="font-size: 14px;">
-            <table class="table ">
-        <thead>
-          <tr>
-            <th>#</th>
+           <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>#</th>
 
-            <?php if ($type == 'available'): ?>
+                  <?php if ($type == 'available'): ?>
 
-              <th>Product Stock</th>
-              <th>Sold Stock</th>
-              <?php else: ?>
-                <th>Driver</th>
-            <?php endif; ?>
+                    <th>Product Stock</th>
+                    <th>Sold Stock</th>
+                    <?php else: ?>
+                      <th>Driver</th>
+                  <?php endif; ?>
 
-            <?php if ($type == 'available' || $type == 'missing'): ?>
-              <th>Missing Stock</th>
-            <?php endif; ?>
+                  <?php if ($type == 'available' || $type == 'missing'): ?>
+                    <th>Missing Stock</th>
+                  <?php endif; ?>
 
-            <?php if ($type == 'available' || $type == 'return'): ?>
-              <th>Return Stock</th>
-            <?php endif; ?>
+                  <?php if ($type == 'available' || $type == 'return'): ?>
+                    <th>Return Stock</th>
+                  <?php endif; ?>
 
-            <?php if ($type == 'available' || $type == 'exchange'): ?>
-              <th>Exchange Stock</th>
-            <?php endif; ?>
+                  <?php if ($type == 'available' || $type == 'exchange'): ?>
+                    <th>Exchange Stock</th>
+                  <?php endif; ?>
 
-            <th>Date & Time</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <?php if ($type == 'available'): ?>
-                <td>100</td>
-                <td>80</td>
-              <?php else: ?>
-                <th>Driver1</th>
-              <?php endif; ?>
+                  <th>Date & Time</th>
+                </tr>
+              </thead>
+              <tbody>
 
-            <?php if ($type == 'available' || $type == 'missing'): ?>
-              <td>10</td>
-            <?php endif; ?>
+                <?php foreach ($stock_details as $key => $v): ?>
 
-            <?php if ($type == 'available' || $type == 'return'): ?>
-              <td>5</td>
-            <?php endif; ?>
+                <tr>
+                  <td><?= $key+1 ?></td>
+                  <?php if ($type == 'available'): ?>
+                      <td>
+                        <?php
 
-            <?php if ($type == 'available' || $type == 'exchange'): ?>
-              <td>5</td>
-            <?php endif; ?>
+                          $total_add = $v->total_add_stock_qty + $v->total_return;
+                          $total_remove = $v->total_remove_stock_qty + $v->total_assign_stock_confirmed + $v->total_pending_call_order_confirmed + $v->total_return_missing;
 
-            <td> 03-04-2022,5:56 PM</td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <?php if ($type == 'available'): ?>
-                <td>100</td>
-                <td>80</td>
-              <?php else: ?>
-                <th>Driver1</th>
-              <?php endif; ?>
+                        echo $total_qty = $total_add - $total_remove;
 
-            <?php if ($type == 'available' || $type == 'missing'): ?>
-              <td>10</td>
-            <?php endif; ?>
+                         ?>
+                      </td>
+                      <td><?= $v->total_sold_qty ?></td>
+                    <?php else: ?>
+                      <th><?= $v->driver_name ?></th>
+                    <?php endif; ?>
 
-            <?php if ($type == 'available' || $type == 'return'): ?>
-              <td>5</td>
-            <?php endif; ?>
+                  <?php if ($type == 'available' || $type == 'missing'): ?>
+                    <td><?= $v->total_return_missing ?></td>
+                  <?php endif; ?>
 
-            <?php if ($type == 'available' || $type == 'exchange'): ?>
-              <td>5</td>
-            <?php endif; ?>
+                  <?php if ($type == 'available' || $type == 'return'): ?>
+                    <td><?= $v->total_return ?></td>
+                  <?php endif; ?>
 
-            <td> 03-04-2022,5:56 PM</td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <?php if ($type == 'available'): ?>
-                <td>100</td>
-                <td>80</td>
-              <?php else: ?>
-                <th>Driver1</th>
-              <?php endif; ?>
+                  <?php if ($type == 'available' || $type == 'exchange'): ?>
+                    <td><?= $v->total_exchange ?></td>
+                  <?php endif; ?>
 
-            <?php if ($type == 'available' || $type == 'missing'): ?>
-              <td>10</td>
-            <?php endif; ?>
+                  <td><?= getDateTimeFormat($v->added_at) ?></td>
+                </tr>
 
-            <?php if ($type == 'available' || $type == 'return'): ?>
-              <td>5</td>
-            <?php endif; ?>
+                <?php endforeach; ?>
 
-            <?php if ($type == 'available' || $type == 'exchange'): ?>
-              <td>5</td>
-            <?php endif; ?>
-
-            <td> 03-04-2022,5:56 PM</td>
-          </tr>
-        </tbody>
-      </table>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
 

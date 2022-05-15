@@ -26,6 +26,7 @@ class Sales extends MY_Controller
       ],
       'scripts' => [
         'DataTable/salesDataTable.js',
+        'dataTable_buttons',
         'sales/sales.js'
       ]
 

@@ -26,10 +26,9 @@ $('.inv_tabs_').click(function () {
 
 
 // view details
-$('.view_details_').click(function () {
+$(document).on('click','.view_details_',function () {
 
   let url = $(this).attr('data-url')
-
 
     $.ajax({
 

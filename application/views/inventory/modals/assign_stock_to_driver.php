@@ -13,7 +13,7 @@
 
                   <?php
 
-                    echo getHiddenField('redirect','inventory');
+                    echo getHiddenField('redirect',$redirect_to);
 
                     echo getSelectField([
                       'label' => 'Driver',

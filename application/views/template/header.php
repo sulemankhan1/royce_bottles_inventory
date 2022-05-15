@@ -172,7 +172,7 @@
 					}
 				}
 
-				/* deetails circular img */
+				/* details circular img */
 				.details-circular-img {
 				  width: 135px;
 				  height: 135px;
