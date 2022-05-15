@@ -158,7 +158,14 @@ class AjaxController extends MY_Controller
 
   public function getReturnStockProductsByDriverId($driver_id)
   {
-      $data = [];
+      $this->load->model('Sale_model');
+
+      $assign_products = $this->Sale_model->getAssignStockToDriver($driver_id);
+
+      $data = [
+        'assign_products' => $assign_products
+      ];
+
       $output['html'] = $this->load_view('inventory/modals/return_stock_products',$data,true);
 
       echo json_encode($output);
@@ -269,34 +276,29 @@ class AjaxController extends MY_Controller
 
   }
 
-  public function updateSale($sale_id)
+  public function getCustomerPayments()
   {
 
-      echo json_encode(true);
+    $p = $this->inp_get();
 
-  }
+    $this->load->model('Payment_model');
 
-  public function getCustomerPayments($customer_id)
-  {
+    $payments = $this->Payment_model->getPayments($p['customer_id'],$p['from'],$p['to']);
+
+    $customer = $this->bm->getRow('customers','id',$p['customer_id']);
 
     $data = [
-      'page_title' => 'Customer Payments'
+
+      'page_title' => 'Customer Payments',
+      'payments' => $payments,
+      'customer' => $customer,
+      'customer_id' => $p['customer_id'],
+      'from' => $p['from'],
+      'to' => $p['to']
+
     ];
-    $output['html'] = $this->load_view('payments/view_payments',$data);
 
-  }
-
-  public function printCustomerPayments()
-  {
-
-      $get = $this->inp_get();
-
-      $data = [
-        'page_title' => 'Customer Payments'
-      ];
-
-      $this->load_view('payments/print_payment_details',$data);
-
+    $this->load_view('payments/view_payments',$data);
 
   }
 

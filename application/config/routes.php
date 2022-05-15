@@ -94,8 +94,11 @@ $route['save_stock'] = 'Inventory/save_stock';
 $route['view_stock'] = 'Inventory/view_stock';
 $route['delete_stock/(:num)'] = 'Inventory/delete_stock/$1';
 $route['stock_history'] = 'Inventory/stock_history';
-$route['return_stock'] = 'Inventory/return_stock';
 $route['live_stock'] = 'Inventory/live_stock';
+
+// inventory //return_stock
+$route['return_stock'] = 'Inventory/return_stock';
+$route['save_return_stock'] = 'Inventory/save_return_stock';
 
 // inventory //request_stock
 $route['request_stock'] = 'Inventory/request_stock';
@@ -122,6 +125,7 @@ $route['sales'] = 'Sales';
 $route['add_sale'] = 'Sales/create';
 $route['edit_sale/(:num)'] = 'Sales/edit/$1';
 $route['view_sale'] = 'Sales/view_sale';
+$route['update_sales_status/(:any)/(:num)'] = 'Sales/update_sales_status/$1/$2';
 
 //call order
 $route['call_order'] = 'Order';
@@ -154,6 +158,7 @@ $route['delete_salesperson/(:num)'] = 'Salesperson/delete/$1';
 
 //payments
 $route['payments'] = 'Payments';
+$route['save_payment'] = 'Payments/save_payment';
 
 //db_export
 $route['db_export'] = 'DB_export';

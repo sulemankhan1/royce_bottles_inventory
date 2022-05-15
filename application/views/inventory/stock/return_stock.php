@@ -17,7 +17,10 @@
                </div>
             </div>
             <div class="card-body">
-              <form class="row g-3 needs-validation" novalidate>
+              <?=
+              getHiddenField('return_stock_url',base_url('AjaxController/getReturnStockProductsByDriverId'));
+              ?>
+              <form class="row g-3 needs-validation" novalidate action="<?= site_url('save_return_stock') ?>" method="post">
                 <div class="row mt-4">
 
                     <div class="col-sm-12">
@@ -25,23 +28,16 @@
 
                         <?php
 
-                          $pro_arr = [
-
-                            ['id' => 1,'name' => 'Driver1'],
-                            ['id' => 2,'name' => 'Driver2'],
-                            ['id' => 3,'name' => 'Driver3']
-
-                          ];
-
-                          echo getHiddenField('return_stock_url',base_url('AjaxController/getReturnStockProductsByDriverId'));
+                          echo getHiddenField('redirect','return_stock');
 
                           echo getSelectField([
                             'label' => 'Driver',
                             'name' => 'driver_id',
                             'id' => 'return_stock_driver',
                             'column' => 'sm-4',
-                            'data' => $pro_arr
+                            'data' => $drivers
                           ]);
+
                         ?>
                       </div>
                       <div id="show_driver_products_"></div>

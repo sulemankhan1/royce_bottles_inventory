@@ -94,6 +94,12 @@ if ( ! function_exists('getDateTimeFormat'))
       return date('d-m-Y H:i A',strtotime($value));
 
     }
+    else if($type == 'only_time')
+    {
+
+      return date('H:i A',strtotime($value));
+
+    }
     else
     {
 

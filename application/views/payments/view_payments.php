@@ -10,6 +10,8 @@
     <!-- Custom Css -->
     <link rel="stylesheet" href="<?= base_url('assets/css/custom.min.css?v=1.2.0') ?>" />
 
+    <!-- to set deisgn in print -->
+    <link rel="stylesheet" href="<?= base_url('assets/css/bootstrap-print.min.css') ?>" media="print">
 
     <!-- Font Awesome script -->
     <script src="https://kit.fontawesome.com/b04cb78fd5.js" crossorigin="anonymous"></script>
@@ -58,7 +60,7 @@
 
         @media print
         {
-            #print_details
+            .hide_content
             {
                 display: none !important;
             }
@@ -77,10 +79,10 @@
                 </div>
                 <span>
 
-                    <a href="javascript:void(0)" class="btn btn-sm btn-success" id="send_sheet_to_whtaspp"><i class="fa-brands fa-whatsapp"></i> Send Pdf To WhatsApp</a>
-                    <a href="javascript:void(0)" class="btn btn-sm btn-success" id="send_mail_to_customer">Send Mail To Customer</a>
+                    <a href="javascript:void(0)" class="btn btn-sm btn-success hide_content" id="send_sheet_to_whtaspp"><i class="fa-brands fa-whatsapp"></i> Send Pdf To WhatsApp</a>
+                    <a href="javascript:void(0)" class="btn btn-sm btn-success hide_content" id="send_mail_to_customer">Send Mail To Customer</a>
 
-                    <a href="javascript:void(0)" class="btn btn-sm btn-primary" id="print_customer_payments" data-url="<?= base_url('AjaxController/printCustomerPayments')?>">Print</a>
+                    <a href="javascript:void(0)" class="btn btn-sm btn-primary hide_content" id="print_customer_payments">Print</a>
 
                 </span>
              </div>
@@ -90,15 +92,25 @@
                    <table width="30%">
                      <tr>
                        <td>Customer:</td>
-                       <th>Customer1</th>
+
+                       <?php if (!empty($customer_id)): ?>
+
+                         <th><?= isset($customer->name)?$customer->name:'' ?></th>
+
+                         <?php else: ?>
+
+                           <th>All</th>
+
+                        <?php endif; ?>
+
                      </tr>
                      <tr>
                        <td>Date From:</td>
-                       <th>03-10-2022</th>
+                       <th><?= $from != ''?getDateTimeFormat($from,'date'):'All' ?></th>
                      </tr>
                      <tr>
                        <td>Date To:</td>
-                       <th>03-20-2022</th>
+                       <th><?= $to != ''?getDateTimeFormat($to,'date'):'All' ?></th>
                      </tr>
                    </table>
                  </div>
@@ -116,30 +128,34 @@
                          </tr>
                       </thead>
                       <tbody>
+                        <?php if (!empty($payments)): ?>
+
+                        <?php foreach ($payments as $key => $v): ?>
+
                         <tr>
-                          <td>1</td>
-                           <td>12141</td>
-                           <td>03-04-2021</td>
-                           <td>5:10 PM</td>
-                           <td>10</td>
-                           <td>0</td>
+                           <td><?= $key+1 ?></td>
+                           <td><?= $v->invoice_no ?></td>
+                           <td><?= getDateTimeFormat($v->added_at,'date') ?></td>
+                           <td><?= getDateTimeFormat($v->added_at,'only_time') ?></td>
+                           <?php if ($v->type != 'credit'): ?>
+
+                             <td><?= $v->amount ?></td>
+                             <td>0</td>
+
+                             <?php else: ?>
+
+                             <td>0</td>
+                             <td><?= $v->amount ?></td>
+
+                            <?php endif; ?>
                         </tr>
-                        <tr>
-                          <td>1</td>
-                           <td>12141</td>
-                           <td>03-04-2021</td>
-                           <td>5:10 PM</td>
-                           <td>0</td>
-                           <td>10</td>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                           <td>12141</td>
-                           <td>03-04-2021</td>
-                           <td>5:10 PM</td>
-                           <td>10</td>
-                           <td>0</td>
-                        </tr>
+
+                        <?php endforeach; ?>
+                        <?php else: ?>
+                          <tr>
+                            <th colspan="6">No payments found...</th>
+                          </tr>
+                        <?php endif; ?>
                       </tbody>
                    </table>
                 </div>
@@ -171,24 +187,15 @@
 
   <script type="text/javascript">
 
-    $('#print_details').click(function () {
-
-        window.print()
-
-    })
-
     $('#send_sheet_to_whtaspp,#send_mail_to_customer').click(function () {
 
       $('#ConfirmationModal').modal('show')
 
     })
 
+    $('#print_customer_payments').click(function () {
 
-    $("#print_customer_payments").on('click', function () {
-
-      let url = $(this).attr('data-url')
-
-      window.open(url,'Customer Payments','height=800,width=800');
+        window.print()
 
     })
 

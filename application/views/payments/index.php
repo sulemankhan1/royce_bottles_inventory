@@ -14,12 +14,14 @@
                <div class="header-title">
                   <h3 class="card-title"><?= $page_head ?></h3>
                </div>
-
+               <?=
+                getHiddenField('getCustomerPayments',base_url('AjaxController/getCustomerPayments'));
+               ?>
                <a href="javascript:void(0)" class="btn btn-sm btn-primary add_payment_">Add Payment</a>
 
             </div>
             <div class="card-body">
-              <form class="row g-3 needs-validation" novalidate>
+              <form class="row g-3 needs-validation" novalidate method="post" id="filter_payments">
                 <div class="row mt-1">
 
                   <div class="col-sm-6">
@@ -28,24 +30,26 @@
 
                         <?php
 
-                        echo getHiddenField('getCustomerPayments',base_url('AjaxController/getCustomerPayments'));
 
                         echo getSelectField([
                           'label' => 'Customer',
                           'name' => 'customer_id',
-                          'column' => 'col-sm-12'
+                          'column' => 'col-sm-12',
+                          'data' => $customers
                         ]);
 
                         echo getInputField([
                             'label' => 'From',
                             'name' => 'from',
-                            'type' => 'date'
+                            'type' => 'date',
+                            'required' => false
                           ]);
 
                         echo getInputField([
                             'label' => 'To',
                             'name' => 'to',
-                            'type' => 'date'
+                            'type' => 'date',
+                            'required' => false
                           ]);
 
                         ?>
@@ -59,15 +63,9 @@
                 </div>
                   <div class="row mt-1">
 
-                      <div class="col-sm-3">
-
-                        <a href="javascript:void(0)" class="btn btn-sm btn-primary show_payments_">Submit</a>
-
-                      </div>
-
                       <?php
 
-                        getSubmitBtn('Submit');
+                        echo  getSubmitBtn('Submit');
 
                       ?>
                   </div>

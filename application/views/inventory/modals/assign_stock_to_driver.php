@@ -1,8 +1,8 @@
 
-<div class="modal fade" id="AssignStockToDriverModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade assign_modal_select_" id="AssignStockToDriverModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
       <div class="modal-content">
-        <form action="<?= site_url('inventory') ?>" method="post" class="row g-3 needs-validation" novalidate>
+        <form class="row g-3 needs-validation" novalidate method="post" action="<?= site_url('save_assign_to_driver') ?>">
           <div class="modal-body">
 
               <div class="container">
@@ -13,25 +13,30 @@
 
                   <?php
 
+                    echo getHiddenField('redirect','inventory');
+
                     echo getSelectField([
                       'label' => 'Driver',
                       'name' => 'driver_id',
                       'column' => 'sm-8',
-                      'data' => $products
+                      'classes' => 'modal_select_assign_',
+                      'id' => 'modal_driver_id',
+                      'data' => $drivers
                     ]);
 
                   ?>
 
                 </div>
-                <div id="assign_products_to_driver">
+                <div id="assign_products_to_driver_modal">
 
                   <div class="row">
                     <?php
-                    
+
                       echo getSelectField([
                         'label' => 'Product',
                         'name' => 'product_id',
                         'column' => 'sm-8',
+                        'classes' => 'modal_select_assign_',
                         'data' => $products
                       ]);
 
@@ -50,7 +55,7 @@
 
                 <div class="row">
                   <div class="col-sm-12">
-                    <a href="javascript:void(0)" class="add_assign_products_to_driver">
+                    <a href="javascript:void(0)" class="add_assign_products_to_driver_from_modal">
                       + Add Row
                     </a>
                   </div>
@@ -67,31 +72,11 @@
   </div>
 </div>
 
+<div class="getProductOptionsToAssign" style="display:none!important">
 
-<div class="getProductRowToAssign" style="display:none!important">
-  <div class="row">
-    <?php
+    <option value="">select</option>
+    <?php foreach ($products as $key => $v): ?>
+      <option value="<?= $v->id ?>"><?= $v->name ?></option>
+    <?php endforeach; ?>
 
-      echo getSelectField([
-        'label' => 'Product',
-        'name' => 'product_id',
-        'column' => 'sm-8',
-        'data' => $products
-      ]);
-
-      echo getInputField([
-        'label' => 'Qty',
-        'type' => 'number',
-        'name' => 'qty',
-        'column' => 'sm-3'
-      ]);
-
-    ?>
-
-    <div class="col-sm-1" style="padding:0px!important;">
-      <a href="javascript:void(0)" class="remove_assign_products_to_driver">
-        <i class="fa-solid fa-x" style="font-size: 20px;margin-top: 38px;margin-left:8px;;color:#fd6262!important;"></i>
-      </a>
-    </div>
-  </div>
 </div>

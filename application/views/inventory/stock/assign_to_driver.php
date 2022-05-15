@@ -25,6 +25,8 @@
 
                         <?php
 
+                          echo getHiddenField('redirect','assign_to_driver');
+
                           echo getSelectField([
                             'label' => 'Driver',
                             'name' => 'driver_id',

@@ -10,7 +10,7 @@ $('.add_assign_products_to_driver').click(function () {
                   <div class="col-sm-5 mb-3">
                     <label for="product_" class="form-label">Product</label>
                     <select class="form-select form-select-sm product_id_" data-width="100%" name="product_id[]" id="select2_`+sno+`" required>
-                      <option value="">select</option>`+ product_options +`
+                      `+ product_options +`
                     </select>
                   </div>
                   <div class="col-sm-2 mb-3">
@@ -125,6 +125,113 @@ $('#driver_id').change(function () {
 
 
 
+//assigned to driver from modal
+$('#modal_driver_id').change(function () {
+
+  let driver_id = $(this).val()
+
+  $.ajax({
+    url : 'AjaxController/getDriverRequestedProducts/'+driver_id,
+    dataType : 'json',
+    success : function (data) {
+
+        var products = data.products
+        var driver_request = data.driver_request
+
+        var html = ''
+        for (var i = 0; i < driver_request.length; i++) {
+
+          html += `<div class="row">
+                          <div class="col-sm-8 mb-3">
+                            <label for="product_" class="form-label">Product</label>
+                            <select class="form-select form-select-sm product_id_ modal_select_assign_product_" data-width="100%" name="product_id[]" required>
+                              <option value="">select</option>`;
+
+                              for (var p = 0; p < products.length; p++) {
+
+                                var selected = ''
+                                if(products[p].id == driver_request[i].product_id)
+                                {
+
+                                  selected = 'selected'
+
+                                }
+
+                                html +=`<option value="`+ products[i].id +`" `+ selected +`>`+ products[i].name +`</option>`;
+
+                              }
+
+                            html +=`</select>
+                          </div>
+                          <div class="col-sm-3 mb-3">
+                            <label for="qty" class="form-label">Qty</label>
+                            <input type="number" class="form-control form-control-sm qty_" min="1" name="qty" value="`+ driver_request[i].qty +`" required>
+                          </div>
+                          <div class="col-sm-1" style="padding:0px!important;">
+                            <a href="javascript:void(0)" class="remove_assign_products_to_driver">
+                              <i class="fa-solid fa-x" style="font-size: 20px;margin-top: 38px;margin-left:8px;;color:#fd6262!important;"></i>
+                            </a>
+                          </div>
+                        </div>`;
+
+
+        }
+
+        $('#assign_products_to_driver_modal').html(html)
+
+        $('.modal_select_assign_product_').select2({
+
+          dropdownParent: $('.assign_modal_select_')
+
+        });
+
+        $('.product_id_').trigger('change')
+
+    }
+  })
+
+})
+
+
+var sno_modal = 0
+$('.add_assign_products_to_driver_from_modal').click(function () {
+
+  sno_modal++
+
+  let product_options = $('.getProductOptionsToAssign').html()
+
+  let pro_row = `<div class="row">
+                  <div class="col-sm-8 mb-3">
+                    <label for="product_" class="form-label">Product</label>
+                    <select class="form-select form-select-sm product_id_" data-width="100%" name="product_id[]" id="select2_`+sno_modal+`" required>
+                      `+ product_options +`
+                    </select>
+                  </div>
+                  <div class="col-sm-3 mb-3">
+                    <label for="qty" class="form-label">Qty</label>
+                    <input type="number" class="form-control form-control-sm qty_" min="1" name="qty" required>
+                  </div>
+                  <div class="col-sm-1" style="padding:0px!important;">
+                    <a href="javascript:void(0)" class="remove_assign_products_to_driver">
+                      <i class="fa-solid fa-x" style="font-size: 20px;margin-top: 38px;margin-left:8px;;color:#fd6262!important;"></i>
+                    </a>
+                  </div>
+                </div>`;
+
+
+
+  $('#assign_products_to_driver_modal').append(pro_row)
+
+  $('#select2_'+sno_modal).select2({
+
+    dropdownParent: $('.assign_modal_select_')
+
+  });
+
+})
+
+
+
 // add_assign_products_to_driver
 
 var sno1 = 0
@@ -138,7 +245,7 @@ $('.add_call_order_products_').click(function () {
                   <div class="col-sm-6 mb-3">
                     <label for="product_" class="form-label">Product</label>
                     <select class="form-select form-select-sm product_id_" data-width="100%" name="product_id[]" id="select2_`+sno1+`" required>
-                      <option value="">select</option>`+ product_options +`
+                      `+ product_options +`
                     </select>
                   </div>
                   <div class="col-sm-5 mb-3">

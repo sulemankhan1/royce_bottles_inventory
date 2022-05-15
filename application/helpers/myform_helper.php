@@ -214,7 +214,7 @@ if ( ! function_exists('getInputField'))
       if(isset($arr['value']))
       {
 
-        if(!empty($arr['value']))
+        if(!empty($arr['value']) || $arr['value'] == '0')
         {
 
           $value = "value=".$arr['value'];

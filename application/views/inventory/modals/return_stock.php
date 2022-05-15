@@ -17,10 +17,13 @@
 
   }
 </style>
-<div class="modal fade" id="ReturnStockModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade select2_modal_" id="ReturnStockModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl">
       <div class="modal-content">
-        <form action="<?= site_url('inventory') ?>" method="post" class="row g-3 needs-validation" novalidate>
+        <?=
+        getHiddenField('return_stock_url',base_url('AjaxController/getReturnStockProductsByDriverId'));
+        ?>
+        <form class="row g-3 needs-validation" novalidate action="<?= site_url('save_return_stock') ?>" method="post">
           <div class="modal-body">
 
               <div class="container">
@@ -31,23 +34,17 @@
 
                   <?php
 
-                    $pro_arr = [
-
-                      ['id' => 1,'name' => 'Driver1'],
-                      ['id' => 2,'name' => 'Driver2'],
-                      ['id' => 3,'name' => 'Driver3']
-
-                    ];
-
-                    echo getHiddenField('return_stock_url',base_url('AjaxController/getReturnStockProductsByDriverId'));
+                    echo getHiddenField('redirect','inventory');
 
                     echo getSelectField([
                       'label' => 'Driver',
                       'name' => 'driver_id',
                       'id' => 'return_stock_driver',
+                      'classes' => 'modal_select_',
                       'column' => 'sm-4',
-                      'data' => $pro_arr
+                      'data' => $drivers
                     ]);
+
                     ?>
                 </div>
 

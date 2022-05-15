@@ -21,6 +21,7 @@ class Inventory extends MY_Controller
       'page_head' => 'Inventory',
       'active_menu' => 'inventory',
       'active_submenu' => 'view_inventory',
+      'drivers' => $this->bm->getRowsWithConditions('users',['is_deleted' =>0,'type' => 'driver']),
       'products' => $this->bm->getRows('products','is_deleted',0),
       'redirect_to' => site_url('view_inventory'),
       'styles' => [
@@ -380,6 +381,8 @@ class Inventory extends MY_Controller
   public function save_assign_to_driver($value='')
   {
 
+      $p = $this->inp_post();
+
       $this->form_validation->set_rules('driver_id', 'Driver', 'required');
       $this->form_validation->set_rules('product_id[]', 'Product', 'required');
       $this->form_validation->set_rules('qty[]', 'Quantity', 'required');
@@ -391,13 +394,11 @@ class Inventory extends MY_Controller
 
         $this->session->set_flashdata('_error',$error);
 
-        redirect('assign_to_driver');
+        redirect($p['redirect']);
 
       }
       else
       {
-
-           $p = $this->inp_post();
 
            $arr = [
 
@@ -455,7 +456,7 @@ class Inventory extends MY_Controller
 
            }
 
-           redirect('assign_to_driver');
+           redirect($p['redirect']);
       }
 
   }
@@ -469,12 +470,86 @@ class Inventory extends MY_Controller
       'page_head' => 'Return Stock',
       'active_menu' => 'inventory',
       'active_submenu' => 'return_stock',
+      'drivers' => $this->bm->getRowsWithConditions('users',['is_deleted' => 0,'type' => 'driver']),
       'scripts' => [
         'inventory/return_stock.js'
       ]
     ];
 
     $this->template('inventory/stock/return_stock',$data);
+
+  }
+
+  public function save_return_stock()
+  {
+
+      $p = $this->inp_post();
+
+      if(!isset($p['product_id']))
+      {
+
+          $this->session->set_flashdata('_error','Product is required');
+
+          redirect($p['redirect']);
+
+      }
+
+      $assign_stock = $this->bm->getRowWithConditions('assign_stock',['is_return' => 0,'driver_id' => $p['driver_id']]);
+
+      $this->trans_('start');
+
+          $arr = [
+              'is_return' => 1
+          ];
+
+          $this->bm->update('assign_stock',$arr,'id',$assign_stock->id);
+
+          $logs = [];
+
+          foreach ($p['product_id'] as $key => $v)
+          {
+
+              $logs[] = [
+
+                  'product_id' => $v,
+                  'driver_id' => $p['driver_id'],
+                  'qty' => $p['missing_qty'][$key],
+                  'type' => 'return',
+                  'qty_type' => 'missing_qty',
+                  'added_by' => $this->user_id_
+
+              ];
+              $logs[] = [
+
+                'product_id' => $v,
+                'driver_id' => $p['driver_id'],
+                'qty' => $p['return_qty'][$key],
+                'type' => 'return',
+                'qty_type' => 'return_qty',
+                'added_by' => $this->user_id_
+
+              ];
+
+          }
+
+           $this->bm->insert_rows('logs',$logs);
+
+      $this->trans_('complete');
+
+      if ($this->trans_('status') === FALSE)
+      {
+
+          $this->session->set_flashdata('_error','Connection error Try Again');
+
+      }
+      else
+      {
+
+          $this->session->set_flashdata('_success','Stock has returned successfully');
+
+      }
+
+      redirect($p['redirect']);
 
   }
 

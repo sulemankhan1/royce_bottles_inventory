@@ -75,6 +75,12 @@
 
     });
 
+    $('.modal_select_assign_').select2({
+
+      dropdownParent: $('.assign_modal_select_')
+
+    });
+
   </script>
   <?php
 

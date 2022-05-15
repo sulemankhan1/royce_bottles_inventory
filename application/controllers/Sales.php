@@ -103,9 +103,13 @@ class Sales extends MY_Controller
 
           $actions .= '<span class="actions-icons">';
 
+          if ($v->status == 'pending') {
+
             $actions .= '<a href="'.site_url('edit_sale/'.$ID) .'" class="action-icons" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit">
               <i class="fa fa-pencil"></i>
             </a>';
+
+          }
 
             $actions .= '<a href="javascript:void(0)" class="action-icons view_sale_details_" data-url="'. site_url('AjaxController/showSalesDetails/'.$ID.'/details') .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Details">
               <i class="fa fa-eye"></i>
@@ -247,6 +251,7 @@ class Sales extends MY_Controller
                     'driver_id' => $this->user_id_,
                     'qty' => $p['sale_qty'][$key] == ''?0:$p['sale_qty'][$key],
                     'type' => $ID == ''?'add_sale':'edit_sale',
+                    'qty_type' => 'sale_qty',
                     'added_by' => $this->user_id_
 
                 ];
@@ -257,6 +262,7 @@ class Sales extends MY_Controller
                   'driver_id' => $this->user_id_,
                   'qty' => $p['exchange_qty'][$key] == ''?0:$p['exchange_qty'][$key],
                   'type' => $ID == ''?'add_sale':'edit_sale',
+                  'qty_type' => 'exchange_qty',
                   'added_by' => $this->user_id_
 
                 ];
@@ -267,6 +273,7 @@ class Sales extends MY_Controller
                   'driver_id' => $this->user_id_,
                   'qty' => $p['foc_qty'][$key] == ''?0:$p['foc_qty'][$key],
                   'type' => $ID == ''?'add_sale':'edit_sale',
+                  'qty_type' => 'foc_qty',
                   'added_by' => $this->user_id_
 
                 ];
@@ -352,6 +359,19 @@ class Sales extends MY_Controller
 
           $sale_row = $this->bm->getRow('sales','id',$sale_id);
 
+          // insert row for credit payment
+          $payment_row = [
+
+              'sale_id' => $sale_id,
+              'customer_id' => $sale_row->customer_id,
+              'amount' => $sale_row->total_amount,
+              'type' => 'credit',
+              'added_by' => $this->user_id_
+
+          ];
+
+          $this->bm->insert_row('payments',$payment_row);
+
           if($sale_row->customer_category == 'cash')
           {
 
@@ -365,6 +385,11 @@ class Sales extends MY_Controller
             {
 
               $arr['status'] = 'paid';
+
+              // insert row for debit payment
+              $payment_row['type'] = 'debit';
+
+              $this->bm->insert_row('payments',$payment_row);
 
             }
 
@@ -390,7 +415,14 @@ class Sales extends MY_Controller
               if(!empty($assign_stock_row))
               {
 
-                $update_assignstock_qty['available_qty'] = $assign_stock_row->available_qty - $total_qty;
+                $update_assignstock_qty = [
+
+                  'available_qty' => $assign_stock_row->available_qty - $total_qty,
+                  'sale_qty' => $assign_stock_row->sale_qty + $v->sale_qty,
+                  'exchange_qty' => $assign_stock_row->exchange_qty + $v->exchange_qty,
+                  'foc_qty' => $assign_stock_row->foc_qty + $v->foc_qty
+
+                ];
 
                 $this->bm->update('assign_stock_details',$update_assignstock_qty,'id',$assign_stock_row->id);
 
@@ -403,6 +435,7 @@ class Sales extends MY_Controller
                   'driver_id' => $this->user_id_,
                   'qty' => $v->sale_qty,
                   'type' => 'mark_sale_done',
+                  'qty_type' => 'sale_qty',
                   'added_by' => $this->user_id_
 
               ];
@@ -413,6 +446,7 @@ class Sales extends MY_Controller
                 'driver_id' => $this->user_id_,
                 'qty' => $v->exchange_qty,
                 'type' => 'mark_sale_done',
+                'qty_type' => 'exchange_qty',
                 'added_by' => $this->user_id_
 
               ];
@@ -423,6 +457,7 @@ class Sales extends MY_Controller
                 'driver_id' => $this->user_id_,
                 'qty' => $v->foc_qty,
                 'type' => 'mark_sale_done',
+                'qty_type' => 'foc_qty',
                 'added_by' => $this->user_id_
 
               ];
@@ -452,20 +487,49 @@ class Sales extends MY_Controller
 
   }
 
-  public function view_sale()
+  public function update_sales_status($type,$sale_id)
   {
 
-    $data = [
+      $this->trans_('start');
 
-      'title' => 'View Sale',
-      'page_head' => 'View Sale',
-      'active_menu' => 'sales'
+          $sale_row = $this->bm->getRow('sales','id',$sale_id);
 
-    ];
+          // insert row for credit payment
+          $payment_row = [
+
+              'sale_id' => $sale_id,
+              'customer_id' => $sale_row->customer_id,
+              'amount' => $sale_row->total_amount,
+              'type' => 'debit',
+              'added_by' => $this->user_id_
+
+          ];
+
+          $this->bm->insert_row('payments',$payment_row);
+
+          $arr['status'] = 'paid';
+
+          $this->bm->update('sales',$arr,'id',$sale_id);
+
+      $this->trans_('complete');
+
+       if ($this->trans_('status') === FALSE)
+       {
+
+           $this->session->set_flashdata('_error','Connection error Try Again');
+
+       }
+       else
+       {
+
+          $this->session->set_flashdata('_success','Sale has paid successfully');
 
 
-    $this->template('sales/view_sale',$data);
+       }
+
+       redirect('sales');
 
   }
+
 
 }

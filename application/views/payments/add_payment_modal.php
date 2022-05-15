@@ -1,8 +1,8 @@
 
-<div class="modal fade" id="AddPaymentModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade select2_modal_" id="AddPaymentModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
       <div class="modal-content">
-        <form action="<?= site_url('payments') ?>" method="post" class="row g-3 needs-validation" novalidate>
+        <form action="<?= site_url('save_payment') ?>" method="post" class="row g-3 needs-validation" novalidate>
           <div class="modal-body">
 
               <div class="container">
@@ -13,19 +13,12 @@
 
                   <?php
 
-                    $pro_arr = [
-
-                      ['id' => 1,'name' => 'Customer1'],
-                      ['id' => 2,'name' => 'Customer2'],
-                      ['id' => 3,'name' => 'Customer3']
-
-                    ];
-
                     echo getSelectField([
                       'label' => 'Customer',
                       'name' => 'customer_id',
                       'column' => 'sm-12',
-                      'data' => $pro_arr
+                      'classes' => 'modal_select_',
+                      'data' => $customers
                     ]);
 
                     echo getInputField([
