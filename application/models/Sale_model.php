@@ -188,5 +188,83 @@ class Sale_model extends CI_Model
 
   }
 
+  public function getTotalSaleAmount()
+  {
+
+    $this->db->select('sum(sales.total_amount) as total_amount');
+    $this->db->from('sales');
+    $this->db->join('customers','customers.id = sales.customer_id');
+    $this->db->join('salesperson','salesperson.id = customers.salesperson_id');
+    $this->db->join('sales_details','sales_details.sale_id = sales.id');
+    $this->db->join('products','products.id = sales_details.product_id');
+
+    $this->db->where('sales.is_deleted',0);
+    $this->db->where('sales.status !=','pending');
+    $this->db->group_by('sales_details.sale_id');
+
+    return $this->db->get()->row();
+
+  }
+
+  public function getAllSalesandCreditAmounts($type)
+  {
+
+    if($type == 'weekly' || $type == 'monthly')
+    {
+
+      $this->db->select("DATE(sales.added_at) AS added_at_formatted,sum(if(sales.is_mark_done='1',total_amount,0)) as total_sale_amount,sum(if(sales.status='credit',total_amount,0)) as total_credit_amount",FALSE);
+
+    }
+    else if($type == 'yearly')
+    {
+
+      $this->db->select("MONTHNAME(sales.added_at) AS added_at_formatted,sales.added_at,sum(if(sales.is_mark_done='1',total_amount,0)) as total_sale_amount,sum(if(sales.status='credit',total_amount,0)) as total_credit_amount",FALSE);
+
+    }
+
+    $this->db->from('sales');
+    $this->db->join('customers','customers.id = sales.customer_id');
+    $this->db->join('salesperson','salesperson.id = customers.salesperson_id');
+    $this->db->join('sales_details','sales_details.sale_id = sales.id');
+    $this->db->join('products','products.id = sales_details.product_id');
+
+    $this->db->where('sales.is_deleted',0);
+
+    if($type == 'weekly')
+    {
+
+      $week_first_day = date('Y-m-d',strtotime('monday this week'));
+      $week_last_day = date('Y-m-d',strtotime('sunday this week'));
+
+      $this->db->where('DATE_FORMAT(sales.added_at, "%Y-%m-%d") >=',$week_first_day);
+
+      $this->db->where('DATE_FORMAT(sales.added_at, "%Y-%m-%d") <=',$week_last_day);
+
+    }
+    elseif ($type == 'monthly')
+    {
+
+      $cur_month = date('Y-m');
+
+      $this->db->where('DATE_FORMAT(sales.added_at, "%Y-%m") =',$cur_month);
+
+    }
+    elseif ($type == 'yearly')
+    {
+
+      $cur_year = date('Y');
+
+      $this->db->where('DATE_FORMAT(sales.added_at, "%Y") =',$cur_year);
+
+    }
+
+    $this->db->order_by('sales.added_at','asc');
+
+    $this->db->group_by('added_at_formatted');
+
+    return $this->db->get()->result_array();
+
+  }
+
 
 }

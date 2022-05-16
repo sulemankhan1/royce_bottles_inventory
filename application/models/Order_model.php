@@ -109,5 +109,45 @@ class Order_model extends CI_Model
 
   }
 
+  public function getAllCallOrders($driver_id)
+  {
+
+    $current_day = date('l');
+
+    $this->db->select('call_orders.*,count(call_orders_details.product_id) total_products,sum(call_orders_details.qty) total_qty,customers.name as customer_name,customers.shop_name');
+    $this->db->from('call_orders');
+    $this->db->join('customers','customers.id = call_orders.customer_id');
+    $this->db->join('users','users.id = call_orders.driver_id');
+    $this->db->join('call_orders_details','call_orders_details.call_order_id = call_orders.id');
+    $this->db->join('products','products.id = call_orders_details.product_id');
+    $this->db->join('users added_by', 'added_by.id = call_orders.added_by', 'left');
+
+    $this->db->where('call_orders.driver_id',$driver_id);
+    $this->db->where('call_orders.delivery_day',$current_day);
+    $this->db->where('call_orders.is_given',0);
+
+    $this->db->group_by('call_orders_details.call_order_id');
+
+    return $this->db->get()->result();
+
+  }
+
+  public function getAllCallOrdersQtyByCallOrderId($call_order_id)
+  {
+
+    $this->db->select('call_orders_details.qty,products.name as product_name');
+    $this->db->from('call_orders');
+    $this->db->join('customers','customers.id = call_orders.customer_id');
+    $this->db->join('users','users.id = call_orders.driver_id');
+    $this->db->join('call_orders_details','call_orders_details.call_order_id = call_orders.id');
+    $this->db->join('products','products.id = call_orders_details.product_id');
+    $this->db->join('users added_by', 'added_by.id = call_orders.added_by', 'left');
+
+    $this->db->where('call_orders.id',$call_order_id);
+
+    return $this->db->get()->result();
+
+  }
+
 
 }

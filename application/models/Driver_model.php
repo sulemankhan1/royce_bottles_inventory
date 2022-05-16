@@ -92,5 +92,18 @@ class Driver_model extends CI_Model
 
   }
 
+  public function getDriversCount()
+  {
+
+      $this->db->select('users.id');
+      $this->db->from('users');
+
+      $this->db->where('is_deleted',0);
+      $this->db->where('type','driver');
+
+      return $this->db->count_all_results();
+
+  }
+
 
 }

@@ -363,9 +363,6 @@ class AjaxController extends MY_Controller
     foreach ($driver_request_products as $key => $v)
     {
 
-
-
-
       $p_stock = getProductAvailableStock($v->product_id);
 
       $available_stock = $p_stock['available_qty'] > 0?'max="'.$p_stock['available_qty'].'"':'';
@@ -400,6 +397,176 @@ class AjaxController extends MY_Controller
 
     echo json_encode($output);
 
+
+  }
+
+  public function getAllSalesandCreditAmounts($type)
+  {
+
+      if ($type == 'weekly')
+      {
+        $output['heads'] = ["Mon","Tues","Wed","Thurs","Fri","Sat","Sun"];
+      }
+      else if($type == 'monthly')
+      {
+          $month_last_date = date("t", strtotime(date('Y-m-d')));
+          $heads = [];
+          for ($i=1; $i <= $month_last_date; $i++) {
+            $heads[] = $i;
+          }
+          $output['heads'] = $heads;
+      }
+      else if($type == 'yearly')
+      {
+        $output['heads'] = ["Jan", "Feb", "Mar", "Apr","May","Jun", "Jul", "Aug","Sept","Oct","Nov","Dec"];
+      }
+
+      $this->load->model('Sale_model');
+
+      $output['data'] = $this->Sale_model->getAllSalesandCreditAmounts($type);
+
+      $output['data'] = $this->toFillNullDateData($type,$output);
+      //
+      // echo "<pre>";
+      //  print_r($output);
+      //  echo "</pre>";
+      //  die();
+      echo json_encode($output);
+
+  }
+
+  public function check_heads_value_exist($date,$array,$type = '')
+  {
+
+      $arr = [
+
+        'total_sale_amount' => 0,
+        'total_credit_amount' => 0
+
+      ];
+
+      foreach ($array as $key => $v)
+      {
+
+          if($type == 'yearly')
+          {
+
+            $added_at = date('m',strtotime($v['added_at']));
+
+          }
+          else
+          {
+
+            $added_at = date('Y-m-d',strtotime($v['added_at_formatted']));
+
+          }
+
+          if($added_at == $date)
+          {
+
+            $arr = [
+
+              'total_sale_amount' => $v['total_sale_amount'],
+              'total_credit_amount' => $v['total_credit_amount']
+
+            ];
+
+            break;
+
+          }
+
+      }
+
+      return $arr;
+
+  }
+
+  public function getBetweenDates($startDate, $endDate)
+  {
+
+    $rangArray = [];
+
+    $startDate = strtotime($startDate);
+
+    $endDate = strtotime($endDate);
+
+    for ($currentDate = $startDate; $currentDate <= $endDate;$currentDate += (86400))
+    {
+
+        $date = date('Y-m-d', $currentDate);
+
+        $rangArray[] = $date;
+
+    }
+
+    return $rangArray;
+
+  }
+
+  public function toFillNullDateData($type,$output)
+  {
+
+      if ($type == 'weekly')
+      {
+
+        $week_first_day = date('Y-m-d',strtotime('monday this week'));
+        $week_last_day = date('Y-m-d',strtotime('sunday this week'));
+
+        $dates = $this->getBetweenDates($week_first_day,$week_last_day);
+
+        $values = [];
+        foreach ($dates as $key => $v)
+        {
+
+            $res = $this->check_heads_value_exist($v,$output['data']);
+
+            $values['total_sale_amount'][] = $res['total_sale_amount'];
+            $values['total_credit_amount'][] = 1;
+
+        }
+
+      }
+      elseif ($type == 'monthly')
+      {
+
+        foreach ($output['heads'] as $key => $v)
+        {
+
+            if($v < 10)
+            {
+              $v = '0'.$v;
+            }
+
+            $cur_month = date('Y-m-'.$v);
+
+            $res = $this->check_heads_value_exist($cur_month,$output['data']);
+
+            $values['total_sale_amount'][] = $res['total_sale_amount'];
+            $values['total_credit_amount'][] = $res['total_credit_amount'];
+
+        }
+
+
+      }
+      elseif ($type == 'yearly')
+      {
+
+        $month_nums = ['01','02','03','04','05','06','07','08','09','10','11','12'];
+
+        foreach ($month_nums as $key => $v)
+        {
+
+            $res = $this->check_heads_value_exist($v,$output['data'],'yearly');
+
+            $values['total_sale_amount'][] = $res['total_sale_amount'];
+            $values['total_credit_amount'][] = $res['total_credit_amount'];
+
+        }
+
+
+      }
+
+      return $values;
 
   }
 

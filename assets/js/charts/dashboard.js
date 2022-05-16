@@ -1,3 +1,240 @@
+
+function getAllSales(filter_type = 'weekly')
+{
+
+    let url = $('input[name=sale_filter]').val()
+
+    var res = []
+    $.ajax({
+
+      'url' : url+'/'+filter_type,
+      dataType : 'json',
+      async : false,
+      success : function (data) {
+
+        res = data;
+
+      }
+
+    })
+
+    return res
+
+}
+
+var sales_;
+
+sales_ = getAllSales()
+
+
+if (document.querySelectorAll('#d-main-my').length) {
+
+  const optionsF = {
+      series: [{
+          name: 'total',
+          data: sales_.data.total_sale_amount
+      }, {
+          name: 'pipline',
+          data: sales_.data.total_credit_amount
+      }],
+      chart: {
+          fontFamily: '"Inter", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+          height: 245,
+          type: 'area',
+          toolbar: {
+              show: false
+          },
+          sparkline: {
+              enabled: false,
+          },
+      },
+      colors: ["#3a57e8", "#4bc7d2"],
+      dataLabels: {
+          enabled: false
+      },
+      stroke: {
+          curve: 'smooth',
+          width: 3,
+      },
+      yaxis: {
+        show: true,
+        labels: {
+          show: true,
+          style: {
+            colors: "#8A92A6",
+          }
+        },
+      },
+      legend: {
+          show: false,
+      },
+      xaxis: {
+          labels: {
+              minHeight:22,
+              maxHeight:22,
+              show: true,
+              style: {
+                colors: "#8A92A6",
+              },
+          },
+          lines: {
+              show: false  //or just here to disable only x axis grids
+          },
+          categories: sales_.heads
+      },
+      grid: {
+          show: false,
+      },
+      fill: {
+          type: 'gradient',
+          gradient: {
+              shade: 'dark',
+              type: "vertical",
+              shadeIntensity: 0,
+              gradientToColors: undefined, // optional, if not defined - uses the shades of same color in series
+              inverseColors: true,
+              opacityFrom: .4,
+              opacityTo: .1,
+              stops: [0, 50, 80],
+              colors: ["#3a57e8", "#4bc7d2"]
+          }
+      },
+      tooltip: {
+        enabled: true,
+      },
+  };
+
+  const chartF = new ApexCharts(document.querySelector("#d-main-my"), optionsF);
+  chartF.render();
+  document.addEventListener('ColorChange', (e) => {
+    console.log(e)
+    const newOptF = {
+      colors: [e.detail.detail1, e.detail.detail2],
+      fill: {
+        type: 'gradient',
+        gradient: {
+            shade: 'dark',
+            type: "vertical",
+            shadeIntensity: 0,
+            gradientToColors: [e.detail.detail1, e.detail.detail2], // optional, if not defined - uses the shades of same color in series
+            inverseColors: true,
+            opacityFrom: .4,
+            opacityTo: .1,
+            stops: [0, 50, 60],
+            colors: [e.detail.detail1, e.detail.detail2],
+        }
+    },
+   }
+    chartF.updateOptions(newOptF)
+  });
+
+
+// graph sale filter
+$('.sale_filter_').click(function () {
+
+    let filter_type = $(this).attr('data-type')
+
+    var selected_filter_type = ''
+
+    if(filter_type == 'weekly')
+    {
+        selected_filter_type = 'This Week'
+    }
+    else if(filter_type == 'monthly')
+    {
+        selected_filter_type = 'This Month'
+    }
+    else if(filter_type == 'yearly')
+    {
+        selected_filter_type = 'This Year'
+    }
+
+    $('.selected_sale_filter_').text(selected_filter_type)
+
+    var sales_1 = getAllSales(filter_type)
+
+    const optionsF1 = {
+        series: [{
+            name: 'total',
+            data: sales_1.data.total_sale_amount
+        }, {
+            name: 'pipline',
+            data: sales_1.data.total_credit_amount
+        }],
+        chart: {
+            fontFamily: '"Inter", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+            height: 245,
+            type: 'area',
+            toolbar: {
+                show: false
+            },
+            sparkline: {
+                enabled: false,
+            },
+        },
+        colors: ["#3a57e8", "#4bc7d2"],
+        dataLabels: {
+            enabled: false
+        },
+        stroke: {
+            curve: 'smooth',
+            width: 3,
+        },
+        yaxis: {
+          show: true,
+          labels: {
+            show: true,
+            style: {
+              colors: "#8A92A6",
+            }
+          },
+        },
+        legend: {
+            show: false,
+        },
+        xaxis: {
+            labels: {
+                minHeight:22,
+                maxHeight:22,
+                show: true,
+                style: {
+                  colors: "#8A92A6",
+                },
+            },
+            lines: {
+                show: false  //or just here to disable only x axis grids
+            },
+            categories: sales_1.heads
+        },
+        grid: {
+            show: false,
+        },
+        fill: {
+            type: 'gradient',
+            gradient: {
+                shade: 'dark',
+                type: "vertical",
+                shadeIntensity: 0,
+                gradientToColors: undefined, // optional, if not defined - uses the shades of same color in series
+                inverseColors: true,
+                opacityFrom: .4,
+                opacityTo: .1,
+                stops: [0, 50, 80],
+                colors: ["#3a57e8", "#4bc7d2"]
+            }
+        },
+        tooltip: {
+          enabled: true,
+        },
+    };
+
+    chartF.updateOptions(optionsF1);
+
+});
+
+}
+
+
 (function (jQuery) {
   "use strict";
 if (document.querySelectorAll('#myChart').length) {
@@ -31,7 +268,7 @@ if (document.querySelectorAll('#myChart').length) {
     document.addEventListener('ColorChange', (e) => {
         const newOpt = {colors: [e.detail.detail2, e.detail.detail1],}
         chart.updateOptions(newOpt)
-       
+
     })
   }
 }
@@ -105,7 +342,7 @@ if (document.querySelectorAll('#d-activity').length) {
         }
       }
     };
-  
+
     const chart = new ApexCharts(document.querySelector("#d-activity"), options);
     chart.render();
     document.addEventListener('ColorChange', (e) => {
@@ -239,13 +476,13 @@ if ($('.d-slider1').length > 0) {
         navigation: {
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev'
-        },  
+        },
 
         // And if we need scrollbar
         scrollbar: {
-            el: '.swiper-scrollbar'  
+            el: '.swiper-scrollbar'
         }
-    } 
+    }
     let swiper = new Swiper('.d-slider1',options);
 
     document.addEventListener('ChangeMode', (e) => {

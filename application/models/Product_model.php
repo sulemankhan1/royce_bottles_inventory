@@ -101,5 +101,18 @@ class Product_model extends CI_Model
 
   }
 
+  public function getProductsCount()
+  {
+
+    $this->db->select('products.id');
+    $this->db->from('products');
+    $this->db->join('categories','categories.id = products.cat_id');
+
+    $this->db->where('products.is_deleted',0);
+
+    return $this->db->count_all_results();
+
+  }
+
 
 }

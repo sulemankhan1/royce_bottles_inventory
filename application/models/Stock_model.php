@@ -237,4 +237,21 @@ class Stock_model extends CI_Model
 
   }
 
+  public function getAssignStockQtyToDriver($driver_id)
+  {
+
+      $this->db->select('sum(assign_stock_details.qty) as total_assign_qty,sum(assign_stock_details.available_qty) as total_available_qty');
+      $this->db->from('assign_stock');
+      $this->db->join('users','users.id = assign_stock.driver_id');
+      $this->db->join('assign_stock_details','assign_stock_details.assign_stock_id = assign_stock.id');
+      $this->db->join('products','products.id = assign_stock_details.product_id');
+
+      $this->db->where('assign_stock.driver_id',$driver_id);
+      $this->db->where('assign_stock.status','confirmed');
+      $this->db->where('assign_stock.is_return',0);
+
+      return $this->db->get()->row();
+
+  }
+
 }
