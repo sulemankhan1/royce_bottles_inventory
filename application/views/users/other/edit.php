@@ -18,7 +18,7 @@
                </div>
             </div>
             <div class="card-body">
-              <form class="row g-3 needs-validation" novalidate action="<?= site_url('save_other_user') ?>" method="post" enctype="multipart/form-data">
+              <form class="row g-3" action="<?= site_url('save_other_user') ?>" method="post" id="myForm" data-parsley-validate enctype="multipart/form-data">
                 <div class="row mt-4">
 
                     <div class="col-sm-2">

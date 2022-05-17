@@ -2,7 +2,7 @@
 <div class="modal fade" id="CustomerProductsPricesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable">
       <div class="modal-content">
-          <form action="<?= site_url('update_customer_products_price')?>" method="post">
+          <form action="<?= site_url('update_customer_products_price')?>" method="post" id="myForm" data-parsley-validate>
             <input type="hidden" name="customer_id_">
           <div class="modal-body">
             <div class="container">

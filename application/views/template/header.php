@@ -39,6 +39,8 @@
 	<!-- select 2 css-->
 	<link href="<?= base_url('assets/css/select2/select2.min.css') ?>" rel="stylesheet" />
 
+	<!-- parsely  css-->
+	<link href="<?= base_url('assets/css/parsley/parsley.css') ?>" rel="stylesheet" />
 
 	<!-- Font Awesome script -->
 	<script src="https://kit.fontawesome.com/b04cb78fd5.js" crossorigin="anonymous"></script>

@@ -1,3 +1,6 @@
+
+$('#save_sale').parsley()
+
 function show_error_(_error_msg) {
 
    toastr.error(_error_msg, "", {

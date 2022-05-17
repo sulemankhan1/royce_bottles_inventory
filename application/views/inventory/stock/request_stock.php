@@ -17,7 +17,7 @@
                </div>
             </div>
             <div class="card-body">
-              <form class="row g-3 needs-validation" novalidate method="post" action="<?= site_url('save_driver_request') ?>">
+              <form class="row g-3" method="post" action="<?= site_url('save_driver_request') ?>" id="myForm" data-parsley-validate>
                 <div class="row mt-4">
 
                     <div class="col-sm-12">

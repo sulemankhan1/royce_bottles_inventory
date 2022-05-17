@@ -65,7 +65,12 @@
   <!-- toastr  js -->
   <script src="<?= base_url('assets/js/toastr/toastr.min.js') ?>"></script>
 
+  <!-- parsely  js -->
+  <script src="<?= base_url('assets/js/parsley/parsley.js') ?>"></script>
+
   <script type="text/javascript">
+
+    $('#myForm').parsley()
 
     $('.select2').select2();
 

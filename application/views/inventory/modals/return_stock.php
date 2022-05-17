@@ -23,7 +23,7 @@
         <?=
         getHiddenField('return_stock_url',base_url('AjaxController/getReturnStockProductsByDriverId'));
         ?>
-        <form class="row g-3 needs-validation" novalidate action="<?= site_url('save_return_stock') ?>" method="post">
+        <form class="row g-3" action="<?= site_url('save_return_stock') ?>" method="post" id="myForm" data-parsley-validate>
           <div class="modal-body">
 
               <div class="container">

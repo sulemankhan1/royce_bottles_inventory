@@ -2,7 +2,7 @@
 <div class="modal fade assign_modal_select_" id="AssignStockToDriverModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
       <div class="modal-content">
-        <form class="row g-3 needs-validation" novalidate method="post" action="<?= site_url('save_assign_to_driver') ?>">
+        <form class="row g-3" method="post" action="<?= site_url('save_assign_to_driver') ?>" id="myForm" data-parsley-validate>
           <div class="modal-body">
 
               <div class="container">

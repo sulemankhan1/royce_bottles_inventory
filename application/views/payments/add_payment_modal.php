@@ -2,7 +2,7 @@
 <div class="modal fade select2_modal_" id="AddPaymentModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
       <div class="modal-content">
-        <form action="<?= site_url('save_payment') ?>" method="post" class="row g-3 needs-validation" novalidate>
+        <form action="<?= site_url('save_payment') ?>" method="post" class="row g-3" id="myForm" data-parsley-validate>
           <div class="modal-body">
 
               <div class="container">
