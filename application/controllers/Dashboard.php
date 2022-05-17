@@ -16,8 +16,7 @@ class Dashboard extends MY_Controller
 	{
 
     $user = $this->bm->getRow('users','id',$this->user_id_);
-
-    $user->type = 'admin';
+    
     $data = [
 
       'title' => 'Dashboard',

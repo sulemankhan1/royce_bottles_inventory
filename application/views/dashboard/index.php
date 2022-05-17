@@ -40,7 +40,7 @@
                 <div class="progress-detail">
                   <p class="mb-2">Total Sales</p>
                   <h4 class="counter">
-                    <?= $sale->total_amount; ?>
+                    <?= checkIsset($sale->total_amount); ?>
                   </h4>
                 </div>
               </div>
@@ -60,7 +60,7 @@
                   <h4 class="counter">
                     <?php
 
-                      echo $total_ = $payment->total_credit - $payment->total_debit;
+                      echo $total_ = checkIsset($payment->total_credit) - checkIsset($payment->total_debit);
 
                      ?>
                   </h4>
@@ -138,7 +138,7 @@
                   </div>
                   <div class="progress-detail">
                     <p class="mb-2">Stock Given</p>
-                    <h4 class="counter"><?= $stock->total_assign_qty - $stock->total_available_qty  ?></h4>
+                    <h4 class="counter"><?= checkIsset($stock->total_assign_qty) - checkIsset($stock->total_available_qty)  ?></h4>
                   </div>
                 </div>
               </div>
@@ -332,7 +332,7 @@
                     <th>Customer</th>
                     <th>Shop Name</th>
                     <th>Total Products</th>
-                    <th>Total Qtyth>
+                    <th>Total Qty</th>
                     <th>Action </th>
                   </tr>
                 </thead>

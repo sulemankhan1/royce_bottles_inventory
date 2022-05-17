@@ -159,3 +159,32 @@ if ( ! function_exists('getProductAvailableStock'))
   }
 
 }
+
+
+if ( ! function_exists('checkIsset'))
+{
+
+  function checkIsset($val , $type = 'number')
+	{
+
+    if(isset($val))
+    {
+      $res = $val;
+    }
+    else
+    {
+      if($type == 'number')
+      {
+        $res = 0;
+      }
+      else
+      {
+        $res = '';
+      }
+    }
+
+    return $res;
+
+  }
+
+}
