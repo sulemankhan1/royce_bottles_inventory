@@ -188,3 +188,19 @@ if ( ! function_exists('checkIsset'))
   }
 
 }
+
+
+if ( ! function_exists('showPendingRequestCount'))
+{
+
+  function showPendingRequestCount()
+	{
+
+    $ci=& get_instance();
+    $ci->load->database();
+
+    return true;
+
+  }
+
+}

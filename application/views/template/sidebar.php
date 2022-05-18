@@ -220,7 +220,9 @@
 										<i class="fa-solid fa-caret-right"></i>
 									</i>
 									<i class="sidenav-mini-icon"> PR </i>
-									<span class="item-name">Pending Requests <span class="badge rounded-pill bg-success" style="margin-left:6px">4</span></span>
+									<span class="item-name">Pending Requests
+										 <!-- <span class="badge rounded-pill bg-success" style="margin-left:6px">4</span> -->
+									 </span>
 								</a>
 							</li>
 

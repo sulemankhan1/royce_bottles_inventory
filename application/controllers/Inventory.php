@@ -349,7 +349,7 @@ class Inventory extends MY_Controller
       'page_head' => 'Stock History',
       'active_menu' => 'inventory',
       'active_submenu' => 'stock_history',
-      'ajax_url' => base_url('Inventory/getStockHistory'),
+      'ajax_url' => site_url('Inventory/getStockHistory'),
       'styles' => [
         'my-dataTable.css'
       ],
@@ -469,6 +469,16 @@ class Inventory extends MY_Controller
   {
 
       $p = $this->inp_post();
+
+      $assign_stock = $this->bm->getRowWithConditions('assign_stock',['is_return' => 0,'driver_id' => $p['driver_id']]);
+
+      if (!empty($assign_stock))
+      {
+
+          $this->session->set_flashdata('_error','Stock already assign to this driver');
+          redirect($p['redirect']);
+
+      }
 
       $this->form_validation->set_rules('driver_id', 'Driver', 'required');
       $this->form_validation->set_rules('product_id[]', 'Product', 'required');
@@ -649,17 +659,76 @@ class Inventory extends MY_Controller
       'page_head' => 'Live Stock',
       'active_menu' => 'inventory',
       'active_submenu' => 'live_stock',
+      'ajax_url' => site_url('Inventory/getLiveStocks'),
       'styles' => [
         'my-dataTable.css'
       ],
       'scripts' => [
-        'DataTable/myDataTable.js',
+        'DataTable/liveStockDataTable.js',
         'main.js'
       ]
 
     ];
 
     $this->template('inventory/stock/live_stock',$data);
+
+  }
+
+  public function getLiveStocks()
+  {
+
+    $this->load->model('Inventory_model');
+
+    $records = $this->Inventory_model->getLiveStocks($_REQUEST,'records');
+    $totalFilteredRecords = $this->Inventory_model->getLiveStocks($_REQUEST,'filter');
+    $recordsTotal = $this->Inventory_model->getLiveStocks($_REQUEST,'recordsTotal');
+
+    $data = array();
+    $SNo = 0;
+    $Style = "";
+
+    foreach ($records as $key => $v)
+    {
+
+      $ID = $v->id;
+
+      $SNo++;
+
+      $nestedData = array();
+
+      $nestedData[] = $SNo;
+
+      $nestedData[] = $v->driver_name;
+      $nestedData[] = $v->total_products;
+      $nestedData[] = $v->total_qty;
+      $nestedData[] = $v->total_qty - $v->total_available_qty;
+      $nestedData[] = $v->total_available_qty;
+
+        $actions = '';
+
+          $actions .= '<span class="actions-icons">';
+
+            $actions .= '<a href="javascript:void(0)" class="action-icons view_details_" data-url="'. site_url('AjaxController/getViewDetailsByDriverAssignQty/'.$ID) .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Details">
+              <i class="fa fa-eye"></i>
+            </a>';
+
+          $actions .= '</span>';
+
+           $nestedData[] = $actions;
+
+           $data[] = $nestedData;
+
+    }
+
+    $json_data = array(
+      "draw" => intval($_REQUEST['draw']), // for every request/draw by clientside , they send a number as a parameter, when they recieve a response/data they first check the draw number, so we are sending same number in draw.
+      "recordsTotal" => intval($recordsTotal), // total number of records
+      "recordsFiltered" => intval($totalFilteredRecords), // total number of records after searching, if there is no searching then totalFiltered = totalData
+      "data" => $data // total data array
+    );
+
+
+    echo json_encode($json_data);
 
   }
 
@@ -1141,7 +1210,10 @@ class Inventory extends MY_Controller
       'title' => 'Inventory Logs',
       'page_head' => 'Inventory Logs',
       'active_menu' => 'inventory',
-      'active_submenu' => 'logs'
+      'active_submenu' => 'logs',
+      'products' => $this->bm->getRows('products','is_deleted',0),
+      'customers' => $this->bm->getRows('customers','is_deleted',0),
+      'drivers' => $this->bm->getRowsWithConditions('users',['is_deleted' => 0,'type' => 'driver'])
 
     ];
 

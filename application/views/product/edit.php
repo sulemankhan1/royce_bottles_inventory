@@ -79,7 +79,7 @@
                         echo getInputField([
                           'label' => 'Price',
                           'name' => 'price',
-                          'type' => 'number',
+                          'type' => 'text',
                           'column' => 'sm-12',
                           'attr' => 'readonly',
                           'value' => $product->price

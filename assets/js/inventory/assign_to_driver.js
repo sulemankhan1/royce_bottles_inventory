@@ -15,7 +15,7 @@ $('.add_assign_products_to_driver').click(function () {
                   </div>
                   <div class="col-sm-2 mb-3">
                     <label for="qty" class="form-label">Qty</label>
-                    <input type="number" class="form-control form-control-sm qty_" min="1" name="qty" required>
+                    <input type="number" class="form-control form-control-sm qty_" min="1" name="qty[]" required>
                   </div>
                   <div class="col-sm-1" style="padding:0px!important;">
                     <a href="javascript:void(0)" class="remove_assign_products_to_driver">
@@ -100,7 +100,7 @@ $('#driver_id').change(function () {
                           </div>
                           <div class="col-sm-2 mb-3">
                             <label for="qty" class="form-label">Qty</label>
-                            <input type="number" class="form-control form-control-sm qty_" min="1" name="qty" value="`+ driver_request[i].qty +`" required>
+                            <input type="number" class="form-control form-control-sm qty_" min="1" name="qty[]" value="`+ driver_request[i].qty +`" required>
                           </div>
                           <div class="col-sm-1" style="padding:0px!important;">
                             <a href="javascript:void(0)" class="remove_assign_products_to_driver">
@@ -165,7 +165,7 @@ $('#modal_driver_id').change(function () {
                           </div>
                           <div class="col-sm-3 mb-3">
                             <label for="qty" class="form-label">Qty</label>
-                            <input type="number" class="form-control form-control-sm qty_" min="1" name="qty" value="`+ driver_request[i].qty +`" required>
+                            <input type="number" class="form-control form-control-sm qty_" min="1" name="qty[]" value="`+ driver_request[i].qty +`" required>
                           </div>
                           <div class="col-sm-1" style="padding:0px!important;">
                             <a href="javascript:void(0)" class="remove_assign_products_to_driver">
@@ -209,7 +209,7 @@ $('.add_assign_products_to_driver_from_modal').click(function () {
                   </div>
                   <div class="col-sm-3 mb-3">
                     <label for="qty" class="form-label">Qty</label>
-                    <input type="number" class="form-control form-control-sm qty_" min="1" name="qty" required>
+                    <input type="number" class="form-control form-control-sm qty_" min="1" name="qty[]" required>
                   </div>
                   <div class="col-sm-1" style="padding:0px!important;">
                     <a href="javascript:void(0)" class="remove_assign_products_to_driver">
@@ -250,7 +250,7 @@ $('.add_call_order_products_').click(function () {
                   </div>
                   <div class="col-sm-5 mb-3">
                     <label for="qty" class="form-label">Qty</label>
-                    <input type="number" class="form-control form-control-sm qty_" min="1" name="qty" required>
+                    <input type="number" class="form-control form-control-sm qty_" min="1" name="qty[]" required>
                   </div>
                   <div class="col-sm-1" style="padding:0px!important;">
                     <a href="javascript:void(0)" class="remove_assign_products_to_driver">

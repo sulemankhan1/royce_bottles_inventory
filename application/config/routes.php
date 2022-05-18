@@ -94,6 +94,9 @@ $route['save_stock'] = 'Inventory/save_stock';
 $route['view_stock'] = 'Inventory/view_stock';
 $route['delete_stock/(:num)'] = 'Inventory/delete_stock/$1';
 $route['stock_history'] = 'Inventory/stock_history';
+
+
+// inventory // live_stock
 $route['live_stock'] = 'Inventory/live_stock';
 
 // inventory //return_stock

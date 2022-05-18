@@ -16,34 +16,19 @@
           </tr>
         </thead>
         <tbody>
+
+          <?php foreach ($assign_stock_details as $key => $v): ?>
+
           <tr>
             <td>1</td>
-            <td>Product1</td>
-            <td>100</td>
-            <td>20</td>
-            <td>80</td>
+            <td><?= $v->product_name ?></td>
+            <td><?= $v->qty ?></td>
+            <td><?= $v->qty - $v->available_qty ?></td>
+            <td><?= $v->available_qty ?></td>
           </tr>
-          <tr>
-            <td>1</td>
-            <td>Product1</td>
-            <td>100</td>
-            <td>20</td>
-            <td>80</td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>Product1</td>
-            <td>100</td>
-            <td>20</td>
-            <td>80</td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>Product1</td>
-            <td>100</td>
-            <td>20</td>
-            <td>80</td>
-          </tr>
+
+          <?php endforeach; ?>
+          
         </tbody>
       </table>
         </div>

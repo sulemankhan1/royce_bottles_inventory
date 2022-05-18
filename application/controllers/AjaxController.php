@@ -195,10 +195,15 @@ class AjaxController extends MY_Controller
   }
 
 
-  public function getViewDetailsByDriverAssignQty($driver_id)
+  public function getViewDetailsByDriverAssignQty($assign_stock_id)
   {
+      $this->load->model('Stock_model');
 
-      $data = [];
+
+
+      $data = [
+        'assign_stock_details' => $this->Stock_model->getAssignStockDetails($assign_stock_id)
+      ];
 
       $output['html'] = $this->load_view('inventory/modals/live_stock_details',$data,true);
 

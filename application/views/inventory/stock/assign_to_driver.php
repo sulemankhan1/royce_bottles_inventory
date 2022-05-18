@@ -45,6 +45,7 @@
                               'label' => 'Product',
                               'name' => 'product_id',
                               'column' => 'sm-5',
+                              'classes' => 'product_id_',
                               'data' => $products
                             ]);
 
@@ -52,6 +53,8 @@
                               'label' => 'Qty',
                               'type' => 'number',
                               'name' => 'qty',
+                              'classes' => 'qty_',
+                              'attr' => 'min="1"',
                               'column' => 'sm-2'
                             ]);
 

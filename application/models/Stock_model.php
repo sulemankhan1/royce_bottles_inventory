@@ -224,7 +224,7 @@ class Stock_model extends CI_Model
   public function getAssignStockDetails($id)
   {
 
-    $this->db->select('assign_stock.*,users.img as driver_img,users.name as driver_name,users.email as driver_email,users.contact_no as driver_number,assign_stock_details.qty,products.name as product_name,added_by.name as added_by_name');
+    $this->db->select('assign_stock.*,users.img as driver_img,users.name as driver_name,users.email as driver_email,users.contact_no as driver_number,assign_stock_details.qty,assign_stock_details.available_qty,assign_stock_details.exchange_qty,assign_stock_details.foc_qty,products.name as product_name,added_by.name as added_by_name');
     $this->db->from('assign_stock');
     $this->db->join('users','users.id = assign_stock.driver_id');
     $this->db->join('assign_stock_details','assign_stock_details.assign_stock_id = assign_stock.id');

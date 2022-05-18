@@ -34,17 +34,19 @@
 
                       echo getSelectField([
                         'label' => 'Product',
-                        'name' => 'product_id',
+                        'name' => 'product_id[]',
                         'column' => 'sm-8',
-                        'classes' => 'modal_select_assign_',
+                        'classes' => 'modal_select_assign_,product_id_',
                         'data' => $products
                       ]);
 
                       echo getInputField([
                         'label' => 'Qty',
                         'type' => 'number',
-                        'name' => 'qty',
-                        'column' => 'sm-3'
+                        'name' => 'qty[]',
+                        'column' => 'sm-3',
+                        'attr' => 'min="1"',
+                        'classes' => 'qty_'
                       ]);
 
                     ?>

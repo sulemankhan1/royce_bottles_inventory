@@ -231,7 +231,7 @@ class Customer extends MY_Controller
 
       }
 
-      $this->form_validation->set_rules('soa_email', 'Email Address For SOA', 'required'.$is_soa_email_unique.'|callback_check_customer_email['.$p['soa_email'].']',[
+      $this->form_validation->set_rules('soa_email', 'Email Address For SOA', 'required'.$is_soa_email_unique.'|callback_check_customer_email['.$p['email'].']',[
         'required'      => 'The %s field is required',
         'is_unique'     => 'The %s already exist'
       ]);
@@ -389,7 +389,7 @@ class Customer extends MY_Controller
 
   function check_customer_email($second_field,$first_field)
   {
-
+    
     if ($second_field == $first_field)
     {
         $this->form_validation->set_message('check_customer_email', 'The Email Address For E-Receipt and Email Address For SOA should not be same');

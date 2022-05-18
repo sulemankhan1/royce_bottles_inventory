@@ -25,71 +25,58 @@
 
                         <?php
 
-                          $pro_arr = [
-
-                            ['id' => 1,'name' => 'Product1'],
-                            ['id' => 2,'name' => 'Product2'],
-                            ['id' => 3,'name' => 'Product3']
-
-                          ];
-
                           echo getSelectField([
                             'label' => 'Product',
                             'name' => 'product_id',
-                            'data' => $pro_arr
+                            'data' => $products
                           ]);
                           ?>
                       </div>
                       <div class="row">
                       <?php
 
-                          $pro_arr = [
-
-                            ['id' => 1,'name' => 'Customer1'],
-                            ['id' => 2,'name' => 'Customer2'],
-                            ['id' => 3,'name' => 'Customer3']
-
-                          ];
-
                           echo getSelectField([
                             'label' => 'Customer',
                             'name' => 'customer_id',
-                            'data' => $pro_arr
+                            'data' => $customers
                           ]);
                           ?>
                       </div>
                       <div class="row">
                           <?php
 
-                            $pro_arr = [
-
-                              ['id' => 1,'name' => 'Driver1'],
-                              ['id' => 2,'name' => 'Driver2'],
-                              ['id' => 3,'name' => 'Driver3']
-
-                            ];
-
                             echo getSelectField([
                               'label' => 'Driver',
                               'name' => 'driver_id',
-                              'data' => $pro_arr
+                              'data' => $drivers
                             ]);
                           ?>
                       </div>
                       <div class="row">
                           <?php
-                          $pro_arr = [
+                          $type_arr = [
 
-                            ['id' => 1,'name' => 'Sold'],
-                            ['id' => 2,'name' => 'Assigned'],
-                            ['id' => 3,'name' => 'Return'],
-                            ['id' => 3,'name' => 'Removed']
+                            'add_stock',
+                            'remove_stock',
+                            'request',
+                            'assign',
+                            'return',
+                            'add_stock',
+                            'remove_stock',
+                            'call_order',
+                            'assign_stock_confirmed',
+                            'call_order_confirmed',
+                            'pending_call_order_confirmed',
+                            'add_sale',
+                            'edit_sale',
+                            'mark_sale_done'
 
                           ];
                           echo getSelectField([
                             'label' => 'Type',
                             'name' => 'type',
-                            'data' => $pro_arr
+                            'static' => true,
+                            'data' => $type_arr
                           ]);
                           ?>
                       </div>
@@ -110,13 +97,10 @@
                           ?>
                       </div>
                       <div class="row mt-3">
-                        <div class="col-sm-3">
-
-                          <a href="<?= site_url('view_logs') ?>" class="btn btn-sm btn-primary">View Logs</a>
-                        </div>
+                        
                         <?php
 
-                           getSubmitBtn('View Logs');
+                           echo getSubmitBtn('View Logs');
 
                         ?>
 

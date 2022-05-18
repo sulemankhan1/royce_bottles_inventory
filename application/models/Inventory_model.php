@@ -131,6 +131,89 @@ class Inventory_model extends CI_Model
 
   }
 
+  public function getLiveStocks($requestData,$type)
+  {
+      // storing request (ie, get/post) global array to a variable
+      $columns = [
+          // datatable column index => database column name
+          0 => NULL,
+          1 => 'driver.name',
+          2 => NULL,
+          3 => NULL,
+          4 => NULL,
+          4 => NULL
+
+      ];
+
+      $this->db->select('assign_stock.id,users.name as driver_name,count(assign_stock_details.product_id) as total_products,sum(assign_stock_details.qty) as total_qty,sum(assign_stock_details.available_qty) as total_available_qty');
+      $this->db->from('assign_stock');
+      $this->db->join('users','users.id = assign_stock.driver_id');
+      $this->db->join('assign_stock_details','assign_stock_details.assign_stock_id = assign_stock.id');
+      $this->db->join('products','products.id = assign_stock_details.product_id');
+
+      $this->db->where('assign_stock.is_deleted',0);
+      $this->db->where('assign_stock.is_return',0);
+      $this->db->where('assign_stock.status','confirmed');
+
+      $this->db->group_by('assign_stock_details.assign_stock_id');
+
+      if($type == 'recordsTotal')
+      {
+          return $this->db->count_all_results();
+      }
+
+      else if($type == 'filter' || $type == 'records')
+      {
+
+        if (!empty($requestData['search']['value']))
+        {
+
+           $this->db->group_start();
+
+            $this->db->or_like('users.name',$requestData['search']['value']);
+
+           $this->db->group_end();
+
+        }
+
+        if($type == 'records')
+        {
+
+          if(isset($requestData['order']))
+          {
+
+              $this->db->order_by($columns[$requestData['order'][0]['column']],$requestData['order'][0]['dir']);
+
+          }
+          else
+          {
+
+            $this->db->order_by('assign_stock.id','desc');
+
+          }
+
+          if(isset($requestData["length"]))
+          {
+
+               $this->db->limit(@$_POST['length'], @$_POST['start']);
+
+          }
+
+          return $this->db->get()->result();
+
+        }
+        else
+        {
+
+            return $this->db->count_all_results();
+
+        }
+
+
+      }
+
+  }
+
   public function getDeliveryOrders($requestData,$type)
   {
       // storing request (ie, get/post) global array to a variable
