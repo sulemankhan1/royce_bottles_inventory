@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title><?= $page_title ?></title>
+
+    <!-- Hope Ui Design System Css -->
+    <link rel="stylesheet" href="<?= $_SERVER["DOCUMENT_ROOT"].'/assets/css/hope-ui.min.css?v=1.2.0' ?>" media="all" />
+
+    <!-- Custom Css -->
+    <link rel="stylesheet" href="<?= $_SERVER["DOCUMENT_ROOT"].'/assets/css/custom.min.css?v=1.2.0' ?>" media="all" />
+
+    <!-- to set deisgn in print -->
+    <link rel="stylesheet" href="<?= $_SERVER["DOCUMENT_ROOT"].'/assets/css/bootstrap-print.min.css' ?>" media="print">
+
+    <style type="text/css">
+
+        .row
+        {
+          --bs-gutter-x: 0px!important;
+        }
+
+        .company_logo
+        {
+          min-width: 100px;
+          height: 100px;
+        }
+
+        #company_head
+        {
+          text-align: right;
+          text-transform: uppercase;
+          margin-top: 10px;
+        }
+        #company_address
+        {
+          text-align: right;
+          font-size: 13px;
+        }
+        .font_uppercase
+        {
+          text-transform: uppercase!important;
+        }
+        .font_design
+        {
+          color: black;
+          font-size : 14px;
+        }
+        #customer_address
+        {
+          font-size: 13px;
+        }
+        #totals_color
+        {
+          color:black;
+        }
+
+        @media print
+        {
+            .hide_content
+            {
+                display: none !important;
+            }
+        }
+
+    </style>
+  </head>
+  <body>
+
+    <div class="row">
+        <div class="col-sm-12 col-lg-12">
+          <div class="card">
+             <div class="card-header d-flex justify-content-between" style="background: #f5f6fa!important;">
+                <div class="header-title" style="margin-bottom: 25px!important;">
+                   <h3 class="card-title"><?= $page_title ?></h3>
+                </div>
+             </div>
+             <div class="card-body">
+
+               <!-- company info row start -->
+                <div class="row">
+
+                  <div class="col-12 col-sm-6 col-md-8">
+                    <?php
+
+                      $logo = companySetting('logo');
+                      $company_logo = $_SERVER["DOCUMENT_ROOT"].'/uploads/company_logo/'.$logo;
+
+                    ?>
+
+                    <?php if ($logo): ?>
+
+                    <img src="<?= $company_logo ?>" alt="company_logo" class="company_logo">
+
+                    <?php endif; ?>
+
+                  </div>
+                  <div class="col-12 col-sm-6 col-md-4">
+                    <h5 id="company_head"><?= companySetting('name') ?></h5>
+                    <label id="company_address">
+                      <?= companySetting('address') ?>
+                    </label>
+                  </div>
+
+                </div>
+                <!-- company info row end -->
+
+                <!-- invoice info row start -->
+                <div class="row mt-5">
+
+                  <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+
+                    <div class="row mt-1">
+                      <div class="col-sm-12">
+
+                        <h6 class="text-primary font_uppercase">Invoice Information</h6>
+
+                      </div>
+                      <div class="col-12 col-sm-12 mt-1">
+                          <div class="row">
+
+                            <div class="col-12 col-sm-4 col-md-5 col-lg-4">
+                              <span class="font_design font_uppercase">Invoice #:</span>
+                            </div>
+                            <div class="col-12 col-sm-8 col-md-7 col-lg-8">
+                              <span class="font_design font_uppercase"><?= $sale->invoice_no ?></span>
+                            </div>
+                          </div>
+                      </div>
+                      <div class="col-12 col-sm-12">
+                          <div class="row">
+
+                            <div class="col-12 col-sm-5 col-md-6 col-lg-6 col-xl-5">
+                              <span class="font_design font_uppercase">Invoice Date:</span>
+                            </div>
+                            <div class="col-12 col-sm-7 col-md-6 col-lg-6 col-xl-7">
+                              <span class="font_design font_uppercase"><?= getDateTimeFormat($sale->added_at,'date') ?></span>
+                            </div>
+                          </div>
+                      </div>
+                      <div class="col-12 col-sm-12">
+                          <div class="row">
+
+                            <div class="col-3 col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                              <span class="font_design font_uppercase">Category:</span>
+                            </div>
+                            <div class="col-9 col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                              <span class="font_design font_uppercase">
+                                <?php if ($sale->customer_category == 'cash'){ ?>
+                                  <span class="badge rounded-pill bg-success">Cash</span>
+                                <?php }elseif ($sale->customer_category == 'credit') { ?>
+                                  <span class="badge rounded-pill bg-warning">Credit</span>
+                                <?php } ?>
+                              </span>
+                            </div>
+                          </div>
+                      </div>
+                      <div class="col-12 col-sm-12">
+                          <div class="row">
+
+                            <div class="col-3 col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                              <span class="font_design font_uppercase">Status:</span>
+                            </div>
+                            <div class="col-9 col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                              <span class="font_design font_uppercase">
+
+                                <?php if ($sale->status == 'paid'){ ?>
+
+                                  <span class="badge rounded-pill bg-success">Paid</span>
+
+                                <?php }elseif ($sale->status == 'unpaid' || $sale->status == 'credit') { ?>
+
+                                  <span class="badge rounded-pill bg-warning"><?= ucfirst($sale->status) ?></span>
+
+                                <?php }elseif ($sale->status == 'pending') { ?>
+
+                                  <span class="badge rounded-pill bg-secondary">Pending</span>
+
+                                <?php }
+                                 ?>
+
+                              </span>
+                            </div>
+                          </div>
+                      </div>
+
+                    </div>
+
+                  </div>
+                  <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+
+                    <div class="row mt-1">
+                      <div class="col-sm-12">
+
+                        <h6 class="text-primary font_uppercase">Invoice To</h6>
+                        <div class="col-sm-12 mt-1">
+                          <span class="font_design font_uppercase"><?= $sale->customer_name ?></span>
+                        </div>
+                        <div class="col-sm-12">
+                          <label id="customer_address">
+                            <?= $sale->customer_address ?>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+
+                </div>
+                <!-- invoice info row end -->
+
+                <!-- table row start -->
+                <div class="row mt-4">
+
+                  <div class="col-12">
+                    <div class="table-responsive">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th width="55%">Products</th>
+                            <th width="10%">Sale Qty</th>
+                            <th width="13%">Exchange Qty</th>
+                            <th width="13%">Foc Qty</th>
+                            <th width="10%">Price</th>
+                            <th style="text-align:right">Total</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+
+                          <?php foreach ($sales_details as $key => $v): ?>
+
+                          <tr>
+                            <td><?= $v->product_name ?></td>
+                            <td><?= $v->sale_qty ?></td>
+                            <td><?= $v->exchange_qty ?></td>
+                            <td><?= $v->foc_qty ?></td>
+                            <td><?= $v->price ?></td>
+                            <td style="text-align:right"><?= $v->amount?></td>
+                          </tr>
+
+                          <?php endforeach; ?>
+
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-12">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th width="78%"></th>
+                          <td>SubTotal</td>
+                          <td id="totals_color"><?= $sale->total_amount ?></td>
+                        </tr>
+                        <!-- <tr>
+                          <th width="78%"></th>
+                          <td>Taxes</td>
+                          <td id="totals_color">1000</td>
+                        </tr> -->
+                        <!-- <tr>
+                          <th width="78%"></th>
+                          <td>Discount</td>
+                          <td id="totals_color">100</td>
+                        </tr> -->
+                        <!-- <tr>
+                          <th width="78%"></th>
+                          <td>Net Amount</td>
+                          <td id="totals_color">2900</td>
+                        </tr> -->
+                      </thead>
+                    </table>
+                  </div>
+
+                </div>
+                <!-- table row end -->
+
+                <!-- terms & condition row start -->
+
+                <div class="row mt-3">
+                  <div class="col-sm-12 mt-1">
+                    <span class="font_design font_uppercase">Terms & Condition</span>
+                  </div>
+                  <div class="col-10 col-sm-10 col-md-8 col-lg-7">
+                    <label id="customer_address">
+                      <?= companySetting('terms_and_condition') ?>
+                    </label>
+                  </div>
+                </div>
+                <!-- terms & condition row end -->
+
+             </div>
+          </div>
+        </div>
+    </div>
+
+  </body>
+</html>

@@ -118,6 +118,8 @@ class MY_Controller extends CI_Controller
   public function send_mail_($arr)
   {
 
+      return true;
+      
       $this->load->library('email');
 
       $to = $arr['to'];
@@ -135,7 +137,7 @@ class MY_Controller extends CI_Controller
       $config['charset']  = 'utf-8';
 
       $this->email->initialize($config);
-      $this->email->from('Royce',$company_name);
+      $this->email->from('RZ',$company_name);
       $this->email->to($to);
 
       $this->email->subject($subject);

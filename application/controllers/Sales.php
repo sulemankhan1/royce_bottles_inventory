@@ -407,6 +407,7 @@ class Sales extends MY_Controller
           $sales_products = $this->bm->getRows('sales_details','sale_id',$sale_id);
 
           $logs = [];
+
           foreach ($sales_products as $key => $v)
           {
 
@@ -419,7 +420,7 @@ class Sales extends MY_Controller
                 $update_assignstock_qty = [
 
                   'available_qty' => $assign_stock_row->available_qty - $total_qty,
-                  'sale_qty' => $assign_stock_row->sale_qty + $v->sale_qty,
+                  // 'sale_qty' => $assign_stock_row->sale_qty + $v->sale_qty,
                   'exchange_qty' => $assign_stock_row->exchange_qty + $v->exchange_qty,
                   'foc_qty' => $assign_stock_row->foc_qty + $v->foc_qty
 
@@ -466,6 +467,58 @@ class Sales extends MY_Controller
           }
 
            $this->bm->insert_rows('logs',$logs);
+
+
+           //check is_send sale pdf on mail or not start
+
+           $is_invoice_email = $this->bm->getRowWithConditions('general_setting',['name' => 'INVOICE_EMAIL']);
+
+           if(!empty($is_invoice_email))
+           {
+
+              if($is_invoice_email->value == 'yes')
+              {
+
+
+                $email_subject = 'RZ';
+                $email_body = '';
+
+                $invoice_temp = $this->bm->getRowWithConditions('general_setting',['name' => 'INVOICE_TEMP']);
+
+                if(!empty($invoice_temp))
+                {
+
+                  $email_template = $this->bm->getRow('email_templates','id',$invoice_temp->value);
+
+                  if(!empty($email_template))
+                  {
+
+                    $email_subject = $email_template->subject;
+                    $email_body = $email_template->template;
+
+                  }
+
+                }
+
+                  $this->generateSalePdf($sale_row->id);
+                  $customer = $this->bm->getRow('customers','id',$sale_row->customer_id);
+
+                  $arr = [
+
+                    'to' => $customer->e_receipt_email,
+                    'subject' => $email_subject,
+                    'body' => $email_body,
+                    // 'attachment' =>
+
+                  ];
+
+                  $this->send_mail_($arr);
+
+
+              }
+
+           }
+           //check is_send sale pdf on mail or not end
 
       $this->trans_('complete');
 
@@ -532,5 +585,30 @@ class Sales extends MY_Controller
 
   }
 
+  public function generateSalePdf($sale_id)
+  {
+
+      $this->load->model('Sale_model');
+
+      $sales_details = $this->Sale_model->getSaleDetails($sale_id);
+
+      $sale = @$sales_details[0];
+
+      $page_title = 'Invoice Details';
+
+      $data = [
+
+        'page_title' => $page_title,
+        'sale' => $sale,
+        'sales_details' => $sales_details
+
+      ];
+
+
+      $this->load->library('pdf');
+
+      $this->pdf->load_view('sales/sales_pdf',$data);
+
+  }
 
 }
