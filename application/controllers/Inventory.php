@@ -1205,6 +1205,62 @@ class Inventory extends MY_Controller
   public function logs()
   {
 
+    $type_arr = (object)[
+
+      (object)[
+        'id' => 'add_stock',
+        'name' => 'Add Stock'
+      ],
+      (object)[
+        'id' => 'remove_stock',
+        'name' => 'Remove Stock'
+      ],
+      (object)[
+        'id' => 'request',
+        'name' => 'Driver Request'
+      ],
+      (object)[
+        'id' => 'assign',
+        'name' => 'Assign To Driver'
+      ],
+      (object)[
+        'id' => 'return',
+        'name' => 'Return Stock'
+      ],
+      (object)[
+        'id' => 'call_order',
+        'name' => 'Add Call Order'
+      ],
+      (object)[
+        'id' => 'assign_stock_confirmed',
+        'name' => 'Assign Stock Confirmed'
+      ],
+      (object)[
+        'id' => 'call_order_confirmed',
+        'name' => 'Call Order Confirmed'
+      ],
+      (object)[
+        'id' => 'pending_call_order_confirmed',
+        'name' => 'Pending Request Call Order Confirmed'
+      ],
+      (object)[
+        'id' => 'pending_call_order_confirmed',
+        'name' => 'Pending Request Call Order Confirmed'
+      ],
+      (object)[
+        'id' => 'add_sale',
+        'name' => 'Add Sale'
+      ],
+      (object)[
+        'id' => 'edit_sale',
+        'name' => 'Edit Sale'
+      ],
+      (object)[
+        'id' => 'mark_sale_done',
+        'name' => 'Mark Sale Done'
+      ]
+    ];
+
     $data = [
 
       'title' => 'Inventory Logs',
@@ -1213,34 +1269,16 @@ class Inventory extends MY_Controller
       'active_submenu' => 'logs',
       'products' => $this->bm->getRows('products','is_deleted',0),
       'customers' => $this->bm->getRows('customers','is_deleted',0),
-      'drivers' => $this->bm->getRowsWithConditions('users',['is_deleted' => 0,'type' => 'driver'])
+      'drivers' => $this->bm->getRowsWithConditions('users',['is_deleted' => 0,'type' => 'driver']),
+      'type_arr' => $type_arr,
+      'scripts' => [
+        'inventory/logs.js'
+      ]
 
     ];
 
     $this->template('inventory/logs',$data);
 
   }
-
-  public function view_logs()
-  {
-
-    $data = [
-
-      'title' => 'View Inventory Logs',
-      'page_head' => 'View Inventory Logs',
-      'active_menu' => 'inventory',
-      'active_submenu' => 'logs',
-      'styles' => [
-        'table-image.css'
-      ],
-      'scripts' => [
-        'inventory/log_details.js'
-      ]
-
-    ];
-
-    $this->template('inventory/logs_details',$data);
-
-  }
-
+  
 }

@@ -211,17 +211,27 @@ class AjaxController extends MY_Controller
 
   }
 
-  public function printLogDetails()
+  public function viewLogDetails()
   {
 
       $get = $this->inp_get();
 
+      $this->load->model('Inventory_model');
+
       $data = [
-        'page_title' => 'Log Details'
+
+        'page_title' => 'Log Details',
+        'product' => $this->bm->getRows('products','id',$get['product_id'] == ''?0:$get['product_id']),
+        'customer' => $this->bm->getRows('customers','id',$get['customer_id'] == ''?0:$get['customer_id']),
+        'driver' => $this->bm->getRows('users','id',$get['driver_id'] == ''?0:$get['driver_id']),
+        'type' => $get['type_name'],
+        'from' => $get['from'],
+        'to' => $get['to'],
+        'logs' => $this->Inventory_model->getLogDetails($get)
+
       ];
 
       $this->load_view('inventory/print_log_details',$data);
-
 
   }
 

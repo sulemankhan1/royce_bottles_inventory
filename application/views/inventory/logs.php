@@ -17,7 +17,10 @@
                </div>
             </div>
             <div class="card-body">
-              <form class="row g-3 needs-validation" novalidate>
+              <?=
+              getHiddenField('logs_filter_url',site_url('AjaxController/viewLogDetails'));
+              ?>
+              <form class="row g-3 logs_form" method="post" id="myForm" data-parsley-validate>
                 <div class="row mt-4">
 
                     <div class="col-sm-12">
@@ -25,10 +28,13 @@
 
                         <?php
 
+                          echo getHiddenField('type_name','');
+
                           echo getSelectField([
                             'label' => 'Product',
                             'name' => 'product_id',
-                            'data' => $products
+                            'data' => $products,
+                            'required' => false
                           ]);
                           ?>
                       </div>
@@ -38,7 +44,8 @@
                           echo getSelectField([
                             'label' => 'Customer',
                             'name' => 'customer_id',
-                            'data' => $customers
+                            'data' => $customers,
+                            'required' => false
                           ]);
                           ?>
                       </div>
@@ -48,36 +55,21 @@
                             echo getSelectField([
                               'label' => 'Driver',
                               'name' => 'driver_id',
-                              'data' => $drivers
+                              'data' => $drivers,
+                              'required' => false
                             ]);
                           ?>
                       </div>
                       <div class="row">
                           <?php
-                          $type_arr = [
 
-                            'add_stock',
-                            'remove_stock',
-                            'request',
-                            'assign',
-                            'return',
-                            'add_stock',
-                            'remove_stock',
-                            'call_order',
-                            'assign_stock_confirmed',
-                            'call_order_confirmed',
-                            'pending_call_order_confirmed',
-                            'add_sale',
-                            'edit_sale',
-                            'mark_sale_done'
-
-                          ];
                           echo getSelectField([
                             'label' => 'Type',
                             'name' => 'type',
-                            'static' => true,
-                            'data' => $type_arr
+                            'data' => $type_arr,
+                            'required' => false
                           ]);
+
                           ?>
                       </div>
                       <div class="row">
@@ -97,7 +89,7 @@
                           ?>
                       </div>
                       <div class="row mt-3">
-                        
+
                         <?php
 
                            echo getSubmitBtn('View Logs');
