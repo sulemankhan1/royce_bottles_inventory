@@ -455,5 +455,61 @@ class Inventory_model extends CI_Model
 
   }
 
+  public function getLogDetails($data)
+  {
+
+    $this->db->select('logs.*,products.name as product_name,customers.name as customer_name,drivers.name as driver_name,users.name as username');
+    $this->db->from('logs');
+    $this->db->join('products','products.id = logs.product_id','left');
+    $this->db->join('customers','customers.id = logs.customer_id','left');
+    $this->db->join('users drivers','drivers.id = logs.driver_id','left');
+    $this->db->join('users','users.id = logs.added_by','left');
+
+    if(!empty($data['product_id']))
+    {
+
+      $this->db->where('logs.product_id',$data['product_id']);
+
+    }
+
+    if(!empty($data['customer_id']))
+    {
+
+      $this->db->where('logs.customer_id',$data['customer_id']);
+
+    }
+
+    if(!empty($data['driver_id']))
+    {
+
+      $this->db->where('logs.driver_id',$data['driver_id']);
+
+    }
+
+    if(!empty($data['type']))
+    {
+
+      $this->db->where('logs.type',$data['type']);
+
+    }
+
+    if(!empty($data['from']))
+    {
+
+      $this->db->where('DATE_FORMAT(logs.added_at, "%Y-%m-%d") >=',$data['from']);
+
+    }
+
+    if(!empty($data['to']))
+    {
+
+      $this->db->where('DATE_FORMAT(logs.added_at, "%Y-%m-%d") <=',$data['to']);
+
+    }
+
+    return $this->db->get()->result();
+    
+  }
+
 
 }

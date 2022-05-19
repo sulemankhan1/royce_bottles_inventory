@@ -10,6 +10,9 @@
     <!-- Custom Css -->
     <link rel="stylesheet" href="<?= base_url('assets/css/custom.min.css?v=1.2.0') ?>" />
 
+    <!-- to set deisgn in print -->
+    <link rel="stylesheet" href="<?= base_url('assets/css/bootstrap-print.min.css') ?>" media="print">
+
     <style type="text/css">
 
 
@@ -28,42 +31,108 @@
         margin-left: 3px!important;
       }
 
+      @media print
+      {
+          .hide_content
+          {
+              display: none !important;
+          }
+
+      }
+      body {
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+
     </style>
   </head>
-  <body onload="window.print()">
+  <body>
 
-      <h2 align="center"><?= $page_title ?></h2>
+    <span>
+
+        <a href="javascript:void(0)" class="btn btn-sm btn-primary hide_content" id="print_log_details" style="float:right!important;margin-right:10px;">Print</a>
+
+    </span>
+
+      <h2 align="center" style="margin-top:10px;"><?= $page_title ?></h2>
+
       <br><br>
 
       <table width="30%" id="log-details-filter">
         <tr>
           <th>Product:</th>
-          <td>All</td>
+          <td>
+            <?php
+
+              if(!empty($product))
+              {
+
+                echo $product->name;
+
+              }
+              else
+              {
+                echo 'All';
+              }
+
+             ?>
+          </td>
         </tr>
         <tr>
           <th>Customer:</th>
-          <td>All</td>
+          <th>
+            <?php
+
+              if(!empty($customer))
+              {
+
+                echo $customer->name;
+
+              }
+              else
+              {
+                echo 'All';
+              }
+
+             ?>
+          </th>
         </tr>
         <tr>
           <th>Driver:</th>
-          <td>All</td>
+          <th>
+            <?php
+
+              if(!empty($driver))
+              {
+
+                echo $driver->name;
+
+              }
+              else
+              {
+                echo 'All';
+              }
+
+             ?>
+          </th>
         </tr>
         <tr>
           <th>Type:</th>
-          <td>All</td>
+          <th><?php echo $type != ''?$type:'All' ?></th>
         </tr>
         <tr>
           <th>Date From:</th>
-          <td>03-10-2022</td>
+          <th><?= getDateTimeFormat($from,'date') ?></th>
         </tr>
         <tr>
           <th>Date To:</th>
-          <td>03-20-2022</td>
+          <th><?= getDateTimeFormat($to,'date') ?></th>
         </tr>
       </table>
       <br>
 
-      <table class="table table-bordered">
+      <div class="table-responsive">
+      <table class="table">
          <thead>
             <tr>
                <th>#</th>
@@ -78,60 +147,51 @@
             </tr>
          </thead>
          <tbody>
+
+           <?php if (!empty($logs)): ?>
+
+           <?php foreach ($logs as $key => $v): ?>
+
            <tr>
-              <td>1</td>
+              <td><?= $key + 1 ?></td>
               <td>
-                  Product1
+                  <?= $v->product_name ?>
               </td>
-              <td>10</td>
-              <td>Assigned</td>
-              <td>-</td>
-              <td>Driver1</td>
-              <td>User1</td>
-              <td>03-04-2021</td>
-              <td>5:10 PM</td>
+              <td><?= $v->qty ?></td>
+              <td><?= $v->type ?></td>
+              <td><?= $v->customer_name ?></td>
+              <td><?= $v->driver_name ?></td>
+              <td><?= $v->username ?></td>
+              <td><?= getDateTimeFormat($v->added_at,'date') ?></td>
+              <td><?= getDateTimeFormat($v->added_at,'only_time') ?></td>
            </tr>
-           <tr>
-              <td>1</td>
-              <td>Product1
-              </td>
-              <td>10</td>
-              <td>Removed</td>
-              <td>-</td>
-              <td>-</td>
-              <td>User1</td>
-              <td>03-04-2021</td>
-              <td>5:10 PM</td>
-           </tr>
-           <tr>
-              <td>1</td>
-              <td>
-                  Product1
-              </td>
-              <td>10</td>
-              <td>Sold</td>
-              <td>Customer1</td>
-              <td>Driver1</td>
-              <td>User1</td>
-              <td>03-04-2021</td>
-              <td>5:10 PM</td>
-           </tr>
-           <tr>
-              <td>1</td>
-              <td>
-                  Product1
-              </td>
-              <td>10</td>
-              <td>Sold</td>
-              <td>Customer1</td>
-              <td>Driver1</td>
-              <td>User1</td>
-              <td>03-04-2021</td>
-              <td>5:10 PM</td>
-           </tr>
+
+          <?php endforeach; ?>
+          <?php else: ?>
+
+            <tr>
+              <td colspan="9">No log found...</td>
+            </tr>
+
+          <?php endif; ?>
+
          </tbody>
       </table>
+      </div>
 
 
   </body>
+
+  <!-- Library Bundle Script -->
+  <script src="<?= base_url('assets/js/core/libs.min.js') ?>"></script>
+
+  <script type="text/javascript">
+
+    $('#print_log_details').click(function () {
+
+        window.print()
+
+    })
+
+  </script>
 </html>
