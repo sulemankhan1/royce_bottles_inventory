@@ -51,7 +51,8 @@ $route['delete_other_user/(:num)'] = 'OtherUsers/delete/$1';
 
 //rights
 $route['rights'] = 'Rights';
-$route['edit_rights'] = 'Rights/edit';
+$route['edit_rights/(:any)'] = 'Rights/edit/$1';
+$route['save_rights'] = 'Rights/save';
 
 
 //categories

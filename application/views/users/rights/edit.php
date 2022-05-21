@@ -18,68 +18,55 @@
                </div>
             </div>
             <div class="card-body">
-              <form  action="#" class="row g-3 needs-validation" novalidate>
+              <form  action="<?= site_url('save_rights') ?>" class="row g-3" method="post" id="myForm" data-parsley-validate>
+
+                <?= getHiddenField('type',$type); ?>
+
                 <div class="row mt-4">
 
                     <div class="col-sm-12 mb-3">
 
                           <div class="accordion" id="accordionExample">
+
+                              <?php foreach ($modules as $key => $v): ?>
+
                               <div class="accordion-item">
-                                  <h4 class="accordion-header" id="headingOne">
-                                      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                          Categories
+                                  <h4 class="accordion-header" id="headingOne<?= $v->id ?>">
+                                      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne<?= $v->id ?>" aria-expanded="true" aria-controls="collapseOne<?= $v->id ?>">
+                                          <?= $v->name ?>
                                       </button>
                                   </h4>
-                                  <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                  <div id="collapseOne<?= $v->id ?>" class="accordion-collapse collapse" aria-labelledby="headingOne<?= $v->id ?>" data-bs-parent="#accordionExample">
                                       <div class="accordion-body">
+
+                                        <?php foreach ($roles[$key] as $k => $val): ?>
 
                                         <div class="row">
 
                                           <div class="col-sm-11">
 
-                                            <p><i class="fa-solid fa-star"></i> Can view categories</p>
+                                            <p><i class="fa-solid fa-star"></i> <?= $val->name ?></p>
 
                                           </div>
 
                                           <div class="col-sm-1 text-center">
                                             <div class="form-check form-switch form-check-inline">
-                                                <input class="form-check-input" type="checkbox" id="switch1" />
+                                              <?= getHiddenField('row_id[]',$val->id); ?>
+                                                <input class="form-check-input" type="checkbox" id="switch1" name="role_id[<?= $val->id ?>]" <?= ($val->is_allow == 1?'checked':'') ?> />
                                                 <label class="form-check-label pl-2" for="switch1"></label>
                                             </div>
                                           </div>
 
                                         </div>
 
+                                        <?php endforeach; ?>
+
                                       </div>
                                   </div>
                               </div>
-                              <div class="accordion-item">
-                                  <h4 class="accordion-header" id="headingTwo">
-                                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                          Products
-                                      </button>
-                                  </h4>
-                                  <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                                      <div class="accordion-body">
-                                        <div class="row">
 
-                                          <div class="col-sm-11">
+                              <?php endforeach; ?>
 
-                                            <p><i class="fa-solid fa-star"></i> Can view products</p>
-
-                                          </div>
-
-                                          <div class="col-sm-1 text-center">
-                                            <div class="form-check form-switch form-check-inline">
-                                                <input class="form-check-input" type="checkbox" id="switch1" />
-                                                <label class="form-check-label pl-2" for="switch1"></label>
-                                            </div>
-                                          </div>
-
-                                        </div>
-                                      </div>
-                                  </div>
-                              </div>
                           </div>
 
 

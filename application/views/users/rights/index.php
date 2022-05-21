@@ -26,7 +26,7 @@
                         <tr>
                            <th>#</th>
                            <th>Name</th>
-                           <th>Actions</th>
+                           <th class="dnr">Actions</th>
                         </tr>
                      </thead>
                      <tbody>
@@ -35,10 +35,10 @@
                           <td>Driver</td>
                           <td>
                             <span class="actions-icons">
-                              <a href="<?= site_url('edit_rights') ?>" class="action-icons" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit">
+                              <a href="<?= site_url('edit_rights/driver') ?>" class="action-icons" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit">
                                 <i class="fa fa-pencil"></i>
                               </a>
-                              <a href="javascript:void(0)" class="action-icons view_details_" data-url="<?= site_url('AjaxController/getViewDetailsByType/Rights/1') ?>" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Details">
+                              <a href="javascript:void(0)" class="action-icons view_details_" data-url="<?= site_url('AjaxController/getRightsDetails/driver') ?>" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Details">
                                 <i class="fa fa-eye"></i>
                               </a>
                             </span>
@@ -49,10 +49,10 @@
                           <td>Production Users</td>
                           <td>
                             <span class="actions-icons">
-                              <a href="<?= site_url('edit_rights') ?>" class="action-icons" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit">
+                              <a href="<?= site_url('edit_rights/production') ?>" class="action-icons" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit">
                                 <i class="fa fa-pencil"></i>
                               </a>
-                              <a href="javascript:void(0)" class="action-icons view_details_" data-url="<?= site_url('AjaxController/getViewDetailsByType/Rights/1') ?>" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Details">
+                              <a href="javascript:void(0)" class="action-icons view_details_" data-url="<?= site_url('AjaxController/getRightsDetails/production') ?>" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Details">
                                 <i class="fa fa-eye"></i>
                               </a>
                             </span>
@@ -63,10 +63,10 @@
                           <td>Other Users</td>
                           <td>
                             <span class="actions-icons">
-                              <a href="<?= site_url('edit_rights') ?>" class="action-icons" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit">
+                              <a href="<?= site_url('edit_rights/other') ?>" class="action-icons" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit">
                                 <i class="fa fa-pencil"></i>
                               </a>
-                              <a href="javascript:void(0)" class="action-icons view_details_" data-url="<?= site_url('AjaxController/getViewDetailsByType/Rights/1') ?>" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Details">
+                              <a href="javascript:void(0)" class="action-icons view_details_" data-url="<?= site_url('AjaxController/getRightsDetails/other') ?>" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Details">
                                 <i class="fa fa-eye"></i>
                               </a>
                             </span>

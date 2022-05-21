@@ -120,55 +120,51 @@
       </div>
       <div class="accordion" id="accordionExample">
           <div class="accordion-item">
-              <h4 class="accordion-header" id="headingOne">
-                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                      Categories
-                  </button>
-              </h4>
-              <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                  <div class="accordion-body">
 
-                    <div class="row">
+            <?php foreach ($modules as $key => $v): ?>
 
-                      <div class="col-sm-11">
+            <div class="accordion-item">
+                <h4 class="accordion-header" id="headingOne<?= $v->id ?>">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne<?= $v->id ?>" aria-expanded="true" aria-controls="collapseOne<?= $v->id ?>">
+                        <?= $v->name ?>
+                    </button>
+                </h4>
+                <div id="collapseOne<?= $v->id ?>" class="accordion-collapse collapse" aria-labelledby="headingOne<?= $v->id ?>" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
 
-                        <p><i class="fa-solid fa-star"></i> Can view categories</p>
+                    <?php foreach ($roles[$key] as $k => $val): ?>
+
+                      <div class="row">
+
+                        <div class="col-sm-11">
+
+                          <p><i class="fa-solid fa-star"></i>  <?= $val->name ?></p>
+
+                        </div>
+
+                        <div class="col-sm-1 text-center">
+
+                          <?php if ($val->is_allow == 1): ?>
+
+                            <i class="fa-regular fa-circle-check" style="color:green!important;"></i>
+
+                          <?php else: ?>
+
+                            <i class="fa-regular fa-circle-xmark" style="color:red!important;"></i>
+
+                          <?php endif; ?>
+                        </div>
 
                       </div>
 
-                      <div class="col-sm-1 text-center">
-                        <i class="fa-regular fa-circle-check" style="color:green!important;"></i>
-                      </div>
-
-                    </div>
+                    <?php endforeach; ?>
 
                   </div>
               </div>
           </div>
-          <div class="accordion-item">
-              <h4 class="accordion-header" id="headingTwo">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                      Products
-                  </button>
-              </h4>
-              <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                  <div class="accordion-body">
-                    <div class="row">
 
-                      <div class="col-sm-11">
+          <?php endforeach; ?>
 
-                        <p><i class="fa-solid fa-star"></i> Can view products</p>
-
-                      </div>
-
-                      <div class="col-sm-1 text-center">
-                          <i class="fa-regular fa-circle-xmark" style="color:red!important;"></i>
-                      </div>
-
-                    </div>
-                  </div>
-              </div>
-          </div>
       </div>
 
     </div>

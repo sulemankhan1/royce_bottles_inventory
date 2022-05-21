@@ -741,6 +741,32 @@ class AjaxController extends MY_Controller
 
   }
 
+  public function getRightsDetails($type)
+  {
+
+      $this->load->model('Rights_model');
+
+      $modules = $this->bm->getRows('modules');
+      $roles = [];
+      foreach ($modules as $key => $v) {
+
+        $roles[$key] = $this->Rights_model->getModuleRolesByUserType($v->id,$type);
+
+      }
+
+      $data = [
+
+        'type' => 'Rights',
+        'modules' => $modules,
+        'roles' => $roles
+
+      ];
+
+      $output['html'] = $this->load_view('users/modals/view_details',$data,true);
+
+      echo json_encode($output);
+
+  }
 
 
 }
