@@ -21,7 +21,7 @@
 
             </div>
             <div class="card-body">
-              <form class="row g-3 needs-validation" novalidate method="post" id="filter_payments">
+              <form class="row g-3" method="post" id="filter_payments" data-parsley-validate>
                 <div class="row mt-1">
 
                   <div class="col-sm-6">
@@ -41,15 +41,13 @@
                         echo getInputField([
                             'label' => 'From',
                             'name' => 'from',
-                            'type' => 'date',
-                            'required' => false
+                            'type' => 'date'
                           ]);
 
                         echo getInputField([
                             'label' => 'To',
                             'name' => 'to',
-                            'type' => 'date',
-                            'required' => false
+                            'type' => 'date'
                           ]);
 
                         ?>

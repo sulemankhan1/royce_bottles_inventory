@@ -93,7 +93,7 @@ class Inventory extends MY_Controller
       else if($tab == 'exchange')
       {
 
-        $total_qty = $v->exchange;
+        $total_qty = $v->total_exchange;
 
       }
 
@@ -1280,5 +1280,5 @@ class Inventory extends MY_Controller
     $this->template('inventory/logs',$data);
 
   }
-  
+
 }

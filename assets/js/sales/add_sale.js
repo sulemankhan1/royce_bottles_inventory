@@ -170,8 +170,6 @@ $('#save_sale').submit(function (e) {
       dataType : 'json',
       success : function (data) {
 
-        console.warn(data)
-
         if(data.status == true)
         {
 

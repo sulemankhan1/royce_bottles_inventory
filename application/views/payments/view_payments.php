@@ -13,6 +13,9 @@
     <!-- to set deisgn in print -->
     <link rel="stylesheet" href="<?= base_url('assets/css/bootstrap-print.min.css') ?>" media="print">
 
+    <!-- toastr  css -->
+    <link rel="stylesheet" href="<?= base_url('assets/css/toastr.min.css') ?>" />
+
     <!-- Font Awesome script -->
     <script src="https://kit.fontawesome.com/b04cb78fd5.js" crossorigin="anonymous"></script>
 
@@ -79,8 +82,12 @@
                 </div>
                 <span>
 
-                    <a href="javascript:void(0)" class="btn btn-sm btn-success hide_content" id="send_sheet_to_whtaspp"><i class="fa-brands fa-whatsapp"></i> Send Pdf To WhatsApp</a>
-                    <a href="javascript:void(0)" class="btn btn-sm btn-success hide_content" id="send_mail_to_customer">Send Mail To Customer</a>
+                    <input type="hidden" name="customer_id" value="<?= $customer_id ?>">
+                    <input type="hidden" name="from_date" value="<?= $from ?>">
+                    <input type="hidden" name="to_date" value="<?= $to ?>">
+
+                    <a href="javascript:void(0)" class="btn btn-sm btn-success hide_content" id="send_sheet_to_whtaspp"><i class="fa-brands fa-whatsapp" data-type="whatsapp"></i> Send Pdf To WhatsApp</a>
+                    <a href="javascript:void(0)" class="btn btn-sm btn-success hide_content" id="send_mail_to_customer" data-type="email">Send Mail To Customer</a>
 
                     <a href="javascript:void(0)" class="btn btn-sm btn-primary hide_content" id="print_customer_payments">Print</a>
 
@@ -173,7 +180,7 @@
                       <p>Are you sure you want to send?</p>
                   </div>
                   <div class="modal-footer">
-                      <button type="button" class="btn btn-sm btn-primary">Yes</button>
+                      <button type="button" class="btn btn-sm btn-primary" id="sendPdfToCustomer" data-type="">Yes</button>
                       <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Cancel</button>
                   </div>
               </div>
@@ -185,9 +192,16 @@
   <!-- Library Bundle Script -->
   <script src="<?= base_url('assets/js/core/libs.min.js') ?>"></script>
 
+  <!-- toastr  js -->
+  <script src="<?= base_url('assets/js/toastr/toastr.min.js') ?>"></script>
+
   <script type="text/javascript">
 
     $('#send_sheet_to_whtaspp,#send_mail_to_customer').click(function () {
+
+      let type = $(this).attr('data-type')
+
+      $('#sendPdfToCustomer').attr('data-type',type)
 
       $('#ConfirmationModal').modal('show')
 
@@ -196,6 +210,90 @@
     $('#print_customer_payments').click(function () {
 
         window.print()
+
+    })
+
+
+    function show_error_(_error_msg) {
+
+       toastr.error(_error_msg, "", {
+        positionClass: "toast-top-right",
+        timeOut: 5e3,
+        closeButton: !0,
+        debug: !1,
+        newestOnTop: !0,
+        progressBar: !0,
+        preventDuplicates: !0,
+        onclick: null,
+        showDuration: "300",
+        hideDuration: "1000",
+        extendedTimeOut: "1000",
+        showEasing: "swing",
+        hideEasing: "linear",
+        showMethod: "fadeIn",
+        hideMethod: "fadeOut",
+        tapToDismiss: !1
+      })
+
+    }
+
+    function show_success_(_succes_msg) {
+
+      toastr.success(_succes_msg, "", {
+        positionClass: "toast-top-right",
+        timeOut: 5e3,
+        closeButton: !0,
+        debug: !1,
+        newestOnTop: !0,
+        progressBar: !0,
+        preventDuplicates: !0,
+        onclick: null,
+        showDuration: "300",
+        hideDuration: "1000",
+        extendedTimeOut: "1000",
+        showEasing: "swing",
+        hideEasing: "linear",
+        showMethod: "fadeIn",
+        hideMethod: "fadeOut",
+        tapToDismiss: !1
+      })
+
+    }
+
+    $('#sendPdfToCustomer').click(function () {
+
+      $('#ConfirmationModal').modal('hide')
+
+      let type = $(this).attr('data-type')
+      let customer_id = $('input[name=customer_id]').val()
+      let from_date = $('input[name=from_date]').val()
+      let to_date = $('input[name=to_date]').val()
+
+      // send mail / whtsapp
+      $.ajax({
+        url : "<?= site_url('AjaxController/sendPaymentsInPdfToCustomer')?>",
+        type : 'post',
+        data : {customer_id : customer_id,from_date : from_date,to_date : to_date,type : type},
+        dataType : 'json',
+        success : function (data) {
+
+          if(data.status == true)
+          {
+
+            show_success_(data.msg)
+
+          }
+          else
+          {
+
+            show_error_(data.msg)
+
+          }
+
+
+        }
+      })
+
 
     })
 

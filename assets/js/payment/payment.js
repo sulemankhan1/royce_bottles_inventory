@@ -1,3 +1,6 @@
+
+$('#filter_payments').parsley()
+
 $('#filter_payments').submit(function () {
 
     let url = $('input[name=getCustomerPayments]').val()

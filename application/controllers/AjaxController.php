@@ -586,4 +586,161 @@ class AjaxController extends MY_Controller
   }
 
 
+  public function sendPdfToCustomer()
+  {
+
+    $p = $this->inp_post();
+
+    $sale_id = $p['sale_id'];
+    $type = $p['type'];
+
+    $output['status'] = false;
+    $output['msg'] = 'Connection error try again';
+
+    if($type != '' && $sale_id != '')
+    {
+
+        if($type != 'whatsapp')
+        {
+          //send mail to customer about his sale
+          $res = $this->sendInvoicePdfOnMail($sale_id);
+
+          if($res)
+          {
+              $output['status'] = true;
+              $output['msg'] = 'Pdf has sent on email successfully';
+          }
+
+        }
+        else
+        {
+          //send whatsapp to customer about his sale
+          $res = $this->sendInvoicePdfOnWhatsapp($sale_id);
+
+          if($res)
+          {
+              $output['status'] = true;
+              $output['msg'] = 'Pdf has sent on whatsapp successfully';
+          }
+
+        }
+
+    }
+
+    echo json_encode($output);
+
+  }
+
+  public function generatePaymentsPdf($customer_id,$from_date,$to_date)
+  {
+
+    $this->load->model('Payment_model');
+
+    $payments = $this->Payment_model->getPayments($customer_id,$from_date,$to_date);
+
+    $customer = $this->bm->getRow('customers','id',$customer_id);
+
+    $data = [
+
+      'page_title' => 'Customer Payments',
+      'payments' => $payments,
+      'customer' => $customer,
+      'customer_id' => $customer_id,
+      'from' => $from_date,
+      'to' => $to_date,
+      'root' => $_SERVER['DOCUMENT_ROOT'].'/royce/web-dev/',
+
+    ];
+
+    @$this->load->library('pdf');
+
+    @$this->pdf->load_view('payments/payments_pdf',$data);
+
+
+  }
+
+  public function sendPaymentsInPdfToCustomer()
+  {
+
+    $p = $this->inp_post();
+
+    $customer_id = $p['customer_id'];
+    $from_date = $p['from_date'];
+    $to_date = $p['to_date'];
+    $type = $p['type'];
+
+    $output['status'] = false;
+    $output['msg'] = 'Connection error try again';
+
+    if($type != '' && $customer_id != '' && $from_date != '' && $to_date != '')
+    {
+
+        $email_subject = 'RZ';
+        $email_body = '';
+
+        $recurr_temp = $this->bm->getRowWithConditions('general_setting',['name' => 'RECURR_TEMP']);
+
+        if(!empty($recurr_temp))
+        {
+
+          $template = $this->bm->getRow('email_templates','id',$recurr_temp->value);
+
+          if(!empty($template))
+          {
+
+            $email_subject = $template->subject;
+            $email_body = $template->template;
+
+          }
+
+        }
+
+        // generate payments pdf
+        @$this->generatePaymentsPdf($customer_id,$from_date,$to_date);
+        $customer = $this->bm->getRow('customers','id',$customer_id);
+
+        if($type != 'whatsapp')
+        {
+
+          $arr = [
+
+            'to' => $customer->soa_email,
+            'subject' => $email_subject,
+            'body' => $email_body,
+            'attachment' => $_SERVER["DOCUMENT_ROOT"].'/assets/mypdf.pdf'
+
+          ];
+
+          //send mail to customer about his payments
+          $res = $this->send_mail_($arr);
+
+          if($res)
+          {
+              $output['status'] = true;
+              $output['msg'] = 'Pdf has sent on email successfully';
+          }
+
+        }
+        else
+        {
+          //send whatsapp to customer about his sale
+          // $res = $this->sendInvoicePdfOnWhatsapp($sale_id);
+
+          $res = false;
+
+          if($res)
+          {
+              $output['status'] = true;
+              $output['msg'] = 'Pdf has sent on whatsapp successfully';
+          }
+
+        }
+    }
+
+    echo json_encode($output);
+
+  }
+
+
+
 }

@@ -115,11 +115,39 @@ class MY_Controller extends CI_Controller
 
   }
 
+  public function generateSalePdf($sale_id)
+  {
+
+      $this->load->model('Sale_model');
+
+      $sales_details = $this->Sale_model->getSaleDetails($sale_id);
+
+      $sale = @$sales_details[0];
+
+      $page_title = 'Invoice Details';
+
+      $path = '';
+
+      $data = [
+
+        'page_title' => $page_title,
+        'sale' => $sale,
+        'sales_details' => $sales_details,
+        'root' => $_SERVER['DOCUMENT_ROOT'].'/royce/web-dev/'
+
+      ];
+
+      @$this->load->library('pdf');
+
+      @$this->pdf->load_view('sales/sales_pdf',$data);
+
+  }
+
   public function send_mail_($arr)
   {
 
       return true;
-      
+
       $this->load->library('email');
 
       $to = $arr['to'];
@@ -147,7 +175,7 @@ class MY_Controller extends CI_Controller
       if(isset($arr['attachment']))
       {
 
-        $this->email->attach($_SERVER["DOCUMENT_ROOT"].$arr['attachment']);
+        $this->email->attach($arr['attachment']);
 
       }
 
@@ -159,6 +187,91 @@ class MY_Controller extends CI_Controller
       {
         return false;
       }
+
+  }
+
+  public function sendInvoicePdfOnMail($sale_id)
+  {
+
+      //get sale row
+      $sale_row = $this->bm->getRow('sales','id',$sale_id);
+
+      $email_subject = 'RZ';
+      $email_body = '';
+
+      $invoice_temp = $this->bm->getRowWithConditions('general_setting',['name' => 'INVOICE_TEMP']);
+
+      if(!empty($invoice_temp))
+      {
+
+        $email_template = $this->bm->getRow('email_templates','id',$invoice_temp->value);
+
+        if(!empty($email_template))
+        {
+
+          $email_subject = $email_template->subject;
+          $email_body = $email_template->template;
+
+        }
+
+      }
+
+        @$this->generateSalePdf($sale_row->id);
+
+        $customer = $this->bm->getRow('customers','id',$sale_row->customer_id);
+
+        $arr = [
+
+          'to' => $customer->e_receipt_email,
+          'subject' => $email_subject,
+          'body' => $email_body,
+          'attachment' => $_SERVER["DOCUMENT_ROOT"].'/assets/mypdf'
+
+        ];
+
+        //send mail to customer about his sale
+        $res = $this->send_mail_($arr);
+
+        if($res)
+        {
+          return true;
+        }
+        else
+        {
+          return false;
+        }
+
+  }
+
+  public function sendInvoicePdfOnWhatsapp($sale_id)
+  {
+
+    $sale_row = $this->bm->getRow('sales','id',$sale_id);
+
+    $email_subject = 'RZ';
+    $email_body = '';
+
+    //whatsapp template
+    $invoice_temp = $this->bm->getRowWithConditions('general_setting',['name' => 'WHATSAPP_TEMP']);
+
+    if(!empty($invoice_temp))
+    {
+
+      $email_template = $this->bm->getRow('email_templates','id',$invoice_temp->value);
+
+      if(!empty($email_template))
+      {
+
+        $email_subject = $email_template->subject;
+        $email_body = $email_template->template;
+
+      }
+
+    }
+
+      @$this->generateSalePdf($sale_row->id);
+
+      $customer = $this->bm->getRow('customers','id',$sale_row->customer_id);
 
   }
 

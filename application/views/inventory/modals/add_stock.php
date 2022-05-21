@@ -1,5 +1,5 @@
 
-<div class="modal fade select2_modal_" id="AddStockModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade add_stock_modal_select_" id="AddStockModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
       <div class="modal-content">
         <form action="<?= site_url('save_stock') ?>" method="post" class="row g-3" id="myForm" data-parsley-validate>
@@ -18,7 +18,7 @@
                       'label' => 'Product',
                       'name' => 'product_id',
                       'column' => 'sm-9',
-                      'classes' => 'modal_select_',
+                      'classes' => 'add_stock_select_',
                       'data' => $products
                     ]);
 

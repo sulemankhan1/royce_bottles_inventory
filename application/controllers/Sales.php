@@ -469,8 +469,7 @@ class Sales extends MY_Controller
            $this->bm->insert_rows('logs',$logs);
 
 
-           //check is_send sale pdf on mail or not start
-
+           //check is_send sale pdf on mail or not
            $is_invoice_email = $this->bm->getRowWithConditions('general_setting',['name' => 'INVOICE_EMAIL']);
 
            if(!empty($is_invoice_email))
@@ -479,46 +478,27 @@ class Sales extends MY_Controller
               if($is_invoice_email->value == 'yes')
               {
 
-
-                $email_subject = 'RZ';
-                $email_body = '';
-
-                $invoice_temp = $this->bm->getRowWithConditions('general_setting',['name' => 'INVOICE_TEMP']);
-
-                if(!empty($invoice_temp))
-                {
-
-                  $email_template = $this->bm->getRow('email_templates','id',$invoice_temp->value);
-
-                  if(!empty($email_template))
-                  {
-
-                    $email_subject = $email_template->subject;
-                    $email_body = $email_template->template;
-
-                  }
-
-                }
-
-                  $this->generateSalePdf($sale_row->id);
-                  $customer = $this->bm->getRow('customers','id',$sale_row->customer_id);
-
-                  $arr = [
-
-                    'to' => $customer->e_receipt_email,
-                    'subject' => $email_subject,
-                    'body' => $email_body,
-                    // 'attachment' =>
-
-                  ];
-
-                  $this->send_mail_($arr);
-
+                //send mail to customer about his sale
+                $this->sendInvoicePdfOnMail($sale_row->id);
 
               }
 
            }
-           //check is_send sale pdf on mail or not end
+           //check is_send sale pdf on whatsapp or not
+           $is_invoice_whatsapp = $this->bm->getRowWithConditions('general_setting',['name' => 'INVOICE_WHATSAPP']);
+
+           if(!empty($is_invoice_whatsapp))
+           {
+
+              if($is_invoice_whatsapp->value == 'yes')
+              {
+
+                //send whatsapp to customer about his sale
+                $this->sendInvoicePdfOnWhatsapp($sale_row->id);
+
+              }
+
+           }
 
       $this->trans_('complete');
 
@@ -578,37 +558,15 @@ class Sales extends MY_Controller
 
           $this->session->set_flashdata('_success','Sale has paid successfully');
 
-
        }
 
        redirect('sales');
 
   }
 
-  public function generateSalePdf($sale_id)
+  public function testpdf()
   {
-
-      $this->load->model('Sale_model');
-
-      $sales_details = $this->Sale_model->getSaleDetails($sale_id);
-
-      $sale = @$sales_details[0];
-
-      $page_title = 'Invoice Details';
-
-      $data = [
-
-        'page_title' => $page_title,
-        'sale' => $sale,
-        'sales_details' => $sales_details
-
-      ];
-
-
-      $this->load->library('pdf');
-
-      $this->pdf->load_view('sales/sales_pdf',$data);
-
+      $this->generateSalePdf(1);
   }
 
 }

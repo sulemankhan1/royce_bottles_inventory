@@ -25,5 +25,12 @@ class Exception extends \Exception
     public function __construct($message = null, $code = 0)
     {
         parent::__construct($message, $code);
+
+        try{
+
+        }catch(DOMPDF_Exception $e){
+          echo '<pre>',print_r($e),'</pre>';
+        }
+        
     }
 }

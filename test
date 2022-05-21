@@ -6,10 +6,11 @@
   <title><?= $page_title ?></title>
 
   <!-- Hope Ui Design System Css -->
-  <!-- <link rel="stylesheet" href="<= $root.'assets/css/hope-ui.min.css'; ?>" media="all" /> -->
+  <?php $root = $_SERVER['DOCUMENT_ROOT']; ?>
+  <link rel="stylesheet" href="<?= $root.'/royce/web-dev/assets/css/hope-ui.min.css'; ?>" media="all" />
 
   <!-- Custom Css -->
-  <link rel="stylesheet" href="<?= $root.'assets/css/custom.min.css?v=1.2.0' ?>" media="all" />
+  <link rel="stylesheet" href="<?= $root.'/royce/web-dev/assets/css/custom.min.css?v=1.2.0' ?>" media="all" />
 
   <style type="text/css">
     .row {

@@ -13,6 +13,9 @@
     <!-- to set deisgn in print -->
     <link rel="stylesheet" href="<?= base_url('assets/css/bootstrap-print.min.css') ?>" media="print">
 
+    <!-- toastr  css -->
+    <link rel="stylesheet" href="<?= base_url('assets/css/toastr.min.css') ?>" />
+
     <!-- Font Awesome script -->
     <script src="https://kit.fontawesome.com/b04cb78fd5.js" crossorigin="anonymous"></script>
 
@@ -39,6 +42,7 @@
         {
           text-align: right;
           font-size: 13px;
+          float:right;
         }
         .font_uppercase
         {
@@ -98,8 +102,8 @@
 
                   <?php if ($type == 'invoice' || $type == 'invoice_print'): ?>
 
-                    <a href="javascript:void(0)" class="btn btn-sm btn-success hide_content" id="send_pdf_to_whtaspp"><i class="fa-brands fa-whatsapp"></i> Send Pdf To WhatsApp</a>
-                    <a href="javascript:void(0)" class="btn btn-sm btn-success hide_content" id="send_invoice_email">Send Email</a>
+                    <a href="javascript:void(0)" class="btn btn-sm btn-success hide_content" id="send_pdf_to_whtaspp" data-type="whatsapp" data-id="<?= $sale->id ?>"><i class="fa-brands fa-whatsapp"></i> Send Pdf To WhatsApp</a>
+                    <a href="javascript:void(0)" class="btn btn-sm btn-success hide_content" id="send_invoice_email" data-type="mail" data-id="<?= $sale->id ?>">Send Email</a>
                     <a href="javascript:void(0)" class="btn btn-sm btn-primary hide_content" id="print_details">Print</a>
 
                   <?php endif; ?>
@@ -330,16 +334,48 @@
     </div>
 
 
+    <!-- confirmation pdf modal -->
+    <div class="modal fade" id="ConfirmationPdfModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-body">
+                  <p>Are you sure you want to send?</p>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-sm btn-primary" id="sendPdfToCustomer" data-type="" data-id="">Yes</button>
+                  <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Cancel</button>
+              </div>
+          </div>
+      </div>
+    </div>
+
+
   </body>
 
   <!-- Library Bundle Script -->
   <script src="<?= base_url('assets/js/core/libs.min.js') ?>"></script>
+
+  <!-- toastr  js -->
+  <script src="<?= base_url('assets/js/toastr/toastr.min.js') ?>"></script>
 
   <script type="text/javascript">
 
     $('#mark_as_done').click(function functionName() {
 
       $('#markAsDoneModal').modal('show')
+
+    })
+
+
+    $('#send_invoice_email,#send_pdf_to_whtaspp').click(function () {
+
+      let type = $(this).attr('data-type')
+      let sale_id = $(this).attr('data-id')
+
+      $('#sendPdfToCustomer').attr('data-type',type)
+      $('#sendPdfToCustomer').attr('data-id',sale_id)
+
+      $('#ConfirmationPdfModal').modal('show')
 
     })
 
@@ -385,11 +421,85 @@
 
     })
 
-    $(function () {
 
-      window.onbeforeunload = function(){
-        alert("You are now leaving, are you sure?")
-      }
+    function show_error_(_error_msg) {
+
+       toastr.error(_error_msg, "", {
+        positionClass: "toast-top-right",
+        timeOut: 5e3,
+        closeButton: !0,
+        debug: !1,
+        newestOnTop: !0,
+        progressBar: !0,
+        preventDuplicates: !0,
+        onclick: null,
+        showDuration: "300",
+        hideDuration: "1000",
+        extendedTimeOut: "1000",
+        showEasing: "swing",
+        hideEasing: "linear",
+        showMethod: "fadeIn",
+        hideMethod: "fadeOut",
+        tapToDismiss: !1
+      })
+
+    }
+
+    function show_success_(_succes_msg) {
+
+      toastr.success(_succes_msg, "", {
+        positionClass: "toast-top-right",
+        timeOut: 5e3,
+        closeButton: !0,
+        debug: !1,
+        newestOnTop: !0,
+        progressBar: !0,
+        preventDuplicates: !0,
+        onclick: null,
+        showDuration: "300",
+        hideDuration: "1000",
+        extendedTimeOut: "1000",
+        showEasing: "swing",
+        hideEasing: "linear",
+        showMethod: "fadeIn",
+        hideMethod: "fadeOut",
+        tapToDismiss: !1
+      })
+
+    }
+
+    $('#sendPdfToCustomer').click(function () {
+
+      $('#ConfirmationPdfModal').modal('hide')
+
+      let type = $(this).attr('data-type')
+      let sale_id = $(this).attr('data-id')
+
+      // send mail / whtsapp
+      $.ajax({
+        url : "<?= site_url('AjaxController/sendPdfToCustomer') ?>",
+        type : 'post',
+        data : {sale_id : sale_id,type : type},
+        dataType : 'json',
+        success : function (data) {
+
+          if(data.status == true)
+          {
+
+            show_success_(data.msg)
+
+          }
+          else
+          {
+
+            show_error_(data.msg)
+
+          }
+
+
+        }
+      })
+
 
     })
 

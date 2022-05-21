@@ -26,6 +26,7 @@ if ( ! function_exists('companySetting'))
       $company_data =[
 
         'logo' => $logo_url,
+        'pdf_logo' => 'uploads/company_logo/'.$result->logo,
         'name' => $result->name,
         'address' => $result->address,
         'terms_and_condition' => $result->terms_and_condition
@@ -39,6 +40,7 @@ if ( ! function_exists('companySetting'))
       $company_data =[
 
         'logo' => base_url('assets/images/company_logo.jpg'),
+        'pdf_logo' => 'assets/images/company_logo.jpg',
         'name' => '',
         'address' => '',
         'terms_and_condition' => ''
