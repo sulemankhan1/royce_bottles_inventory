@@ -7,7 +7,6 @@ if ( ! function_exists('companySetting'))
 	{
 
     $ci=& get_instance();
-    $ci->load->database();
 
     $result = $ci->db->get('company_setting')->row();
 
@@ -74,7 +73,6 @@ if ( ! function_exists('loginUserDetails'))
 	{
 
     $ci=& get_instance();
-    $ci->load->database();
 
     $result = $ci->db->get_where('users',['id' => $user_id])->row();
 
@@ -133,7 +131,6 @@ if ( ! function_exists('getProductAvailableStock'))
   {
 
       $ci=& get_instance();
-      $ci->load->database();
 
       $ci->db->select("logs.product_id,products.name as product_name,sum(if(logs.type='request',qty,0)) as total_request_qty,sum(if(logs.type='assign',qty,0)) as total_assign_qty,sum(if(logs.type='sold',qty,0)) as total_sold_qty,sum(if(logs.type='return',qty,0)) as total_return_qty,sum(if(logs.type='add_stock',qty,0)) as total_add_stock_qty,sum(if(logs.type='remove_stock',qty,0)) as total_remove_stock_qty,sum(if(logs.type='missing',qty,0)) as total_missing_qty,sum(if(logs.type='exchange',qty,0)) as total_exchange_qty", FALSE);
       $ci->db->from('logs');
@@ -199,9 +196,56 @@ if ( ! function_exists('showPendingRequestCount'))
 	{
 
     $ci=& get_instance();
-    $ci->load->database();
 
-    return true;
+    $ci->load->model('Count_model');
+
+    $pending_call_orders = $ci->Count_model->getPendingCallOrdersCount();
+
+    $delivery_orders = $ci->Count_model->getDeliveryOrdersCount();
+
+    return $pending_call_orders + $delivery_orders;
+
+  }
+
+}
+
+if ( ! function_exists('checkUserRight'))
+{
+
+  function isUserAllow($role_id)
+	{
+
+
+    $ci=& get_instance();
+
+    $ci->load->model('Rights_model');
+
+    $user_type = $ci->session->userdata('UTYPE');
+    
+    $res = $ci->Rights_model->checkUserRight($user_type,$role_id);
+
+    if(!empty($res) && $res->is_allow == 1)
+    {
+      return true;
+    }
+    else
+    {
+      return false;
+    }
+
+  }
+
+}
+
+if ( ! function_exists('UTYPE'))
+{
+
+  function UTYPE()
+	{
+
+    $ci=& get_instance();
+
+    return $ci->session->userdata('UTYPE');
 
   }
 

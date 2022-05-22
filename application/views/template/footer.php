@@ -9,7 +9,7 @@
           document.write(new Date().getFullYear())
 
           </script>
-          <a href="#">Alphinex Solutions</a>
+          <a href="http://www.alphinex.com">Alphinex Solutions</a>
       </div>
     </div>
   </footer>

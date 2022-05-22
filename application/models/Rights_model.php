@@ -23,4 +23,19 @@ class Rights_model extends CI_Model
 
   }
 
+  public function checkUserRight($type , $role_id)
+  {
+
+    $this->db->select('user_roles.is_allow');
+    $this->db->from('modules');
+    $this->db->join('roles','modules.id = roles.module_id');
+    $this->db->join('user_roles','roles.id = user_roles.role_id','left');
+
+      $this->db->where('user_roles.role_id',$role_id);
+      $this->db->where('user_roles.type',$type);
+
+    return $this->db->get()->row();
+
+  }
+
 }

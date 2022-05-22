@@ -15,6 +15,11 @@ class Payments extends MY_Controller
 	public function index()
 	{
 
+
+    echo showPendingRequestCount();
+
+    die();
+    
     $data = [
 
       'title' => 'Payments',

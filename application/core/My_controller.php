@@ -3,6 +3,7 @@ class MY_Controller extends CI_Controller
 {
 
   public $user_id_ = 0;
+  public $use_type_ = 0;
 
   public function __construct()
   {
@@ -12,6 +13,8 @@ class MY_Controller extends CI_Controller
       $this->check_user_login();
 
       $this->user_id_ = $this->session->userdata('UID');
+
+      $this->use_type_ = $this->session->userdata('UTYPE');
 
   }
 
@@ -272,6 +275,23 @@ class MY_Controller extends CI_Controller
       @$this->generateSalePdf($sale_row->id);
 
       $customer = $this->bm->getRow('customers','id',$sale_row->customer_id);
+
+  }
+
+  public function redirect_to()
+  {
+
+      return '404_override';
+
+  }
+
+  public function checkRole($role_id)
+  {
+
+    if(isUserAllow($role_id) == false)
+    {
+      redirect($this->redirect_to());
+    }
 
   }
 

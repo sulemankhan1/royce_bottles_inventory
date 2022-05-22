@@ -64,6 +64,7 @@ class Auth extends CI_Controller
        {
 
          $this->session->set_userdata('UID',$data['data']->id);
+         $this->session->set_userdata('UTYPE',$data['data']->type);
 
          // remember me
           if(isset($p['remember_me']))

@@ -12,6 +12,8 @@ class Admin extends MY_Controller
 
     $this->load->library('encryption');
 
+    $this->checkRole(1);
+
   }
 
 	public function index()
@@ -82,13 +84,21 @@ class Admin extends MY_Controller
 			$nestedData[] = $v->email;
 			$nestedData[] = $v->contact_no;
 
+        $change_status_class = '';
+
+        if(isUserAllow(70))
+        {
+
+          $change_status_class = 'changeUser_status_';
+
+        }
 
         if($v->status != 0)
         {
 
           $change_status_url = site_url('update_admin_status/active/'.$ID);
 
-          $status = '<a href="javascript:void(0)" class="changeUser_status_ action-icons" data-type-status="active" data-msg="Admin" data-url="'. $change_status_url .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Active">
+          $status = '<a href="javascript:void(0)" class="'. $change_status_class .' action-icons" data-type-status="active" data-msg="Admin" data-url="'. $change_status_url .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Active">
                    <span class="badge rounded-pill bg-secondary">Deactivated</span>
              </a>';
 
@@ -98,7 +108,7 @@ class Admin extends MY_Controller
 
           $change_status_url = site_url('update_admin_status/deactivated/'.$ID);
 
-          $status = '<a href="javascript:void(0)" class="changeUser_status_ action-icons" data-type-status="deactivate" data-msg="Admin" data-url="'. $change_status_url .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Deactivate">
+          $status = '<a href="javascript:void(0)" class="'. $change_status_class .' action-icons" data-type-status="deactivate" data-msg="Admin" data-url="'. $change_status_url .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Deactivate">
                  <span class="badge rounded-pill bg-success">Active</span>
            </a>';
 
@@ -112,17 +122,29 @@ class Admin extends MY_Controller
 
           $actions .= '<span class="actions-icons">';
 
+            if (isUserAllow(3)) {
+              // code...
     				$actions .= '<a href="'.site_url('edit_admin/'.$ID) .'" class="action-icons" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit">
               <i class="fa fa-pencil"></i>
             </a>';
+
+          }
+
+          if (isUserAllow(9)) {
 
   					$actions .= '<a href="javascript:void(0)" class="action-icons delete_record_" data-msg="Are you sure you want to delete this Admin?" data-url="'. $delete_url .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete">
               <i class="fa-solid fa-trash"></i>
             </a>';
 
-    				$actions .= '<a href="javascript:void(0)" class="action-icons view_details_" data-url="'. site_url('AjaxController/getUserDetailsByType/Admin/'.$ID) .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Details">
-              <i class="fa fa-eye"></i>
-            </a>';
+          }
+
+            if (isUserAllow(4)) {
+
+        				$actions .= '<a href="javascript:void(0)" class="action-icons view_details_" data-url="'. site_url('AjaxController/getUserDetailsByType/Admin/'.$ID) .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Details">
+                  <i class="fa fa-eye"></i>
+                </a>';
+
+              }
 
           $actions .= '</span>';
 
@@ -146,6 +168,8 @@ class Admin extends MY_Controller
 
   public function create()
   {
+
+    $this->checkRole(2);
 
     $data = [
 
@@ -344,6 +368,8 @@ class Admin extends MY_Controller
   public function edit($admin_id)
   {
 
+    $this->checkRole(3);
+
     $data = [
 
       'title' => 'Edit Admin',
@@ -363,6 +389,8 @@ class Admin extends MY_Controller
 
   public function update_status($status,$admin_id)
   {
+
+      $this->checkRole(70);
 
       $arr = [
 
@@ -391,6 +419,8 @@ class Admin extends MY_Controller
 
   public function delete($admin_id)
   {
+
+      $this->checkRole(9);
 
       $arr = [
 

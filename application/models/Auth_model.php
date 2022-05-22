@@ -9,7 +9,7 @@ class Auth_model extends CI_Model
   public function checkLoginDetails($username,$password)
   {
 
-    $this->db->select('id,password');
+    $this->db->select('id,type,password');
     $this->db->from('users');
 
     $this->db->where('username',$username);
