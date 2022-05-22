@@ -20,7 +20,12 @@
                <?=
                getHiddenField('ajax_url',$ajax_url);
                ?>
-               <a href="<?= site_url('add_other_user') ?>" class="btn btn-sm btn-primary">Add Other User</a>
+
+               <?php if (isUserAllow(17)): ?>
+
+                 <a href="<?= site_url('add_other_user') ?>" class="btn btn-sm btn-primary">Add Other User</a>
+
+                <?php endif; ?>
 
             </div>
             <div class="card-body">

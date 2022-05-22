@@ -6,7 +6,7 @@ if ( ! function_exists('companySetting'))
   function companySetting($column = '')
 	{
 
-    $ci=& get_instance();
+    $ci = & get_instance();
 
     $result = $ci->db->get('company_setting')->row();
 
@@ -221,7 +221,7 @@ if ( ! function_exists('checkUserRight'))
     $ci->load->model('Rights_model');
 
     $user_type = $ci->session->userdata('UTYPE');
-    
+
     $res = $ci->Rights_model->checkUserRight($user_type,$role_id);
 
     if(!empty($res) && $res->is_allow == 1)

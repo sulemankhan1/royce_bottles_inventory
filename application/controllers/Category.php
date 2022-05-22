@@ -10,6 +10,8 @@ class Category extends MY_Controller
 
     parent :: __construct();
 
+    $this->checkRole(21);
+
   }
 
 	public function index()
@@ -70,13 +72,21 @@ class Category extends MY_Controller
 
           $actions .= '<span class="actions-icons">';
 
+          if (isUserAllow(23)) {
+
     				$actions .= '<a href="'.site_url('edit_category/'.$ID) .'" class="action-icons" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit">
               <i class="fa fa-pencil"></i>
             </a>';
 
+          }
+
+          if (isUserAllow(24)) {
+
   					$actions .= '<a href="javascript:void(0)" class="action-icons delete_record_" data-msg="Are you sure you want to delete this Category?" data-url="'. $delete_url .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete">
               <i class="fa-solid fa-trash"></i>
             </a>';
+
+          }
 
           $actions .= '</span>';
 
@@ -100,6 +110,8 @@ class Category extends MY_Controller
 
   public function create()
   {
+
+      $this->checkRole(22);
 
     $data = [
 
@@ -242,6 +254,8 @@ class Category extends MY_Controller
   public function edit($cat_id)
   {
 
+      $this->checkRole(23);
+
     $data = [
 
       'title' => 'Edit Category',
@@ -257,6 +271,8 @@ class Category extends MY_Controller
 
   public function delete($cat_id)
   {
+
+      $this->checkRole(24);
 
       $arr = [
 

@@ -39,13 +39,7 @@
                           <th>Email</th>
                           <th>Contact #</th>
                           <th>Status</th>
-
-                          <?php if (isUserAllow(3) || isUserAllow(9) || isUserAllow(4)): ?>
-
                           <th class="dnr">Actions</th>
-
-                          <?php endif; ?>
-
                        </tr>
                     </thead>
                     <tbody></tbody>

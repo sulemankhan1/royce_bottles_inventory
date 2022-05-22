@@ -12,6 +12,8 @@ class Production extends MY_Controller
 
     $this->load->library('encryption');
 
+    $this->checkRole(11);
+
   }
 
 	public function index()
@@ -84,12 +86,21 @@ class Production extends MY_Controller
       $nestedData[] = $v->contact_no;
       $nestedData[] = $v->fin_no;
 
+      $change_status_class = '';
+
+      if(isUserAllow(72))
+      {
+
+        $change_status_class = 'changeUser_status_';
+
+      }
+
         if($v->status != 0)
         {
 
           $change_status_url = site_url('update_production_status/active/'.$ID);
 
-          $status = '<a href="javascript:void(0)" class="changeUser_status_ action-icons" data-type-status="active" data-msg="Production User" data-url="'. $change_status_url .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Active">
+          $status = '<a href="javascript:void(0)" class="'. $change_status_class.' action-icons" data-type-status="active" data-msg="Production User" data-url="'. $change_status_url .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Active">
                    <span class="badge rounded-pill bg-secondary">Deactivated</span>
              </a>';
 
@@ -99,7 +110,7 @@ class Production extends MY_Controller
 
           $change_status_url = site_url('update_production_status/deactivated/'.$ID);
 
-          $status = '<a href="javascript:void(0)" class="changeUser_status_ action-icons" data-type-status="deactivate" data-msg="Production User" data-url="'. $change_status_url .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Deactivate">
+          $status = '<a href="javascript:void(0)" class="'. $change_status_class.' action-icons" data-type-status="deactivate" data-msg="Production User" data-url="'. $change_status_url .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Deactivate">
                  <span class="badge rounded-pill bg-success">Active</span>
            </a>';
 
@@ -147,6 +158,8 @@ class Production extends MY_Controller
 
   public function create()
   {
+
+    $this->checkRole(12);
 
     $data = [
 
@@ -348,6 +361,8 @@ class Production extends MY_Controller
   public function edit($production_id)
   {
 
+    $this->checkRole(13);
+
     $data = [
 
       'title' => 'Edit Production User',
@@ -367,6 +382,8 @@ class Production extends MY_Controller
 
   public function update_status($status,$production_id)
   {
+
+      $this->checkRole(72);
 
       $arr = [
 
@@ -395,6 +412,8 @@ class Production extends MY_Controller
 
   public function delete($production_id)
   {
+
+      $this->checkRole(14);
 
       $arr = [
 

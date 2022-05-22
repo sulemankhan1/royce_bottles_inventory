@@ -12,6 +12,8 @@ class OtherUsers extends MY_Controller
 
     $this->load->library('encryption');
 
+    $this->checkRole(16);
+
   }
 
 	public function index()
@@ -83,12 +85,21 @@ class OtherUsers extends MY_Controller
 			$nestedData[] = $v->email;
       $nestedData[] = $v->contact_no;
 
+      $change_status_class = '';
+
+      if(isUserAllow(73))
+      {
+
+        $change_status_class = 'changeUser_status_';
+
+      }
+
         if($v->status != 0)
         {
 
           $change_status_url = site_url('update_other_user_status/active/'.$ID);
 
-          $status = '<a href="javascript:void(0)" class="changeUser_status_ action-icons" data-type-status="active" data-msg="Other User" data-url="'. $change_status_url .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Active">
+          $status = '<a href="javascript:void(0)" class="'. $change_status_class .' action-icons" data-type-status="active" data-msg="Other User" data-url="'. $change_status_url .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Active">
                    <span class="badge rounded-pill bg-secondary">Deactivated</span>
              </a>';
 
@@ -98,7 +109,7 @@ class OtherUsers extends MY_Controller
 
           $change_status_url = site_url('update_other_user_status/deactivated/'.$ID);
 
-          $status = '<a href="javascript:void(0)" class="changeUser_status_ action-icons" data-type-status="deactivate" data-msg="Other User" data-url="'. $change_status_url .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Deactivate">
+          $status = '<a href="javascript:void(0)" class="'. $change_status_class .' action-icons" data-type-status="deactivate" data-msg="Other User" data-url="'. $change_status_url .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Deactivate">
                  <span class="badge rounded-pill bg-success">Active</span>
            </a>';
 
@@ -112,17 +123,29 @@ class OtherUsers extends MY_Controller
 
           $actions .= '<span class="actions-icons">';
 
+          if (isUserAllow(18)) {
+
     				$actions .= '<a href="'.site_url('edit_other_user/'.$ID) .'" class="action-icons" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit">
               <i class="fa fa-pencil"></i>
             </a>';
+
+          }
+
+          if (isUserAllow(20)) {
 
   					$actions .= '<a href="javascript:void(0)" class="action-icons delete_record_" data-msg="Are you sure you want to delete this Other User?" data-url="'. $delete_url .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete">
               <i class="fa-solid fa-trash"></i>
             </a>';
 
+          }
+
+          if (isUserAllow(73)) {
+
     				$actions .= '<a href="javascript:void(0)" class="action-icons view_details_" data-url="'. site_url('AjaxController/getUserDetailsByType/Other_user/'.$ID) .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Details">
               <i class="fa fa-eye"></i>
             </a>';
+
+          }
 
           $actions .= '</span>';
 
@@ -329,6 +352,8 @@ class OtherUsers extends MY_Controller
   public function create()
   {
 
+    $this->checkRole(17);
+
     $data = [
 
       'title' => 'Add Other User',
@@ -347,6 +372,8 @@ class OtherUsers extends MY_Controller
 
   public function edit($otherUser_id)
   {
+
+    $this->checkRole(18);
 
     $data = [
 
@@ -367,6 +394,8 @@ class OtherUsers extends MY_Controller
 
   public function update_status($status,$otherUser_id)
   {
+
+    $this->checkRole(73);
 
       $arr = [
 
@@ -395,6 +424,8 @@ class OtherUsers extends MY_Controller
 
   public function delete($otherUser_id)
   {
+
+      $this->checkRole(19);
 
       $arr = [
 

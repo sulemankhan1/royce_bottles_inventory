@@ -12,6 +12,8 @@ class Driver extends MY_Controller
 
     $this->load->library('encryption');
 
+    $this->checkRole(5);
+
   }
 
 	public function index()
@@ -86,12 +88,21 @@ class Driver extends MY_Controller
 			$nestedData[] = $v->car_plate;
 
 
+        $change_status_class = '';
+
+        if(isUserAllow(71))
+        {
+
+          $change_status_class = 'changeUser_status_';
+
+        }
+
         if($v->status != 0)
         {
 
           $change_status_url = site_url('update_driver_status/active/'.$ID);
 
-          $status = '<a href="javascript:void(0)" class="changeUser_status_ action-icons" data-type-status="active" data-msg="Driver" data-url="'. $change_status_url .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Active">
+          $status = '<a href="javascript:void(0)" class="'. $change_status_class .' action-icons" data-type-status="active" data-msg="Driver" data-url="'. $change_status_url .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Active">
                    <span class="badge rounded-pill bg-secondary">Deactivated</span>
              </a>';
 
@@ -101,7 +112,7 @@ class Driver extends MY_Controller
 
           $change_status_url = site_url('update_driver_status/deactivated/'.$ID);
 
-          $status = '<a href="javascript:void(0)" class="changeUser_status_ action-icons" data-type-status="deactivate" data-msg="Driver" data-url="'. $change_status_url .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Deactivate">
+          $status = '<a href="javascript:void(0)" class="'. $change_status_class .' action-icons" data-type-status="deactivate" data-msg="Driver" data-url="'. $change_status_url .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Deactivate">
                  <span class="badge rounded-pill bg-success">Active</span>
            </a>';
 
@@ -115,17 +126,29 @@ class Driver extends MY_Controller
 
           $actions .= '<span class="actions-icons">';
 
-    				$actions .= '<a href="'.site_url('edit_driver/'.$ID) .'" class="action-icons" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit">
-              <i class="fa fa-pencil"></i>
-            </a>';
+            if (isUserAllow(7)) {
 
-  					$actions .= '<a href="javascript:void(0)" class="action-icons delete_record_" data-msg="Are you sure you want to delete this Driver?" data-url="'. $delete_url .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete">
-              <i class="fa-solid fa-trash"></i>
-            </a>';
+      				$actions .= '<a href="'.site_url('edit_driver/'.$ID) .'" class="action-icons" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit">
+                <i class="fa fa-pencil"></i>
+              </a>';
 
-    				$actions .= '<a href="javascript:void(0)" class="action-icons view_details_" data-url="'. site_url('AjaxController/getUserDetailsByType/Driver/'.$ID) .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Details">
-              <i class="fa fa-eye"></i>
-            </a>';
+            }
+
+            if (isUserAllow(8)) {
+
+    					$actions .= '<a href="javascript:void(0)" class="action-icons delete_record_" data-msg="Are you sure you want to delete this Driver?" data-url="'. $delete_url .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete">
+                <i class="fa-solid fa-trash"></i>
+              </a>';
+
+            }
+
+            if (isUserAllow(71)) {
+
+      				$actions .= '<a href="javascript:void(0)" class="action-icons view_details_" data-url="'. site_url('AjaxController/getUserDetailsByType/Driver/'.$ID) .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Details">
+                <i class="fa fa-eye"></i>
+              </a>';
+
+            }
 
           $actions .= '</span>';
 
@@ -149,6 +172,8 @@ class Driver extends MY_Controller
 
   public function create()
   {
+
+      $this->checkRole(6);
 
     $data = [
 
@@ -352,25 +377,29 @@ class Driver extends MY_Controller
   public function edit($driver_id)
   {
 
-    $data = [
+      $this->checkRole(7);
 
-      'title' => 'Edit Driver',
-      'page_head' => 'Edit Driver',
-      'active_menu' => 'users',
-      'active_submenu' => 'drivers',
-      'driver' => $this->bm->getRow('users','id',$driver_id),
-      'scripts' => [
-        'img_trigger.js'
-      ]
+      $data = [
 
-    ];
+        'title' => 'Edit Driver',
+        'page_head' => 'Edit Driver',
+        'active_menu' => 'users',
+        'active_submenu' => 'drivers',
+        'driver' => $this->bm->getRow('users','id',$driver_id),
+        'scripts' => [
+          'img_trigger.js'
+        ]
 
-    $this->template('users/driver/edit',$data);
+      ];
+
+      $this->template('users/driver/edit',$data);
 
   }
 
   public function update_status($status,$driver_id)
   {
+
+      $this->checkRole(71);
 
       $arr = [
 
@@ -399,6 +428,8 @@ class Driver extends MY_Controller
 
   public function delete($driver_id)
   {
+
+      $this->checkRole(8);
 
       $arr = [
 

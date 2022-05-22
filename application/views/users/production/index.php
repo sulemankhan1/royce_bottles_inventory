@@ -20,7 +20,10 @@
                <?=
                getHiddenField('ajax_url',$ajax_url);
                ?>
+               <?php if (isUserAllow(12)): ?>
+
                <a href="<?= site_url('add_production') ?>" class="btn btn-sm btn-primary">Add Production User</a>
+             <?php endif; ?>
 
             </div>
             <div class="card-body">

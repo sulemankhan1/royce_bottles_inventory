@@ -20,7 +20,12 @@
                <?=
                getHiddenField('ajax_url',$ajax_url);
                ?>
+
+               <?php if (isUserAllow(6)): ?>
+
                <a href="<?= site_url('add_driver') ?>" class="btn btn-sm btn-primary">Add Driver</a>
+
+              <?php endif; ?>
 
             </div>
             <div class="card-body">
@@ -36,7 +41,9 @@
                           <th>FIN #</th>
                           <th>Car Plate </th>
                           <th>Status</th>
+
                           <th class="dnr">Actions</th>
+
                        </tr>
                     </thead>
                     <tbody></tbody>
