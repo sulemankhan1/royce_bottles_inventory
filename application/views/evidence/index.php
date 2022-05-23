@@ -19,7 +19,12 @@
                <?=
                getHiddenField('ajax_url',$ajax_url);
                ?>
+
+               <?php if (isUserAllow(62)): ?>
+
                <a href="<?= site_url('add_evidence') ?>" class="btn btn-sm btn-primary">Add Evidence</a>
+
+              <?php endif; ?>
 
             </div>
             <div class="card-body">
