@@ -15,6 +15,8 @@ class Inventory extends MY_Controller
 	public function index()
 	{
 
+    $this->checkRole(35);
+
     $data = [
 
       'title' => 'Inventory',
@@ -104,9 +106,13 @@ class Inventory extends MY_Controller
 
           $actions .= '<span class="actions-icons">';
 
+          if (isUserAllow(36)) {
+
             $actions .= '<a href="javascript:void(0)" class="action-icons view_details_" data-url="'. site_url('AjaxController/getInventoryDetailsByType/'.$tab.'/'.$ID) .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Details">
               <i class="fa fa-eye"></i>
             </a>';
+
+          }
 
           $actions .= '</span>';
 
@@ -130,6 +136,8 @@ class Inventory extends MY_Controller
 
   public function add_stock()
   {
+
+    $this->checkRole(37);
 
     $data = [
 
@@ -208,6 +216,8 @@ class Inventory extends MY_Controller
   public function view_stock()
   {
 
+    $this->checkRole(38);
+
     $data = [
 
       'title' => 'View Stock',
@@ -268,9 +278,13 @@ class Inventory extends MY_Controller
 
           $actions .= '<span class="actions-icons">';
 
+            if (isUserAllow(75)) {
+
   					$actions .= '<a href="javascript:void(0)" class="action-icons delete_record_" data-msg="Are you sure you want to delete this Stock?" data-url="'. $delete_url .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete">
               <i class="fa-solid fa-trash"></i>
             </a>';
+
+          }
 
           $actions .= '</span>';
 
@@ -294,6 +308,8 @@ class Inventory extends MY_Controller
 
   public function delete_stock($stock_id)
   {
+
+      $this->checkRole(75);
 
       $arr = [
 
@@ -342,6 +358,8 @@ class Inventory extends MY_Controller
 
   public function stock_history()
   {
+
+    $this->checkRole(39);
 
     $data = [
 
@@ -443,6 +461,8 @@ class Inventory extends MY_Controller
 
   public function assign_to_driver()
   {
+
+    $this->checkRole(40);
 
     $this->load->model('Product_model');
     $this->load->model('Stock_model');
@@ -561,6 +581,8 @@ class Inventory extends MY_Controller
   public function return_stock()
   {
 
+    $this->checkRole(41);
+
     $data = [
 
       'title' => 'Return Stock',
@@ -653,6 +675,8 @@ class Inventory extends MY_Controller
   public function live_stock()
   {
 
+    $this->checkRole(42);
+
     $data = [
 
       'title' => 'Live Stock',
@@ -734,6 +758,8 @@ class Inventory extends MY_Controller
 
   public function request_stock()
   {
+
+    $this->checkRole(43);
 
     $this->load->model('Product_model');
     $this->load->model('Stock_model');
@@ -868,6 +894,8 @@ class Inventory extends MY_Controller
 
   public function pending_request()
   {
+
+    $this->checkRole(44);
 
     $data = [
 
@@ -1204,6 +1232,8 @@ class Inventory extends MY_Controller
 
   public function logs()
   {
+
+    $this->checkRole(45);
 
     $type_arr = (object)[
 
