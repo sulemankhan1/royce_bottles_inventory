@@ -10,6 +10,8 @@ class Invoice extends MY_Controller
 
     parent :: __construct();
 
+    $this->checkRole(55);
+
   }
 
 	public function index()

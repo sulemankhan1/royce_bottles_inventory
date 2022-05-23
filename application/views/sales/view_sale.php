@@ -102,8 +102,18 @@
 
                   <?php if ($type == 'invoice' || $type == 'invoice_print'): ?>
 
+                    <?php if (isUserAllow(58)): ?>
+
                     <a href="javascript:void(0)" class="btn btn-sm btn-success hide_content" id="send_pdf_to_whtaspp" data-type="whatsapp" data-id="<?= $sale->id ?>"><i class="fa-brands fa-whatsapp"></i> Send Pdf To WhatsApp</a>
+
+                    <?php endif; ?>
+
+                    <?php if (isUserAllow(57)): ?>
+
                     <a href="javascript:void(0)" class="btn btn-sm btn-success hide_content" id="send_invoice_email" data-type="mail" data-id="<?= $sale->id ?>">Send Email</a>
+
+                    <?php endif; ?>
+
                     <a href="javascript:void(0)" class="btn btn-sm btn-primary hide_content" id="print_details">Print</a>
 
                   <?php endif; ?>

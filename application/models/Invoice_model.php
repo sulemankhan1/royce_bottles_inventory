@@ -17,6 +17,12 @@
 
        $this->db->where('sales.is_deleted',0);
 
+       if (isUserAllow(56)) {
+
+         $this->db->where('sales.added_by',$this->session->userdata('UID'));
+
+       }
+
        if (!empty($filter['invoice_no']))
        {
 
