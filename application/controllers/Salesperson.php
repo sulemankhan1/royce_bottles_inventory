@@ -10,6 +10,8 @@ class Salesperson extends MY_Controller
 
     parent :: __construct();
 
+    $this->checkRole(66);
+
   }
 
 	public function index()
@@ -72,13 +74,21 @@ class Salesperson extends MY_Controller
 
           $actions .= '<span class="actions-icons">';
 
+          if (isUserAllow(68)) {
+
     				$actions .= '<a href="'.site_url('edit_salesperson/'.$ID) .'" class="action-icons" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit">
               <i class="fa fa-pencil"></i>
             </a>';
 
+          }
+
+          if (isUserAllow(69)) {
+            
   					$actions .= '<a href="javascript:void(0)" class="action-icons delete_record_" data-msg="Are you sure you want to delete this Salesperson?" data-url="'. $delete_url .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete">
               <i class="fa-solid fa-trash"></i>
             </a>';
+
+          }
 
           $actions .= '</span>';
 
@@ -102,6 +112,8 @@ class Salesperson extends MY_Controller
 
   public function create()
   {
+
+    $this->checkRole(67);
 
     $data = [
 
@@ -205,6 +217,8 @@ class Salesperson extends MY_Controller
   public function edit($salesperson_id)
   {
 
+    $this->checkRole(68);
+
     $data = [
 
       'title' => 'Edit Salesperson',
@@ -220,6 +234,8 @@ class Salesperson extends MY_Controller
 
   public function delete($salesperson_id)
   {
+
+    $this->checkRole(69);
 
       $arr = [
 
