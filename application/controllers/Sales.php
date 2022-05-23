@@ -10,6 +10,8 @@ class Sales extends MY_Controller
 
     parent :: __construct();
 
+    $this->checkRole(46);
+
   }
 
 	public function index()
@@ -67,13 +69,20 @@ class Sales extends MY_Controller
       $nestedData[] = $v->total_qty;
       $nestedData[] = $v->total_amount;
 
+      $change_status_class = '';
+
+        if (isUserAllow(76)) {
+
+          $change_status_class = 'changeSalesStatus';
+
+        }
 
         if($v->status == 'unpaid')
         {
 
           $change_status_url = site_url('update_sales_status/paid/'.$ID);
 
-          $status = '<a href="javascript:void(0)" class="changeSalesStatus action-icons" data-msg="Are you sure you want to Paid this invoice?" data-btn="Paid" data-url="'. $change_status_url .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Paid">
+          $status = '<a href="javascript:void(0)" class="'. $change_status_class .' action-icons" data-msg="Are you sure you want to Paid this invoice?" data-btn="Paid" data-url="'. $change_status_url .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Paid">
                    <span class="badge rounded-pill bg-danger">Unpaid</span>
              </a>';
 
@@ -104,17 +113,25 @@ class Sales extends MY_Controller
 
           $actions .= '<span class="actions-icons">';
 
-          if ($v->status == 'pending') {
+          if (isUserAllow(49)) {
 
-            $actions .= '<a href="'.site_url('edit_sale/'.$ID) .'" class="action-icons" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit">
-              <i class="fa fa-pencil"></i>
-            </a>';
+            if ($v->status == 'pending') {
 
+              $actions .= '<a href="'.site_url('edit_sale/'.$ID) .'" class="action-icons" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit">
+                <i class="fa fa-pencil"></i>
+              </a>';
+
+
+            }
           }
+
+          if (isUserAllow(50)) {
 
             $actions .= '<a href="javascript:void(0)" class="action-icons view_sale_details_" data-url="'. site_url('AjaxController/showSalesDetails/'.$ID.'/details') .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Details">
               <i class="fa fa-eye"></i>
             </a>';
+
+          }
 
           $actions .= '</span>';
 
@@ -138,6 +155,8 @@ class Sales extends MY_Controller
 
   public function create()
   {
+
+    $this->checkRole(48);
 
     $data = [
 
@@ -322,6 +341,8 @@ class Sales extends MY_Controller
 
   public function edit($sale_id)
   {
+
+    $this->checkRole(49);
 
     $this->load->model('Sale_model');
 

@@ -33,6 +33,14 @@ class Sale_model extends CI_Model
       $this->db->join('products','products.id = sales_details.product_id');
 
       $this->db->where('sales.is_deleted',0);
+
+      if(isUserAllow(47))
+      {
+
+        $this->db->where('sales.added_by',$this->session->userdata('UID'));
+
+      }
+
       $this->db->group_by('sales_details.sale_id');
 
       if($type == 'recordsTotal')
