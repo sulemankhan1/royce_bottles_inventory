@@ -10,6 +10,13 @@ class Settings extends MY_Controller
 
     parent :: __construct();
 
+    if(UTYPE() == 'admin')
+    {
+
+      redirect($this->redirect_to);
+
+    }
+
   }
 
   public function company()
