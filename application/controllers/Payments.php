@@ -10,16 +10,13 @@ class Payments extends MY_Controller
 
     parent :: __construct();
 
+    $this->checkRole(59);
+
   }
 
 	public function index()
 	{
 
-
-    echo showPendingRequestCount();
-
-    die();
-    
     $data = [
 
       'title' => 'Payments',

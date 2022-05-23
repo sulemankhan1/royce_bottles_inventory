@@ -86,8 +86,18 @@
                     <input type="hidden" name="from_date" value="<?= $from ?>">
                     <input type="hidden" name="to_date" value="<?= $to ?>">
 
+                    <?php if (isUserAllow(79)): ?>
+
                     <a href="javascript:void(0)" class="btn btn-sm btn-success hide_content" id="send_sheet_to_whtaspp"><i class="fa-brands fa-whatsapp" data-type="whatsapp"></i> Send Pdf To WhatsApp</a>
+
+                    <?php endif; ?>
+
+                    <?php if (isUserAllow(78)): ?>
+
+
                     <a href="javascript:void(0)" class="btn btn-sm btn-success hide_content" id="send_mail_to_customer" data-type="email">Send Mail To Customer</a>
+
+                    <?php endif; ?>
 
                     <a href="javascript:void(0)" class="btn btn-sm btn-primary hide_content" id="print_customer_payments">Print</a>
 

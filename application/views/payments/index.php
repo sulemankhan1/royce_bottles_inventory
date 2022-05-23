@@ -17,7 +17,11 @@
                <?=
                 getHiddenField('getCustomerPayments',base_url('AjaxController/getCustomerPayments'));
                ?>
+
+               <?php if (isUserAllow(60)): ?>
+
                <a href="javascript:void(0)" class="btn btn-sm btn-primary add_payment_">Add Payment</a>
+             <?php endif; ?>
 
             </div>
             <div class="card-body">
