@@ -10,6 +10,8 @@ class Order extends MY_Controller
 
     parent :: __construct();
 
+    $this->checkRole(51);
+
   }
 
 	public function index()
@@ -68,9 +70,17 @@ class Order extends MY_Controller
       $nestedData[] = change_number_format($v->total_price);
 
 
+        $change_status_class = '';
+
+        if (isUserAllow(54)) {
+
+          $change_status_class = 'changeInv_status_';
+
+        }
+
         $change_status_url = site_url('update_call_order_status/'.$ID);
 
-        $status = '<a href="javascript:void(0)" class="changeInv_status_ action-icons" data-btn-txt="Move To Pending Request" data-msg="Are you sure you want to move this Call Order to Pending Request?" data-url="'. $change_status_url .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Move To Pending Request">
+        $status = '<a href="javascript:void(0)" class="'. $change_status_class .' action-icons" data-btn-txt="Move To Pending Request" data-msg="Are you sure you want to move this Call Order to Pending Request?" data-url="'. $change_status_url .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Move To Pending Request">
                  <span class="badge rounded-pill bg-secondary">Pending</span>
            </a>';
 
@@ -82,13 +92,22 @@ class Order extends MY_Controller
 
           $actions .= '<span class="actions-icons">';
 
+          if (isUserAllow(77)) {
+
             $actions .= '<a href="javascript:void(0)" class="action-icons delete_record_" data-msg="Are you sure you want to delete this Call Order?" data-url="'. $delete_url .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete">
               <i class="fa-solid fa-trash"></i>
             </a>';
 
+          }
+
+          if (isUserAllow(53)) {
+
+
             $actions .= '<a href="javascript:void(0)" class="action-icons view_details_" data-url="'. site_url('AjaxController/getCallOrderDetails/'.$ID) .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Details">
               <i class="fa fa-eye"></i>
             </a>';
+
+          }
 
           $actions .= '</span>';
 
@@ -112,6 +131,8 @@ class Order extends MY_Controller
 
   public function create()
   {
+
+    $this->checkRole(52);
 
     $this->load->model('Product_model');
 
@@ -233,6 +254,8 @@ class Order extends MY_Controller
   public function update_status($call_order_id)
   {
 
+    $this->checkRole(54);
+
       $arr = [
 
         'status' => 'confirmed'
@@ -258,8 +281,10 @@ class Order extends MY_Controller
 
   }
 
-  public function delete($admin_id)
+  public function delete($call_order_id)
   {
+
+      $this->checkRole(77);
 
       $arr = [
 
@@ -267,7 +292,7 @@ class Order extends MY_Controller
 
       ];
 
-      $res = $this->bm->update('call_orders',$arr,'id',$admin_id);
+      $res = $this->bm->update('call_orders',$arr,'id',$call_order_id);
 
       if ($res)
       {
