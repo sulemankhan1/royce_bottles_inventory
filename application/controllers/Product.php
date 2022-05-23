@@ -10,6 +10,8 @@ class Product extends MY_Controller
 
     parent :: __construct();
 
+    $this->checkRole(25);
+
   }
 
 	public function index()
@@ -85,17 +87,31 @@ class Product extends MY_Controller
 
           $actions .= '<span class="actions-icons">';
 
+          if (isUserAllow(27)) {
+
             $actions .= '<a href="'.site_url('edit_product/'.$ID) .'" class="action-icons" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit">
               <i class="fa fa-pencil"></i>
             </a>';
+
+          }
+
+          if (isUserAllow(28)) {
+
 
             $actions .= '<a href="javascript:void(0)" class="action-icons delete_record_" data-msg="Are you sure you want to delete this Product?" data-url="'. $delete_url .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete">
               <i class="fa-solid fa-trash"></i>
             </a>';
 
+          }
+
+          if (isUserAllow(29)) {
+
+
             $actions .= '<a href="javascript:void(0)" class="action-icons view_details_" data-url="'. site_url('AjaxController/getProductDetails/'.$ID) .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Details">
               <i class="fa fa-eye"></i>
             </a>';
+
+          }
 
           $actions .= '</span>';
 
@@ -119,6 +135,8 @@ class Product extends MY_Controller
 
   public function create()
   {
+
+    $this->checkRole(26);
 
     $data = [
 
@@ -308,6 +326,8 @@ class Product extends MY_Controller
   public function edit($product_id)
   {
 
+    $this->checkRole(27);
+
     $data = [
 
       'title' => 'Edit Product',
@@ -328,6 +348,8 @@ class Product extends MY_Controller
 
   public function delete($product_id)
   {
+
+      $this->checkRole(28);
 
       $arr = [
 

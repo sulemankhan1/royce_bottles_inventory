@@ -19,7 +19,11 @@
                <?=
                getHiddenField('ajax_url',$ajax_url);
                ?>
+
+               <?php if (isUserAllow(26)): ?>
+
                <a href="<?= site_url('add_product') ?>" class="btn btn-sm btn-primary">Add Product</a>
+             <?php endif; ?>
 
             </div>
             <div class="card-body">

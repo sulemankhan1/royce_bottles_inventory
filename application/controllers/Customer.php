@@ -10,6 +10,8 @@ class Customer extends MY_Controller
 
     parent :: __construct();
 
+    $this->checkRole(30);
+
   }
 
 	public function index()
@@ -104,21 +106,38 @@ class Customer extends MY_Controller
 
           $actions .= '<span class="actions-icons">';
 
+
+          if (isUserAllow(32)) {
+
             $actions .= '<a href="'.site_url('edit_customer/'.$ID) .'" class="action-icons" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit">
               <i class="fa fa-pencil"></i>
             </a>';
+
+          }
+
+          if (isUserAllow(33)) {
 
             $actions .= '<a href="javascript:void(0)" class="action-icons delete_record_" data-msg="Are you sure you want to delete this Customer?" data-url="'. $delete_url .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete">
               <i class="fa-solid fa-trash"></i>
             </a>';
 
+          }
+
+
+          if (isUserAllow(34)) {
+
             $actions .= '<a href="javascript:void(0)" class="action-icons view_details_" data-url="'. site_url('AjaxController/getCustomerDetails/'.$ID) .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Details">
               <i class="fa fa-eye"></i>
             </a>';
+          }
+
+            if (isUserAllow(74)) {
 
             $actions .= '<a href="javascript:void(0)" class="action-icons adjust_prices_" data-url="'. site_url('AjaxController/getCustomerProductPrices/'.$ID) .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Adjust Price by product">
                 <i class="fa-solid fa-circle-dollar-to-slot"></i>
               </a>';
+
+            }
 
           $actions .= '</span>';
 
@@ -142,6 +161,8 @@ class Customer extends MY_Controller
 
   public function create()
   {
+
+    $this->checkRole(31);
 
     $days = [
         'Monday',
@@ -389,7 +410,7 @@ class Customer extends MY_Controller
 
   function check_customer_email($second_field,$first_field)
   {
-    
+
     if ($second_field == $first_field)
     {
         $this->form_validation->set_message('check_customer_email', 'The Email Address For E-Receipt and Email Address For SOA should not be same');
@@ -402,6 +423,8 @@ class Customer extends MY_Controller
 
   public function edit($customer_id)
   {
+
+    $this->checkRole(32);
 
     $days = [
         'Monday',
@@ -441,6 +464,8 @@ class Customer extends MY_Controller
   public function delete($customer_id)
   {
 
+      $this->checkRole(33);
+
       $arr = [
 
         'is_deleted' => 1
@@ -468,6 +493,8 @@ class Customer extends MY_Controller
 
   public function update_products_price()
   {
+
+      $this->checkRole(74);
 
       $p = $this->inp_post();
 
