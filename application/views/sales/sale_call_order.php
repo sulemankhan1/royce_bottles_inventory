@@ -7,7 +7,7 @@
         showBreadCumbs([
           ['label'=>'Home','url' => 'dashboard'],
           ['label'=>'Sales','url' => 'sales'],
-          ['label'=>'Add Sale']
+          ['label'=>'Add Call Order Sale']
         ])
         ?>
          <div class="card">
@@ -20,7 +20,7 @@
             <div class="card-body">
               <?php
                 echo getHiddenField('total_products',0);
-                echo getHiddenField('save_sale',site_url('Sales/save_sale'));
+                echo getHiddenField('save_sale',site_url('Sales/save_call_order_sale'));
                 echo getHiddenField('show_details',site_url('AjaxController/showSalesDetails'));
               ?>
                 <form class="row g-3" action="javascript:void(0)" method="post" id="save_sale" data-parsley-validate>
@@ -32,7 +32,6 @@
                         <?php
 
                           echo getHiddenField('customer_category');
-                          echo getHiddenField('total_amount',0);
 
                           echo getSelectField([
                             'label' => 'Customer',
@@ -41,7 +40,6 @@
                             'column' => 'sm-4',
                             'data' => $customers
                           ]);
-
 
                           ?>
 
@@ -121,7 +119,7 @@
 
                         <?php
 
-                          echo getSubmitBtn('Add Sale');
+                          echo getSubmitBtn('Add Call Order Sale');
 
                         ?>
 

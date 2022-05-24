@@ -162,7 +162,7 @@ class Order_model extends CI_Model
     $this->db->join('products','products.id = call_orders_details.product_id');
     $this->db->join('users added_by', 'added_by.id = call_orders.added_by', 'left');
 
-      $this->db->where('call_orders.driver_id',8);
+      $this->db->where('call_orders.driver_id',$driver_id);
       $this->db->where('call_orders.delivery_day',$current_day);
 
       $this->db->where('call_orders.status','confirmed');
@@ -191,7 +191,7 @@ class Order_model extends CI_Model
 
       $this->db->where('call_orders.customer_id',$customer_id);
 
-      $this->db->where('call_orders.driver_id',8);
+      $this->db->where('call_orders.driver_id',$driver_id);
       $this->db->where('call_orders.delivery_day',$current_day);
 
       $this->db->where('call_orders.status','confirmed');

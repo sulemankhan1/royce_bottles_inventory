@@ -284,7 +284,7 @@
                         <tr>
                           <th width="78%"></th>
                           <td>SubTotal</td>
-                          <td id="totals_color"><?= $sale->total_amount ?></td>
+                          <td id="totals_color"><?= number_format(floatval($sale->total_amount),2,'.','') ?></td>
                         </tr>
                         <!-- <tr>
                           <th width="78%"></th>

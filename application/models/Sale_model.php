@@ -174,17 +174,41 @@ class Sale_model extends CI_Model
   public function getEditSaleDetails($sale_id,$driver_id)
   {
 
-      $this->db->select('sales.*,customers.name customer_name,customers.address as customer_address,customers.remarks as customer_remarks,sales_details.price,sales_details.sale_qty,sales_details.exchange_qty,sales_details.foc_qty,sales_details.amount,products.name as product_name,products.id as product_id,assign_stock_details.available_qty');
-      $this->db->from('sales');
-      $this->db->join('customers','customers.id = sales.customer_id');
-      $this->db->join('sales_details','sales_details.sale_id = sales.id');
-      $this->db->join('products','products.id = sales_details.product_id');
-      $this->db->join('assign_stock_details','assign_stock_details.product_id = sales_details.product_id');
-      $this->db->join('assign_stock','assign_stock.id = assign_stock_details.assign_stock_id');
+      $this->db->where('id',$sale_id);
+      $sale_row = $this->db->get('sales')->row();
+
+      if(!empty($sale_row) & $sale_row->sale_type == 'call_order')
+      {
+
+        $this->db->select('sales.*,customers.name customer_name,customers.address as customer_address,customers.remarks as customer_remarks,sales_details.price,sales_details.sale_qty,sales_details.exchange_qty,sales_details.foc_qty,sales_details.amount,products.name as product_name,products.id as product_id,call_orders_details.qty');
+        $this->db->from('sales');
+        $this->db->join('customers','customers.id = sales.customer_id');
+        $this->db->join('sales_details','sales_details.sale_id = sales.id');
+        $this->db->join('products','products.id = sales_details.product_id');
+        $this->db->join('call_orders','call_orders.id = sales.main_id');
+        $this->db->join('call_orders_details','call_orders_details.call_order_id = call_orders.id');
+
+      }
+      else
+      {
+
+        $this->db->select('sales.*,customers.name customer_name,customers.address as customer_address,customers.remarks as customer_remarks,sales_details.price,sales_details.sale_qty,sales_details.exchange_qty,sales_details.foc_qty,sales_details.amount,products.name as product_name,products.id as product_id,assign_stock_details.available_qty');
+        $this->db->from('sales');
+        $this->db->join('customers','customers.id = sales.customer_id');
+        $this->db->join('sales_details','sales_details.sale_id = sales.id');
+        $this->db->join('products','products.id = sales_details.product_id');
+        $this->db->join('assign_stock','assign_stock.id = sales.main_id');
+        $this->db->join('assign_stock_details','assign_stock_details.assign_stock_id = assign_stock.id');
+
+        $this->db->where('assign_stock.is_return',0);
+        $this->db->where('assign_stock.driver_id',$driver_id);
+
+        $this->db->group_by('assign_stock_details.product_id');
+
+      }
+
 
       $this->db->where('sales.id',$sale_id);
-      $this->db->where('assign_stock.is_return',0);
-      $this->db->where('assign_stock.driver_id',$driver_id);
 
       return $this->db->get()->result();
 

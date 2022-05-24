@@ -1,6 +1,9 @@
-<?php foreach ($products as $key => $v): ?>
+<?php $total = 0;$call_order_id = 0; foreach ($products as $key => $v): ?>
 
-<?php if ($v->qty != 0): ?>
+<?php if ($v->qty != 0):
+  $call_order_id = $v->call_order_id;
+  $amount = $v->product_price * $v->qty;
+  $total += $amount; ?>
 
 <div class="row">
 
@@ -30,8 +33,6 @@
     echo getHiddenField('foc_qty[]',0);
     echo getHiddenField('total[]',$v->qty);
 
-    $amount = $v->product_price * $v->qty;
-
     echo getHiddenField('amount[]',$amount);
 
     ?>
@@ -39,4 +40,7 @@
 </div>
 
 <?php endif; ?>
-<?php endforeach; ?>
+<?php endforeach;
+echo getHiddenField('total_amount',number_format(floatval($total),2,'.',''));
+echo getHiddenField('main_id',$call_order_id);
+?>

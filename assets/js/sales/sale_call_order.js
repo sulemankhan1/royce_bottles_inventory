@@ -140,8 +140,9 @@ $('.payment_type').change(function () {
 
 
 //add sale
-$('save_sale').submit(function (e) {
+$('#save_sale').submit(function (e) {
 
+  alert();
   e.preventDefault()
 
   let url = $('input[name=save_sale]').val()

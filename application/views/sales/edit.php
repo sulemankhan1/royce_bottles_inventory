@@ -20,7 +20,17 @@
             <div class="card-body">
               <?php
                 echo getHiddenField('total_products',count($sales_details));
-                echo getHiddenField('save_sale',site_url('Sales/save_sale'));
+
+                if($sale->sale_type == 'call_order')
+                {
+
+                  echo getHiddenField('save_sale',site_url('Sales/save_call_order_sale'));
+                }
+                else
+                {
+                  echo getHiddenField('save_sale',site_url('Sales/save_sale'));
+
+                }
                 echo getHiddenField('show_details',site_url('AjaxController/showSalesDetails'));
                ?>
               <form class="row g-3" action="javascript:void(0)" method="post" id="save_sale" data-parsley-validate>
@@ -34,6 +44,7 @@
                           echo getHiddenField('ID',$sale->id);
                           echo getHiddenField('customer_category',$sale->customer_category);
                           echo getHiddenField('total_amount',$sale->total_amount);
+                          echo getHiddenField('main_id',$sale->main_id);
 
                           echo getHiddenField('customer_id',$sale->customer_id);
 
@@ -145,9 +156,11 @@
                       </div>
 
                       <div id="showCustomerSaleProducts_">
+                        <?php if ($sale->sale_type == 'call_order'): ?>
+
                         <?php foreach ($sales_details as $key => $v): ?>
 
-                        <?php if ($v->available_qty != 0): ?>
+                        <?php if ($v->qty != 0): ?>
 
                         <div class="row">
 
@@ -162,64 +175,107 @@
                               'column' => 'sm-4',
                               'attr' => 'readonly'
                             ]);
-                            echo getInputField([
-                              'label' => 'Available Qty',
-                              'name' => 'available_qty[]',
-                              'column' => 'sm-1',
-                              'col_classes' => 'sale_stock_inp_cols',
-                              'classes' => 'available_qty_',
-                              'attr' => 'readonly',
-                              'value' => $v->available_qty
-                            ]);
+
+                            echo getHiddenField('available_qty[]',0);
+
                             echo getInputField([
                               'label' => 'Sale Qty',
                               'name' => 'sale_qty[]',
-                              'column' => 'sm-1',
-                              'col_classes' => 'sale_stock_inp_cols',
-                              'classes' => 'sale_qty_',
-                              'value' => $v->sale_qty
-                            ]);
-                            echo getInputField([
-                              'label' => 'Exchange Qty',
-                              'name' => 'exchange_qty[]',
-                              'column' => 'sm-1',
-                              'col_classes' => 'sale_stock_inp_cols',
-                              'classes' => 'exchange_qty_',
-                              'value' => $v->exchange_qty
-                            ]);
-                            echo getInputField([
-                              'label' => 'Foc Qty',
-                              'name' => 'foc_qty[]',
-                              'column' => 'sm-1',
-                              'col_classes' => 'sale_stock_inp_cols',
-                              'classes' => 'foc_qty_',
-                              'value' => $v->foc_qty
-                            ]);
-                            echo getInputField([
-                              'label' => 'Total',
-                              'name' => 'total[]',
-                              'column' => 'sm-1',
-                              'col_classes' => 'sale_stock_inp_cols',
-                              'classes' => 'total_qty_',
-                              'attr' => 'readonly,max="'.$v->available_qty.'"',
-                              'value' => $v->sale_qty + $v->exchange_qty + $v->foc_qty
-
+                              'column' => 'sm-2',
+                              'attr' => 'readonly',
+                              'value' => $v->qty
                             ]);
 
-                            echo getHiddenField('amount[]',$v->amount,'amount_');
+                            echo getHiddenField('exchange_qty[]',0);
+                            echo getHiddenField('foc_qty[]',0);
+                            echo getHiddenField('total[]',$v->qty);
+
+                            echo getHiddenField('amount[]',$v->amount);
 
                             ?>
-
-                            <div class="col-sm-1" style="padding:0px!important;width:1.333333%!important;">
-                              <a href="javascript:void(0)" class="remove_customer_sale_product">
-                                <i class="fa-solid fa-x" style="font-size: 20px;margin-top: 38px;margin-left:8px;;color:#fd6262!important;"></i>
-                              </a>
-                            </div>
 
                         </div>
 
                         <?php endif; ?>
                         <?php endforeach; ?>
+                        <?php else: ?>
+
+                          <?php foreach ($sales_details as $key => $v): ?>
+
+                          <?php if ($v->available_qty != 0): ?>
+
+                          <div class="row">
+
+                            <?php
+
+                              echo getHiddenField('product_id[]',$v->product_id);
+                              echo getHiddenField('price[]',$v->price,'price_');
+
+                              echo getInputField([
+                                'label' => 'Product',
+                                'value' => $v->product_name,
+                                'column' => 'sm-4',
+                                'attr' => 'readonly'
+                              ]);
+                              echo getInputField([
+                                'label' => 'Available Qty',
+                                'name' => 'available_qty[]',
+                                'column' => 'sm-1',
+                                'col_classes' => 'sale_stock_inp_cols',
+                                'classes' => 'available_qty_',
+                                'attr' => 'readonly',
+                                'value' => $v->available_qty
+                              ]);
+                              echo getInputField([
+                                'label' => 'Sale Qty',
+                                'name' => 'sale_qty[]',
+                                'column' => 'sm-1',
+                                'col_classes' => 'sale_stock_inp_cols',
+                                'classes' => 'sale_qty_',
+                                'value' => $v->sale_qty
+                              ]);
+                              echo getInputField([
+                                'label' => 'Exchange Qty',
+                                'name' => 'exchange_qty[]',
+                                'column' => 'sm-1',
+                                'col_classes' => 'sale_stock_inp_cols',
+                                'classes' => 'exchange_qty_',
+                                'value' => $v->exchange_qty
+                              ]);
+                              echo getInputField([
+                                'label' => 'Foc Qty',
+                                'name' => 'foc_qty[]',
+                                'column' => 'sm-1',
+                                'col_classes' => 'sale_stock_inp_cols',
+                                'classes' => 'foc_qty_',
+                                'value' => $v->foc_qty
+                              ]);
+                              echo getInputField([
+                                'label' => 'Total',
+                                'name' => 'total[]',
+                                'column' => 'sm-1',
+                                'col_classes' => 'sale_stock_inp_cols',
+                                'classes' => 'total_qty_',
+                                'attr' => 'readonly,max="'.$v->available_qty.'"',
+                                'value' => $v->sale_qty + $v->exchange_qty + $v->foc_qty
+
+                              ]);
+
+                              echo getHiddenField('amount[]',$v->amount,'amount_');
+
+                              ?>
+
+                              <div class="col-sm-1" style="padding:0px!important;width:1.333333%!important;">
+                                <a href="javascript:void(0)" class="remove_customer_sale_product">
+                                  <i class="fa-solid fa-x" style="font-size: 20px;margin-top: 38px;margin-left:8px;;color:#fd6262!important;"></i>
+                                </a>
+                              </div>
+
+                          </div>
+                          <?php endif; ?>
+                          <?php endforeach; ?>
+
+                        <?php endif; ?>
 
                       </div>
 

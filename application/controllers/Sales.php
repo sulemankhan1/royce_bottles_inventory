@@ -221,6 +221,8 @@ class Sales extends MY_Controller
          'acc_no' => $p['acc_no'],
          'cheque_no' => $p['cheque_no'],
          'status' => 'pending',
+         'sale_type' => 'delivery_order',
+         'main_id' => isset($p['main_id'])?$p['main_id']:0,
          'added_by' => $this->user_id_
        ];
 
@@ -231,6 +233,7 @@ class Sales extends MY_Controller
 
                unset($arr['invoice_no']);
                unset($arr['added_by']);
+               unset($arr['main_id']);
 
                $this->bm->update('sales',$arr,'id',$ID);
 
@@ -424,6 +427,7 @@ class Sales extends MY_Controller
 
           }
 
+          $arr['is_mark_done'] = 1;
           $this->bm->update('sales',$arr,'id',$sale_id);
 
           $sales_products = $this->bm->getRows('sales_details','sale_id',$sale_id);
@@ -492,35 +496,35 @@ class Sales extends MY_Controller
 
 
            //check is_send sale pdf on mail or not
-           $is_invoice_email = $this->bm->getRowWithConditions('general_setting',['name' => 'INVOICE_EMAIL']);
-
-           if(!empty($is_invoice_email))
-           {
-
-              if($is_invoice_email->value == 'yes')
-              {
-
-                //send mail to customer about his sale
-                $this->sendInvoicePdfOnMail($sale_row->id);
-
-              }
-
-           }
+           // $is_invoice_email = $this->bm->getRowWithConditions('general_setting',['name' => 'INVOICE_EMAIL']);
+           //
+           // if(!empty($is_invoice_email))
+           // {
+           //
+           //    if($is_invoice_email->value == 'yes')
+           //    {
+           //
+           //      //send mail to customer about his sale
+           //      $this->sendInvoicePdfOnMail($sale_row->id);
+           //
+           //    }
+           //
+           // }
            //check is_send sale pdf on whatsapp or not
-           $is_invoice_whatsapp = $this->bm->getRowWithConditions('general_setting',['name' => 'INVOICE_WHATSAPP']);
-
-           if(!empty($is_invoice_whatsapp))
-           {
-
-              if($is_invoice_whatsapp->value == 'yes')
-              {
-
-                //send whatsapp to customer about his sale
-                $this->sendInvoicePdfOnWhatsapp($sale_row->id);
-
-              }
-
-           }
+           // $is_invoice_whatsapp = $this->bm->getRowWithConditions('general_setting',['name' => 'INVOICE_WHATSAPP']);
+           //
+           // if(!empty($is_invoice_whatsapp))
+           // {
+           //
+           //    if($is_invoice_whatsapp->value == 'yes')
+           //    {
+           //
+           //      //send whatsapp to customer about his sale
+           //      $this->sendInvoicePdfOnWhatsapp($sale_row->id);
+           //
+           //    }
+           //
+           // }
 
       $this->trans_('complete');
 
@@ -615,6 +619,150 @@ class Sales extends MY_Controller
     $this->template('sales/sale_call_order',$data);
 
   }
+
+  public function save_call_order_sale()
+  {
+
+      $this->load->model('Sale_model');
+
+      $sale_row = $this->Sale_model->getLastInvoiceNo();
+
+      $p = $this->inp_post();
+
+      $ID = (isset($p['ID'])?$p['ID']:'');
+      unset($p['ID']);
+
+      $NewInvoiceNo = '';
+      if ($ID == '')
+      {
+
+        if(!empty($sale_row))
+        {
+
+           $NewInvoiceNo = str_pad($sale_row->invoice_no + 1, 5, '0', STR_PAD_LEFT);
+
+         }
+         else
+         {
+
+           $NewInvoiceNo = "00001";
+
+         }
+
+       }
+
+       $arr = [
+         'invoice_no' => $NewInvoiceNo,
+         'customer_id' => $p['customer_id'],
+         'customer_category' => $p['customer_category'],
+         'total_amount' => $p['total_amount'],
+         'is_pay' => $p['is_customer_pay'] == 'No'?0:1,
+         'pay_type' => $p['payment_type'],
+         'reason' => $p['reason'],
+         'bank' => $p['bank_name'],
+         'acc_no' => $p['acc_no'],
+         'cheque_no' => $p['cheque_no'],
+         'status' => 'pending',
+         'sale_type' => 'call_order',
+         'main_id' => isset($p['main_id'])?$p['main_id']:0,
+         'added_by' => $this->user_id_
+       ];
+
+       $this->trans_('start');
+
+             if(!empty($ID))
+             {
+
+               unset($arr['invoice_no']);
+               unset($arr['added_by']);
+               unset($arr['main_id']);
+
+               $this->bm->update('sales',$arr,'id',$ID);
+
+               $last_id = $ID;
+
+               $this->bm->delete('sales_details','sale_id',$ID);
+
+             }
+             else
+             {
+
+               $last_id = $this->bm->insert_row('sales',$arr);
+
+             }
+
+
+            $sale_products = [];
+
+            $logs = [];
+
+            foreach ($p['product_id'] as $key => $v) {
+
+                $sale_products[] = [
+
+                  'sale_id' => $last_id,
+                  'product_id' => $v,
+                  'price' => $p['price'][$key],
+                  'sale_qty' => $p['sale_qty'][$key] == ''?0:$p['sale_qty'][$key],
+                  'exchange_qty' => $p['exchange_qty'][$key] == ''?0:$p['exchange_qty'][$key],
+                  'foc_qty' => $p['foc_qty'][$key] == ''?0:$p['foc_qty'][$key],
+                  'amount' => $p['amount'][$key] == ''?0:$p['amount'][$key]
+
+                ];
+
+                $logs[] = [
+
+                    'product_id' => $v,
+                    'customer_id' => $p['customer_id'],
+                    'driver_id' => $this->user_id_,
+                    'qty' => $p['sale_qty'][$key] == ''?0:$p['sale_qty'][$key],
+                    'type' => $ID == ''?'add_sale':'edit_sale',
+                    'qty_type' => 'sale_qty',
+                    'added_by' => $this->user_id_
+
+                ];
+
+            }
+
+            $this->bm->insert_rows('sales_details',$sale_products);
+            $this->bm->insert_rows('logs',$logs);
+
+       $this->trans_('complete');
+
+       if ($this->trans_('status') === FALSE)
+       {
+
+           $output['status'] = false;
+           $output['msg'] = 'Connection error Try Again';
+           $output['sale_id'] = 0;
+
+       }
+       else
+       {
+
+         $output['status'] = true;
+
+         if($ID != '')
+         {
+
+           $output['msg'] = 'Sale updated successfully';
+
+         }
+         else
+         {
+
+           $output['msg'] = 'Sale added successfully';
+
+         }
+
+         $output['sale_id'] = $last_id;
+
+       }
+
+       echo json_encode($output);
+
+  }
+
 
   public function testpdf()
   {

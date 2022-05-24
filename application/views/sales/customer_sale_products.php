@@ -1,6 +1,9 @@
-<?php foreach ($products as $key => $v): ?>
+<?php $assign_stock_id = 0; foreach ($products as $key => $v): ?>
 
-<?php if ($v->available_qty != 0): ?>
+<?php if ($v->available_qty != 0):
+
+  $assign_stock_id = $v->assign_stock_id;
+  ?>
 
 <div class="row">
 
@@ -68,4 +71,6 @@
 </div>
 
 <?php endif; ?>
-<?php endforeach; ?>
+<?php endforeach;
+echo getHiddenField('main_id',$assign_stock_id = $v->assign_stock_id);
+?>

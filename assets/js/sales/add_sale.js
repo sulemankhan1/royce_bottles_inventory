@@ -224,7 +224,7 @@ function total_amount_()
 
   })
 
-  $('input[name=total_amount]').val(sum)
+  $('input[name=total_amount]').val(sum.toFixed(2))
 
 }
 
