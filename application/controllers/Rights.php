@@ -13,7 +13,7 @@ class Rights extends MY_Controller
     if(UTYPE() != 'admin')
     {
 
-        redirect($this->redirect_to);
+        redirect($this->redirect_to());
 
     }
 
@@ -88,7 +88,7 @@ class Rights extends MY_Controller
 
             $rights[] = [
 
-                'type' => $p['type'],
+                'type' => 'admin',
                 'role_id' => $v,
                 'is_allow' => isset($p['role_id'][$v])?1:0
 

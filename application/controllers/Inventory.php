@@ -17,6 +17,8 @@ class Inventory extends MY_Controller
 
     $this->checkRole(35);
 
+    $this->load->model('Product_model');
+
     $data = [
 
       'title' => 'Inventory',
@@ -24,7 +26,7 @@ class Inventory extends MY_Controller
       'active_menu' => 'inventory',
       'active_submenu' => 'view_inventory',
       'drivers' => $this->bm->getRowsWithConditions('users',['is_deleted' =>0,'type' => 'driver']),
-      'products' => $this->bm->getRows('products','is_deleted',0),
+      'products' => $this->Product_model->getAllProducts(),
       'redirect_to' => site_url('view_inventory'),
       'ajax_url' => site_url('Inventory/getInventory'),
       'styles' => [
@@ -139,13 +141,15 @@ class Inventory extends MY_Controller
 
     $this->checkRole(37);
 
+    $this->load->model('Product_model');
+
     $data = [
 
       'title' => 'Add Stock',
       'page_head' => 'Add Stock',
       'active_menu' => 'inventory',
       'active_submenu' => 'add_stock',
-      'products' => $this->bm->getRows('products','is_deleted',0)
+      'products' => $this->Product_model->getAllProducts()
 
     ];
 

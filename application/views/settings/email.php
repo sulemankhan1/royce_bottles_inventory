@@ -222,7 +222,7 @@
 
                                 </div>
 
-                                <div class="row mb-2">
+                                <!-- <div class="row mb-2">
 
                                   <div class="col-sm-10">
 
@@ -249,9 +249,9 @@
 
                                   </div>
 
-                                </div>
+                                </div> -->
 
-                                <div class="row">
+                                <!-- <div class="row">
                                   <div class="col-sm-4" style="padding-right: 37px;">
 
                                     <div class="row pt-2 pb-1 mb-2" style="background-color:#f1f1f1!important;border-radius:3px!important;margin-left:-6px;">
@@ -308,7 +308,7 @@
                                     </div>
 
                                   </div>
-                                </div>
+                                </div> -->
 
                                 <div class="row" id="email_general_setting_save_btn" style="margin:0px!important;padding:0px!important;margin-top:20px!important;">
 

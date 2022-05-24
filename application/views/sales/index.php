@@ -19,7 +19,23 @@
                <?=
                getHiddenField('ajax_url',$ajax_url);
                ?>
-               <a href="<?= site_url('add_sale') ?>" class="btn btn-sm btn-primary">Add Sale</a>
+
+               <div class="row">
+
+                 <div class="col-sm-12">
+
+                   <span>
+                     <?php if (isUserAllow(48)): ?>
+
+                       <a href="<?= site_url('add_sale') ?>" class="btn btn-sm btn-primary">Add Sale</a>
+
+                       <a href="<?= site_url('sale_call_order') ?>" class="btn btn-sm btn-warning">Add Call Order Sale</a>
+
+                   <?php endif; ?>
+
+
+                 </div>
+               </div>
 
             </div>
             <div class="card-body">

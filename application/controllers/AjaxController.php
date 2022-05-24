@@ -269,6 +269,41 @@ class AjaxController extends MY_Controller
 
   }
 
+  public function getCustomerConfirmedCallOrderInfo($customer_id)
+  {
+
+      $this->load->model('Sale_model');
+      $this->load->model('Order_model');
+
+      $unpaid_inv = $this->Sale_model->getCountCustomerUnpaidInvoices($customer_id);
+      $customer = $this->bm->getRow('customers','id',$customer_id);
+
+      $driver_id = $this->user_id_;
+      $products = $this->Order_model->getCustomerCallOrdersProducts($customer_id,$driver_id);
+
+      if($unpaid_inv->total > 0)
+      {
+          $output['total_unpaid_inv'] = '<span class="badge rounded-pill bg-danger">Total Unpaid Invoices: '. $unpaid_inv->total .'</span>';
+      }
+      else
+      {
+          $output['total_unpaid_inv'] = '<span class="badge rounded-pill bg-success">Total Unpaid Invoices: 0</span>';
+      }
+
+      $output['remarks'] = $customer->remarks;
+      $output['payment_type'] = $customer->cat_type;
+      $output['total_products'] = count($products);
+
+      $data = [
+          'products' => $products
+      ];
+
+      $output['html'] = $this->load_view('sales/customer_sale_call_order_products',$data,true);
+
+      echo json_encode($output);
+
+  }
+
   public function showSalesDetails($sale_id,$type = '')
   {
 

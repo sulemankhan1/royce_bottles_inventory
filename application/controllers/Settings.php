@@ -10,10 +10,10 @@ class Settings extends MY_Controller
 
     parent :: __construct();
 
-    if(UTYPE() == 'admin')
+    if(UTYPE() != 'admin')
     {
 
-      redirect($this->redirect_to);
+        redirect($this->redirect_to());
 
     }
 

@@ -8,6 +8,14 @@
    function getAllInvoices($rowno,$rowperpage,$filter)
  	 {
 
+     $only_his = false;
+     if(isUserAllow(56))
+     {
+
+       $only_his = true;
+
+     }
+
        $this->db->select('sales.*,customers.img as customer_img,customers.name customer_name,users.img as driver_img,users.name as driver_name,count(sales_details.product_id) as total_products');
        $this->db->from('sales');
        $this->db->join('sales_details','sales_details.sale_id = sales.id');
@@ -17,7 +25,7 @@
 
        $this->db->where('sales.is_deleted',0);
 
-       if (isUserAllow(56)) {
+       if ($only_his) {
 
          $this->db->where('sales.added_by',$this->session->userdata('UID'));
 
@@ -78,6 +86,14 @@
    function getCountInvoices($filter)
 	 {
 
+     $only_his = false;
+     if(isUserAllow(56))
+     {
+
+       $only_his = true;
+
+     }
+
        $this->db->select('sales.id');
        $this->db->from('sales');
        $this->db->join('sales_details','sales_details.sale_id = sales.id');
@@ -86,6 +102,12 @@
        $this->db->join('users','users.id = sales.added_by');
 
        $this->db->where('sales.is_deleted',0);
+
+       if ($only_his) {
+
+         $this->db->where('sales.added_by',$this->session->userdata('UID'));
+
+       }
 
         if (!empty($filter['invoice_no']))
         {

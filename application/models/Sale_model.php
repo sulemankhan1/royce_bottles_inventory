@@ -8,6 +8,15 @@ class Sale_model extends CI_Model
 
   public function getSales($requestData,$type)
   {
+
+    $only_his = false;
+    if(isUserAllow(47))
+    {
+
+      $only_his = true;
+
+    }
+
       // storing request (ie, get/post) global array to a variable
       $columns = [
           // datatable column index => database column name
@@ -32,14 +41,14 @@ class Sale_model extends CI_Model
       $this->db->join('sales_details','sales_details.sale_id = sales.id');
       $this->db->join('products','products.id = sales_details.product_id');
 
-      $this->db->where('sales.is_deleted',0);
-
-      if(isUserAllow(47))
+      if($only_his)
       {
 
         $this->db->where('sales.added_by',$this->session->userdata('UID'));
 
       }
+
+      $this->db->where('sales.is_deleted',0);
 
       $this->db->group_by('sales_details.sale_id');
 

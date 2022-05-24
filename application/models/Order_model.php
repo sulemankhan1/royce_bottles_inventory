@@ -149,5 +149,58 @@ class Order_model extends CI_Model
 
   }
 
+  public function getAllCallOrdersCustomers($driver_id)
+  {
+
+    $current_day = date('l');
+
+    $this->db->select('customers.id,customers.name');
+    $this->db->from('call_orders');
+    $this->db->join('customers','customers.id = call_orders.customer_id');
+    $this->db->join('users','users.id = call_orders.driver_id');
+    $this->db->join('call_orders_details','call_orders_details.call_order_id = call_orders.id');
+    $this->db->join('products','products.id = call_orders_details.product_id');
+    $this->db->join('users added_by', 'added_by.id = call_orders.added_by', 'left');
+
+      $this->db->where('call_orders.driver_id',8);
+      $this->db->where('call_orders.delivery_day',$current_day);
+
+      $this->db->where('call_orders.status','confirmed');
+      $this->db->where('call_orders.pending_request_status','confirmed');
+      $this->db->where('call_orders.is_given',0);
+
+
+      $this->db->group_by('call_orders_details.call_order_id');
+
+    return $this->db->get()->result();
+
+  }
+
+  public function getCustomerCallOrdersProducts($customer_id,$driver_id)
+  {
+
+      $current_day = date('l');
+
+      $this->db->select('call_orders_details.*,products.name as product_name,products.price as product_price');
+      $this->db->from('call_orders');
+      $this->db->join('customers','customers.id = call_orders.customer_id');
+      $this->db->join('users','users.id = call_orders.driver_id');
+      $this->db->join('call_orders_details','call_orders_details.call_order_id = call_orders.id');
+      $this->db->join('products','products.id = call_orders_details.product_id');
+      $this->db->join('users added_by', 'added_by.id = call_orders.added_by', 'left');
+
+      $this->db->where('call_orders.customer_id',$customer_id);
+
+      $this->db->where('call_orders.driver_id',8);
+      $this->db->where('call_orders.delivery_day',$current_day);
+
+      $this->db->where('call_orders.status','confirmed');
+      $this->db->where('call_orders.pending_request_status','confirmed');
+      $this->db->where('call_orders.is_given',0);
+
+      return $this->db->get()->result();
+
+  }
+
 
 }

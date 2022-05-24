@@ -40,6 +40,7 @@ class Sales extends MY_Controller
 
   public function getSales()
   {
+
     $this->load->model('Sale_model');
 
     $records = $this->Sale_model->getSales($_REQUEST,'records');
@@ -582,6 +583,36 @@ class Sales extends MY_Controller
        }
 
        redirect('sales');
+
+  }
+
+  public function sale_call_order()
+  {
+
+    $this->checkRole(48);
+
+    $this->load->model('Order_model');
+
+    $driver_id = $this->user_id_;
+
+    $customers = $this->Order_model->getAllCallOrdersCustomers($driver_id);
+
+    $data = [
+
+      'title' => 'Add Call Order Sale',
+      'page_head' => 'Add Call Order Sale',
+      'active_menu' => 'sales',
+      'customers' => $customers,
+      'styles' => [
+        'add_sale.css'
+      ],
+      'scripts' => [
+        'sales/sale_call_order.js'
+      ]
+
+    ];
+
+    $this->template('sales/sale_call_order',$data);
 
   }
 

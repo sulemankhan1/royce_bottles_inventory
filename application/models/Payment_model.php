@@ -6,7 +6,7 @@
 class Payment_model extends CI_Model
 {
 
-  public function getPayments($customer_id,$from,$to)
+  public function getPayments($customer_id,$from = '',$to = '')
   {
 
     $this->db->select('payments.*,sales.invoice_no,customers.name as customer_name');
