@@ -222,7 +222,7 @@
 
                                 </div>
 
-                                <!-- <div class="row mb-2">
+                                <div class="row mb-2">
 
                                   <div class="col-sm-10">
 
@@ -249,66 +249,54 @@
 
                                   </div>
 
-                                </div> -->
-
-                                <!-- <div class="row">
-                                  <div class="col-sm-4" style="padding-right: 37px;">
-
-                                    <div class="row pt-2 pb-1 mb-2" style="background-color:#f1f1f1!important;border-radius:3px!important;margin-left:-6px;">
-
-                                      <div class="col-sm-10">
-
-                                        <span class="text-dark">Customer1</span>
-
-                                      </div>
-                                      <div class="col-sm-2">
-
-                                        <div class="form-check form-check-inline">
-                                           <input type="checkbox" class="form-check-input customer_check" id="customCheck5">
-                                        </div>
-
-                                      </div>
-
-                                    </div>
-                                  </div>
-                                  <div class="col-sm-4" style="padding-right: 37px;">
-                                    <div class="row pt-2 pb-1 mb-2" style="background-color:#f1f1f1!important;border-radius:3px!important;margin-left:-6px;">
-
-                                      <div class="col-sm-10">
-
-                                        <span class="text-dark">Customer2</span>
-
-                                      </div>
-                                      <div class="col-sm-2">
-
-                                        <div class="form-check form-check-inline">
-                                           <input type="checkbox" class="form-check-input customer_check" id="customCheck5">
-                                        </div>
-
-                                      </div>
-
-                                    </div>
                                 </div>
-                                <div class="col-sm-4" style="padding-right: 37px;">
-                                    <div class="row pt-2 pb-1 mb-2" style="background-color:#f1f1f1!important;border-radius:3px!important;margin-left:-6px;">
 
-                                      <div class="col-sm-10">
+                                <div class="row">
 
-                                        <span class="text-dark">Customer3</span>
+                                  <?php
+                                  function checkRecurringCustomer($arr , $id)
+                                  {
+                                      $is_selected = false;
+                                      foreach ($arr as $key => $v)
+                                      {
 
-                                      </div>
-                                      <div class="col-sm-2">
+                                          if($v->customer_id == $id)
+                                          {
 
-                                        <div class="form-check form-check-inline">
-                                           <input type="checkbox" class="form-check-input customer_check" id="customCheck5">
-                                        </div>
+                                            $is_selected = true;
 
-                                      </div>
+                                            break;
 
-                                    </div>
+                                          }
 
+                                      }
+
+                                      return $is_selected;
+
+                                  } ?>
+
+                                  <div class="col-sm-5 mb-3">
+                                    <label for="customer_" class="form-label">Recurring Customers</label>
+                                    <select class="form-select form-select-sm select2" data-width="100%" name="customer_ids[]" multiple="multiple">
+                                      <option value="" disabled>Select customers</option>
+
+                                      <?php foreach ($customers as $key => $v): ?>
+
+                                        <?php if (checkRecurringCustomer($recurr_customers,$v->id)): ?>
+
+                                          <option value="<?= $v->id ?>" selected><?= $v->name ?></option>
+
+                                          <?php else: ?>
+
+                                            <option value="<?= $v->id ?>"><?= $v->name ?></option>
+
+                                        <?php endif; ?>
+
+                                      <?php endforeach; ?>
+                                    </select>
                                   </div>
-                                </div> -->
+
+                                </div>
 
                                 <div class="row" id="email_general_setting_save_btn" style="margin:0px!important;padding:0px!important;margin-top:20px!important;">
 

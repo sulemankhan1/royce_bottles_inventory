@@ -183,6 +183,8 @@ class Settings extends MY_Controller
       'invoice_temp' => $this->Setting_model->getGeneralSetting('INVOICE_TEMP'),
       'whatsapp_temp' => $this->Setting_model->getGeneralSetting('WHATSAPP_TEMP'),
       'recurr_temp' => $this->Setting_model->getGeneralSetting('RECURR_TEMP'),
+      'customers' => $this->bm->getRows('customers','is_deleted',0),
+      'recurr_customers' => $this->bm->getRows('recurring_customers'),
       'styles' => [
         'my-dataTable.css'
       ],
@@ -374,6 +376,26 @@ class Settings extends MY_Controller
              $this->bm->insert_row('general_setting',['name' => 'RECURR_TEMP' , 'value' => $p['recurring_template']]);
 
            }
+
+         }
+
+
+         $customer_ids = $p['customer_ids'];
+
+         $this->bm->delete('recurring_customers','id >',0);
+
+         if(!empty($customer_ids))
+         {
+
+           $recurr_customers = [];
+           foreach ($customer_ids as $key => $v)
+           {
+               $recurr_customers[] = [
+                 'customer_id' => $v
+                 ];
+           }
+
+           $this->bm->insert_rows('recurring_customers',$recurr_customers);
 
          }
 

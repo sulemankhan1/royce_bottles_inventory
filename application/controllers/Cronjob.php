@@ -17,8 +17,10 @@ class Cronjob extends CI_Controller
 
 		$general_setting = $this->bm->getRow('general_setting','name','SENDING_TYPE');
 
-		$customers = $this->bm->getRows('customers','is_deleted','0');
+		$this->load->model('Customer_model');
 
+		$customers = $this->Customer_model->getRecurringCustomers();
+		
 		$is_email_send = false;
 
 		if(!empty($general_setting))

@@ -31,10 +31,10 @@ if (document.querySelectorAll('#d-main-my').length) {
 
   const optionsF = {
       series: [{
-          name: 'total',
+          name: 'Sale',
           data: sales_.data.total_sale_amount
       }, {
-          name: 'pipline',
+          name: 'Credit',
           data: sales_.data.total_credit_amount
       }],
       chart: {
@@ -155,10 +155,10 @@ $('.sale_filter_').click(function () {
 
     const optionsF1 = {
         series: [{
-            name: 'total',
+            name: 'Sale',
             data: sales_1.data.total_sale_amount
         }, {
-            name: 'pipline',
+            name: 'Credit',
             data: sales_1.data.total_credit_amount
         }],
         chart: {

@@ -17,6 +17,8 @@ if ( ! function_exists('getSelectField'))
       $options = '';
       $sel_first_option = 'select';
       $select2_class = 'select2';
+      $sel_attributes = '';
+      $fo_attr = '';
       //select column width
       if(isset($arr['column']))
       {
@@ -86,6 +88,20 @@ if ( ! function_exists('getSelectField'))
           }
 
       }
+      //to add attributes in select
+      if(isset($arr['attr']) && !empty($arr['attr']))
+      {
+
+          $s_attributes = explode(',',$arr['attr']);
+
+          foreach ($s_attributes as $k => $v)
+          {
+
+            $sel_attributes .= $v.' ';
+
+          }
+
+      }
       //to add classes in column
       if(isset($arr['col_classes']) && !empty($arr['col_classes']))
       {
@@ -148,6 +164,21 @@ if ( ! function_exists('getSelectField'))
         $sel_first_option = $arr['first_option'];
       }
 
+      //to add attr in first option
+      if(isset($arr['first_option_attr']) && !empty($arr['first_option_attr']))
+      {
+
+          $fo_attr_ = explode(',',$arr['first_option_attr']);
+
+          foreach ($fo_attr_ as $k => $v)
+          {
+
+            $fo_attr .= $v.' ';
+
+          }
+
+      }
+
       $select_col = '<div class="col-'.$column.' mb-3 '.$col_classes.'" '. $col_attributes .'>';
 
                       if($label != '')
@@ -157,8 +188,8 @@ if ( ! function_exists('getSelectField'))
 
                       }
 
-                     $select_col .='<select class="form-select form-select-sm '.$select2_class.' '. $sel_classes .'" data-width="100%" name="'.$name.'" '.$id.' '.$required.'>'.
-                     '<option value="">'.$sel_first_option.'</option>'.$options;
+                     $select_col .='<select class="form-select form-select-sm '.$select2_class.' '. $sel_classes .'" data-width="100%" name="'.$name.'" '.$id.' '.$required.' '. $sel_attributes .'>'.
+                     '<option value="" '. $fo_attr .'>'.$sel_first_option.'</option>'.$options;
                       $select_col .='</select>'.
                   '</div>';
 

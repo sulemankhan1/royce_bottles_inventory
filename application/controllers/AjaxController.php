@@ -516,8 +516,8 @@ class AjaxController extends MY_Controller
 
             $arr = [
 
-              'total_sale_amount' => $v['total_sale_amount'],
-              'total_credit_amount' => $v['total_credit_amount']
+              'total_sale_amount' => number_format(floatval($v['total_sale_amount']),2,'.',''),
+              'total_credit_amount' => number_format(floatval($v['total_credit_amount']),2,'.','')
 
             ];
 

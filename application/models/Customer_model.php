@@ -137,5 +137,18 @@ class Customer_model extends CI_Model
 
   }
 
+  public function getRecurringCustomers()
+  {
+
+    $this->db->select('customers.*');
+    $this->db->from('customers');
+    $this->db->join('recurring_customers','recurring_customers.customer_id = customers.id');
+
+    $this->db->where('customers.is_deleted',0);
+
+    return $this->db->get()->result();
+
+  }
+
 
 }
