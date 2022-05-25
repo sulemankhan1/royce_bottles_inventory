@@ -20,7 +20,7 @@ class Cronjob extends CI_Controller
 		$this->load->model('Customer_model');
 
 		$customers = $this->Customer_model->getRecurringCustomers();
-		
+
 		$is_email_send = false;
 
 		if(!empty($general_setting))

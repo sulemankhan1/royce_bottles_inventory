@@ -38,7 +38,8 @@ $(document).on('click','.edit_template_',function () {
 
 $('.template_commands_').click(function () {
 
-  let command = $(this).attr('data')
+  let command = $(this).attr('data');
+  navigator.clipboard.writeText(command)
 
 })
 

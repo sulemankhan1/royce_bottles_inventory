@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html lang="en" dir="ltr">
 
 <head>
@@ -6,12 +6,17 @@
   <title><?= $page_title ?></title>
 
   <!-- Hope Ui Design System Css -->
-  <!-- <link rel="stylesheet" href="<= $root.'assets/css/hope-ui.min.css'; ?>" media="all" /> -->
+  <link rel="stylesheet" href="<?= $root.'assets/css/pdf-bootstrap.min.css'; ?>" media="all" />
 
   <!-- Custom Css -->
   <link rel="stylesheet" href="<?= $root.'assets/css/custom.min.css?v=1.2.0' ?>" media="all" />
 
   <style type="text/css">
+
+  body {
+  font-family: sans-serif!important;
+  }
+
     .row {
       --bs-gutter-x: 0px !important;
     }
@@ -19,16 +24,17 @@
     .company_logo {
       min-width: 100px;
       height: 100px;
+      margin-top: 30px;
     }
 
     #company_head {
       text-align: right;
       text-transform: uppercase;
-      margin-top: 10px;
+      margin-top: 30px;
     }
 
     #company_address {
-      text-align: right;
+      text-align: right!important;
       font-size: 13px;
     }
 
@@ -56,18 +62,19 @@
   <div class="row">
     <div class="col-sm-12 col-lg-12">
       <div class="card">
-        <div class="card-header d-flex justify-content-between" style="background: #f5f6fa!important;">
+        <div class="card-header d-flex justify-content-between" style="background: #f5f6fa!important;padding: 1.5rem 1.5rem;padding-bottom:0px;">
           <div class="header-title" style="margin-bottom: 25px!important;">
-            <h3 class="card-title">
+            <h3 class="card-title" style="font-weight:500!important;">
               <?= $page_title ?></h3>
           </div>
         </div>
         <div class="card-body">
 
           <!-- company info row start -->
-          <div class="row">
+          <div class="row" >
+            <div class="col-sm-12">
+            <div class="" style="width:50%;float:left">
 
-            <div class="col-12 col-sm-6 col-md-8">
               <?php
 
                       $logo = companySetting('pdf_logo');
@@ -82,113 +89,110 @@
               <?php endif; ?>
 
             </div>
-            <div class="col-12 col-sm-6 col-md-4">
-              <h5 id="company_head"><?= companySetting('name') ?></h5>
-              <label id="company_address">
+            <div class="" style="width:50%;float:right">
+              <h5 id="company_head" style="font-size: 1.25rem;font-weight:500"><?= companySetting('name') ?></h5>
+              <p id="company_address" style="color: #8a92a6;">
                 <?= companySetting('address') ?>
-              </label>
+              </p>
             </div>
-
+          </div>
           </div>
           <!-- company info row end -->
 
           <!-- invoice info row start -->
-          <div class="row mt-5">
+          <div class="row" style="margin-top:40px;">
 
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="col-sm-12">
 
-              <div class="row mt-1">
+              <div style="width:40%;float:left">
+
+                <div class="row mt-1">
                 <div class="col-sm-12">
 
-                  <h6 class="text-primary font_uppercase">Invoice Information</h6>
+                  <h6 class="text-primary font_uppercase" style="font-size: 1rem;color: #3a57e9!important;">Invoice Information</h6>
 
                 </div>
-                <div class="col-12 col-sm-12 mt-1">
+                <div class="col-sm-12 mt-1">
                   <div class="row">
 
-                    <div class="col-12 col-sm-4 col-md-5 col-lg-4">
-                      <span class="font_design font_uppercase">Invoice #:</span>
-                    </div>
-                    <div class="col-12 col-sm-8 col-md-7 col-lg-8">
-                      <span class="font_design font_uppercase"><?= $sale->invoice_no ?></span>
+                    <div class="col-sm-12" style="lfloat:left">
+                      <span class="font_design font_uppercase">Invoice #: 56757676<?= $sale->invoice_no ?></span>
                     </div>
                   </div>
                 </div>
-                <div class="col-12 col-sm-12">
+                <div class="col-sm-12">
                   <div class="row">
 
-                    <div class="col-12 col-sm-5 col-md-6 col-lg-6 col-xl-5">
-                      <span class="font_design font_uppercase">Invoice Date:</span>
-                    </div>
-                    <div class="col-12 col-sm-7 col-md-6 col-lg-6 col-xl-7">
-                      <span class="font_design font_uppercase"><?= getDateTimeFormat($sale->added_at,'date') ?></span>
+                    <div class="col-sm-12" style="float:left">
+                      <span class="font_design font_uppercase">Invoice Date: <?= getDateTimeFormat($sale->added_at,'date') ?></span>
                     </div>
                   </div>
                 </div>
-                <div class="col-12 col-sm-12">
-                  <div class="row">
+                <br>
+                <div class="col-sm-12">
+                  <div class="row" style="margin-top:5px!important;">
 
-                    <div class="col-3 col-sm-4 col-md-4 col-lg-4 col-xl-4">
-                      <span class="font_design font_uppercase">Category:</span>
+                    <div class="col-sm-12">
+                      <span class="font_design font_uppercase">Category:
+                        <span class="font_design font_uppercase">
+                          <?php if ($sale->customer_category == 'cash'){ ?>
+                          <span class="badge rounded-pill bg-success">Cash</span>
+                          <?php }elseif ($sale->customer_category == 'credit') { ?>
+                          <span class="badge rounded-pill bg-warning">Credit</span>
+                          <?php } ?>
+                        </span></span>
                     </div>
-                    <div class="col-9 col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                      <span class="font_design font_uppercase">
-                        <?php if ($sale->customer_category == 'cash'){ ?>
-                        <span class="badge rounded-pill bg-success">Cash</span>
-                        <?php }elseif ($sale->customer_category == 'credit') { ?>
-                        <span class="badge rounded-pill bg-warning">Credit</span>
-                        <?php } ?>
+                  </div>
+                </div>
+                <div class="col-sm-12">
+                  <div class="row" style="margin-top:5px!important;">
+
+                    <div class="col-sm-12">
+                      <span class="font_design font_uppercase">Status:
+                        <span class="font_design font_uppercase">
+
+                          <?php if ($sale->status == 'paid'){ ?>
+
+                          <span class="badge rounded-pill bg-success">Paid</span>
+
+                          <?php }elseif ($sale->status == 'unpaid' || $sale->status == 'credit') { ?>
+
+                          <span class="badge rounded-pill bg-warning"><?= ucfirst($sale->status) ?></span>
+
+                          <?php }elseif ($sale->status == 'pending') { ?>
+
+                          <span class="badge rounded-pill bg-secondary">Pending</span>
+
+                          <?php }
+                                   ?>
+
+                        </span>
                       </span>
                     </div>
                   </div>
-                </div>
-                <div class="col-12 col-sm-12">
-                  <div class="row">
 
-                    <div class="col-3 col-sm-4 col-md-4 col-lg-4 col-xl-4">
-                      <span class="font_design font_uppercase">Status:</span>
-                    </div>
-                    <div class="col-9 col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                      <span class="font_design font_uppercase">
-
-                        <?php if ($sale->status == 'paid'){ ?>
-
-                        <span class="badge rounded-pill bg-success">Paid</span>
-
-                        <?php }elseif ($sale->status == 'unpaid' || $sale->status == 'credit') { ?>
-
-                        <span class="badge rounded-pill bg-warning"><?= ucfirst($sale->status) ?></span>
-
-                        <?php }elseif ($sale->status == 'pending') { ?>
-
-                        <span class="badge rounded-pill bg-secondary">Pending</span>
-
-                        <?php }
-                                 ?>
-
-                      </span>
-                    </div>
-                  </div>
                 </div>
 
               </div>
 
-            </div>
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+              </div>
 
-              <div class="row mt-1">
+              <div style="width:60%;float:right">
+
+                <div class="row mt-1">
                 <div class="col-sm-12">
 
-                  <h6 class="text-primary font_uppercase">Invoice To</h6>
-                  <div class="col-sm-12 mt-1">
-                    <span class="font_design font_uppercase"><?= $sale->customer_name ?></span>
-                  </div>
-                  <div class="col-sm-12">
-                    <label id="customer_address">
+                  <h6 class="text-primary font_uppercase" style="font-size: 1rem;color: #3a57e9!important;">Invoice To</h6>
+
+                    <span class="font_design font_uppercase">asfasfasf<?= $sale->customer_name ?></span>
+
+                    <p id="customer_address">dfasfasfasfas
                       <?= $sale->customer_address ?>
-                    </label>
-                  </div>
+                    </p>
+
                 </div>
+              </div>
+
               </div>
 
             </div>
@@ -197,19 +201,20 @@
           <!-- invoice info row end -->
 
           <!-- table row start -->
-          <div class="row mt-4">
+          <br><br>
+          <div class="row">
 
-            <div class="col-12">
+            <div class="col-sm-12">
               <div class="table-responsive">
                 <table class="table">
                   <thead>
                     <tr>
-                      <th width="55%">Products</th>
+                      <th width="45%">Products</th>
                       <th width="10%">Sale Qty</th>
-                      <th width="13%">Exchange Qty</th>
-                      <th width="13%">Foc Qty</th>
+                      <th width="12%">Exchange Qty</th>
+                      <th width="12%">Foc Qty</th>
                       <th width="10%">Price</th>
-                      <th style="text-align:right">Total</th>
+                      <th width="16%" style="text-align:right">Total</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -228,19 +233,25 @@
                     <?php endforeach; ?>
 
                   </tbody>
+                  <tfoot>
+                    <tr>
+                      <th colspan="5" style="text-align:right;">SubTotal</th>
+                      <td id="totals_color"><?= $sale->total_amount ?></td>
+                    </tr>
+                  </tfoot>
                 </table>
               </div>
             </div>
-
+<!--
             <div class="col-sm-12">
               <table class="table">
                 <thead>
                   <tr>
-                    <th width="78%"></th>
-                    <td>SubTotal</td>
-                    <td id="totals_color"><?= $sale->total_amount ?></td>
+                    <th width="74%"></th>
+                    <td width="10%">SubTotal</td>
+                    <td width="16%" id="totals_color"><= $sale->total_amount ?></td>
                   </tr>
-                  <!-- <tr>
+                  <tr>
                           <th width="78%"></th>
                           <td>Taxes</td>
                           <td id="totals_color">1000</td>
@@ -254,10 +265,10 @@
                           <th width="78%"></th>
                           <td>Net Amount</td>
                           <td id="totals_color">2900</td>
-                        </tr> -->
+                        </tr>
                 </thead>
               </table>
-            </div>
+            </div> -->
 
           </div>
           <!-- table row end -->
