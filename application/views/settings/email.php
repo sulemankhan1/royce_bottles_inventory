@@ -224,28 +224,9 @@
 
                                 <div class="row mb-2">
 
-                                  <div class="col-sm-10">
+                                  <div class="col-sm-12">
 
                                     <h4 class="mt-4 mb-2">Recurring Email Receipients</h4>
-
-                                  </div>
-                                  <div class="col-sm-2">
-
-                                    <div class="row" style="margin-top:22px;">
-
-                                      <div class="col-sm-7" style="text-align:right;padding:0px;margin:0px;">
-
-                                        <span class="text-dark">All</span>
-
-                                      </div>
-                                      <div class="col-sm-5" style="padding:0px;padding-left:5px;">
-
-                                        <div class="form-check form-check-inline">
-                                          <input type="checkbox" class="form-check-input check_all_customers" id="customCheck5">
-                                        </div>
-
-                                      </div>
-                                    </div>
 
                                   </div>
 

@@ -118,6 +118,27 @@ class MY_Controller extends CI_Controller
 
   }
 
+  public function replaceWithCustomerData($msg,$customer)
+  {
+
+    $name = isset($customer->name)?$customer->name:'';
+    $shop_name = isset($customer->shop_name)?$customer->shop_name:'';
+    $primary_contact = isset($customer->primary_contact)?$customer->primary_contact:'';
+    $secondary_contact = isset($customer->secondary_contact)?$customer->secondary_contact:'';
+    $e_receipt_email = isset($customer->e_receipt_email)?$customer->e_receipt_email:'';
+    $soa_email = isset($customer->soa_email)?$customer->soa_email:'';
+    $address = isset($customer->address)?$customer->address:'';
+    $cur_date = date('d-m-Y');
+
+    $search = ['[NAME]','[SHOP_NAME]','[PRIMARY_CONTACT]','[SECONDARY_CONTACT]','[E_RECEIPT_EMAIL]','[SOA_EMAIL]','[SHOP_ADDRESS]','[CURR_DATE]'];
+    $replace = [$name, $shop_name, $primary_contact,$secondary_contact,$e_receipt_email,$soa_email,$address,$cur_date];
+
+    $message = str_replace($search, $replace, $msg);
+
+    return $message;
+
+  }
+
   public function generateSalePdf($sale_id)
   {
 
@@ -198,6 +219,7 @@ class MY_Controller extends CI_Controller
 
       //get sale row
       $sale_row = $this->bm->getRow('sales','id',$sale_id);
+      $customer = $this->bm->getRow('customers','id',$sale_row->customer_id);
 
       $email_subject = 'RZ';
       $email_body = '';
@@ -213,15 +235,13 @@ class MY_Controller extends CI_Controller
         {
 
           $email_subject = $email_template->subject;
-          $email_body = $email_template->template;
+          $email_body = $this->replaceWithCustomerData($email_template->template,$customer);
 
         }
 
       }
 
         @$this->generateSalePdf($sale_row->id);
-
-        $customer = $this->bm->getRow('customers','id',$sale_row->customer_id);
 
         $arr = [
 
@@ -250,6 +270,7 @@ class MY_Controller extends CI_Controller
   {
 
     $sale_row = $this->bm->getRow('sales','id',$sale_id);
+    $customer = $this->bm->getRow('customers','id',$sale_row->customer_id);
 
     $email_subject = 'RZ';
     $email_body = '';
@@ -266,7 +287,7 @@ class MY_Controller extends CI_Controller
       {
 
         $email_subject = $email_template->subject;
-        $email_body = $email_template->template;
+        $email_body = $this->replaceWithCustomerData($email_template->template,$customer);
 
       }
 
@@ -274,7 +295,6 @@ class MY_Controller extends CI_Controller
 
       @$this->generateSalePdf($sale_row->id);
 
-      $customer = $this->bm->getRow('customers','id',$sale_row->customer_id);
 
   }
 

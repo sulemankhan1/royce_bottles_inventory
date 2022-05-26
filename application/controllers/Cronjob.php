@@ -167,11 +167,34 @@ class Cronjob extends CI_Controller
 
 	}
 
+  public function replaceWithCustomerData($msg,$customer)
+  {
+
+    $name = isset($customer->name)?$customer->name:'';
+    $shop_name = isset($customer->shop_name)?$customer->shop_name:'';
+    $primary_contact = isset($customer->primary_contact)?$customer->primary_contact:'';
+    $secondary_contact = isset($customer->secondary_contact)?$customer->secondary_contact:'';
+    $e_receipt_email = isset($customer->e_receipt_email)?$customer->e_receipt_email:'';
+    $soa_email = isset($customer->soa_email)?$customer->soa_email:'';
+    $address = isset($customer->address)?$customer->address:'';
+    $cur_date = date('d-m-Y');
+
+    $search = ['[NAME]','[SHOP_NAME]','[PRIMARY_CONTACT]','[SECONDARY_CONTACT]','[E_RECEIPT_EMAIL]','[SOA_EMAIL]','[SHOP_ADDRESS]','[CURR_DATE]'];
+    $replace = [$name, $shop_name, $primary_contact,$secondary_contact,$e_receipt_email,$soa_email,$address,$cur_date];
+
+    $message = str_replace($search, $replace, $msg);
+
+    return $message;
+
+  }
+
 	public function sendPaymentsInPdfToCustomer($customer_id,$customer_email)
   {
 
     if($type != '' && $customer_id != '' && $customer_email != '')
     {
+
+				$customer_row = $this->bm->getRow('customers','id',$customer_id);
 
         $email_subject = 'RZ';
         $email_body = '';
@@ -187,7 +210,7 @@ class Cronjob extends CI_Controller
           {
 
             $email_subject = $template->subject;
-            $email_body = $template->template;
+            $email_body = $this->replaceWithCustomerData($template->template,$customer_row);
 
           }
 

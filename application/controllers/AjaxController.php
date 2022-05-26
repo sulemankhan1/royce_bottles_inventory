@@ -710,6 +710,8 @@ class AjaxController extends MY_Controller
     if($type != '' && $customer_id != '' && $from_date != '' && $to_date != '')
     {
 
+        $customer = $this->bm->getRow('customers','id',$customer_id);
+
         $email_subject = 'RZ';
         $email_body = '';
 
@@ -724,7 +726,7 @@ class AjaxController extends MY_Controller
           {
 
             $email_subject = $template->subject;
-            $email_body = $template->template;
+            $email_body = $this->replaceWithCustomerData($template->template,$customer);
 
           }
 
@@ -732,7 +734,6 @@ class AjaxController extends MY_Controller
 
         // generate payments pdf
         @$this->generatePaymentsPdf($customer_id,$from_date,$to_date);
-        $customer = $this->bm->getRow('customers','id',$customer_id);
 
         if($type != 'whatsapp')
         {

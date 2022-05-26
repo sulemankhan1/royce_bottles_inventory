@@ -28,10 +28,25 @@
                                         <div class="col-sm-12 p-2">
 
                                           <a href="javascript:void(0)">
-                                            <span class="badge rounded-pill bg-primary template_commands_" data="[USERNAME]">Username</span>
+                                            <span class="badge rounded-pill bg-primary template_commands_" data="[NAME]">Name</span>
                                           </a>
                                           <a href="javascript:void(0)">
-                                            <span class="badge rounded-pill bg-primary template_commands_" data="[EMAIL]">Email</span>
+                                            <span class="badge rounded-pill bg-primary template_commands_" data="[SHOP_NAME]">Shop Name</span>
+                                          </a>
+                                          <a href="javascript:void(0)">
+                                            <span class="badge rounded-pill bg-primary template_commands_" data="[PRIMARY_CONTACT]">Primary Contact</span>
+                                          </a>
+                                          <a href="javascript:void(0)">
+                                            <span class="badge rounded-pill bg-primary template_commands_" data="[SECONDARY_CONTACT]">Secondary Contact</span>
+                                          </a>
+                                          <a href="javascript:void(0)">
+                                            <span class="badge rounded-pill bg-primary template_commands_" data="[E_RECEIPT_EMAIL]">E-Receipt Email</span>
+                                          </a>
+                                          <a href="javascript:void(0)">
+                                            <span class="badge rounded-pill bg-primary template_commands_" data="[SOA_EMAIL]">SOA Email</span>
+                                          </a>
+                                          <a href="javascript:void(0)">
+                                            <span class="badge rounded-pill bg-primary template_commands_" data="[SHOP_ADDRESS]">Shop Address</span>
                                           </a>
                                           <a href="javascript:void(0)">
                                             <span class="badge rounded-pill bg-primary template_commands_" data="[CURR_DATE]">Curr: Date</span>
