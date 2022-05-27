@@ -451,6 +451,7 @@
 					</li>
 
 				<?php endif; ?>
+				<br><br>
 
 				</ul>
 				<!-- Sidebar Menu End -->
