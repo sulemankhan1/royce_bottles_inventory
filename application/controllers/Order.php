@@ -169,6 +169,26 @@ class Order extends MY_Controller
   public function save()
   {
 
+      $p = $this->inp_post();
+
+      $where_arr = [
+
+         'customer_id' => $p['customer_id'],
+         'driver_id' => $p['driver_id'],
+         'delivery_day' => $p['day']
+
+      ];
+
+      $call_order = $this->bm->getRowWithConditions('call_orders',$where_arr);
+
+      if (!empty($call_order))
+      {
+
+          $this->session->set_flashdata('_error','The Call Order customer already assign to this driver on that day');
+          redirect($p['redirect']);
+
+      }
+
       $this->form_validation->set_rules('customer_id', 'Driver', 'required');
       $this->form_validation->set_rules('driver_id', 'Driver', 'required');
       $this->form_validation->set_rules('day', 'Day', 'required');
@@ -188,11 +208,9 @@ class Order extends MY_Controller
       else
       {
 
-           $p = $this->inp_post();
-
            $arr = [
 
-              'customer_id' => $p['driver_id'],
+              'customer_id' => $p['customer_id'],
               'driver_id' => $p['driver_id'],
               'delivery_day' => $p['day'],
               'added_by' => $this->user_id_

@@ -40,7 +40,7 @@
                 <div class="progress-detail">
                   <p class="mb-2">Total Sales</p>
                   <h4 class="counter">
-                    <?= checkIsset($sale->total_amount); ?>
+                    <?= isset($sale->total_amount)?$sale->total_amount:'0'; ?>
                   </h4>
                 </div>
               </div>

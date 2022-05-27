@@ -687,6 +687,10 @@ class Sales extends MY_Controller
              else
              {
 
+               $call_order_id = isset($p['main_id'])?$p['main_id']:0;
+
+               $this->bm->update('call_orders',['is_given' => 1],'id',$call_order_id);
+
                $last_id = $this->bm->insert_row('sales',$arr);
 
              }
