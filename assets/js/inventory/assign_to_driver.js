@@ -92,7 +92,7 @@ $('#driver_id').change(function () {
 
                                 }
 
-                                html +=`<option value="`+ products[i].id +`" `+ selected +`>`+ products[i].name +`</option>`;
+                                html +=`<option value="`+ products[p].id +`" `+ selected +`>`+ products[p].name +`</option>`;
 
                               }
 
@@ -157,7 +157,7 @@ $('#modal_driver_id').change(function () {
 
                                 }
 
-                                html +=`<option value="`+ products[i].id +`" `+ selected +`>`+ products[i].name +`</option>`;
+                                html +=`<option value="`+ products[p].id +`" `+ selected +`>`+ products[p].name +`</option>`;
 
                               }
 

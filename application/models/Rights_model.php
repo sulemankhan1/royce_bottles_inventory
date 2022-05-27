@@ -15,11 +15,30 @@ class Rights_model extends CI_Model
     $this->db->join('user_roles','roles.id = user_roles.role_id','left');
 
       $this->db->where('modules.id',$module_id);
-      $this->db->or_where('user_roles.type',$type);
+      $this->db->where('user_roles.type',$type);
 
       $this->db->order_by('roles.order_id','asc');
 
-    return $this->db->get()->result();
+    $res =  $this->db->get()->result();
+
+    if(!empty($res))
+    {
+        return $res;
+    }
+    else
+    {
+
+      $this->db->select('roles.id,roles.name');
+      $this->db->from('modules');
+      $this->db->join('roles','modules.id = roles.module_id');
+
+        $this->db->where('modules.id',$module_id);
+
+        $this->db->order_by('roles.order_id','asc');
+
+      return $this->db->get()->result();
+
+    }
 
   }
 

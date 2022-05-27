@@ -52,7 +52,7 @@
                                           <div class="col-sm-1 text-center">
                                             <div class="form-check form-switch form-check-inline">
                                               <?= getHiddenField('row_id[]',$val->id); ?>
-                                                <input class="form-check-input" type="checkbox" id="switch1" name="role_id[<?= $val->id ?>]" <?= ($val->is_allow == 1?'checked':'') ?> />
+                                                <input class="form-check-input" type="checkbox" id="switch1" name="role_id[<?= $val->id ?>]" <?= (isset($val->is_allow) &&  $val->is_allow == 1?'checked':'') ?> />
                                                 <label class="form-check-label pl-2" for="switch1"></label>
                                             </div>
                                           </div>

@@ -244,7 +244,7 @@ class AjaxController extends MY_Controller
       $customer = $this->bm->getRow('customers','id',$customer_id);
 
       $driver_id = $this->user_id_;
-      $products = $this->Sale_model->getAssignStockToDriver($driver_id);
+      $products = $this->Sale_model->getAssignStockToDriverForSale($customer_id,$driver_id);
 
       if($unpaid_inv->total > 0)
       {
@@ -396,10 +396,11 @@ class AjaxController extends MY_Controller
   {
 
     $this->load->model('Stock_model');
+    $this->load->model('Product_model');
 
     $driver_request_products = $this->Stock_model->getDriverRequestedProducts($driver_id);
 
-    $products = $this->bm->getRows('products','is_deleted',0);
+    $products = $this->Product_model->getAllProducts();
 
     $output = [
 

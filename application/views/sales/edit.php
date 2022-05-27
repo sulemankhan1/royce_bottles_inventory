@@ -19,9 +19,12 @@
             </div>
             <div class="card-body">
               <?php
+
+                echo getHiddenField('sale_action','update');
+
                 echo getHiddenField('total_products',count($sales_details));
 
-                if($sale->sale_type == 'call_order')
+                if(isset($sale->sale_type) && $sale->sale_type == 'call_order')
                 {
 
                   echo getHiddenField('save_sale',site_url('Sales/save_call_order_sale'));
@@ -156,7 +159,7 @@
                       </div>
 
                       <div id="showCustomerSaleProducts_">
-                        <?php if ($sale->sale_type == 'call_order'): ?>
+                        <?php if (isset($sale->sale_type) && $sale->sale_type == 'call_order'): ?>
 
                         <?php foreach ($sales_details as $key => $v): ?>
 

@@ -144,7 +144,7 @@
 
                         <div class="col-sm-1 text-center">
 
-                          <?php if ($val->is_allow == 1): ?>
+                          <?php if (isset($val->is_allow) && $val->is_allow == 1): ?>
 
                             <i class="fa-regular fa-circle-check" style="color:green!important;"></i>
 

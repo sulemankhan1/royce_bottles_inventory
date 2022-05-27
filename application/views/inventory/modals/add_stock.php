@@ -26,7 +26,8 @@
                       'label' => 'Qty',
                       'type' => 'number',
                       'name' => 'qty',
-                      'column' => 'sm-3'
+                      'column' => 'sm-3',
+                      'attr' => 'min="1"'
                     ]);
 
                   ?>

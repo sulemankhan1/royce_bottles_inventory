@@ -190,7 +190,12 @@
 							</i>
 							<span class="item-name">
 								Inventory
-								<span class="badge rounded-pill bg-success" style="margin-left:6px"><?= showPendingRequestCount() ?></span>
+
+								<?php if (isUserAllow(44)): ?>
+
+									<span class="badge rounded-pill bg-success" style="margin-left:6px"><?= showPendingRequestCount() ?></span>
+
+								<?php endif; ?>
 							</span>
 							<i class="right-icon">
 								<i class="fa-solid fa-angle-right"></i>

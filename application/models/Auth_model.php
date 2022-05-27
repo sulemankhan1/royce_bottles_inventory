@@ -9,10 +9,11 @@ class Auth_model extends CI_Model
   public function checkLoginDetails($username,$password)
   {
 
-    $this->db->select('id,type,password');
+    $this->db->select('id,type,password,status');
     $this->db->from('users');
 
     $this->db->where('username',$username);
+    $this->db->where('is_deleted',0);
 
     $data = $this->db->get()->result();
 
@@ -25,9 +26,22 @@ class Auth_model extends CI_Model
         if($password == $this->encryption->decrypt($v->password))
         {
 
-          $res['result'] = true;
-          $res['data'] = $data[$key];
-          $res['msg'] = 'Credentials Matched';
+          if($v->status != 0)
+          {
+
+            $res['result'] = false;
+            $res['msg'] = 'Your account has been deactivated';
+
+          }
+          else
+          {
+
+            $res['result'] = true;
+            $res['data'] = $data[$key];
+            $res['msg'] = 'Credentials Matched';
+
+          }
+
           break;
 
         }

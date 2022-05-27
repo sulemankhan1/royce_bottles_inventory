@@ -132,7 +132,7 @@ if ( ! function_exists('getProductAvailableStock'))
 
       $ci=& get_instance();
 
-      $ci->db->select("logs.product_id,products.name as product_name,sum(if(logs.type='request',qty,0)) as total_request_qty,sum(if(logs.type='assign',qty,0)) as total_assign_qty,sum(if(logs.type='sold',qty,0)) as total_sold_qty,sum(if(logs.type='return',qty,0)) as total_return_qty,sum(if(logs.type='add_stock',qty,0)) as total_add_stock_qty,sum(if(logs.type='remove_stock',qty,0)) as total_remove_stock_qty,sum(if(logs.type='missing',qty,0)) as total_missing_qty,sum(if(logs.type='exchange',qty,0)) as total_exchange_qty", FALSE);
+      $ci->db->select("logs.product_id,products.name as product_name,sum(if(logs.type='add_stock',qty,0)) as total_add_stock_qty,sum(if(logs.type='remove_stock',qty,0)) as total_remove_stock_qty,sum(if(logs.type='assign_stock_confirmed',qty,0)) as total_assign_stock_confirmed,sum(if(logs.type='pending_call_order_confirmed',qty,0)) as total_pending_call_order_confirmed,sum(if(logs.type='return' && logs.qty_type='missing_qty',qty,0)) as total_return_missing,sum(if(logs.type='return' && logs.qty_type='return_qty',qty,0)) as total_return", FALSE);
       $ci->db->from('logs');
       $ci->db->join('products','products.id = logs.product_id');
 
@@ -140,16 +140,15 @@ if ( ! function_exists('getProductAvailableStock'))
 
       $result = $ci->db->get()->row();
 
+      $total_add = $result->total_add_stock_qty + $result->total_return;
+      $total_remove = $result->total_remove_stock_qty + $result->total_assign_stock_confirmed + $result->total_pending_call_order_confirmed + $result->total_return_missing;
 
-      $total_add = $result->total_add_stock_qty + $result->total_return_qty;
-      $total_remove = $result->total_sold_qty + $result->total_remove_stock_qty + $result->total_missing_qty + $result->total_exchange_qty;
-
-      $total = $total_add - $total_remove;
+      $total_qty = $total_add - $total_remove;
 
       $arr = [
 
         'product_id' => $result->product_id,
-        'available_qty' => $total,
+        'available_qty' => $total_qty,
 
       ];
 

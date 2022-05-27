@@ -104,6 +104,7 @@ class Customer_model extends CI_Model
     $this->db->join('customers','customers.id = customer_products_price.customer_id');
 
     $this->db->where('customer_products_price.customer_id',$customer_id);
+    $this->db->where('products.is_deleted',0);
 
     return $this->db->get()->result();
 

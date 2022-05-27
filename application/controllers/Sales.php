@@ -108,22 +108,31 @@ class Sales extends MY_Controller
 
         $nestedData[] = $status;
 
-        $delete_url = site_url('delete_admin/'.$ID);
+        $delete_url = site_url('delete_sale/'.$ID);
 
         $actions = '';
 
           $actions .= '<span class="actions-icons">';
 
-          if (isUserAllow(49)) {
+          if ($v->status == 'pending') {
 
-            if ($v->status == 'pending') {
+            if (isUserAllow(49)) {
 
-              $actions .= '<a href="'.site_url('edit_sale/'.$ID) .'" class="action-icons" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit">
-                <i class="fa fa-pencil"></i>
+
+                $actions .= '<a href="'.site_url('edit_sale/'.$ID) .'" class="action-icons" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit">
+                  <i class="fa fa-pencil"></i>
+                </a>';
+
+              }
+
+            if (isUserAllow(80)) {
+
+              $actions .= '<a href="javascript:void(0)" class="action-icons delete_record_" data-msg="Are you sure you want to delete this Sale?" data-url="'. $delete_url .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete">
+                <i class="fa-solid fa-trash"></i>
               </a>';
 
-
             }
+
           }
 
           if (isUserAllow(50)) {
@@ -164,7 +173,7 @@ class Sales extends MY_Controller
       'title' => 'Add Sale',
       'page_head' => 'Add Sale',
       'active_menu' => 'sales',
-      'customers' => $this->bm->getRows('customers','is_deleted',0),
+      'customers' => $this->bm->getRowsWithConditions('customers',['driver_id' => $this->user_id_,'is_deleted' => 0,'day' => date('l')]),
       'styles' => [
         'add_sale.css'
       ],
@@ -351,6 +360,14 @@ class Sales extends MY_Controller
     $this->load->model('Sale_model');
 
     $sales_details = $this->Sale_model->getEditSaleDetails($sale_id,$this->user_id_);
+
+      if (empty($sales_details))
+      {
+
+          $this->session->set_flashdata('_error','Stock of products in selected sale has sold');
+          redirect('sales');
+
+      }
 
     $sale = @$sales_details[0];
 
@@ -767,6 +784,35 @@ class Sales extends MY_Controller
 
   }
 
+  public function delete($sale_id)
+  {
+
+      $this->checkRole(80);
+
+      $arr = [
+
+        'is_deleted' => 1
+
+      ];
+
+      $res = $this->bm->update('sales',$arr,'id',$sale_id);
+
+      if ($res)
+      {
+
+        $this->session->set_flashdata('_success','Sale deleted successfully');
+
+      }
+      else
+      {
+
+        $this->session->set_flashdata('_error','Connection error Try Again');
+
+      }
+
+      redirect('sales');
+
+  }
 
   public function testpdf()
   {

@@ -26,6 +26,13 @@ class Evidence_model extends CI_Model
 
       $this->db->where('evidence.is_deleted',0);
 
+      if($this->session->userdata('UTYPE') == 'driver')
+      {
+
+        $this->db->where('evidence.added_by',$this->session->userdata('UID'));
+
+      }
+
       if($type == 'recordsTotal')
       {
           return $this->db->count_all_results();

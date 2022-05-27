@@ -144,6 +144,25 @@ class Sale_model extends CI_Model
 
   }
 
+  public function getAssignStockToDriverForSale($customer_id,$driver_id)
+  {
+
+    $this->db->select('products.name as product_name,customer_products_price.price as product_price,assign_stock_details.*');
+    $this->db->from('assign_stock');
+    $this->db->join('users','users.id = assign_stock.driver_id');
+    $this->db->join('assign_stock_details','assign_stock_details.assign_stock_id = assign_stock.id');
+    $this->db->join('products','products.id = assign_stock_details.product_id');
+    $this->db->join('customer_products_price','customer_products_price.product_id = products.id');
+
+    $this->db->where('customer_products_price.customer_id',$customer_id);
+    $this->db->where('assign_stock.driver_id',$driver_id);
+    $this->db->where('assign_stock.status','confirmed');
+    $this->db->where('assign_stock.is_return',0);
+
+    return $this->db->get()->result();
+
+  }
+
   public function getLastInvoiceNo()
   {
 
@@ -198,12 +217,11 @@ class Sale_model extends CI_Model
         $this->db->join('sales_details','sales_details.sale_id = sales.id');
         $this->db->join('products','products.id = sales_details.product_id');
         $this->db->join('assign_stock','assign_stock.id = sales.main_id');
-        $this->db->join('assign_stock_details','assign_stock_details.assign_stock_id = assign_stock.id');
+        $this->db->join('assign_stock_details','assign_stock_details.product_id = sales_details.product_id');
 
         $this->db->where('assign_stock.is_return',0);
         $this->db->where('assign_stock.driver_id',$driver_id);
-
-        $this->db->group_by('assign_stock_details.product_id');
+        $this->db->where('assign_stock_details.available_qty !=',0);
 
       }
 

@@ -88,7 +88,7 @@ class Rights extends MY_Controller
 
             $rights[] = [
 
-                'type' => 'admin',
+                'type' => $p['type'],
                 'role_id' => $v,
                 'is_allow' => isset($p['role_id'][$v])?1:0
 

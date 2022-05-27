@@ -19,6 +19,7 @@
             </div>
             <div class="card-body">
               <?php
+                echo getHiddenField('sale_action','create');
                 echo getHiddenField('total_products',0);
                 echo getHiddenField('save_sale',site_url('Sales/save_sale'));
                 echo getHiddenField('show_details',site_url('AjaxController/showSalesDetails'));

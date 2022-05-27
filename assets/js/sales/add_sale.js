@@ -152,6 +152,7 @@ $('#save_sale').submit(function (e) {
 
   e.preventDefault()
 
+  var sale_action = $('input[name=sale_action]').val()
   let url = $('input[name=save_sale]').val()
   let show_details_url = $('input[name=show_details]').val()
 
@@ -174,6 +175,13 @@ $('#save_sale').submit(function (e) {
         {
 
           show_success_(data.msg)
+
+          if(sale_action == 'create')
+          {
+
+              $("#save_sale")[0].reset();
+
+          }
 
           window.open(show_details_url+'/'+data.sale_id+'/save_sale','Sale Information','height=800,width=800');
 
@@ -239,7 +247,7 @@ $(document).on('keyup','.sale_qty_',function () {
 
   let amount = sale_qty * price
 
-  $t.find('.amount_').val(amount)
+  $t.find('.amount_').val(amount.toFixed(2))
 
   total_amount_()
 

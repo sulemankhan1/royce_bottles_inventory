@@ -54,7 +54,7 @@
       'column' => 'sm-1',
       'col_classes' => 'sale_stock_inp_cols',
       'classes' => 'total_qty_',
-      'attr' => 'readonly,max="'.$v->available_qty.'"'
+      'attr' => 'readonly,min="1",max="'.$v->available_qty.'"'
 
     ]);
 

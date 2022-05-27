@@ -45,8 +45,8 @@ class Inventory_model extends CI_Model
 
       $this->db->select("logs.product_id,products.name as product_name,".$select, FALSE);
 
-      $this->db->from('products');
-      $this->db->join('logs','logs.product_id = products.id','left');
+      $this->db->from('logs');
+      $this->db->join('products','logs.product_id = products.id','left');
 
       $this->db->where('products.is_deleted',0);
 
@@ -508,7 +508,7 @@ class Inventory_model extends CI_Model
     }
 
     return $this->db->get()->result();
-    
+
   }
 
 

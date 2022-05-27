@@ -129,6 +129,7 @@ $route['sales'] = 'Sales';
 $route['add_sale'] = 'Sales/create';
 $route['sale_call_order'] = 'Sales/sale_call_order';
 $route['edit_sale/(:num)'] = 'Sales/edit/$1';
+$route['delete_sale/(:num)'] = 'Sales/delete/$1';
 $route['view_sale'] = 'Sales/view_sale';
 $route['update_sales_status/(:any)/(:num)'] = 'Sales/update_sales_status/$1/$2';
 

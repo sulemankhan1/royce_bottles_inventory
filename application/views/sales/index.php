@@ -66,4 +66,5 @@
 
 <?php
 include(APPPATH.'views/sales/status_modal.php');
+include(APPPATH.'views/modals/delete-modal.php');
 ?>
