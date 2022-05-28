@@ -142,8 +142,9 @@ $('.payment_type').change(function () {
 //add sale
 $('#save_sale').submit(function (e) {
 
-  alert();
   e.preventDefault()
+
+  var sale_action = $('input[name=sale_action]').val()
 
   let url = $('input[name=save_sale]').val()
   let show_details_url = $('input[name=show_details]').val()
@@ -161,20 +162,27 @@ $('#save_sale').submit(function (e) {
       type : 'post',
       data : data,
       dataType : 'json',
-      success : function (data) {
+      success : function (response) {
 
-        if(data.status == true)
+        if(response.status == true)
         {
 
-          show_success_(data.msg)
+          show_success_(response.msg)
 
-          window.open(show_details_url+'/'+data.sale_id+'/save_sale','Sale Information','height=800,width=800');
+          window.open(show_details_url+'/'+response.sale_id+'/save_sale','Sale Information','height=800,width=800');
+
+          if(sale_action == 'create')
+          {
+
+             location.reload()
+
+          }
 
         }
         else
         {
 
-          show_error_(data.msg)
+          show_error_(response.msg)
 
         }
 

@@ -494,7 +494,7 @@ class Inventory extends MY_Controller
 
       $p = $this->inp_post();
 
-      $assign_stock = $this->bm->getRowWithConditions('assign_stock',['is_return' => 0,'driver_id' => $p['driver_id']]);
+      $assign_stock = $this->bm->getRowWithConditions('assign_stock',['is_return' => 0,'driver_id' => $p['driver_id'],'is_deleted' => 0]);
 
       if (!empty($assign_stock))
       {
@@ -1175,8 +1175,8 @@ class Inventory extends MY_Controller
              $logs[] = [
 
                  'product_id' => $v->product_id,
-                 'customer_id' => $call_order_id->customer_id,
-                 'driver_id' => $call_order_id->driver_id,
+                 'customer_id' => $call_order_row->customer_id,
+                 'driver_id' => $call_order_row->driver_id,
                  'qty' => $v->qty,
                  'type' => 'pending_call_order_confirmed',
                  'added_by' => $this->user_id_

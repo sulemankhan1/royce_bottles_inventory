@@ -4,7 +4,8 @@
 <div class="row">
   <?php
 
-    $sold_qty = $v->qty - $v->available_qty;
+    $q = $v->exchange_qty + $v->foc_qty;
+    $sold_qty = $v->qty - $v->available_qty - $q;
 
     echo getHiddenField('product_id[]',$v->product_id);
 

@@ -446,14 +446,14 @@
 						</ul>
 					</li>
 
-					<li class="nav-item mb-5">
-						<a class="nav-link <?= $active_menu == 'db_export'?'active':'' ?>" aria-current="page" href="<?= site_url('db_export') ?>">
+					<!-- <li class="nav-item mb-5">
+						<a class="nav-link <= $active_menu == 'db_export'?'active':'' ?>" aria-current="page" href="<?= site_url('db_export') ?>">
 							<i class="icon">
 								<i class="fa fa-download"></i>
 							</i>
 							<span class="item-name">DB Export</span>
 						</a>
-					</li>
+					</li> -->
 
 				<?php endif; ?>
 				<br><br>

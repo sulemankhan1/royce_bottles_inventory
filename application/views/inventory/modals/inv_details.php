@@ -51,7 +51,7 @@
 
                   <?php if ($type == 'available'): ?>
 
-                    <th>Product Stock</th>
+                    <!-- <th>Product Stock</th> -->
                     <th>Sold Stock</th>
                     <?php else: ?>
                       <th>Driver</th>
@@ -79,16 +79,16 @@
                 <tr>
                   <td><?= $key+1 ?></td>
                   <?php if ($type == 'available'): ?>
-                      <td>
-                        <?php
+                      <!-- <td>
+                        <php
 
                           $total_add = $v->total_add_stock_qty + $v->total_return;
                           $total_remove = $v->total_remove_stock_qty + $v->total_assign_stock_confirmed + $v->total_pending_call_order_confirmed + $v->total_return_missing;
 
-                        echo $total_qty = $total_add - $total_remove;
+                          $total_qty = $total_add - $total_remove;
 
                          ?>
-                      </td>
+                      </td> -->
                       <td><?= $v->total_sold_qty ?></td>
                     <?php else: ?>
                       <th><?= $v->driver_name ?></th>

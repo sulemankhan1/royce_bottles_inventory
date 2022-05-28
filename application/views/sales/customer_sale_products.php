@@ -1,4 +1,6 @@
-<?php $assign_stock_id = 0; foreach ($products as $key => $v): ?>
+<?php $assign_stock_id = 0;
+if (!empty($products)) {
+  foreach ($products as $key => $v): ?>
 
 <?php if ($v->available_qty != 0):
 
@@ -72,5 +74,6 @@
 
 <?php endif; ?>
 <?php endforeach;
-echo getHiddenField('main_id',$assign_stock_id = $v->assign_stock_id);
+}
+echo getHiddenField('main_id',$assign_stock_id);
 ?>

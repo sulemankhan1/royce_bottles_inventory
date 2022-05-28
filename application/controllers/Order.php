@@ -175,7 +175,8 @@ class Order extends MY_Controller
 
          'customer_id' => $p['customer_id'],
          'driver_id' => $p['driver_id'],
-         'delivery_day' => $p['day']
+         'delivery_day' => $p['day'],
+         'is_deleted' => 0
 
       ];
 
@@ -185,7 +186,7 @@ class Order extends MY_Controller
       {
 
           $this->session->set_flashdata('_error','The Call Order customer already assign to this driver on that day');
-          redirect($p['redirect']);
+          redirect('call_order');
 
       }
 

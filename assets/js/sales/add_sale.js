@@ -169,27 +169,28 @@ $('#save_sale').submit(function (e) {
       type : 'post',
       data : data,
       dataType : 'json',
-      success : function (data) {
+      success : function (response) {
 
-        if(data.status == true)
+        if(response.status == true)
         {
 
-          show_success_(data.msg)
+          show_success_(response.msg)
+
+
+          window.open(show_details_url+'/'+response.sale_id+'/save_sale','Sale Information','height=800,width=800');
 
           if(sale_action == 'create')
           {
 
-              $("#save_sale")[0].reset();
+             location.reload()
 
           }
-
-          window.open(show_details_url+'/'+data.sale_id+'/save_sale','Sale Information','height=800,width=800');
 
         }
         else
         {
 
-          show_error_(data.msg)
+          show_error_(response.msg)
 
         }
 

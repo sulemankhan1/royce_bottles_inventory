@@ -196,7 +196,7 @@ class Sale_model extends CI_Model
       $this->db->where('id',$sale_id);
       $sale_row = $this->db->get('sales')->row();
 
-      if(!empty($sale_row) & $sale_row->sale_type == 'call_order')
+      if(!empty($sale_row) && $sale_row->sale_type == 'call_order')
       {
 
         $this->db->select('sales.*,customers.name customer_name,customers.address as customer_address,customers.remarks as customer_remarks,sales_details.price,sales_details.sale_qty,sales_details.exchange_qty,sales_details.foc_qty,sales_details.amount,products.name as product_name,products.id as product_id,call_orders_details.qty');
