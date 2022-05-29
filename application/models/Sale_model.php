@@ -233,7 +233,7 @@ class Sale_model extends CI_Model
 
   }
 
-  public function getDriverProductStockByProductId($product_id,$driver_id)
+  public function getDriverProductStockByProductId($product_id,$driver_id,$assign_stock_id)
   {
 
     $this->db->select('assign_stock_details.*');
@@ -241,6 +241,7 @@ class Sale_model extends CI_Model
     $this->db->join('assign_stock_details','assign_stock_details.assign_stock_id = assign_stock.id');
 
     $this->db->where('assign_stock.is_return',0);
+    $this->db->where('assign_stock.id',$assign_stock_id);
     $this->db->where('assign_stock.driver_id',$driver_id);
     $this->db->where('assign_stock_details.product_id',$product_id);
 
@@ -333,15 +334,13 @@ class Sale_model extends CI_Model
     $this->db->from('assign_stock');
     $this->db->join('users','users.id = assign_stock.driver_id');
     $this->db->join('assign_stock_details','assign_stock_details.assign_stock_id = assign_stock.id');
-    $this->db->join('products','products.id = assign_stock_details.product_id');
-    $this->db->join('customer_products_price','customer_products_price.product_id = products.id');
 
-    $this->db->where('assign_stock.id',$assign_stock_id);
+    $this->db->where('assign_stock_details.assign_stock_id',$assign_stock_id);
     $this->db->where('assign_stock.is_return',0);
     $this->db->where('assign_stock.status','confirmed');
     $this->db->where('assign_stock_details.available_qty !=',0);
 
-    return $this->db->get()->count_all_results();
+    return $this->db->count_all_results();
 
   }
 

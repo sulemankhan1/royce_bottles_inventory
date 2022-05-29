@@ -454,22 +454,27 @@ class Sales extends MY_Controller
           foreach ($sales_products as $key => $v)
           {
 
-              $total_qty = $v->sale_qty + $v->exchange_qty + $v->foc_qty;
-              $assign_stock_row = $this->Sale_model->getDriverProductStockByProductId($v->product_id,$this->user_id_);
-
-              if(!empty($assign_stock_row))
+              if($sale_row->sale_type != 'call_order')
               {
 
-                $update_assignstock_qty = [
+                $total_qty = $v->sale_qty + $v->exchange_qty + $v->foc_qty;
+                $assign_stock_row = $this->Sale_model->getDriverProductStockByProductId($v->product_id,$this->user_id_,$sale_row->main_id);
 
-                  'available_qty' => $assign_stock_row->available_qty - $total_qty,
-                  // 'sale_qty' => $assign_stock_row->sale_qty + $v->sale_qty,
-                  'exchange_qty' => $assign_stock_row->exchange_qty + $v->exchange_qty,
-                  'foc_qty' => $assign_stock_row->foc_qty + $v->foc_qty
+                if(!empty($assign_stock_row))
+                {
 
-                ];
+                  $update_assignstock_qty = [
 
-                $this->bm->update('assign_stock_details',$update_assignstock_qty,'id',$assign_stock_row->id);
+                    'available_qty' => $assign_stock_row->available_qty - $total_qty,
+                    // 'sale_qty' => $assign_stock_row->sale_qty + $v->sale_qty,
+                    'exchange_qty' => $assign_stock_row->exchange_qty + $v->exchange_qty,
+                    'foc_qty' => $assign_stock_row->foc_qty + $v->foc_qty
+
+                  ];
+
+                  $this->bm->update('assign_stock_details',$update_assignstock_qty,'id',$assign_stock_row->id);
+
+                }
 
               }
 
@@ -510,23 +515,6 @@ class Sales extends MY_Controller
           }
 
            $this->bm->insert_rows('logs',$logs);
-
-           //check driver available stock remaining or not
-
-
-           if($sale_row->sale_type != 'call_order')
-           {
-
-             $is_stock_remaining = $this->Sale_model->checkDriverStockRemainingOrNot($sale_row->main_id);
-
-             if($is_stock_remaining != 0 && !empty($is_stock_remaining))
-             {
-
-               $this->bm->update('assign_stock',['is_return' => 1],'id',$p['main_id']);
-
-             }
-
-           }
 
            //check is_send sale pdf on mail or not
            // $is_invoice_email = $this->bm->getRowWithConditions('general_setting',['name' => 'INVOICE_EMAIL']);
@@ -570,6 +558,22 @@ class Sales extends MY_Controller
       }
       else
       {
+
+        //check driver available stock remaining or not
+
+        if($sale_row->sale_type != 'call_order')
+        {
+
+          $is_stock_remaining = $this->Sale_model->checkDriverStockRemainingOrNot($sale_row->main_id);
+
+          if($is_stock_remaining == 0)
+          {
+
+            $this->bm->update('assign_stock',['is_return' => 1],'id',$sale_row->main_id);
+
+          }
+
+        }
 
         $output['status'] = true;
         $output['msg'] = 'Sale submit successfully';
