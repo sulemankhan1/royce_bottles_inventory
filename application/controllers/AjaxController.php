@@ -218,19 +218,46 @@ class AjaxController extends MY_Controller
 
       $this->load->model('Inventory_model');
 
+      if(!empty($get['product_id']))
+      {
+        $product = $this->bm->getRow('products','id',$get['product_id']);
+      }
+      else
+      {
+        $product = [];
+      }
+
+      if(!empty($get['customer_id']))
+      {
+        $customer = $this->bm->getRow('customers','id',$get['customer_id']);
+      }
+      else
+      {
+        $customer = [];
+      }
+
+      if(!empty($get['driver_id']))
+      {
+        $driver = $this->bm->getRow('users','id',$get['driver_id']);
+      }
+      else
+      {
+        $driver = [];
+      }
+
       $data = [
 
         'page_title' => 'Log Details',
-        'product' => $this->bm->getRows('products','id',$get['product_id'] == ''?0:$get['product_id']),
-        'customer' => $this->bm->getRows('customers','id',$get['customer_id'] == ''?0:$get['customer_id']),
-        'driver' => $this->bm->getRows('users','id',$get['driver_id'] == ''?0:$get['driver_id']),
+        'product' => $product,
+        'customer' => $customer,
+        'driver' => $driver,
         'type' => $get['type_name'],
         'from' => $get['from'],
         'to' => $get['to'],
         'logs' => $this->Inventory_model->getLogDetails($get)
 
       ];
-
+      
       $this->load_view('inventory/print_log_details',$data);
 
   }

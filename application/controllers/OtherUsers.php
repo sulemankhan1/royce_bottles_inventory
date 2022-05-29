@@ -266,7 +266,7 @@ class OtherUsers extends MY_Controller
 
              if($ID != '')
              {
-                  if (getimagesize(base_url('uploads/other_user/'.$otherUser_img)) && !empty($otherUser_img))
+                  if (@getimagesize(base_url('uploads/other_user/'.$otherUser_img)) && !empty($otherUser_img))
                   {
                       $dir_path = getcwd().'/uploads/other_user/'.$otherUser_img;
 

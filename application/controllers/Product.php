@@ -228,7 +228,7 @@ class Product extends MY_Controller
 
              if($ID != '')
              {
-                  if (getimagesize(base_url('uploads/product/'.$product_img)) && !empty($product_img))
+                  if (@getimagesize(base_url('uploads/product/'.$product_img)) && !empty($product_img))
                   {
                       $dir_path = getcwd().'/uploads/product/'.$product_img;
 

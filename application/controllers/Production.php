@@ -276,7 +276,7 @@ class Production extends MY_Controller
 
              if($ID != '')
              {
-                  if (getimagesize(base_url('uploads/production/'.$production_img)) && !empty($production_img))
+                  if (@getimagesize(base_url('uploads/production/'.$production_img)) && !empty($production_img))
                   {
                       $dir_path = getcwd().'/uploads/production/'.$production_img;
 

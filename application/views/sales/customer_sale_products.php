@@ -34,21 +34,24 @@ if (!empty($products)) {
       'name' => 'sale_qty[]',
       'column' => 'sm-1',
       'col_classes' => 'sale_stock_inp_cols',
-      'classes' => 'sale_qty_'
+      'classes' => 'sale_qty_',
+      'value' => 0
     ]);
     echo getInputField([
       'label' => 'Exchange Qty',
       'name' => 'exchange_qty[]',
       'column' => 'sm-1',
       'col_classes' => 'sale_stock_inp_cols',
-      'classes' => 'exchange_qty_'
+      'classes' => 'exchange_qty_',
+      'value' => 0
     ]);
     echo getInputField([
       'label' => 'Foc Qty',
       'name' => 'foc_qty[]',
       'column' => 'sm-1',
       'col_classes' => 'sale_stock_inp_cols',
-      'classes' => 'foc_qty_'
+      'classes' => 'foc_qty_',
+      'value' => 0
     ]);
     echo getInputField([
       'label' => 'Total',

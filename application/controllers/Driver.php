@@ -290,7 +290,7 @@ class Driver extends MY_Controller
 
              if($ID != '')
              {
-                  if (getimagesize(base_url('uploads/driver/'.$driver_img)) && !empty($driver_img))
+                  if (@getimagesize(base_url('uploads/driver/'.$driver_img)) && !empty($driver_img))
                   {
                       $dir_path = getcwd().'/uploads/driver/'.$driver_img;
 

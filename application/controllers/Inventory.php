@@ -499,7 +499,7 @@ class Inventory extends MY_Controller
       if (!empty($assign_stock))
       {
 
-          $this->session->set_flashdata('_error','Stock already assign to this driver');
+          $this->session->set_flashdata('_error','Stock has been already assign to this driver');
           redirect($p['redirect']);
 
       }
@@ -878,13 +878,13 @@ class Inventory extends MY_Controller
              if(!empty($is_driver))
              {
 
-               $this->session->set_flashdata('_success','Request has updated');
+               $this->session->set_flashdata('_success','Request has been updated');
 
              }
              else
              {
 
-               $this->session->set_flashdata('_success','Request has sent');
+               $this->session->set_flashdata('_success','Request has been sent');
 
              }
 
@@ -1059,7 +1059,8 @@ class Inventory extends MY_Controller
 
       ];
 
-      $res = $this->bm->update('assign_stock',$arr,'id',$delivery_order_id);
+      $this->bm->delete('assign_stock_details','assign_stock_id',$delivery_order_id);
+      $res = $this->bm->delete('assign_stock','id',$delivery_order_id);
 
       if ($res)
       {

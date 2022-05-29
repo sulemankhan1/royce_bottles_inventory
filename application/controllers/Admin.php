@@ -284,7 +284,7 @@ class Admin extends MY_Controller
 
              if($ID != '')
              {
-                  if (getimagesize(base_url('uploads/admin/'.$admin_img)) && !empty($admin_img))
+                  if (@getimagesize(base_url('uploads/admin/'.$admin_img)) && !empty($admin_img))
                   {
                       $dir_path = getcwd().'/uploads/admin/'.$admin_img;
 

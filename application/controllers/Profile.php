@@ -134,7 +134,7 @@ class Profile extends MY_Controller
 
              if($ID != '')
              {
-                  if (getimagesize(base_url('uploads/'.$p['type'].'/'.$user_img)) && !empty($user_img))
+                  if (@getimagesize(base_url('uploads/'.$p['type'].'/'.$user_img)) && !empty($user_img))
                   {
                       $dir_path = getcwd().'/uploads/'.$p['type'].'/'.$user_img;
 

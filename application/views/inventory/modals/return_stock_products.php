@@ -56,14 +56,16 @@
       'name' => 'missing_qty[]',
       'column' => 'sm-1',
       'col_classes' => 'return_stock_inp_cols',
-      'classes' => 'missing_qty_'
+      'classes' => 'missing_qty_',
+      'value' => 0
     ]);
     echo getInputField([
       'label' => 'Return Qty',
       'name' => 'return_qty[]',
       'column' => 'sm-1',
       'col_classes' => 'return_stock_inp_cols',
-      'classes' => 'return_qty_'
+      'classes' => 'return_qty_',
+      'value' => 0
     ]);
     echo getInputField([
       'label' => 'Total',

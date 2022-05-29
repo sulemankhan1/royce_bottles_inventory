@@ -511,6 +511,22 @@ class Sales extends MY_Controller
 
            $this->bm->insert_rows('logs',$logs);
 
+           //check driver available stock remaining or not
+
+
+           if($sale_row->sale_type != 'call_order')
+           {
+
+             $is_stock_remaining = $this->Sale_model->checkDriverStockRemainingOrNot($sale_row->main_id);
+
+             if($is_stock_remaining != 0 && !empty($is_stock_remaining))
+             {
+
+               $this->bm->update('assign_stock',['is_return' => 1],'id',$p['main_id']);
+
+             }
+
+           }
 
            //check is_send sale pdf on mail or not
            // $is_invoice_email = $this->bm->getRowWithConditions('general_setting',['name' => 'INVOICE_EMAIL']);

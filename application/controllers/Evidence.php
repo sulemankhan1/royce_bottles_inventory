@@ -189,7 +189,7 @@ class Evidence extends MY_Controller
 
              if($ID != '')
              {
-                  if (getimagesize(base_url('uploads/evidence/'.$evidence_img)) && !empty($evidence_img))
+                  if (@getimagesize(base_url('uploads/evidence/'.$evidence_img)) && !empty($evidence_img))
                   {
                       $dir_path = getcwd().'/uploads/evidence/'.$evidence_img;
 
