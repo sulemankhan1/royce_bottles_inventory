@@ -277,6 +277,8 @@
                 </thead>
                 <tbody>
 
+                  <?php if (!empty($customer_credits)): ?>
+
                   <?php foreach ($customer_credits as $key => $v): ?>
 
                   <tr>
@@ -307,6 +309,11 @@
                   </tr>
 
                   <?php endforeach; ?>
+                  <?php else: ?>
+                    <tr>
+                      <th colspan="7">No record found...</th>
+                    </tr>
+                <?php endif; ?>
 
                 </tbody>
               </table>
