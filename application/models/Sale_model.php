@@ -23,23 +23,25 @@ class Sale_model extends CI_Model
           0 => NULL,
           1 => 'sales.invoice_no',
           2 => 'customers.name',
-          3 => 'sales.customer_category',
-          4 => 'salesperson.name',
-          5 => NULL,
+          3 => 'users.name',
+          4 => 'sales.customer_category',
+          5 => 'salesperson.name',
           6 => NULL,
           7 => NULL,
-          8 => 'sales.status',
-          9 => NULL,
+          8 => NULL,
+          9 => 'sales.status',
+          10 => NULL,
 
 
       ];
 
-      $this->db->select('sales.*,customers.name customer_name,customers.address as customer_address,salesperson.name as salesperson_name,sum(sales_details.sale_qty) as total_qty,count(sales_details.product_id) as total_products,products.name as product_name');
+      $this->db->select('sales.*,customers.name customer_name,customers.address as customer_address,salesperson.name as salesperson_name,sum(sales_details.sale_qty) as total_qty,count(sales_details.product_id) as total_products,products.name as product_name,users.name as driver_name');
       $this->db->from('sales');
       $this->db->join('customers','customers.id = sales.customer_id');
       $this->db->join('salesperson','salesperson.id = customers.salesperson_id');
       $this->db->join('sales_details','sales_details.sale_id = sales.id');
       $this->db->join('products','products.id = sales_details.product_id');
+      $this->db->join('users','users.id = sales.added_by','left');
 
       if($only_his)
       {

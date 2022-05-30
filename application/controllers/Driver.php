@@ -206,7 +206,7 @@ class Driver extends MY_Controller
         if ($p['email'] != $p['old_email'])
         {
 
-          $is_email_unique = '|is_unique[users.email]';
+          $is_email_unique = 'is_unique[users.email]';
 
         }
 
@@ -214,12 +214,11 @@ class Driver extends MY_Controller
       else
       {
 
-        $is_email_unique = '|is_unique[users.email]';
+        $is_email_unique = 'is_unique[users.email]';
 
       }
 
-      $this->form_validation->set_rules('email', 'Email', 'required'.$is_email_unique,[
-        'required'      => 'The %s is required',
+      $this->form_validation->set_rules('email', 'Email',$is_email_unique,[
         'is_unique'     => 'The %s already exist'
       ]);
 

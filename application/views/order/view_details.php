@@ -17,9 +17,10 @@
             $order_row = $call_order[0];
 
             echo viewDetailsCol('Name',$order_row->customer_name);
+            echo viewDetailsCol('Shop Acronym',$order_row->shop_acronym);
             echo viewDetailsCol('Email',$order_row->customer_email);
             echo viewDetailsCol('Contact #',$order_row->customer_number);
-            echo viewDetailsCol('Address',$order_row->customer_address,12);
+            echo viewDetailsCol('Address',$order_row->customer_address,8);
 
           ?>
 

@@ -13,6 +13,7 @@ $('#customer_id').change(function () {
         success : function (reponse) {
 
           $('#customer_name_').val(reponse.data.name)
+          $('#customer_shop_acronym_').val(reponse.data.shop_acronym)
           $('#customer_cno_').val(reponse.data.primary_contact)
           $('#customer_email_').val(reponse.data.e_receipt_email)
           $('#customer_addr_').val(reponse.data.address)

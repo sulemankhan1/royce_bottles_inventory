@@ -43,6 +43,12 @@
                         ]);
 
                         echo getInputField([
+                          'label' => 'Shop Acronym',
+                          'id' => 'customer_shop_acronym_',
+                          'attr' => 'readonly'
+                        ]);
+
+                        echo getInputField([
                           'label' => 'Contact #',
                           'id' => 'customer_cno_',
                           'attr' => 'readonly'

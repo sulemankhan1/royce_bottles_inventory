@@ -99,6 +99,7 @@ if ($type == 'delivery_order'): ?>
             <?php
 
             echo viewDetailsCol('Name',$row->customer_name);
+            echo viewDetailsCol('Shop Acronym',$row->shop_acronym);
             echo viewDetailsCol('Email',$row->customer_email);
             echo viewDetailsCol('Contact #',$row->customer_number);
             echo viewDetailsCol('Address',$row->customer_address,12);

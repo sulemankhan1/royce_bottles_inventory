@@ -61,7 +61,8 @@
                               'label' => 'Email',
                               'name' => 'email',
                               'type' => 'email',
-                              'value' => $production->email
+                              'value' => $production->email,
+                              'required' => false
                             ]);
                             echo getInputField([
                               'label' => 'Username',
@@ -83,7 +84,6 @@
                             echo getInputField([
                               'label' => 'FIN #',
                               'name' => 'fin_no',
-                              'type' => 'number',
                               'value' => $production->fin_no
                             ]);
                             echo getInputField([

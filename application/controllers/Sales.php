@@ -64,6 +64,7 @@ class Sales extends MY_Controller
 
       $nestedData[] = $v->invoice_no;
       $nestedData[] = $v->customer_name;
+      $nestedData[] = $v->driver_name;
       $nestedData[] = $v->customer_category;
       $nestedData[] = $v->salesperson_name;
       $nestedData[] = $v->total_products;

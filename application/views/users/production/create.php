@@ -44,7 +44,8 @@
                             echo getInputField([
                               'label' => 'Email',
                               'name' => 'email',
-                              'type' => 'email'
+                              'type' => 'email',
+                              'required' => false
                             ]);
                             echo getInputField([
                               'label' => 'Username',
@@ -62,8 +63,7 @@
                             ]);
                             echo getInputField([
                               'label' => 'FIN #',
-                              'name' => 'fin_no',
-                              'type' => 'number'
+                              'name' => 'fin_no'
                             ]);
                             echo getInputField([
                               'label' => 'Date Of Birth',

@@ -61,7 +61,8 @@
                         'label' => 'Email',
                         'name' => 'email',
                         'type' => 'email',
-                        'value' => $user->email
+                        'value' => $user->email,
+                        'required' => false
                       ]);
                       echo getInputField([
                         'label' => 'Username',
@@ -87,7 +88,6 @@
                         echo getInputField([
                           'label' => 'License #',
                           'name' => 'license_no',
-                          'type' => 'number',
                           'required' => false,
                           'value' => $user->license_no
                         ]);
@@ -100,7 +100,6 @@
                         echo getInputField([
                           'label' => 'FIN #',
                           'name' => 'fin_no',
-                          'type' => 'number',
                           'value' => $user->fin_no
                         ]);
 

@@ -46,6 +46,7 @@
                            <th>#</th>
                            <th>Invoice #</th>
                            <th>Customer</th>
+                           <th>Driver</th>
                            <th>Category</th>
                            <th>Salesperson</th>
                            <th>Total Product</th>
