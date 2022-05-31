@@ -64,12 +64,14 @@
                           echo getInputField([
                               'label' => 'Email Address For E-Receipt',
                               'name' => 'email',
-                              'type' => 'email'
+                              'type' => 'email',
+                              'required' => false
                             ]);
                           echo getInputField([
                               'label' => 'Email Address For SOA',
                               'name' => 'soa_email',
-                              'type' => 'email'
+                              'type' => 'email',
+                              'required' => false
                             ]);
 
                           echo getSelectField([

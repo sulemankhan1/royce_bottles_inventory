@@ -13,14 +13,16 @@ class Customer_model extends CI_Model
           // datatable column index => database column name
           0 => NULL,
           1 => 'customers.name',
-          2 => 'customers.shop_name',
-          3 => 'customers.shop_id',
-          4 => 'customers.primary_contact',
-          5 => 'customers.secondary_contact',
-          6 => 'customers.e_receipt_email',
-          7 => 'customers.cat_type',
-          8 => 'salesperson.name',
-          9 => NULL
+          2 => 'customers.day',
+          3 => 'customers.shop_name',
+          4 => 'customers.shop_id',
+          5 => 'customers.primary_contact',
+          6 => 'customers.secondary_contact',
+          7 => 'customers.e_receipt_email',
+          8 => 'customers.cat_type',
+          9 => 'salesperson.name',
+          10 => 'customers.added_at',
+          11 => NULL
 
       ];
 
@@ -45,6 +47,7 @@ class Customer_model extends CI_Model
            $this->db->group_start();
 
             $this->db->or_like('customers.name',$requestData['search']['value']);
+            $this->db->or_like('customers.day',$requestData['search']['value']);
             $this->db->or_like('customers.shop_name',$requestData['search']['value']);
             $this->db->or_like('customers.shop_id',$requestData['search']['value']);
             $this->db->or_like('customers.primary_contact',$requestData['search']['value']);

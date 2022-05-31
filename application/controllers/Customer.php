@@ -78,6 +78,7 @@ class Customer extends MY_Controller
         '<span class="table-img-txt-design">'.$v->name.'</span>';
 
       $nestedData[] = $name;
+      $nestedData[] = $v->day;
       $nestedData[] = $v->shop_name;
       $nestedData[] = $v->shop_id;
       $nestedData[] = $v->primary_contact;
@@ -99,6 +100,7 @@ class Customer extends MY_Controller
 
       $nestedData[] = $cat_type;
       $nestedData[] = $v->salesperson_name;
+      $nestedData[] = getDateTimeFormat($v->added_at,'date');
 
         $delete_url = site_url('delete_customer/'.$ID);
 
@@ -109,33 +111,26 @@ class Customer extends MY_Controller
 
           if (isUserAllow(32)) {
 
-            $actions .= '<a href="'.site_url('edit_customer/'.$ID) .'" class="action-icons" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit">
-              <i class="fa fa-pencil"></i>
-            </a>';
+            $actions .= '<a href="'.site_url('edit_customer/'.$ID) .'" class="action-icons" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit"><i class="fa fa-pencil"></i></a>';
 
           }
 
           if (isUserAllow(33)) {
 
-            $actions .= '<a href="javascript:void(0)" class="action-icons delete_record_" data-msg="Are you sure you want to delete this Customer?" data-url="'. $delete_url .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete">
-              <i class="fa-solid fa-trash"></i>
-            </a>';
+            $actions .= '<a href="javascript:void(0)" class="action-icons delete_record_" data-msg="Are you sure you want to delete this Customer?" data-url="'. $delete_url .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete"><i class="fa-solid fa-trash"></i></a>';
 
           }
 
 
           if (isUserAllow(34)) {
 
-            $actions .= '<a href="javascript:void(0)" class="action-icons view_details_" data-url="'. site_url('AjaxController/getCustomerDetails/'.$ID) .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Details">
-              <i class="fa fa-eye"></i>
-            </a>';
+            $actions .= '<a href="javascript:void(0)" class="action-icons view_details_" data-url="'. site_url('AjaxController/getCustomerDetails/'.$ID) .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Details"><i class="fa fa-eye"></i></a>';
+
           }
 
             if (isUserAllow(74)) {
 
-            $actions .= '<a href="javascript:void(0)" class="action-icons adjust_prices_" data-url="'. site_url('AjaxController/getCustomerProductPrices/'.$ID) .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Adjust Price by product">
-                <i class="fa-solid fa-circle-dollar-to-slot"></i>
-              </a>';
+            $actions .= '<a href="javascript:void(0)" class="action-icons adjust_prices_" data-url="'. site_url('AjaxController/getCustomerProductPrices/'.$ID) .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Adjust Price by product"><i class="fa-solid fa-circle-dollar-to-slot"></i></a>';
 
             }
 
@@ -217,7 +212,7 @@ class Customer extends MY_Controller
         if ($p['email'] != $p['old_email'])
         {
 
-          $is_email_unique = '|is_unique[customers.e_receipt_email]';
+          $is_email_unique = 'is_unique[customers.e_receipt_email]';
 
         }
 
@@ -225,12 +220,11 @@ class Customer extends MY_Controller
       else
       {
 
-        $is_email_unique = '|is_unique[customers.e_receipt_email]';
+        $is_email_unique = 'is_unique[customers.e_receipt_email]';
 
       }
 
-      $this->form_validation->set_rules('email', 'Email Address For E-Receipt', 'required'.$is_email_unique,[
-        'required'      => 'The %s is required',
+      $this->form_validation->set_rules('email', 'Email Address For E-Receipt',$is_email_unique,[
         'is_unique'     => 'The %s already exist'
       ]);
 
@@ -240,7 +234,7 @@ class Customer extends MY_Controller
         if ($p['soa_email'] != $p['old_soa_email'])
         {
 
-          $is_soa_email_unique = '|is_unique[customers.soa_email]';
+          $is_soa_email_unique = 'is_unique[customers.soa_email]';
 
         }
 
@@ -248,12 +242,11 @@ class Customer extends MY_Controller
       else
       {
 
-        $is_soa_email_unique = '|is_unique[customers.soa_email]';
+        $is_soa_email_unique = 'is_unique[customers.soa_email]';
 
       }
 
-      $this->form_validation->set_rules('soa_email', 'Email Address For SOA', 'required'.$is_soa_email_unique.'|callback_check_customer_email['.$p['email'].']',[
-        'required'      => 'The %s field is required',
+      $this->form_validation->set_rules('soa_email', 'Email Address For SOA',$is_soa_email_unique.'|callback_check_customer_email['.$p['email'].']',[
         'is_unique'     => 'The %s already exist'
       ]);
 

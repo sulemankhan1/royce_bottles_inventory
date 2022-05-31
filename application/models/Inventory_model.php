@@ -152,8 +152,15 @@ class Inventory_model extends CI_Model
       $this->db->join('products','products.id = assign_stock_details.product_id');
 
       $this->db->where('assign_stock.is_deleted',0);
+
       $this->db->where('assign_stock.is_return',0);
       $this->db->where('assign_stock.status','confirmed');
+
+      if ($this->session->userdata('UTYPE') == 'driver') {
+
+        $this->db->where('assign_stock.driver_id',$this->session->userdata('UID'));
+
+      }
 
       $this->db->group_by('assign_stock_details.assign_stock_id');
 

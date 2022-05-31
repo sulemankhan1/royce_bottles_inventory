@@ -33,6 +33,7 @@
                         <tr>
                            <th>#</th>
                            <th>Name</th>
+                           <th>Day</th>
                            <th>Shop Name</th>
                            <th>Shop ID</th>
                            <th>Primary Contact </th>
@@ -40,6 +41,7 @@
                            <th>Email For E-receipt </th>
                            <th>Payment Type</th>
                            <th>Salesperson </th>
+                           <th>Added At</th>
                            <th class="dnr">Actions</th>
                         </tr>
                      </thead>

@@ -86,13 +86,15 @@
                               'label' => 'Email Address For E-Receipt',
                               'name' => 'email',
                               'type' => 'email',
-                              'value' => $customer->e_receipt_email
+                              'value' => $customer->e_receipt_email,
+                              'required' => false
                             ]);
                           echo getInputField([
                               'label' => 'Email Address For SOA',
                               'name' => 'soa_email',
                               'type' => 'email',
-                              'value' => $customer->soa_email
+                              'value' => $customer->soa_email,
+                              'required' => false
                             ]);
 
                           echo getSelectField([

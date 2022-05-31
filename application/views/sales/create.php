@@ -35,16 +35,23 @@
                           echo getHiddenField('customer_category');
                           echo getHiddenField('total_amount',0);
 
-                          echo getSelectField([
-                            'label' => 'Customer',
-                            'name' => 'customer_id',
-                            'id' => 'sale_customer_id',
-                            'column' => 'sm-4',
-                            'data' => $customers
-                          ]);
-
-
                           ?>
+
+                          <div class="col-sm-4 mb-3">
+
+                            <label for="Customer" class="form-label">Customer</label>
+
+                            <select class="form-select form-select-sm select2" data-width="100%" name="customer_id" id="sale_customer_id" required>
+
+                              <option value="">select</option>
+                              <?php foreach ($customers as $key => $v): ?>
+
+                                <option value="<?= $v->id ?>"><?= $v->name.'-'.$v->shop_name.'-'.$v->shop_acronym ?></option>
+
+                              <?php endforeach; ?>
+                            </select>
+
+                          </div>
 
                         <div class="col-md-8">
                           <label for="Customer Remarks" class="form-label customer_remarks_col" style="display:none;">Customer Remarks</label>
