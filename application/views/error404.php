@@ -25,7 +25,6 @@
 		}
 
 		h1 {
-			font - size: 50px;
 			margin-bottom: 10px;
 			border-bottom: 1px solid white;
 		}
@@ -35,7 +34,7 @@
 <body>
 
 	<div>
-		<h1>404</h1>
+		<h1>You are not authorized to view this page</h1>
 		<h2>Page not found</h2>
 	</div>
 

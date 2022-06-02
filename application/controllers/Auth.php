@@ -20,7 +20,7 @@ class Auth extends CI_Controller
     if($this->check_user_login())
     {
 
-      redirect('dashbaord');
+      redirect('dashboard');
 
     }
 
@@ -100,7 +100,7 @@ class Auth extends CI_Controller
     if($this->check_user_login())
     {
 
-      redirect('dashbaord');
+      redirect('dashboard');
 
     }
 
