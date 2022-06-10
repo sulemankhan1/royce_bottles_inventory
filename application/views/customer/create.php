@@ -107,11 +107,13 @@
 
                           echo getTextareaField([
                             'label' => 'Shop Address',
-                            'name' => 'address'
+                            'name' => 'address',
+                            'required' => false
                           ]);
                           echo getTextareaField([
                             'label' => 'Remarks',
-                            'name' => 'remarks'
+                            'name' => 'remarks',
+                            'required' => false
                           ]);
 
                           echo getSubmitBtn('Add Customer');

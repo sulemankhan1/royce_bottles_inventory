@@ -116,7 +116,7 @@
                   <div class="row">
 
                     <div class="col-sm-12" style="lfloat:left">
-                      <span class="font_design font_uppercase">Invoice #: 56757676<?= $sale->invoice_no ?></span>
+                      <span class="font_design font_uppercase">Invoice #: <?= $sale->invoice_no ?></span>
                     </div>
                   </div>
                 </div>
@@ -184,7 +184,7 @@
 
                   <h6 class="text-primary font_uppercase" style="font-size: 1rem;color: #3a57e9!important;">Invoice To</h6>
 
-                    <span class="font_design font_uppercase">asfasfasf<?= $sale->customer_name ?></span>
+                    <span class="font_design font_uppercase"><?= $sale->customer_name ?></span>
 
                     <p id="customer_address">dfasfasfasfas
                       <?= $sale->customer_address ?>
@@ -226,8 +226,8 @@
                       <td><?= $v->sale_qty ?></td>
                       <td><?= $v->exchange_qty ?></td>
                       <td><?= $v->foc_qty ?></td>
-                      <td><?= $v->price ?></td>
-                      <td style="text-align:right"><?= $v->amount?></td>
+                      <td><?= number_format(floatval($v->price),2); ?></td>
+                      <td style="text-align:right"><?= number_format(floatval($v->amount),2); ?></td>
                     </tr>
 
                     <?php endforeach; ?>
@@ -236,7 +236,7 @@
                   <tfoot>
                     <tr>
                       <th colspan="5" style="text-align:right;">SubTotal</th>
-                      <td id="totals_color"><?= $sale->total_amount ?></td>
+                      <td id="totals_color"><?= number_format(floatval($sale->total_amount),2); ?></td>
                     </tr>
                   </tfoot>
                 </table>

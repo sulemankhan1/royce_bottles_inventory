@@ -345,6 +345,7 @@
                 </thead>
                 <tbody>
 
+                  <?php if (!empty($call_orders)): ?>
                   <?php foreach ($call_orders as $key => $v): ?>
 
                   <tr>
@@ -387,8 +388,13 @@
                       </div>
                     </td>
                   </tr>
-
                   <?php endforeach; ?>
+                  <?php else: ?>
+                    <tr>
+                      <th colspan="6">No record found...</th>
+                    </tr>
+
+                  <?php endif; ?>
 
                 </tbody>
               </table>

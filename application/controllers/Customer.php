@@ -162,7 +162,7 @@ class Customer extends MY_Controller
     $days = [
         'Monday',
         'Tuesday',
-        'Wednesdasy',
+        'Wednesday',
         'Thursday',
         'Friday',
         'Saturday',
@@ -254,8 +254,6 @@ class Customer extends MY_Controller
       $this->form_validation->set_rules('salesperson_id', 'Salesperson', 'required');
       $this->form_validation->set_rules('driver_id', 'Driver', 'required');
       $this->form_validation->set_rules('day', 'Day', 'required');
-      $this->form_validation->set_rules('address', 'Shop Address', 'required');
-      $this->form_validation->set_rules('remarks', 'Remarks', 'required');
 
       if ($this->form_validation->run() == FALSE)
       {
@@ -422,7 +420,7 @@ class Customer extends MY_Controller
     $days = [
         'Monday',
         'Tuesday',
-        'Wednesdasy',
+        'Wednesday',
         'Thursday',
         'Friday',
         'Saturday',

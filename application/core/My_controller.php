@@ -157,7 +157,7 @@ class MY_Controller extends CI_Controller
         'page_title' => $page_title,
         'sale' => $sale,
         'sales_details' => $sales_details,
-        'root' => $_SERVER['DOCUMENT_ROOT'].'/royce/web-dev/'
+        'root' => $_SERVER['DOCUMENT_ROOT'].'/'
 
       ];
 
@@ -170,18 +170,13 @@ class MY_Controller extends CI_Controller
   public function send_mail_($arr)
   {
 
-      return true;
-
       $this->load->library('email');
 
       $to = $arr['to'];
       $subject = $arr['subject'];
       $body = $arr['body'];
 
-      echo $company_name = companySetting('name');
-
-      die();
-
+      $company_name = companySetting('name');
 
       $config['crlf']     = "\r\n";
       $config['newline']  = "\r\n";
@@ -221,6 +216,11 @@ class MY_Controller extends CI_Controller
       $sale_row = $this->bm->getRow('sales','id',$sale_id);
       $customer = $this->bm->getRow('customers','id',$sale_row->customer_id);
 
+      if($customer->e_receipt_email == '')
+      {
+          return true;
+      }
+
       $email_subject = 'RZ';
       $email_body = '';
 
@@ -243,26 +243,26 @@ class MY_Controller extends CI_Controller
 
         @$this->generateSalePdf($sale_row->id);
 
-        $arr = [
+          $arr = [
 
-          'to' => $customer->e_receipt_email,
-          'subject' => $email_subject,
-          'body' => $email_body,
-          'attachment' => $_SERVER["DOCUMENT_ROOT"].'/assets/mypdf'
+            'to' => $customer->e_receipt_email,
+            'subject' => $email_subject,
+            'body' => $email_body,
+            'attachment' => $_SERVER["DOCUMENT_ROOT"].'/assets/mypdf.pdf'
 
-        ];
+          ];
 
-        //send mail to customer about his sale
-        $res = $this->send_mail_($arr);
+          //send mail to customer about his sale
+          $res = $this->send_mail_($arr);
 
-        if($res)
-        {
-          return true;
-        }
-        else
-        {
-          return false;
-        }
+          if($res)
+          {
+            return true;
+          }
+          else
+          {
+            return false;
+          }
 
   }
 

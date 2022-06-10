@@ -26,15 +26,23 @@
                         <div class="col-sm-12 mb-2">
                             <h5>Customer Details</h5>
                         </div>
-                        <?php
 
-                        echo getSelectField([
-                          'label' => 'Customer',
-                          'name' => 'customer_id',
-                          'id' => 'customer_id',
-                          'data' => $customers,
-                          'column' => 'sm-6'
-                        ]);
+                        <div class="col-sm-6 mb-3">
+
+                          <label for="Customer" class="form-label">Customer</label>
+
+                          <select class="form-select form-select-sm select2" data-width="100%" name="customer_id" id="customer_id" required>
+
+                            <option value="">select</option>
+                            <?php foreach ($customers as $key => $v): ?>
+
+                              <option value="<?= $v->id ?>"><?= $v->name.'-'.$v->shop_name.'-'.$v->shop_acronym ?></option>
+
+                            <?php endforeach; ?>
+                          </select>
+
+                        </div>
+                        <?php
 
                         echo getInputField([
                           'label' => 'Customer Name',

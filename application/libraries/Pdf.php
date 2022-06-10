@@ -50,12 +50,12 @@ class Pdf extends DOMPDF
         // Render the HTML as PDF
         $this->render();
 
-         // $output = $this->output();
-        // file_put_contents('assets/invoice.pdf', $output);
+         $output = $this->output();
+        file_put_contents('assets/mypdf.pdf', $output);
         // Output the generated PDF (1 = download and 0 = preview)
         // $this->stream("Invoice", array("Attachment" => 0));
-				$customer_id = 1;
-			 $this->stream("".$customer_id.".pdf", array("Attachment"=>0));
+				// $customer_id = 1;
+			 // $this->stream("".$customer_id.".pdf", array("Attachment"=>0));
 
 	}
 }

@@ -150,7 +150,7 @@ class Settings extends MY_Controller
     $days = [
         'Monday',
         'Tuesday',
-        'Wednesdasy',
+        'Wednesday',
         'Thursday',
         'Friday',
         'Saturday',

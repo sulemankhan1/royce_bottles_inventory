@@ -10,6 +10,8 @@ $route['login'] = 'Auth/login';
 $route['login_user'] = 'Auth/checkLoginDetails';
 $route['forget_password'] = 'Auth/forget_password';
 $route['send_forgetpassword_link'] = 'Auth/send_forgetpassword_link';
+$route['change_password/(:any)'] = 'Auth/change_password/$1';
+$route['update_password'] = 'Auth/update_password';
 $route['logout'] = 'Auth/logout';
 
 //dashbaord

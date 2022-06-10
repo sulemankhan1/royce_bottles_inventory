@@ -257,7 +257,7 @@ class AjaxController extends MY_Controller
         'logs' => $this->Inventory_model->getLogDetails($get)
 
       ];
-      
+
       $this->load_view('inventory/print_log_details',$data);
 
   }
@@ -711,7 +711,7 @@ class AjaxController extends MY_Controller
       'customer_id' => $customer_id,
       'from' => $from_date,
       'to' => $to_date,
-      'root' => $_SERVER['DOCUMENT_ROOT'].'/royce/web-dev/',
+      'root' => $_SERVER['DOCUMENT_ROOT'].'/',
 
     ];
 
@@ -766,22 +766,34 @@ class AjaxController extends MY_Controller
         if($type != 'whatsapp')
         {
 
-          $arr = [
-
-            'to' => $customer->soa_email,
-            'subject' => $email_subject,
-            'body' => $email_body,
-            'attachment' => $_SERVER["DOCUMENT_ROOT"].'/assets/mypdf.pdf'
-
-          ];
-
-          //send mail to customer about his payments
-          $res = $this->send_mail_($arr);
-
-          if($res)
+          if($customer->soa_email != '')
           {
+
+            $arr = [
+
+              'to' => $customer->soa_email,
+              'subject' => $email_subject,
+              'body' => $email_body,
+              'attachment' => $_SERVER["DOCUMENT_ROOT"].'/assets/mypdf.pdf'
+
+            ];
+
+            //send mail to customer about his payments
+            $res = $this->send_mail_($arr);
+
+            if($res)
+            {
+                $output['status'] = true;
+                $output['msg'] = 'Pdf has sent on email successfully';
+            }
+
+          }
+          else
+          {
+
               $output['status'] = true;
               $output['msg'] = 'Pdf has sent on email successfully';
+
           }
 
         }

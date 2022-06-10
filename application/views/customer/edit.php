@@ -135,12 +135,14 @@
                           echo getTextareaField([
                             'label' => 'Shop Address',
                             'name' => 'address',
-                            'value' => $customer->address
+                            'value' => $customer->address,
+                            'required' => false
                           ]);
                           echo getTextareaField([
                             'label' => 'Remarks',
                             'name' => 'remarks',
-                            'value' => $customer->remarks
+                            'value' => $customer->remarks,
+                            'required' => false
                           ]);
 
                           echo getSubmitBtn('Update Customer');

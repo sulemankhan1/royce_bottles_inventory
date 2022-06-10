@@ -110,6 +110,34 @@
     <!-- toastr  js -->
     <script src="<?= base_url('assets/js/toastr/toastr.min.js') ?>"></script>
 
+    <?php if ($this->session->flashdata('_success')): ?>
+
+      <script type="text/javascript">
+
+       var _succes_msg = `<?= $this->session->flashdata('_success') ?>`
+
+       toastr.success(_succes_msg, "", {
+         positionClass: "toast-top-right",
+         timeOut: 5e3,
+         closeButton: !0,
+         debug: !1,
+         newestOnTop: !0,
+         progressBar: !0,
+         preventDuplicates: !0,
+         onclick: null,
+         showDuration: "300",
+         hideDuration: "1000",
+         extendedTimeOut: "1000",
+         showEasing: "swing",
+         hideEasing: "linear",
+         showMethod: "fadeIn",
+         hideMethod: "fadeOut",
+         tapToDismiss: !1
+       })
+
+      </script>
+     <?php endif; ?>
+     
       <?php if ($this->session->flashdata('_error')): ?>
 
         <script type="text/javascript">

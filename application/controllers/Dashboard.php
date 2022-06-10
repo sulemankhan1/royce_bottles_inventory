@@ -14,7 +14,7 @@ class Dashboard extends MY_Controller
 
 	public function index()
 	{
-    
+
     $user = $this->bm->getRow('users','id',$this->user_id_);
 
     $data = [

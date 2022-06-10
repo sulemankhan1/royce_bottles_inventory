@@ -126,8 +126,6 @@ class Auth extends CI_Controller
 
        $this->session->set_flashdata('_error',$error);
 
-       redirect('forget_password');
-
      }
      else
      {
@@ -139,13 +137,33 @@ class Auth extends CI_Controller
        if($data)
        {
 
-         echo "this module is on maintenance";
+         $passwordplain = rand(999999999,9999999999);
+
+         $arr = [
+
+            'token' => $passwordplain,
+            'token_date' => date('Y-m-d H:i:s')
+
+         ];
+
+
+         // update user forget password token
+         $user = $this->Auth_model->updateForgetPasswordToken($email,$arr);
+
+         $company_name = companySetting('name');
+
+         $email_body = '';
+         $email_body = 'Dear '.$user->name.','. "\r\n";
+         $email_body .= 'Thanks for contacting regarding to forgot password,<br> To change the <b>Password</b> link is given below :<br><a href="'. base_url('change_password/'.$passwordplain).'">Change Password</a>'."\r\n";
+         $email_body .= '<br>Please Update your password.';
+         $email_body .= '<br>Thanks & Regards';
+         $email_body .= '<br>'.$company_name;
 
          $mail_credentails = [
 
             'to' => $email,
             'subject' => 'Forget Password',
-            'body' => 'This is forget password'
+            'body' => $email_body
 
          ];
 
@@ -153,14 +171,12 @@ class Auth extends CI_Controller
 
          if($is_send)
          {
-           echo "sent";
+           $this->session->set_flashdata('_success','Forget Password link has been sent on your email');
          }
          else
          {
-           echo "not";
+           $this->session->set_flashdata('_error','Connection error...');
          }
-
-         die();
 
        }
        else
@@ -168,11 +184,11 @@ class Auth extends CI_Controller
 
          $this->session->set_flashdata('_error','Email is not registered');
 
-         redirect('forget_password');
-
        }
 
      }
+
+     redirect('forget_password');
 
   }
 
@@ -235,6 +251,80 @@ class Auth extends CI_Controller
       {
         return false;
       }
+
+  }
+
+  public function change_password($token)
+  {
+    
+      if($this->check_user_login())
+      {
+
+        redirect('dashboard');
+
+      }
+
+      $user = $this->bm->getRow('users','token',$token);
+
+      if(!empty($user))
+      {
+
+        $token_time = date("H:i",strtotime('+30 minutes',strtotime($user->token_date)));
+        $current_time = date("H:i");
+
+        if(strtotime($token_time) >= strtotime($current_time))
+        {
+            $data['user'] = $user;
+            $this->load->view('auth/change_password',$data);
+        }
+        else
+        {
+          $this->load->view('token_expired');
+        }
+
+      }
+      else
+      {
+        $this->load->view('token_expired');
+      }
+
+  }
+
+  public function update_password()
+  {
+
+    $p = $this->input->post();
+
+    $this->form_validation->set_rules('password','Password','required');
+    $this->form_validation->set_rules('confirm_password','Confirm Password','required|matches[password]');
+
+    if ($this->form_validation->run() == FALSE)
+    {
+
+      $error = validation_errors();
+
+      $this->session->set_flashdata('_error',$error);
+
+      redirect('change_password/'.$p['token']);
+
+    }
+    else
+    {
+
+        $arr = [
+
+          'password' => $this->encryption->encrypt($p['password']),
+          'token' => NULL
+
+        ];
+
+        $this->bm->update('users',$arr,'id',$p['user_id']);
+
+        $this->session->set_flashdata('_success','Password has been changed Successfully');
+
+        redirect('login');
+
+    }
 
   }
 

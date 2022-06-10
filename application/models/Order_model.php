@@ -155,7 +155,9 @@ class Order_model extends CI_Model
 
     $current_day = date('l');
 
-    $this->db->select('customers.id,customers.name');
+    $current_day = 'Wednesdasy';
+
+    $this->db->select('customers.id,customers.name,customers.shop_name,customers.shop_acronym');
     $this->db->from('call_orders');
     $this->db->join('customers','customers.id = call_orders.customer_id');
     $this->db->join('users','users.id = call_orders.driver_id');

@@ -1,6 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+date_default_timezone_set("Asia/Karachi");
+
 // $config['base_url'] = $_SERVER['SERVE']'http://localhost/royce_bottles_inventory/';
 // //
 $config['base_url']  =  "http://".$_SERVER['HTTP_HOST'];

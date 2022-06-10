@@ -517,36 +517,36 @@ class Sales extends MY_Controller
 
            $this->bm->insert_rows('logs',$logs);
 
-           //check is_send sale pdf on mail or not
-           // $is_invoice_email = $this->bm->getRowWithConditions('general_setting',['name' => 'INVOICE_EMAIL']);
-           //
-           // if(!empty($is_invoice_email))
-           // {
-           //
-           //    if($is_invoice_email->value == 'yes')
-           //    {
-           //
-           //      //send mail to customer about his sale
-           //      $this->sendInvoicePdfOnMail($sale_row->id);
-           //
-           //    }
-           //
-           // }
-           //check is_send sale pdf on whatsapp or not
-           // $is_invoice_whatsapp = $this->bm->getRowWithConditions('general_setting',['name' => 'INVOICE_WHATSAPP']);
-           //
-           // if(!empty($is_invoice_whatsapp))
-           // {
-           //
-           //    if($is_invoice_whatsapp->value == 'yes')
-           //    {
-           //
-           //      //send whatsapp to customer about his sale
-           //      $this->sendInvoicePdfOnWhatsapp($sale_row->id);
-           //
-           //    }
-           //
-           // }
+           // check is_send sale pdf on mail or not
+           $is_invoice_email = $this->bm->getRowWithConditions('general_setting',['name' => 'INVOICE_EMAIL']);
+
+           if(!empty($is_invoice_email))
+           {
+
+              if($is_invoice_email->value == 'yes')
+              {
+
+                //send mail to customer about his sale
+                $this->sendInvoicePdfOnMail($sale_row->id);
+
+              }
+
+           }
+           // check is_send sale pdf on whatsapp or not
+           $is_invoice_whatsapp = $this->bm->getRowWithConditions('general_setting',['name' => 'INVOICE_WHATSAPP']);
+
+           if(!empty($is_invoice_whatsapp))
+           {
+
+              if($is_invoice_whatsapp->value == 'yes')
+              {
+
+                //send whatsapp to customer about his sale
+                $this->sendInvoicePdfOnWhatsapp($sale_row->id);
+
+              }
+
+           }
 
       $this->trans_('complete');
 

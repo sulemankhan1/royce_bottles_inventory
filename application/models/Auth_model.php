@@ -89,5 +89,20 @@ class Auth_model extends CI_Model
 
   }
 
+  public function updateForgetPasswordToken($email ,$arr)
+  {
+
+    //update user forget password token
+    $this->db->where('email',$email);
+    $this->db->update('users' , $arr);
+
+    //get user forget password token
+    $this->db->select('name,token,token_date');
+    $this->db->from('users');
+    $this->db->where('email',$email);
+    return $this->db->get()->row();
+
+  }
+
 
 }

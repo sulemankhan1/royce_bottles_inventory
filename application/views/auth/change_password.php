@@ -53,18 +53,25 @@
                         <h4 class="logo-title"></h4>
 
                       </a>
-                     <h2 class="mb-2">Reset Password</h2>
-                     <p>Enter your email address and we'll send you an email with instructions to reset your password.</p>
-                     <form action="<?= site_url('send_forgetpassword_link') ?>" method="post">
+                     <h2 class="mb-2">Change Password</h2>
+                     <form action="<?= site_url('update_password') ?>" method="post">
+                       <input type="hidden" name="token" value="<?= $user->token ?>">
+                       <input type="hidden" name="user_id" value="<?= $user->id ?>">
                         <div class="row">
-                           <div class="col-lg-12">
-                              <div class="floating-label form-group">
-                                 <label for="email" class="form-label">Email</label>
-                                 <input type="email" class="form-control" id="email" aria-describedby="email" name="email">
-                              </div>
-                           </div>
+                          <div class="col-lg-12">
+                             <div class="floating-label form-group">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="password" aria-describedby="password" name="password">
+                             </div>
+                          </div>
+                          <div class="col-lg-12">
+                             <div class="floating-label form-group">
+                                <label for="confirm_password" class="form-label">Confirm Password</label>
+                                <input type="password" class="form-control" id="confirm_password" aria-describedby="confirm_password" name="confirm_password">
+                             </div>
+                          </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">Reset</button>
+                        <button type="submit" class="btn btn-primary">Change Password</button>
                      </form>
                   </div>
                </div>
@@ -91,61 +98,33 @@
       <!-- toastr  js -->
       <script src="<?= base_url('assets/js/toastr/toastr.min.js') ?>"></script>
 
-      <?php if ($this->session->flashdata('_success')): ?>
+      <?php if ($this->session->flashdata('_error')): ?>
 
         <script type="text/javascript">
 
-         var _succes_msg = `<?= $this->session->flashdata('_success') ?>`
+         var _error_msg = `<?= $this->session->flashdata('_error') ?>`;
 
-         toastr.success(_succes_msg, "", {
-           positionClass: "toast-top-right",
-           timeOut: 5e3,
-           closeButton: !0,
-           debug: !1,
-           newestOnTop: !0,
-           progressBar: !0,
-           preventDuplicates: !0,
-           onclick: null,
-           showDuration: "300",
-           hideDuration: "1000",
-           extendedTimeOut: "1000",
-           showEasing: "swing",
-           hideEasing: "linear",
-           showMethod: "fadeIn",
-           hideMethod: "fadeOut",
-           tapToDismiss: !1
-         })
+         toastr.error(_error_msg, "", {
+          positionClass: "toast-top-right",
+          timeOut: 5e3,
+          closeButton: !0,
+          debug: !1,
+          newestOnTop: !0,
+          progressBar: !0,
+          preventDuplicates: !0,
+          onclick: null,
+          showDuration: "300",
+          hideDuration: "1000",
+          extendedTimeOut: "1000",
+          showEasing: "swing",
+          hideEasing: "linear",
+          showMethod: "fadeIn",
+          hideMethod: "fadeOut",
+          tapToDismiss: !1
+        })
 
         </script>
        <?php endif; ?>
-       
-        <?php if ($this->session->flashdata('_error')): ?>
-
-          <script type="text/javascript">
-
-           var _error_msg = `<?= $this->session->flashdata('_error') ?>`;
-
-           toastr.error(_error_msg, "", {
-            positionClass: "toast-top-right",
-            timeOut: 5e3,
-            closeButton: !0,
-            debug: !1,
-            newestOnTop: !0,
-            progressBar: !0,
-            preventDuplicates: !0,
-            onclick: null,
-            showDuration: "300",
-            hideDuration: "1000",
-            extendedTimeOut: "1000",
-            showEasing: "swing",
-            hideEasing: "linear",
-            showMethod: "fadeIn",
-            hideMethod: "fadeOut",
-            tapToDismiss: !1
-          })
-
-          </script>
-         <?php endif; ?>
 
   </body>
 </html>
