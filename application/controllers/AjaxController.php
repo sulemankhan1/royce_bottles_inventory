@@ -799,10 +799,9 @@ class AjaxController extends MY_Controller
         }
         else
         {
-          //send whatsapp to customer about his sale
-          // $res = $this->sendInvoicePdfOnWhatsapp($sale_id);
 
-          $res = false;
+          // send whatsapp to customer about his payments
+          $res = $this->sendOnWhatsapp();
 
           if($res)
           {

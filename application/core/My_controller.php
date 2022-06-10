@@ -272,6 +272,11 @@ class MY_Controller extends CI_Controller
     $sale_row = $this->bm->getRow('sales','id',$sale_id);
     $customer = $this->bm->getRow('customers','id',$sale_row->customer_id);
 
+    if ($customer->primary_contact == '') {
+
+        return true;
+    }
+
     $email_subject = 'RZ';
     $email_body = '';
 
@@ -295,8 +300,52 @@ class MY_Controller extends CI_Controller
 
       @$this->generateSalePdf($sale_row->id);
 
+      $arr = [
+
+        // 'recipient_number' => $customer->primary_contact,
+        'recipient_number' => '+923361240874',
+        'sender_number' => '+923413368152',
+        'message' => 'Your appointment is coming up on 30/06/2014 at 4:15 PM',
+        'attachment' => $_SERVER["DOCUMENT_ROOT"].'/assets/mypdf.pdf'
+
+      ];
+
+      //send whatsapp to customer about his sale
+      $res = $this->sendOnWhatsapp($arr);
+
+      if($res)
+      {
+        return true;
+      }
+      else
+      {
+        return false;
+      }
 
   }
+
+  public function sendOnWhatsapp()
+	{
+
+    $arr = [
+
+      // 'recipient_number' => $customer->primary_contact,
+      'recipient_number' => '+923361240874',
+      'sender_number' => '+923413368152',
+      'message' => 'Your appointment is coming up on 30/06/2014 at 4:15 PM',
+      'attachment' => $_SERVER["DOCUMENT_ROOT"].'/assets/mypdf.pdf'
+
+    ];
+
+      $this->load->library('twilio');
+
+      $recipient_number = $arr['recipient_number'];
+      $sender_number = $arr['sender_number'];
+      $message = $arr['message'];
+      $send = $this->twilio->sendmessage($recipient_number, $sender_number, $message);
+      return true;
+
+	}
 
   public function redirect_to()
   {
