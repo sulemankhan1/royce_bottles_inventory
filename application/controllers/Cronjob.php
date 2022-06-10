@@ -84,7 +84,11 @@ class Cronjob extends CI_Controller
 					foreach ($customers as $key => $v)
 					{
 
-							$this->sendPaymentsInPdfToCustomer($v->id,$v->e_receipt_email);
+							$this->bm->insert_row('mails',['mail_to' => $v->id]);
+
+							$this->sendPaymentsInPdfToCustomer($v->id,$v->soa_email);
+
+
 					}
 
 				}
@@ -96,18 +100,13 @@ class Cronjob extends CI_Controller
   public function send_mail_($arr)
   {
 
-      return true;
-
       $this->load->library('email');
 
       $to = $arr['to'];
       $subject = $arr['subject'];
       $body = $arr['body'];
 
-      echo $company_name = companySetting('name');
-
-      die();
-
+      $company_name = companySetting('name');
 
       $config['crlf']     = "\r\n";
       $config['newline']  = "\r\n";
@@ -157,7 +156,7 @@ class Cronjob extends CI_Controller
 			'customer_id' => $customer_id,
 			'from' => '',
 			'to' => '',
-			'root' => $_SERVER['DOCUMENT_ROOT'].'/royce/web-dev/',
+			'root' => $_SERVER['DOCUMENT_ROOT'].'/',
 
 		];
 
@@ -191,7 +190,7 @@ class Cronjob extends CI_Controller
 	public function sendPaymentsInPdfToCustomer($customer_id,$customer_email)
   {
 
-    if($type != '' && $customer_id != '' && $customer_email != '')
+    if($customer_id != '' && $customer_email != '')
     {
 
 				$customer_row = $this->bm->getRow('customers','id',$customer_id);

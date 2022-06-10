@@ -15,8 +15,8 @@ class Dashboard extends MY_Controller
 	public function index()
 	{
 
-    $this->sendOnWhatsapp();
-    die();
+    // $this->sendOnWhatsapp();
+    // die();
     $user = $this->bm->getRow('users','id',$this->user_id_);
 
     $data = [

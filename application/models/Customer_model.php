@@ -149,6 +149,7 @@ class Customer_model extends CI_Model
     $this->db->join('recurring_customers','recurring_customers.customer_id = customers.id');
 
     $this->db->where('customers.is_deleted',0);
+    $this->db->where('customers.soa_email !=','');
 
     return $this->db->get()->result();
 
