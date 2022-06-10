@@ -333,7 +333,7 @@ class MY_Controller extends CI_Controller
       'recipient_number' => '+923361240874',
       'sender_number' => '+923413368152',
       'message' => 'Your appointment is coming up on 30/06/2014 at 4:15 PM',
-      'attachment' => $_SERVER["DOCUMENT_ROOT"].'/assets/mypdf.pdf'
+      'attachment' => site_url('assets/mypdf.pdf')
 
     ];
 
@@ -342,7 +342,8 @@ class MY_Controller extends CI_Controller
       $recipient_number = $arr['recipient_number'];
       $sender_number = $arr['sender_number'];
       $message = $arr['message'];
-      $send = $this->twilio->sendmessage($recipient_number, $sender_number, $message);
+      $mediaurl = $arr['attachment'];
+      $send = $this->twilio->sendmessage($recipient_number, $sender_number, $message,$mediaurl);
       return true;
 
 	}
