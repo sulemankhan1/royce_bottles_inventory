@@ -336,7 +336,7 @@
                 <thead>
                   <tr>
                     <th style="width:2%;">#</th>
-                    <th>Customer</th>
+                    <!-- <th>Customer</th> -->
                     <th>Shop Name</th>
                     <th>Total Products</th>
                     <th>Total Qty</th>
@@ -350,7 +350,7 @@
 
                   <tr>
                     <td><?= $key+1 ?></td>
-                    <td><?= $v->customer_name ?></td>
+                    <!-- <td><= $v->customer_name ?></td> -->
                     <td><?= $v->shop_name ?></td>
                     <td><?= $v->total_products ?></td>
                     <td><?= $v->total_qty ?></td>

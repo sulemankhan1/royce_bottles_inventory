@@ -1,4 +1,5 @@
 <?php
+
 class MY_Controller extends CI_Controller
 {
 
@@ -327,15 +328,15 @@ class MY_Controller extends CI_Controller
   public function sendOnWhatsapp()
 	{
 
-    $arr = [
+      $arr = [
 
-      // 'recipient_number' => $customer->primary_contact,
-      'recipient_number' => '+923361240874',
-      'sender_number' => '+923413368152',
-      'message' => 'Your appointment is coming up on 30/06/2014 at 4:15 PM',
-      'attachment' => site_url('assets/mypdf.pdf')
+        // 'recipient_number' => $customer->primary_contact,
+        'recipient_number' => '+923313676465',
+        'sender_number' => '+12403564679',
+        'message' => 'Your appointment is coming up on 30/06/2014 at 4:15 PM',
+        'attachment' => site_url('assets/mypdf.pdf')
 
-    ];
+      ];
 
       $this->load->library('twilio');
 
@@ -343,7 +344,9 @@ class MY_Controller extends CI_Controller
       $sender_number = $arr['sender_number'];
       $message = $arr['message'];
       $mediaurl = $arr['attachment'];
+
       $send = $this->twilio->sendmessage($recipient_number, $sender_number, $message,$mediaurl);
+
       return true;
 
 	}

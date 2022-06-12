@@ -9,22 +9,29 @@ class Twilio {
     public function __construct()
     {
         $CI =& get_instance();
-        $sid = $CI->config->item('twilio_sid');
-        $token = $CI->config->item('twilio_token');
+        // $CI->config->item('twilio_sid');
+        $sid = 'AC22f9b0c77f5dd639ceb853aed673ff8a';
+
+        // $CI->config->item('twilio_token');
+
+        $token = 'c9d5bd5ff888a42c91d697f42aac0474';
+
         $this->twilio = new Client($sid, $token);
     }
 
 
     public function sendmessage($recipient_number, $sender_number, $message,$mediaurl)
     {
+
         $result = $this->twilio->messages
                   ->create("whatsapp:".$recipient_number, // to
                            array(
                                "from" => "whatsapp:".$sender_number,
-                               "body" =>  $message,
-                               "mediaUrl" => $mediaurl
+                               "body" =>  $message
+                               // "mediaUrl" => $mediaurl
                            )
                   );
+
         $return = $this->preparereturndata($result);
         return $return;
     }
