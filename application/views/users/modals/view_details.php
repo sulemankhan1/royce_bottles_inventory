@@ -35,6 +35,12 @@
             echo viewDetailsCol('Name',$user->name);
             echo viewDetailsCol('Email',$user->email);
             echo viewDetailsCol('Username',$user->username);
+
+            if($type != 'Admin')
+            {
+              echo viewDetailsCol('Password',$this->encryption->decrypt($user->password));
+            }
+
             echo viewDetailsCol('Contact #',$user->contact_no);
 
             if($type == 'Driver' || $type == 'Other_user')

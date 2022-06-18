@@ -130,8 +130,7 @@
                             'column' => 'sm-4',
                             'col_classes' => 'bank_name_col',
                             'value' => $sale->bank,
-                            'col_attr' => $sale->pay_type == 'Bank' || $sale->pay_type == 'Cheque'?'style="display:block;"':'',
-                            'required' => $sale->pay_type == 'Bank' || $sale->pay_type == 'Cheque'?'':false
+                            'required' => false
                           ]);
                           echo getInputField([
                             'label' => 'Account Number',
@@ -140,8 +139,7 @@
                             'column' => 'sm-4',
                             'col_classes' => 'acc_no_col',
                             'value' => $sale->acc_no,
-                            'col_attr' => $sale->pay_type == 'Bank' || $sale->pay_type == 'Cheque'?'style="display:block;"':'',
-                            'required' => $sale->pay_type == 'Bank' || $sale->pay_type == 'Cheque'?'':false
+                            'required' => false
                           ]);
                           echo getInputField([
                             'label' => 'Cheque No',
@@ -150,8 +148,7 @@
                             'column' => 'sm-4',
                             'col_classes' => 'cheque_no_col',
                             'value' => $sale->cheque_no,
-                            'col_attr' => $sale->pay_type == 'Cheque'?'style="display:block;"':'',
-                            'required' => $sale->pay_type == 'Cheque'?'':false
+                            'required' => false
                           ]);
 
                          ?>

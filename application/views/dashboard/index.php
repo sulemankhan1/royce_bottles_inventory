@@ -267,7 +267,7 @@
                 <thead>
                   <tr>
                     <th>#</th>
-                    <th>Customer</th>
+
                     <th>Shop Name</th>
                     <th>Email</th>
                     <th>Contact #</th>
@@ -283,24 +283,7 @@
 
                   <tr>
                     <td><?= $key+1 ?></td>
-                    <td>
 
-                      <?php
-                      if (@getimagesize(base_url('uploads/customer/'.$v->img)) && !empty($v->img))
-                      {
-                          $img_url = base_url('uploads/customer/'.$v->img);
-                      }
-                      else
-                      {
-                          $img_url = base_url('assets/images/avatars/01.png');
-                      }
-
-                      echo '<div class="table-circular-img"><img src="'. $img_url .'" class="" alt=""></div>'.
-                        '<span class="table-img-txt-design">'.$v->name.'</span>';
-
-                      ?>
-
-                    </td>
                     <td><?= $v->shop_name ?></td>
                     <td><?= $v->e_receipt_email ?></td>
                     <td><?= $v->primary_contact ?></td>
@@ -358,6 +341,7 @@
                       <button class="btn btn-primary accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne<?= $v->id ?>" aria-expanded="true" aria-controls="collapseOne<?= $v->id ?>">
                           <i class="fa-solid fa-circle-down"></i>
                       </button>
+                    </td>
                   </tr>
                   <tr id="collapseOne<?= $v->id ?>" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                     <td colspan="6">

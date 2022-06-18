@@ -155,8 +155,6 @@ class Order_model extends CI_Model
 
     $current_day = date('l');
 
-    $current_day = 'Wednesdasy';
-
     $this->db->select('customers.id,customers.name,customers.shop_name,customers.shop_acronym');
     $this->db->from('call_orders');
     $this->db->join('customers','customers.id = call_orders.customer_id');
@@ -201,6 +199,9 @@ class Order_model extends CI_Model
       $this->db->where('call_orders.status','confirmed');
       $this->db->where('call_orders.pending_request_status','confirmed');
       $this->db->where('call_orders.is_given',0);
+
+      $this->db->order_by('call_orders_details.call_order_id');
+      $this->db->group_by('customer_products_price.product_id');
 
       return $this->db->get()->result();
 

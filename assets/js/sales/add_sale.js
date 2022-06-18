@@ -125,24 +125,24 @@ $('.payment_type').change(function () {
 
   let pay_type = $(this).val()
 
-  $('.bank_name_col,.acc_no_col,.cheque_no_col').css('display','none')
-  $('#bank_name,#acc_no,#cheque_no').prop('required',false)
-  $('#bank_name,#acc_no,#cheque_no').val('')
-
-  if(pay_type == 'Cheque')
-  {
-
-    $('.bank_name_col,.acc_no_col,.cheque_no_col').css('display','block')
-    $('#bank_name,#acc_no,#cheque_no').prop('required',true)
-
-  }
-  else if(pay_type == 'Bank')
-  {
-
-    $('.bank_name_col,.acc_no_col').css('display','block')
-    $('#bank_name,#acc_no').prop('required',true)
-
-  }
+  // $('.bank_name_col,.acc_no_col,.cheque_no_col').css('display','none')
+  // $('#bank_name,#acc_no,#cheque_no').prop('required',false)
+  // $('#bank_name,#acc_no,#cheque_no').val('')
+  //
+  // if(pay_type == 'Cheque')
+  // {
+  //
+  //   $('.bank_name_col,.acc_no_col,.cheque_no_col').css('display','block')
+  //   $('#bank_name,#acc_no,#cheque_no').prop('required',true)
+  //
+  // }
+  // else if(pay_type == 'Bank')
+  // {
+  //
+  //   $('.bank_name_col,.acc_no_col').css('display','block')
+  //   $('#bank_name,#acc_no').prop('required',true)
+  //
+  // }
 
 })
 

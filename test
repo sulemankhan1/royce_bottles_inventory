@@ -1,287 +1,633 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
+<!-- Nav Header Component Start -->
+<?= getHiddenField('sale_filter',site_url('AjaxController/getAllSalesandCreditAmounts')); ?>
+<div class="iq-navbar-header" style="height: 215px;">
+  <div class="container-fluid iq-container">
+    <div class="row">
+      <div class="col-md-12" style="z-index:1!important;">
+        <div class="flex-wrap d-flex justify-content-between align-items-center">
+          <div>
 
-<head>
-  <meta charset="utf-8">
-  <title><?= $page_title ?></title>
-
-  <!-- Hope Ui Design System Css -->
-  <?php $root = $_SERVER['DOCUMENT_ROOT']; ?>
-  <link rel="stylesheet" href="<?= $root.'/royce/web-dev/assets/css/hope-ui.min.css'; ?>" media="all" />
-
-  <!-- Custom Css -->
-  <link rel="stylesheet" href="<?= $root.'/royce/web-dev/assets/css/custom.min.css?v=1.2.0' ?>" media="all" />
-
-  <style type="text/css">
-    .row {
-      --bs-gutter-x: 0px !important;
-    }
-
-    .company_logo {
-      min-width: 100px;
-      height: 100px;
-    }
-
-    #company_head {
-      text-align: right;
-      text-transform: uppercase;
-      margin-top: 10px;
-    }
-
-    #company_address {
-      text-align: right;
-      font-size: 13px;
-    }
-
-    .font_uppercase {
-      text-transform: uppercase !important;
-    }
-
-    .font_design {
-      color: black;
-      font-size: 14px;
-    }
-
-    #customer_address {
-      font-size: 13px;
-    }
-
-    #totals_color {
-      color: black;
-    }
-  </style>
-</head>
-
-<body>
-
-  <div class="row">
-    <div class="col-sm-12 col-lg-12">
-      <div class="card">
-        <div class="card-header d-flex justify-content-between" style="background: #f5f6fa!important;">
-          <div class="header-title" style="margin-bottom: 25px!important;">
-            <h3 class="card-title">
-              <?= $page_title ?></h3>
+            <h1>Hello <?= $user->name; ?>!</h1>
           </div>
         </div>
-        <div class="card-body">
+      </div>
+    </div>
+  </div>
+  <div class="iq-header-img" style="z-index:0!important;">
+    <img src="<?= base_url('assets/images/dashboard/top-header.png') ?>" alt="header" class="theme-color-default-img img-fluid w-100 h-100 animated-scaleX">
+  </div>
+</div> <!-- Nav Header Component End -->
+<!--Nav End-->
+</div>
+<div class="conatiner-fluid content-inner mt-n5 py-0" style=" padding-top: 0px!important;background: #e9ecef !important;">
+  <div class="row">
+    <div class="col-md-12 col-lg-12">
+      <div class="row row-cols-1">
+        <div class="overflow-hidden d-slider1 ">
+          <ul class="p-0 m-0 mb-2 swiper-wrapper list-inline">
+            <?php if ($user->type == 'admin'){ ?>
 
-          <!-- company info row start -->
-          <div class="row">
-
-            <div class="col-12 col-sm-6 col-md-8">
-              <?php
-
-                      $logo = companySetting('pdf_logo');
-                      $company_logo = $root.''.$logo;
-
-                    ?>
-
-              <?php if ($logo): ?>
-
-              <img src="<?= $company_logo ?>" alt="company_logo" class="company_logo">
-
-              <?php endif; ?>
-
-            </div>
-            <div class="col-12 col-sm-6 col-md-4">
-              <h5 id="company_head"><?= companySetting('name') ?></h5>
-              <label id="company_address">
-                <?= companySetting('address') ?>
-              </label>
-            </div>
-
-          </div>
-          <!-- company info row end -->
-
-          <!-- invoice info row start -->
-          <div class="row mt-5">
-
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-
-              <div class="row mt-1">
-                <div class="col-sm-12">
-
-                  <h6 class="text-primary font_uppercase">Invoice Information</h6>
-
-                </div>
-                <div class="col-12 col-sm-12 mt-1">
-                  <div class="row">
-
-                    <div class="col-12 col-sm-4 col-md-5 col-lg-4">
-                      <span class="font_design font_uppercase">Invoice #:</span>
-                    </div>
-                    <div class="col-12 col-sm-8 col-md-7 col-lg-8">
-                      <span class="font_design font_uppercase"><?= $sale->invoice_no ?></span>
-                    </div>
+            <li class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="700">
+              <div class="card-body">
+                <div class="progress-widget">
+                  <div id="circle-progress-01" class="text-center circle-progress-01 circle-progress circle-progress-primary" data-min-value="0" data-max-value="100" data-value="90" data-type="percent">
+                    <i class="fa-solid fa-sack-dollar dashboard-icons"></i>
                   </div>
-                </div>
-                <div class="col-12 col-sm-12">
-                  <div class="row">
-
-                    <div class="col-12 col-sm-5 col-md-6 col-lg-6 col-xl-5">
-                      <span class="font_design font_uppercase">Invoice Date:</span>
-                    </div>
-                    <div class="col-12 col-sm-7 col-md-6 col-lg-6 col-xl-7">
-                      <span class="font_design font_uppercase"><?= getDateTimeFormat($sale->added_at,'date') ?></span>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-12 col-sm-12">
-                  <div class="row">
-
-                    <div class="col-3 col-sm-4 col-md-4 col-lg-4 col-xl-4">
-                      <span class="font_design font_uppercase">Category:</span>
-                    </div>
-                    <div class="col-9 col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                      <span class="font_design font_uppercase">
-                        <?php if ($sale->customer_category == 'cash'){ ?>
-                        <span class="badge rounded-pill bg-success">Cash</span>
-                        <?php }elseif ($sale->customer_category == 'credit') { ?>
-                        <span class="badge rounded-pill bg-warning">Credit</span>
-                        <?php } ?>
-                      </span>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-12 col-sm-12">
-                  <div class="row">
-
-                    <div class="col-3 col-sm-4 col-md-4 col-lg-4 col-xl-4">
-                      <span class="font_design font_uppercase">Status:</span>
-                    </div>
-                    <div class="col-9 col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                      <span class="font_design font_uppercase">
-
-                        <?php if ($sale->status == 'paid'){ ?>
-
-                        <span class="badge rounded-pill bg-success">Paid</span>
-
-                        <?php }elseif ($sale->status == 'unpaid' || $sale->status == 'credit') { ?>
-
-                        <span class="badge rounded-pill bg-warning"><?= ucfirst($sale->status) ?></span>
-
-                        <?php }elseif ($sale->status == 'pending') { ?>
-
-                        <span class="badge rounded-pill bg-secondary">Pending</span>
-
-                        <?php }
-                                 ?>
-
-                      </span>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-
-            </div>
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-
-              <div class="row mt-1">
-                <div class="col-sm-12">
-
-                  <h6 class="text-primary font_uppercase">Invoice To</h6>
-                  <div class="col-sm-12 mt-1">
-                    <span class="font_design font_uppercase"><?= $sale->customer_name ?></span>
-                  </div>
-                  <div class="col-sm-12">
-                    <label id="customer_address">
-                      <?= $sale->customer_address ?>
-                    </label>
+                  <div class="progress-detail">
+                    <p class="mb-2">Total Sales</p>
+                    <h4 class="counter">
+                      <?= isset($sale->total_amount)?$sale->total_amount:'0'; ?>
+                    </h4>
                   </div>
                 </div>
               </div>
+            </li>
+            <li class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="800">
+              <div class="card-body">
+                <div class="progress-widget">
+                  <div id="circle-progress-02" class="text-center circle-progress-01 circle-progress circle-progress-info" data-min-value="0" data-max-value="100" data-value="80" data-type="percent">
+                    <i class="fa-solid fa-coins dashboard-icons"></i>
+                  </div>
+                  <div class="progress-detail">
+                    <p class="mb-2">Total Credit</p>
+                    <h4 class="counter">
+                      <?php
 
-            </div>
+                      echo $total_ = checkIsset($payment->total_credit) - checkIsset($payment->total_debit);
 
-          </div>
-          <!-- invoice info row end -->
+                     ?>
+                    </h4>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="900">
+              <div class="card-body">
+                <div class="progress-widget">
+                  <div id="circle-progress-03" class="text-center circle-progress-01 circle-progress circle-progress-primary" data-min-value="0" data-max-value="100" data-value="70" data-type="percent">
+                    <i class="fa-solid fa-user-group dashboard-icons"></i>
+                  </div>
+                  <div class="progress-detail">
+                    <p class="mb-2">Total Customers</p>
+                    <h4 class="counter"><?= $customers ?></h4>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="1000">
+              <div class="card-body">
+                <div class="progress-widget">
+                  <div id="circle-progress-04" class="text-center circle-progress-01 circle-progress circle-progress-info" data-min-value="0" data-max-value="100" data-value="60" data-type="percent">
 
-          <!-- table row start -->
-          <div class="row mt-4">
+                    <i class="fa-solid fa-car-rear dashboard-icons"></i>
 
-            <div class="col-12">
-              <div class="table-responsive">
-                <table class="table">
+                  </div>
+                  <div class="progress-detail">
+                    <p class="mb-2">Total Drivers</p>
+                    <h4 class="counter"><?= $drivers ?></h4>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <?php } ?>
+            <?php if ($user->type == 'driver'){ ?>
+
+            <li class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="700">
+              <div class="card-body">
+                <div class="progress-widget">
+                  <div id="circle-progress-01" class="text-center circle-progress-01 circle-progress circle-progress-primary" data-min-value="0" data-max-value="100" data-value="90" data-type="percent">
+                    <svg class="card-slie-arrow " width="24" height="24px" viewBox="0 0 24 24">
+                      <path fill="currentColor" d="M5,17.59L15.59,7H9V5H19V15H17V8.41L6.41,19L5,17.59Z"></path>
+                    </svg>
+
+                  </div>
+                  <div class="progress-detail">
+                    <p class="mb-2">Stock Taken</p>
+                    <h4 class="counter"><?= $stock->total_assign_qty != ''?$stock->total_assign_qty:0 ?></h4>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="800">
+              <div class="card-body">
+                <div class="progress-widget">
+                  <div id="circle-progress-02" class="text-center circle-progress-01 circle-progress circle-progress-info" data-min-value="0" data-max-value="100" data-value="80" data-type="percent">
+                    <svg class="card-slie-arrow " width="24" height="24px" viewBox="0 0 24 24">
+                      <path fill="currentColor" d="M5,17.59L15.59,7H9V5H19V15H17V8.41L6.41,19L5,17.59Z"></path>
+                    </svg>
+
+                  </div>
+                  <div class="progress-detail">
+                    <p class="mb-2">Stock Given</p>
+                    <h4 class="counter"><?= checkIsset($stock->total_assign_qty) - checkIsset($stock->total_available_qty)  ?></h4>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="900">
+              <div class="card-body">
+                <div class="progress-widget">
+                  <div id="circle-progress-03" class="text-center circle-progress-01 circle-progress circle-progress-primary" data-min-value="0" data-max-value="100" data-value="70" data-type="percent">
+                    <svg class="card-slie-arrow " width="24" viewBox="0 0 24 24">
+                      <path fill="currentColor" d="M19,6.41L17.59,5L7,15.59V9H5V19H15V17H8.41L19,6.41Z"></path>
+                    </svg>
+
+                  </div>
+                  <div class="progress-detail">
+                    <p class="mb-2">Stock Inhand</p>
+                    <h4 class="counter"><?= $stock->total_available_qty != ''?$stock->total_available_qty:0 ?></h4>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <?php } ?>
+            <?php if ($user->type == 'production'){ ?>
+
+            <li class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="700">
+              <div class="card-body">
+                <div class="progress-widget">
+                  <div id="circle-progress-01" class="text-center circle-progress-01 circle-progress circle-progress-primary" data-min-value="0" data-max-value="100" data-value="90" data-type="percent">
+                    <i class="fa-brands fa-product-hunt dashboard-icons"></i>
+                  </div>
+                  <div class="progress-detail">
+                    <p class="mb-2">Total Products</p>
+                    <h4 class="counter"><?= $products ?></h4>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="1000">
+              <div class="card-body">
+                <div class="progress-widget">
+                  <div id="circle-progress-04" class="text-center circle-progress-01 circle-progress circle-progress-info" data-min-value="0" data-max-value="100" data-value="60" data-type="percent">
+
+                    <i class="fa-solid fa-car-rear dashboard-icons"></i>
+
+                  </div>
+                  <div class="progress-detail">
+                    <p class="mb-2">Total Drivers</p>
+                    <h4 class="counter"><?= $drivers ?></h4>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <?php } ?>
+          </ul>
+          <div class="swiper-button swiper-button-next"></div>
+          <div class="swiper-button swiper-button-prev"></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12 col-lg-12">
+      <div class="row">
+
+        <?php if ($user->type == 'driver'){ ?>
+        <div class="col-md-12 col-lg-12">
+          <div class="overflow-hidden card" data-aos="fade-up" data-aos-delay="600">
+            <div class="p-0 card-body mb-2">
+              <h4 class="mt-2" style="margin-left:8px;">
+                Call Orders
+              </h4>
+              <div class="mt-2 table-responsive">
+                <table id="basic-table" class="table mb-0" role="grid">
                   <thead>
                     <tr>
-                      <th width="55%">Products</th>
-                      <th width="10%">Sale Qty</th>
-                      <th width="13%">Exchange Qty</th>
-                      <th width="13%">Foc Qty</th>
-                      <th width="10%">Price</th>
-                      <th style="text-align:right">Total</th>
+                      <th style="width:2%;">#</th>
+                      <th>Customer</th>
+                      <th>Shop Name</th>
+                      <th>Total Products</th>
+                      <th>Total Qty</th>
+                      <th>Action </th>
                     </tr>
                   </thead>
                   <tbody>
 
-                    <?php foreach ($sales_details as $key => $v): ?>
+                    <?php if (!empty($call_orders)){ ?>
+                    <?php foreach ($call_orders as $key => $v){ ?>
 
                     <tr>
-                      <td><?= $v->product_name ?></td>
-                      <td><?= $v->sale_qty ?></td>
-                      <td><?= $v->exchange_qty ?></td>
-                      <td><?= $v->foc_qty ?></td>
-                      <td><?= $v->price ?></td>
-                      <td style="text-align:right"><?= $v->amount?></td>
+                      <td><?= $key+1 ?></td>
+                      <td><?= $v->customer_name ?></td>
+                      <td><?= $v->shop_name ?></td>
+                      <td><?= $v->total_products ?></td>
+                      <td><?= $v->total_qty ?></td>
+                      <td>
+                        <button class="btn btn-primary accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne<?= $v->id ?>" aria-expanded="true" aria-controls="collapseOne<?= $v->id ?>">
+                          <i class="fa-solid fa-circle-down"></i>
+                        </button>
+                      </td>
+                    </tr>
+                    <tr id="collapseOne<?= $v->id ?>" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                      <td colspan="6">
+                        <div class="row">
+                          <div class="col-sm-8 m-auto">
+                            <h3 class="mb-2">Details</h3>
+                            <table class="table">
+                              <tr style="background-color: #f5f6fa;">
+                                <th style="width:2%;">#</th>
+                                <th>Product</th>
+                                <th>Qty</th>
+                              </tr>
+                              <?php if (isset($call_orders_details[$key]) && !empty($call_orders_details[$key])){ ?>
+
+                              <?php foreach ($call_orders_details[$key] as $key1 => $v1){ ?>
+
+                              <tr>
+                                <td><?= $key1+1 ?></td>
+                                <td><?= $v1->product_name ?></td>
+                                <td><?= $v1->qty ?></td>
+                              </tr>
+
+                              <?php } ?>
+
+                              <?php } ?>
+                            </table>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <?php } ?>
+                    <?php }else{ ?>
+                    <tr>
+                      <th colspan="6">No record found...</th>
                     </tr>
 
-                    <?php endforeach; ?>
+                    <?php } ?>
 
                   </tbody>
                 </table>
               </div>
             </div>
-
-            <div class="col-sm-12">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th width="78%"></th>
-                    <td>SubTotal</td>
-                    <td id="totals_color"><?= $sale->total_amount ?></td>
-                  </tr>
-                  <!-- <tr>
-                          <th width="78%"></th>
-                          <td>Taxes</td>
-                          <td id="totals_color">1000</td>
-                        </tr> -->
-                  <!-- <tr>
-                          <th width="78%"></th>
-                          <td>Discount</td>
-                          <td id="totals_color">100</td>
-                        </tr> -->
-                  <!-- <tr>
-                          <th width="78%"></th>
-                          <td>Net Amount</td>
-                          <td id="totals_color">2900</td>
-                        </tr> -->
-                </thead>
-              </table>
-            </div>
-
           </div>
-          <!-- table row end -->
+        </div>
 
-          <!-- terms & condition row start -->
+        <?php } ?>
 
-          <div class="row mt-3">
-            <div class="col-sm-12 mt-1">
-              <span class="font_design font_uppercase">Terms & Condition</span>
-            </div>
-            <div class="col-10 col-sm-10 col-md-8 col-lg-7">
-              <label id="customer_address">
-                <?= companySetting('terms_and_condition') ?>
-              </label>
+      </div>
+    </div>
+    <!-- Nav Header Component Start -->
+    <?= getHiddenField('sale_filter',site_url('AjaxController/getAllSalesandCreditAmounts')); ?>
+    <div class="iq-navbar-header" style="height: 215px;">
+      <div class="container-fluid iq-container">
+        <div class="row">
+          <div class="col-md-12" style="z-index:1!important;">
+            <div class="flex-wrap d-flex justify-content-between align-items-center">
+              <div>
+
+                <h1>Hello <?= $user->name; ?>!</h1>
+              </div>
             </div>
           </div>
-          <!-- terms & condition row end -->
+        </div>
+      </div>
+      <div class="iq-header-img" style="z-index:0!important;">
+        <img src="<?= base_url('assets/images/dashboard/top-header.png') ?>" alt="header" class="theme-color-default-img img-fluid w-100 h-100 animated-scaleX">
+      </div>
+    </div> <!-- Nav Header Component End -->
+    <!--Nav End-->
+  </div>
+  <div class="conatiner-fluid content-inner mt-n5 py-0" style=" padding-top: 0px!important;background: #e9ecef !important;">
+    <div class="row">
+      <div class="col-md-12 col-lg-12">
+        <div class="row row-cols-1">
+          <div class="overflow-hidden d-slider1 ">
+            <ul class="p-0 m-0 mb-2 swiper-wrapper list-inline">
+              <?php if ($user->type == 'admin'): ?>
+
+              <li class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="700">
+                <div class="card-body">
+                  <div class="progress-widget">
+                    <div id="circle-progress-01" class="text-center circle-progress-01 circle-progress circle-progress-primary" data-min-value="0" data-max-value="100" data-value="90" data-type="percent">
+                      <i class="fa-solid fa-sack-dollar dashboard-icons"></i>
+                    </div>
+                    <div class="progress-detail">
+                      <p class="mb-2">Total Sales</p>
+                      <h4 class="counter">
+                        <?= isset($sale->total_amount)?$sale->total_amount:'0'; ?>
+                      </h4>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="800">
+                <div class="card-body">
+                  <div class="progress-widget">
+                    <div id="circle-progress-02" class="text-center circle-progress-01 circle-progress circle-progress-info" data-min-value="0" data-max-value="100" data-value="80" data-type="percent">
+                      <i class="fa-solid fa-coins dashboard-icons"></i>
+                    </div>
+                    <div class="progress-detail">
+                      <p class="mb-2">Total Credit</p>
+                      <h4 class="counter">
+                        <?php
+
+                        echo $total_ = checkIsset($payment->total_credit) - checkIsset($payment->total_debit);
+
+                       ?>
+                      </h4>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="900">
+                <div class="card-body">
+                  <div class="progress-widget">
+                    <div id="circle-progress-03" class="text-center circle-progress-01 circle-progress circle-progress-primary" data-min-value="0" data-max-value="100" data-value="70" data-type="percent">
+                      <i class="fa-solid fa-user-group dashboard-icons"></i>
+                    </div>
+                    <div class="progress-detail">
+                      <p class="mb-2">Total Customers</p>
+                      <h4 class="counter"><?= $customers ?></h4>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="1000">
+                <div class="card-body">
+                  <div class="progress-widget">
+                    <div id="circle-progress-04" class="text-center circle-progress-01 circle-progress circle-progress-info" data-min-value="0" data-max-value="100" data-value="60" data-type="percent">
+
+                      <i class="fa-solid fa-car-rear dashboard-icons"></i>
+
+                    </div>
+                    <div class="progress-detail">
+                      <p class="mb-2">Total Drivers</p>
+                      <h4 class="counter"><?= $drivers ?></h4>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <?php endif; ?>
+              <?php if ($user->type == 'driver'): ?>
+
+              <li class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="700">
+                <div class="card-body">
+                  <div class="progress-widget">
+                    <div id="circle-progress-01" class="text-center circle-progress-01 circle-progress circle-progress-primary" data-min-value="0" data-max-value="100" data-value="90" data-type="percent">
+                      <svg class="card-slie-arrow " width="24" height="24px" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M5,17.59L15.59,7H9V5H19V15H17V8.41L6.41,19L5,17.59Z"></path>
+                      </svg>
+
+                    </div>
+                    <div class="progress-detail">
+                      <p class="mb-2">Stock Taken</p>
+                      <h4 class="counter"><?= $stock->total_assign_qty != ''?$stock->total_assign_qty:0 ?></h4>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="800">
+                <div class="card-body">
+                  <div class="progress-widget">
+                    <div id="circle-progress-02" class="text-center circle-progress-01 circle-progress circle-progress-info" data-min-value="0" data-max-value="100" data-value="80" data-type="percent">
+                      <svg class="card-slie-arrow " width="24" height="24px" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M5,17.59L15.59,7H9V5H19V15H17V8.41L6.41,19L5,17.59Z"></path>
+                      </svg>
+
+                    </div>
+                    <div class="progress-detail">
+                      <p class="mb-2">Stock Given</p>
+                      <h4 class="counter"><?= checkIsset($stock->total_assign_qty) - checkIsset($stock->total_available_qty)  ?></h4>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="900">
+                <div class="card-body">
+                  <div class="progress-widget">
+                    <div id="circle-progress-03" class="text-center circle-progress-01 circle-progress circle-progress-primary" data-min-value="0" data-max-value="100" data-value="70" data-type="percent">
+                      <svg class="card-slie-arrow " width="24" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M19,6.41L17.59,5L7,15.59V9H5V19H15V17H8.41L19,6.41Z"></path>
+                      </svg>
+
+                    </div>
+                    <div class="progress-detail">
+                      <p class="mb-2">Stock Inhand</p>
+                      <h4 class="counter"><?= $stock->total_available_qty != ''?$stock->total_available_qty:0 ?></h4>
+                    </div>
+                  </div>
+                </div>
+              </li>
+
+              <?php endif; ?>
+              <?php if ($user->type == 'production'): ?>
+
+              <li class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="700">
+                <div class="card-body">
+                  <div class="progress-widget">
+                    <div id="circle-progress-01" class="text-center circle-progress-01 circle-progress circle-progress-primary" data-min-value="0" data-max-value="100" data-value="90" data-type="percent">
+                      <i class="fa-brands fa-product-hunt dashboard-icons"></i>
+                    </div>
+                    <div class="progress-detail">
+                      <p class="mb-2">Total Products</p>
+                      <h4 class="counter"><?= $products ?></h4>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="1000">
+                <div class="card-body">
+                  <div class="progress-widget">
+                    <div id="circle-progress-04" class="text-center circle-progress-01 circle-progress circle-progress-info" data-min-value="0" data-max-value="100" data-value="60" data-type="percent">
+
+                      <i class="fa-solid fa-car-rear dashboard-icons"></i>
+
+                    </div>
+                    <div class="progress-detail">
+                      <p class="mb-2">Total Drivers</p>
+                      <h4 class="counter"><?= $drivers ?></h4>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <?php endif; ?>
+            </ul>
+            <div class="swiper-button swiper-button-next"></div>
+            <div class="swiper-button swiper-button-prev"></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12 col-lg-12">
+        <div class="row">
+          <?php if ($user->type == 'admin'): ?>
+          <div class="col-md-12">
+            <div class="card" data-aos="fade-up" data-aos-delay="800">
+              <div class="flex-wrap card-header d-flex justify-content-between align-items-center">
+                <!-- <div class="header-title">
+                <h4 class="card-title">855.8</h4>
+                <p class="mb-0">Total Sales</p>
+              </div> -->
+                <div class="d-flex align-items-center align-self-center">
+                  <div class="d-flex align-items-center text-primary">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" viewBox="0 0 24 24" fill="currentColor">
+                      <g>
+                        <circle cx="12" cy="12" r="8" fill="currentColor"></circle>
+                      </g>
+                    </svg>
+                    <div class="ms-2">
+                      <span class="text-secondary">Sales</span>
+                    </div>
+                  </div>
+                  <div class="d-flex align-items-center ms-3 text-info">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" viewBox="0 0 24 24" fill="currentColor">
+                      <g>
+                        <circle cx="12" cy="12" r="8" fill="currentColor"></circle>
+                      </g>
+                    </svg>
+                    <div class="ms-2">
+                      <span class="text-secondary">Credit</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="dropdown">
+                  <a href="#" class="text-secondary dropdown-toggle selected_sale_filter_" id="dropdownMenuButton22" data-bs-toggle="dropdown" aria-expanded="false">
+                    This Week
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton22">
+                    <li><a class="dropdown-item sale_filter_" data-type="weekly" href="javascript:void(0)">This Week</a></li>
+                    <li><a class="dropdown-item sale_filter_" data-type="monthly" href="javascript:void(0)">This Month</a></li>
+                    <li><a class="dropdown-item sale_filter_" data-type="yearly" href="javascript:void(0)">This Year</a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="card-body">
+                <div id="d-main-my" class="d-main-my"></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12 col-lg-12">
+            <div class="overflow-hidden card" data-aos="fade-up" data-aos-delay="600">
+              <div class="p-0 card-body">
+                <div class="mt-4 table-responsive">
+                  <table id="basic-table" class="table mb-0" role="grid">
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Shop Name</th>
+                        <th>Email</th>
+                        <th>Contact #</th>
+                        <th>Shop ID </th>
+                        <th>Total Credit</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+
+                      <?php if (!empty($customer_credits)): ?>
+
+                      <?php foreach ($customer_credits as $key => $v): ?>
+
+                      <tr>
+                        <td><?= $key+1 ?></td>
+                        <td><?= $v->shop_name ?></td>
+                        <td><?= $v->e_receipt_email ?></td>
+                        <td><?= $v->primary_contact ?></td>
+                        <td><?= $v->shop_id ?></td>
+                        <td><?= $payment->total_credit - $payment->total_debit; ?></td>
+                      </tr>
+
+                      <?php endforeach; ?>
+                      <?php else: ?>
+                      <tr>
+                        <th colspan="7">No record found...</th>
+                      </tr>
+                      <?php endif; ?>
+
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <?php endif; ?>
+
+          <?php if ($user->type == 'driver'): ?>
+          <div class="col-md-12 col-lg-12">
+            <div class="overflow-hidden card" data-aos="fade-up" data-aos-delay="600">
+              <div class="p-0 card-body mb-2">
+                <h4 class="mt-2" style="margin-left:8px;">
+                  Call Orders
+                </h4>
+                <div class="mt-2 table-responsive">
+                  <table id="basic-table" class="table mb-0" role="grid">
+                    <thead>
+                      <tr>
+                        <th style="width:2%;">#</th>
+                        <th>Customer</th>
+                        <th>Shop Name</th>
+                        <th>Total Products</th>
+                        <th>Total Qty</th>
+                        <th>Action </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+
+                      <?php if (!empty($call_orders)): ?>
+                      <?php foreach ($call_orders as $key => $v): ?>
+
+                      <tr>
+                        <td><?= $key+1 ?></td>
+                        <td><?= $v->customer_name ?></td>
+                        <td><?= $v->shop_name ?></td>
+                        <td><?= $v->total_products ?></td>
+                        <td><?= $v->total_qty ?></td>
+                        <td>
+                          <button class="btn btn-primary accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne<?= $v->id ?>" aria-expanded="true" aria-controls="collapseOne<?= $v->id ?>">
+                            <i class="fa-solid fa-circle-down"></i>
+                          </button>
+                      </tr>
+                      <tr id="collapseOne<?= $v->id ?>" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                        <td colspan="6">
+                          <div class="row">
+                            <div class="col-sm-8 m-auto">
+                              <h3 class="mb-2">Details</h3>
+                              <table class="table">
+                                <tr style="background-color: #f5f6fa;">
+                                  <th style="width:2%;">#</th>
+                                  <th>Product</th>
+                                  <th>Qty</th>
+                                </tr>
+                                <?php if (isset($call_orders_details[$key]) && !empty($call_orders_details[$key])): ?>
+
+                                <?php foreach ($call_orders_details[$key] as $key1 => $v1): ?>
+
+                                <tr>
+                                  <td><?= $key1+1 ?></td>
+                                  <td><?= $v1->product_name ?></td>
+                                  <td><?= $v1->qty ?></td>
+                                </tr>
+
+                                <?php endforeach; ?>
+
+                                <?php endif; ?>
+                              </table>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <?php endforeach; ?>
+                      <?php else: ?>
+                      <tr>
+                        <th colspan="6">No record found...</th>
+                      </tr>
+
+                      <?php endif; ?>
+
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <?php endif; ?>
 
         </div>
       </div>
+
     </div>
   </div>
 
-</body>
 
-</html>
+</div>
+</div>

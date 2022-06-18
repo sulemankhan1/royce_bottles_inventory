@@ -270,6 +270,8 @@ class MY_Controller extends CI_Controller
   public function sendInvoicePdfOnWhatsapp($sale_id)
   {
 
+    return true;
+    die();
     $sale_row = $this->bm->getRow('sales','id',$sale_id);
     $customer = $this->bm->getRow('customers','id',$sale_row->customer_id);
 
@@ -328,6 +330,9 @@ class MY_Controller extends CI_Controller
   public function sendOnWhatsapp()
 	{
 
+      return true;
+
+      die();
       $arr = [
 
         // 'recipient_number' => $customer->primary_contact,

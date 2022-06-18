@@ -15,6 +15,8 @@ class AjaxController extends MY_Controller
   public function getUserDetailsByType($type,$user_id)
 	{
 
+      $this->load->library('encryption');
+
       $data = [
 
         'type' => $type,

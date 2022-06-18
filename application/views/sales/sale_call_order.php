@@ -98,21 +98,24 @@
                             'name' => 'bank_name',
                             'id' => 'bank_name',
                             'column' => 'sm-4',
-                            'col_classes' => 'bank_name_col'
+                            'col_classes' => 'bank_name_col',
+                            'required' => false
                           ]);
                           echo getInputField([
                             'label' => 'Account Number',
                             'name' => 'acc_no',
                             'id' => 'acc_no',
                             'column' => 'sm-4',
-                            'col_classes' => 'acc_no_col'
+                            'col_classes' => 'acc_no_col',
+                            'required' => false
                           ]);
                           echo getInputField([
                             'label' => 'Cheque No',
                             'name' => 'cheque_no',
                             'id' => 'cheque_no',
                             'column' => 'sm-4',
-                            'col_classes' => 'cheque_no_col'
+                            'col_classes' => 'cheque_no_col',
+                            'required' => false
                           ]);
 
                          ?>

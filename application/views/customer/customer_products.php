@@ -8,18 +8,16 @@
             <div class="container">
               <h5 class="mb-3">Product Adjustment Prices</h5>
               <table class="table table-bordered">
-                <thead>
+                <thead style="display:block;">
                   <tr>
-                    <th>#</th>
-                    <th style="width:5%">Product</th>
+                    <th style="width:0%!important">#</th>
+                    <th style="width:20%!important">Product</th>
                     <th>Price</th>
                   </tr>
                 </thead>
-                <tbody id="customer_products_price_">
-
+                <tbody id="customer_products_price_" style="display:block;height: 52vh;overflow-y: auto;overflow-x: hidden;">
                 </tbody>
               </table>
-
             </div>
           </div>
           <div class="modal-footer">
