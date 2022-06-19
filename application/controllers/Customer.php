@@ -246,7 +246,7 @@ class Customer extends MY_Controller
 
       }
 
-      $this->form_validation->set_rules('soa_email', 'Email Address For SOA',$is_soa_email_unique.'|callback_check_customer_email['.$p['email'].']',[
+      $this->form_validation->set_rules('soa_email', 'Email Address For SOA',$is_soa_email_unique,[
         'is_unique'     => 'The %s already exist'
       ]);
 

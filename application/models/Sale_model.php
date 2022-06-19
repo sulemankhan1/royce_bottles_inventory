@@ -73,6 +73,7 @@ class Sale_model extends CI_Model
              $this->db->or_like('salesperson.name',$requestData['search']['value']);
              $this->db->or_like('sales.invoice_no',$requestData['search']['value']);
              $this->db->or_like('sales.status',$requestData['search']['value']);
+             $this->db->or_like('users.name',$requestData['search']['value']);
 
            $this->db->group_end();
 
@@ -258,12 +259,12 @@ class Sale_model extends CI_Model
     $this->db->from('sales');
     $this->db->join('customers','customers.id = sales.customer_id');
     $this->db->join('salesperson','salesperson.id = customers.salesperson_id');
-    $this->db->join('sales_details','sales_details.sale_id = sales.id');
-    $this->db->join('products','products.id = sales_details.product_id');
+    // $this->db->join('sales_details','sales_details.sale_id = sales.id');
+    // $this->db->join('products','products.id = sales_details.product_id');
 
     $this->db->where('sales.is_deleted',0);
     $this->db->where('sales.status !=','pending');
-    $this->db->group_by('sales_details.sale_id');
+    // $this->db->group_by('sales_details.sale_id');
 
     return $this->db->get()->row();
 
@@ -288,8 +289,8 @@ class Sale_model extends CI_Model
     $this->db->from('sales');
     $this->db->join('customers','customers.id = sales.customer_id');
     $this->db->join('salesperson','salesperson.id = customers.salesperson_id');
-    $this->db->join('sales_details','sales_details.sale_id = sales.id');
-    $this->db->join('products','products.id = sales_details.product_id');
+    // $this->db->join('sales_details','sales_details.sale_id = sales.id');
+    // $this->db->join('products','products.id = sales_details.product_id');
 
     $this->db->where('sales.is_deleted',0);
 
