@@ -30,7 +30,7 @@
             </div>
             <div class="card-body">
                <div class="table-responsive">
-                 <table id="myDataTable" class="table">
+                 <table id="myDataTable" class="table table-bordered">
                     <thead>
                        <tr>
                           <th>#</th>

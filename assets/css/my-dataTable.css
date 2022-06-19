@@ -37,7 +37,7 @@ table.dataTable {
 
 .table-img-txt-design
 {
-  position: absolute;
+  /* position: absolute; */
   margin-left: 5px!important;
   margin-top: 17.5px!important;
 }
@@ -73,4 +73,8 @@ table thead tr th:last-child{
   -moz-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
+}
+
+thead, tbody, tfoot, tr, td, th {
+    white-space: inherit!important;
 }
