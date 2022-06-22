@@ -199,3 +199,49 @@ $('#save_sale').submit(function (e) {
   }
 
 })
+
+// calculate qty
+$(document).on('keyup','.sale_qty_,.exchange_qty_,.foc_qty_',function () {
+
+  let $t = $(this).closest('.row')
+
+  let sale_qty = Number($t.find('.sale_qty_').val())
+  let exchange_qty = Number($t.find('.exchange_qty_').val())
+  let foc_qty = Number($t.find('.foc_qty_').val())
+
+  let total = sale_qty + exchange_qty + foc_qty
+
+  $t.find('.total_qty_').val(total)
+
+})
+
+function total_amount_()
+{
+
+  var sum = 0;
+  $('.amount_').each(function (){
+
+      sum += Number($(this).val())
+
+  })
+
+  $('input[name=total_amount]').val(sum.toFixed(2))
+
+}
+
+// calculate qty
+$(document).on('keyup','.sale_qty_',function () {
+
+  let $t = $(this).closest('.row')
+
+  let sale_qty = Number($t.find('.sale_qty_').val())
+
+  let price = Number($t.find('.price_').val())
+
+  let amount = sale_qty * price
+
+  $t.find('.amount_').val(amount.toFixed(2))
+
+  total_amount_()
+
+})

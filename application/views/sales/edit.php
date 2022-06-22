@@ -176,21 +176,44 @@
                               'attr' => 'readonly'
                             ]);
 
-                            echo getHiddenField('available_qty[]',0);
+                            echo getInputField([
+                              'label' => 'Available Qty',
+                              'name' => 'available_qty[]',
+                              'column' => 'sm-2',
+                              'classes' => 'available_qty_',
+                              'attr' => 'readonly',
+                              'value' => $v->qty
+                            ]);
 
                             echo getInputField([
                               'label' => 'Sale Qty',
                               'name' => 'sale_qty[]',
                               'column' => 'sm-2',
-                              'attr' => 'readonly',
-                              'value' => $v->qty
+                              'classes' => 'sale_qty_',
+                              'value' => $v->sale_qty
                             ]);
 
-                            echo getHiddenField('exchange_qty[]',0);
-                            echo getHiddenField('foc_qty[]',0);
-                            echo getHiddenField('total[]',$v->qty);
+                            echo getHiddenField('exchange_qty[]',0,'exchange_qty_');
 
-                            echo getHiddenField('amount[]',$v->amount);
+                            echo getInputField([
+                              'label' => 'Foc Qty',
+                              'name' => 'foc_qty[]',
+                              'column' => 'sm-2',
+                              'classes' => 'foc_qty_',
+                              'value' => $v->foc_qty
+                            ]);
+
+                            echo getInputField([
+                              'label' => 'Total',
+                              'name' => 'total[]',
+                              'column' => 'sm-2',
+                              'classes' => 'total_qty_',
+                              'attr' => 'readonly,min="'. $v->qty .'",max="'.$v->qty.'"',
+                              'value' => $v->sale_qty + $v->foc_qty
+
+                            ]);
+
+                            echo getHiddenField('amount[]',$v->amount,'amount_');
 
                             ?>
 

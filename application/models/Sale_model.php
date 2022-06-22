@@ -210,6 +210,11 @@ class Sale_model extends CI_Model
         $this->db->join('call_orders','call_orders.id = sales.main_id');
         $this->db->join('call_orders_details','call_orders_details.call_order_id = call_orders.id');
 
+        $this->db->where('call_orders_details.call_order_id',$sale_row->main_id);
+        
+        $this->db->group_by('sales_details.product_id');
+
+
       }
       else
       {

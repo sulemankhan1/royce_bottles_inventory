@@ -27,7 +27,7 @@ class Order_model extends CI_Model
       $this->db->join('customers','customers.id = call_orders.customer_id');
       $this->db->join('call_orders_details','call_orders_details.call_order_id = call_orders.id');
       $this->db->join('products','products.id = call_orders_details.product_id');
-      $this->db->join('customer_products_price','customer_products_price.product_id = products.id');
+      $this->db->join('customer_products_price','(customer_products_price.product_id = call_orders_details.product_id) AND (customer_products_price.customer_id = customers.id)');
 
       $this->db->where('call_orders.is_deleted',0);
       $this->db->where('call_orders.status','pending');
