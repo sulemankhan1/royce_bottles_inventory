@@ -22,7 +22,7 @@ class Order_model extends CI_Model
 
       ];
 
-      $this->db->select('call_orders.*,customers.name as customer_name,count(call_orders_details.product_id) as total_products,sum(call_orders_details.qty) as total_qty,sum(customer_products_price.price) as total_price');
+      $this->db->select('call_orders.*,customers.name as customer_name,count(call_orders_details.product_id) as total_products,sum(call_orders_details.qty) as total_qty,sum(call_orders_details.qty * customer_products_price.price) as total_price');
       $this->db->from('call_orders');
       $this->db->join('customers','customers.id = call_orders.customer_id');
       $this->db->join('call_orders_details','call_orders_details.call_order_id = call_orders.id');

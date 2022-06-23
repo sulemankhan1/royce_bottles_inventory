@@ -58,7 +58,7 @@ table thead tr th:last-child{
   border-radius: 50%;
   position: relative;
   overflow: hidden;
-  float: left;
+  /* float: left; */
 }
 .table-circular-img img {
   min-width: 60px;
