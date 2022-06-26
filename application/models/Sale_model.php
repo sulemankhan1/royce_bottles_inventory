@@ -166,12 +166,26 @@ class Sale_model extends CI_Model
 
   }
 
-  public function getLastInvoiceNo()
+  public function getLastInvoiceNo($customer_category = '')
   {
 
     $this->db->select('invoice_no');
     $this->db->from('sales');
 
+    if($customer_category != '')
+    {
+
+      if($customer_category == 'cash')
+      {
+         $this->db->where('customer_category',$customer_category);
+      }
+      else
+      {
+        $this->db->where('customer_category',$customer_category);
+      }
+
+    }
+    
     $this->db->order_by('id','desc');
 
     return $this->db->get()->row();
@@ -211,7 +225,7 @@ class Sale_model extends CI_Model
         $this->db->join('call_orders_details','call_orders_details.call_order_id = call_orders.id');
 
         $this->db->where('call_orders_details.call_order_id',$sale_row->main_id);
-        
+
         $this->db->group_by('sales_details.product_id');
 
 

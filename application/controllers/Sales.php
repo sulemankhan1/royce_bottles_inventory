@@ -193,9 +193,9 @@ class Sales extends MY_Controller
 
       $this->load->model('Sale_model');
 
-      $sale_row = $this->Sale_model->getLastInvoiceNo();
-
       $p = $this->inp_post();
+
+      $sale_row = $this->Sale_model->getLastInvoiceNo($p['customer_category']);
 
       $ID = (isset($p['ID'])?$p['ID']:'');
       unset($p['ID']);
@@ -207,13 +207,33 @@ class Sales extends MY_Controller
         if(!empty($sale_row))
         {
 
-           $NewInvoiceNo = str_pad($sale_row->invoice_no + 1, 5, '0', STR_PAD_LEFT);
+            if($p['customer_category'] == 'cash')
+            {
+
+                $remove_char = str_replace("C","",$sale_row->invoice_no);
+
+            }
+            else
+            {
+
+                $remove_char = str_replace("T","",$sale_row->invoice_no);
+
+            }
+
+           $NewInvoiceNo = str_pad($remove_char + 1, 5, '0', STR_PAD_LEFT);
 
          }
          else
          {
 
-           $NewInvoiceNo = "00001";
+             if($p['customer_category'] == 'cash')
+             {
+                $NewInvoiceNo = "C00001";
+             }
+             else
+             {
+               $NewInvoiceNo = "T00001";
+             }
 
          }
 
@@ -663,9 +683,9 @@ class Sales extends MY_Controller
 
       $this->load->model('Sale_model');
 
-      $sale_row = $this->Sale_model->getLastInvoiceNo();
-
       $p = $this->inp_post();
+
+      $sale_row = $this->Sale_model->getLastInvoiceNo($p['customer_category']);
 
       $ID = (isset($p['ID'])?$p['ID']:'');
       unset($p['ID']);
@@ -677,13 +697,33 @@ class Sales extends MY_Controller
         if(!empty($sale_row))
         {
 
-           $NewInvoiceNo = str_pad($sale_row->invoice_no + 1, 5, '0', STR_PAD_LEFT);
+            if($p['customer_category'] == 'cash')
+            {
+
+                $remove_char = str_replace("C","",$sale_row->invoice_no);
+
+            }
+            else
+            {
+
+                $remove_char = str_replace("T","",$sale_row->invoice_no);
+
+            }
+
+           $NewInvoiceNo = str_pad($remove_char + 1, 5, '0', STR_PAD_LEFT);
 
          }
          else
          {
 
-           $NewInvoiceNo = "00001";
+             if($p['customer_category'] == 'cash')
+             {
+                $NewInvoiceNo = "C00001";
+             }
+             else
+             {
+               $NewInvoiceNo = "T00001";
+             }
 
          }
 
