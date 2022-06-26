@@ -286,7 +286,13 @@ class Product extends MY_Controller
 
                 }
 
-                $this->bm->insert_rows('customer_products_price',$customer_products);
+                if(!empty($customer_products))
+                {
+
+                  $this->bm->insert_rows('customer_products_price',$customer_products);
+
+                }
+
 
             }
 
