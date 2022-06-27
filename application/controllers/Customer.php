@@ -206,49 +206,49 @@ class Customer extends MY_Controller
       $this->form_validation->set_rules('shop_id', 'Shop ID', 'required');
       $this->form_validation->set_rules('primary_contact', 'Primary Contact', 'required');
 
-      if(isset($p['old_email']))
-      {
+      // if(isset($p['old_email']))
+      // {
+      //
+      //   if ($p['email'] != $p['old_email'])
+      //   {
+      //
+      //     $is_email_unique = 'is_unique[customers.e_receipt_email]';
+      // 
+      //   }
+      //
+      // }
+      // else
+      // {
+      //
+      //   $is_email_unique = 'is_unique[customers.e_receipt_email]';
+      //
+      // }
 
-        if ($p['email'] != $p['old_email'])
-        {
+      // $this->form_validation->set_rules('email', 'Email Address For E-Receipt',$is_email_unique,[
+      //   'is_unique'     => 'The %s already exist'
+      // ]);
 
-          $is_email_unique = 'is_unique[customers.e_receipt_email]';
-
-        }
-
-      }
-      else
-      {
-
-        $is_email_unique = 'is_unique[customers.e_receipt_email]';
-
-      }
-
-      $this->form_validation->set_rules('email', 'Email Address For E-Receipt',$is_email_unique,[
-        'is_unique'     => 'The %s already exist'
-      ]);
-
-      if(isset($p['old_soa_email']))
-      {
-
-        if ($p['soa_email'] != $p['old_soa_email'])
-        {
-
-          $is_soa_email_unique = 'is_unique[customers.soa_email]';
-
-        }
-
-      }
-      else
-      {
-
-        $is_soa_email_unique = 'is_unique[customers.soa_email]';
-
-      }
-
-      $this->form_validation->set_rules('soa_email', 'Email Address For SOA',$is_soa_email_unique,[
-        'is_unique'     => 'The %s already exist'
-      ]);
+      // if(isset($p['old_soa_email']))
+      // {
+      //
+      //   if ($p['soa_email'] != $p['old_soa_email'])
+      //   {
+      //
+      //     $is_soa_email_unique = 'is_unique[customers.soa_email]';
+      //
+      //   }
+      //
+      // }
+      // else
+      // {
+      //
+      //   $is_soa_email_unique = 'is_unique[customers.soa_email]';
+      //
+      // }
+      //
+      // $this->form_validation->set_rules('soa_email', 'Email Address For SOA',$is_soa_email_unique,[
+      //   'is_unique'     => 'The %s already exist'
+      // ]);
 
       $this->form_validation->set_rules('cat_type', 'Category', 'required');
       $this->form_validation->set_rules('salesperson_id', 'Salesperson', 'required');
