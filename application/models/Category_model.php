@@ -82,5 +82,24 @@ class Category_model extends CI_Model
 
   }
 
+  public function getAllProductCategoriesByCustomerId($customer_id)
+  {
+
+    $this->db->select('categories.*');
+    $this->db->from('customer_products_price');
+    $this->db->join('products','products.id = customer_products_price.product_id');
+    $this->db->join('categories','categories.id = products.cat_id');
+    $this->db->join('customers','customers.id = customer_products_price.customer_id');
+
+    $this->db->where('customer_products_price.customer_id',$customer_id);
+
+    $this->db->group_by('categories.id');
+    $this->db->where('products.is_deleted',0);
+    $this->db->where('categories.is_deleted',0);
+
+    return $this->db->get()->result();
+
+  }
+
 
 }

@@ -113,6 +113,22 @@ class Customer_model extends CI_Model
 
   }
 
+  public function getCustomerProductPricesByCatId($cat_id,$customer_id)
+  {
+
+    $this->db->select('customer_products_price.*,products.name as product_name');
+    $this->db->from('customer_products_price');
+    $this->db->join('products','products.id = customer_products_price.product_id');
+    $this->db->join('customers','customers.id = customer_products_price.customer_id');
+
+    $this->db->where('products.cat_id',$cat_id);
+    $this->db->where('customer_products_price.customer_id',$customer_id);
+    $this->db->where('products.is_deleted',0);
+
+    return $this->db->get()->result();
+
+  }
+
   public function getCustomerShopName()
   {
 

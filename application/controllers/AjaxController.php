@@ -81,13 +81,24 @@ class AjaxController extends MY_Controller
   public function getCustomerProductPrices($customer_id)
   {
 
+      $this->load->model('Category_model');
       $this->load->model('Customer_model');
 
-      $customer_products_price = $this->Customer_model->getCustomerProductPrices($customer_id);
+      $product_categories = $this->Category_model->getAllProductCategoriesByCustomerId($customer_id);
+
+      $customer_products_price = [];
+
+      foreach ($product_categories as $key => $v)
+      {
+
+        $customer_products_price[] = $this->Customer_model->getCustomerProductPricesByCatId($v->id,$customer_id);
+
+      }
 
       $data = [
 
-        'customers' => $customer_products_price
+        'product_categories' => $product_categories,
+        'customer_product_prices' => $customer_products_price
 
       ];
 

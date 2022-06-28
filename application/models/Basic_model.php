@@ -59,7 +59,7 @@ class Basic_model extends CI_Model
   public function getRow($table,$column = '',$id = '')
   {
 
-      if ($column != '' && $id != '') {
+      if ($column != '') {
 
         $this->db->where($column,$id);
 
@@ -83,7 +83,7 @@ class Basic_model extends CI_Model
   public function getRows($table,$column = '',$id = '',$order_column = '',$order = '')
   {
 
-      if ($column != '' && $id != '') {
+      if ($column != '') {
 
         $this->db->where($column,$id);
 

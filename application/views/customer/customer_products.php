@@ -1,23 +1,14 @@
 
 <div class="modal fade" id="CustomerProductsPricesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-scrollable">
+  <div class="modal-dialog modal-lg">
       <div class="modal-content">
           <form action="<?= site_url('update_customer_products_price')?>" method="post" id="myForm" data-parsley-validate>
             <input type="hidden" name="customer_id_">
           <div class="modal-body">
             <div class="container">
               <h5 class="mb-3">Product Adjustment Prices</h5>
-              <table class="table table-bordered">
-                <thead style="display:block;">
-                  <tr>
-                    <th style="width:0%!important">#</th>
-                    <th style="width:20%!important">Product</th>
-                    <th>Price</th>
-                  </tr>
-                </thead>
-                <tbody id="customer_products_price_" style="display:block;height: 52vh;overflow-y: auto;overflow-x: hidden;">
-                </tbody>
-              </table>
+              <div class="container" id="customer_products_price_">
+              </div>
             </div>
           </div>
           <div class="modal-footer">

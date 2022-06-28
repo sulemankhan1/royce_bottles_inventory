@@ -18,3 +18,12 @@ $(document).on('click','.adjust_prices_',function () {
     })
 
 })
+
+$(document).on('keyup','.adjust_product_price',function () {
+
+    let id = $(this).attr('id')
+    let price = $(this).val()
+
+    $('.product_price_'+id).val(price)
+
+})

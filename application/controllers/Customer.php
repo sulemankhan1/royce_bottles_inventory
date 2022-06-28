@@ -213,7 +213,7 @@ class Customer extends MY_Controller
       //   {
       //
       //     $is_email_unique = 'is_unique[customers.e_receipt_email]';
-      // 
+      //
       //   }
       //
       // }
