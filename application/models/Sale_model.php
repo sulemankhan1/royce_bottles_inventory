@@ -23,19 +23,21 @@ class Sale_model extends CI_Model
           0 => NULL,
           1 => 'sales.invoice_no',
           2 => 'customers.name',
-          3 => 'users.name',
-          4 => 'sales.customer_category',
-          5 => 'salesperson.name',
-          6 => NULL,
-          7 => NULL,
+          3 => 'customers.shop_name',
+          4 => 'customers.shop_acronym',
+          5 => 'users.name',
+          6 => 'sales.customer_category',
+          7 => 'salesperson.name',
           8 => NULL,
-          9 => 'sales.status',
+          9 => NULL,
           10 => NULL,
+          11 => 'sales.status',
+          12 => NULL,
 
 
       ];
 
-      $this->db->select('sales.*,customers.name customer_name,customers.address as customer_address,salesperson.name as salesperson_name,sum(sales_details.sale_qty) as total_qty,count(sales_details.product_id) as total_products,products.name as product_name,users.name as driver_name');
+      $this->db->select('sales.*,customers.name customer_name,customers.shop_name,customers.shop_acronym,customers.address as customer_address,salesperson.name as salesperson_name,sum(sales_details.sale_qty) as total_qty,count(sales_details.product_id) as total_products,products.name as product_name,users.name as driver_name');
       $this->db->from('sales');
       $this->db->join('customers','customers.id = sales.customer_id');
       $this->db->join('salesperson','salesperson.id = customers.salesperson_id');
@@ -69,6 +71,8 @@ class Sale_model extends CI_Model
 
              $this->db->or_like('sales.invoice_no',$requestData['search']['value']);
              $this->db->or_like('customers.name',$requestData['search']['value']);
+             $this->db->or_like('customers.shop_name',$requestData['search']['value']);
+             $this->db->or_like('customers.shop_acronym',$requestData['search']['value']);
              $this->db->or_like('sales.customer_category',$requestData['search']['value']);
              $this->db->or_like('salesperson.name',$requestData['search']['value']);
              $this->db->or_like('sales.invoice_no',$requestData['search']['value']);
@@ -185,7 +189,7 @@ class Sale_model extends CI_Model
       }
 
     }
-    
+
     $this->db->order_by('id','desc');
 
     return $this->db->get()->row();
@@ -195,7 +199,7 @@ class Sale_model extends CI_Model
   public function getSaleDetails($sale_id)
   {
 
-    $this->db->select('sales.*,customers.name customer_name,customers.address as customer_address,sales_details.price,sales_details.sale_qty,sales_details.exchange_qty,sales_details.foc_qty,sales_details.amount,products.name as product_name');
+    $this->db->select('sales.*,customers.name as customer_name,customers.shop_name as shop_name,customers.shop_name as shop_acronym,customers.address as customer_address,sales_details.price,sales_details.sale_qty,sales_details.exchange_qty,sales_details.foc_qty,sales_details.amount,products.name as product_name');
     $this->db->from('sales');
     $this->db->join('customers','customers.id = sales.customer_id');
     $this->db->join('sales_details','sales_details.sale_id = sales.id');

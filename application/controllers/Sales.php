@@ -64,6 +64,8 @@ class Sales extends MY_Controller
 
       $nestedData[] = $v->invoice_no;
       $nestedData[] = $v->customer_name;
+      $nestedData[] = $v->shop_name;
+      $nestedData[] = $v->shop_acronym;
       $nestedData[] = $v->driver_name;
       $nestedData[] = $v->customer_category;
       $nestedData[] = $v->salesperson_name;
@@ -207,7 +209,7 @@ class Sales extends MY_Controller
         if(!empty($sale_row))
         {
 
-            if($p['customer_category'] == 'cash')
+            if($p['customer_category'] == 'Cash')
             {
 
                 $remove_char = str_replace("C","",$sale_row->invoice_no);
@@ -226,7 +228,7 @@ class Sales extends MY_Controller
          else
          {
 
-             if($p['customer_category'] == 'cash')
+             if($p['customer_category'] == 'Cash')
              {
                 $NewInvoiceNo = "C00001";
              }
@@ -697,7 +699,7 @@ class Sales extends MY_Controller
         if(!empty($sale_row))
         {
 
-            if($p['customer_category'] == 'cash')
+            if($p['customer_category'] == 'Cash')
             {
 
                 $remove_char = str_replace("C","",$sale_row->invoice_no);
@@ -716,7 +718,7 @@ class Sales extends MY_Controller
          else
          {
 
-             if($p['customer_category'] == 'cash')
+             if($p['customer_category'] == 'Cash')
              {
                 $NewInvoiceNo = "C00001";
              }

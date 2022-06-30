@@ -184,9 +184,9 @@
 
                   <h6 class="text-primary font_uppercase" style="font-size: 1rem;color: #3a57e9!important;">Invoice To</h6>
 
-                    <span class="font_design font_uppercase"><?= $sale->customer_name ?></span>
+                    <span class="font_design font_uppercase"><?= $sale->shop_name ?></span>
 
-                    <p id="customer_address">dfasfasfasfas
+                    <p id="customer_address">
                       <?= $sale->customer_address ?>
                     </p>
 

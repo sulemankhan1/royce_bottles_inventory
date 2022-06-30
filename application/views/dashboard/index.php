@@ -269,6 +269,7 @@
                     <th>#</th>
 
                     <th>Shop Name</th>
+                    <th>Shop Acronym</th>
                     <th>Email</th>
                     <th>Contact #</th>
                     <th>Shop ID </th>
@@ -285,6 +286,7 @@
                     <td><?= $key+1 ?></td>
 
                     <td><?= $v->shop_name ?></td>
+                    <td><?= $v->shop_acronym ?></td>
                     <td><?= $v->e_receipt_email ?></td>
                     <td><?= $v->primary_contact ?></td>
                     <td><?= $v->shop_id ?></td>
@@ -321,6 +323,7 @@
                     <th style="width:2%;">#</th>
                     <!-- <th>Customer</th> -->
                     <th>Shop Name</th>
+                    <th>Shop Acronym</th>
                     <th>Total Products</th>
                     <th>Total Qty</th>
                     <th>Action </th>
@@ -335,6 +338,7 @@
                     <td><?= $key+1 ?></td>
                     <!-- <td><= $v->customer_name ?></td> -->
                     <td><?= $v->shop_name ?></td>
+                    <td><?= $v->shop_acronym ?></td>
                     <td><?= $v->total_products ?></td>
                     <td><?= $v->total_qty ?></td>
                     <td>

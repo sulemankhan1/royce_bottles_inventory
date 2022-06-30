@@ -227,7 +227,7 @@
 
                         <h6 class="text-primary font_uppercase">Invoice To</h6>
                         <div class="col-sm-12 mt-1">
-                          <span class="font_design font_uppercase"><?= $sale->customer_name ?></span>
+                          <span class="font_design font_uppercase"><?= $sale->shop_name ?></span>
                         </div>
                         <div class="col-sm-12">
                           <label id="customer_address">

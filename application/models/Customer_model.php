@@ -15,14 +15,15 @@ class Customer_model extends CI_Model
           1 => 'customers.name',
           2 => 'customers.day',
           3 => 'customers.shop_name',
-          4 => 'customers.shop_id',
-          5 => 'customers.primary_contact',
-          6 => 'customers.secondary_contact',
-          7 => 'customers.e_receipt_email',
-          8 => 'customers.cat_type',
-          9 => 'salesperson.name',
-          10 => 'customers.added_at',
-          11 => NULL
+          4 => 'customers.shop_acronym',
+          5 => 'customers.shop_id',
+          6 => 'customers.primary_contact',
+          7 => 'customers.secondary_contact',
+          8 => 'customers.e_receipt_email',
+          9 => 'customers.cat_type',
+          10 => 'salesperson.name',
+          11 => 'customers.added_at',
+          12 => NULL
 
       ];
 
@@ -49,6 +50,7 @@ class Customer_model extends CI_Model
             $this->db->or_like('customers.name',$requestData['search']['value']);
             $this->db->or_like('customers.day',$requestData['search']['value']);
             $this->db->or_like('customers.shop_name',$requestData['search']['value']);
+            $this->db->or_like('customers.shop_acronym',$requestData['search']['value']);
             $this->db->or_like('customers.shop_id',$requestData['search']['value']);
             $this->db->or_like('customers.primary_contact',$requestData['search']['value']);
             $this->db->or_like('customers.secondary_contact',$requestData['search']['value']);

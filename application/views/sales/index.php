@@ -46,6 +46,8 @@
                            <th>#</th>
                            <th>Invoice #</th>
                            <th>Customer</th>
+                           <th>Shop Name</th>
+                           <th>Shop Acronym</th>
                            <th>Driver</th>
                            <th>Category</th>
                            <th>Salesperson</th>

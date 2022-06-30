@@ -64,6 +64,8 @@ class Order extends MY_Controller
       $nestedData[] = $SNo;
 
       $nestedData[] = $v->customer_name;
+      $nestedData[] = $v->shop_name;
+      $nestedData[] = $v->shop_acronym;
       $nestedData[] = $v->delivery_day;
       $nestedData[] = $v->total_products;
       $nestedData[] = $v->total_qty;

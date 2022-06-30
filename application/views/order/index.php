@@ -34,6 +34,8 @@
                         <tr>
                            <th>#</th>
                            <th>Customer</th>
+                           <th>Shop Name</th>
+                           <th>Shop Acronym</th>
                            <th>Day</th>
                            <th>Total Products</th>
                            <th>Total Qty</th>

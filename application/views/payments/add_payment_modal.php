@@ -11,15 +11,30 @@
 
                 <div class="row mt-3">
 
+                  <div class="col-sm-12 mb-3">
+
+                    <label for="Customer" class="form-label">Customer</label>
+
+                    <select class="form-select form-select-sm select2 modal_select_" data-width="100%" name="customer_id" required>
+
+                      <option value="">select</option>
+                      <?php foreach ($customers as $key => $v): ?>
+
+                        <option value="<?= $v->id ?>"><?= $v->name.'-'.$v->shop_name.'-'.$v->shop_acronym ?></option>
+
+                      <?php endforeach; ?>
+                    </select>
+
+                  </div>
                   <?php
 
-                    echo getSelectField([
-                      'label' => 'Customer',
-                      'name' => 'customer_id',
-                      'column' => 'sm-12',
-                      'classes' => 'modal_select_',
-                      'data' => $customers
-                    ]);
+                    // echo getSelectField([
+                    //   'label' => 'Customer',
+                    //   'name' => 'customer_id',
+                    //   'column' => 'sm-12',
+                    //   'classes' => 'modal_select_',
+                    //   'data' => $customers
+                    // ]);
 
                     echo getInputField([
                       'label' => 'Amount',

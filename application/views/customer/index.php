@@ -35,6 +35,7 @@
                            <th>Name</th>
                            <th>Day</th>
                            <th>Shop Name</th>
+                           <th>Shop Acronym</th>
                            <th>Shop ID</th>
                            <th>Primary Contact </th>
                            <th>Secondary Contact </th>

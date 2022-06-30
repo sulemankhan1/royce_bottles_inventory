@@ -80,6 +80,7 @@ class Customer extends MY_Controller
       $nestedData[] = $name;
       $nestedData[] = $v->day;
       $nestedData[] = $v->shop_name;
+      $nestedData[] = $v->shop_acronym;
       $nestedData[] = $v->shop_id;
       $nestedData[] = $v->primary_contact;
       $nestedData[] = $v->secondary_contact;

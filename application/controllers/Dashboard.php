@@ -48,7 +48,6 @@ class Dashboard extends MY_Controller
         {
             $data['call_orders_details'][$key] = $this->Order_model->getAllCallOrdersQtyByCallOrderId($v->id);
         }
-
     }
     else if($user->type == 'production')
     {
@@ -74,6 +73,7 @@ class Dashboard extends MY_Controller
         $data['customer_credits'] = $this->Payment_model->getCustomerCreditsAmount();
 
     }
+
 
     $this->template('dashboard/index',$data);
 

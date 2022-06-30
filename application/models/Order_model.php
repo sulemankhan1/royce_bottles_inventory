@@ -13,16 +13,18 @@ class Order_model extends CI_Model
           // datatable column index => database column name
           0 => NULL,
           1 => 'customer.name',
-          2 => 'call_orders.delivery_day',
-          3 => Null,
-          4 => Null,
+          2 => 'customer.shop_name',
+          3 => 'customer.shop_acronym',
+          4 => 'call_orders.delivery_day',
           5 => Null,
-          6 => 'call_orders.status',
-          7 => NULL
+          6 => Null,
+          7 => Null,
+          8 => 'call_orders.status',
+          9 => NULL
 
       ];
 
-      $this->db->select('call_orders.*,customers.name as customer_name,count(call_orders_details.product_id) as total_products,sum(call_orders_details.qty) as total_qty,sum(call_orders_details.qty * customer_products_price.price) as total_price');
+      $this->db->select('call_orders.*,customers.name as customer_name,customers.shop_name as shop_name,customers.shop_acronym as shop_acronym,count(call_orders_details.product_id) as total_products,sum(call_orders_details.qty) as total_qty,sum(call_orders_details.qty * customer_products_price.price) as total_price');
       $this->db->from('call_orders');
       $this->db->join('customers','customers.id = call_orders.customer_id');
       $this->db->join('call_orders_details','call_orders_details.call_order_id = call_orders.id');
@@ -48,6 +50,8 @@ class Order_model extends CI_Model
            $this->db->group_start();
 
             $this->db->or_like('customers.name',$requestData['search']['value']);
+            $this->db->or_like('customers.shop_name',$requestData['search']['value']);
+            $this->db->or_like('customers.shop_acronym',$requestData['search']['value']);
             $this->db->or_like('call_orders.delivery_day',$requestData['search']['value']);
             $this->db->or_like('call_orders.status',$requestData['search']['value']);
 
@@ -115,7 +119,7 @@ class Order_model extends CI_Model
 
     $current_day = date('l');
 
-    $this->db->select('call_orders.*,count(call_orders_details.product_id) total_products,sum(call_orders_details.qty) total_qty,customers.name as customer_name,customers.shop_name');
+    $this->db->select('call_orders.*,count(call_orders_details.product_id) total_products,sum(call_orders_details.qty) total_qty,customers.name as customer_name,customers.shop_name,customers.shop_acronym');
     $this->db->from('call_orders');
     $this->db->join('customers','customers.id = call_orders.customer_id');
     $this->db->join('users','users.id = call_orders.driver_id');
@@ -188,7 +192,7 @@ class Order_model extends CI_Model
       $this->db->join('users','users.id = call_orders.driver_id');
       $this->db->join('call_orders_details','call_orders_details.call_order_id = call_orders.id');
       $this->db->join('products','products.id = call_orders_details.product_id');
-      $this->db->join('customer_products_price','customer_products_price.product_id = products.id');
+      $this->db->join('customer_products_price','(customer_products_price.product_id = call_orders_details.product_id) AND (customer_products_price.customer_id = customers.id)');
       $this->db->join('users added_by', 'added_by.id = call_orders.added_by', 'left');
 
       $this->db->where('call_orders.customer_id',$customer_id);

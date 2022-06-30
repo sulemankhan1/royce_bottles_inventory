@@ -34,7 +34,7 @@ $('#myDataTable').DataTable({
         }
       },
       "columnDefs": [
-        { "orderable": false, "targets": [0,3,4,5,-1] }
+        { "orderable": false, "targets": [0,5,6,7,-1] }
       ],
       "aaSorting": [],
       "processing": true,
